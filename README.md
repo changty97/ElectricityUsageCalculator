@@ -1,4 +1,4 @@
-# euc
+# Electricity Usage Calculator
 
 ## Required development tools
 - JDK 11
