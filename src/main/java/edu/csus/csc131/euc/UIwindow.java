@@ -35,10 +35,10 @@ public class UIwindow{
 
         // Set Size
         this.window.setSize(this.width, this.height);
-    }
 
-    // Show the GUI
-    public void showGUI(){ this.window.setVisible(true); }
+        // Show the GUI
+        this.window.setVisible(true);
+    }
 
 
 }
