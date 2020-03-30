@@ -88,7 +88,7 @@
                 </descriptorRefs>
                 <archive>
                     <manifest>
-                        <mainClass>edu.csus.csc131.euc.UIwindow</mainClass>
+                        <mainClass>edu.csus.csc131.euc.App</mainClass>
                     </manifest>
                 </archive>
             </configuration>
