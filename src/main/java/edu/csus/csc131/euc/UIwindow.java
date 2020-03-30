@@ -1,5 +1,5 @@
-/*README 
-    Make sure to add this to POM file 
+/*README
+    Make sure to add this to POM file
 */
 
 // Main package import
@@ -9,25 +9,25 @@ package edu.csus.csc131.euc;
 import javax.swing.JFrame;
 
 public class UIwindow{
-    // Instance variables 
+    // Instance variables
     JFrame window;
 
-    // Variables for window creation 
-    String title; 
-    int height; 
-    int width; 
+    // Variables for window creation
+    String title;
+    int height;
+    int width;
 
-    // Constructor for a Window 
+    // Constructor for a Window
     public UIwindow(String t, int w, int h){
         this.title = t;
-        this.width = w; 
-        this.height = h; 
+        this.width = w;
+        this.height = h;
     }
 
-    /* Functions of UIwindow */ 
+    /* Functions of UIwindow */
 
     public void initializeGUI(){
-        // Create set up the window 
+        // Create set up the window
         this.window = new JFrame(this.title);
 
         // Set the close operation
