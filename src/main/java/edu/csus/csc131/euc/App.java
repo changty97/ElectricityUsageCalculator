@@ -1,16 +1,23 @@
 package edu.csus.csc131.euc;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
+    // Static Main window for application 
+    static UIwindow mainwindow = new UIwindow("Main Window", 800, 800);
+
+    // Initializing the main GUI for application
+    public static void initializeGUI() {
+
+        // Main Window initialization
+        mainwindow.initializeWindow();
+
+        // Other intializations for UI elements ... 
+
+    }
+
     public static void main( String[] args )
     {
-        // make instance of the window 
-        UIwindow window1 = new UIwindow("Main Window", 800, 800);
-        window1.initializeGUI();
-        
+        // intialize the GUI 
+        initializeGUI(); 
     }
 }
