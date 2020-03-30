@@ -40,6 +40,6 @@ public class App
         // make instance of the window 
         UIwindow window1 = new UIwindow("Main Window", 800, 800);
         window1.initializeGUI();
-
+        
     }
 }
