@@ -5,17 +5,21 @@
 // Main package import
 package edu.csus.csc131.euc;
 
+
 // Framework Imports
 import javax.swing.JFrame;
+
 
 public class UIwindow{
     // Instance variables
     JFrame window;
-
     // Variables for window creation
     String title;
     int height;
     int width;
+
+    //variables for button creation
+    String name;
 
     // Constructor for a Window
     public UIwindow(String t, int w, int h){
