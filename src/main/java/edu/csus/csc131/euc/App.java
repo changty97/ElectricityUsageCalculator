@@ -6,8 +6,8 @@ import java.util.Arrays;
  *
  */
 
-public class App 
-{    
+public class App
+{
     // constants
     private static final int RATES_ARRAY_SIZE = 24;
     private static final float RATES_DEFAULT_OFFPEAK_SUMMER = (float)0.1209;
@@ -36,8 +36,8 @@ public class App
     {
         // input default rates
         float rates[] = setDefaultRates(true); //just for test. Boolean determines if summer or non summer
-
-        // make instance of the window 
+        System.out.println(rates);
+        // make instance of the window
         UIwindow window1 = new UIwindow("Main Window", 800, 800);
         window1.initializeGUI();
 
