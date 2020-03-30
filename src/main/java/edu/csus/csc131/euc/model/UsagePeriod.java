@@ -13,12 +13,12 @@ public class UsagePeriod{
   }
 
   //setter
-  public void setUsage(float value, int index) throws ArrayIndexOutOfBoundsException{
+  public void setUsage(float value, int index) throws ArrayIndexOutOfBoundsException, NumberFormatException{
     usage[index] = value;
   }
 
   //getter
-  public float getUsage(int index) throws ArrayIndexOutOfBoundsException{
+  public float getUsage(int index) throws ArrayIndexOutOfBoundsException, NumberFormatException{
     return usage[index];
   }
 }
