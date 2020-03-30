@@ -23,7 +23,8 @@ public class UIwindow extends JFrame{
     }
 
     // Initialize window with necessary parameters 
-    public void initializeGUI(){ 
+    public void initializeWindow(){ 
+        // Frame Components 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle(this.title);
         this.setSize(this.height, this.width);

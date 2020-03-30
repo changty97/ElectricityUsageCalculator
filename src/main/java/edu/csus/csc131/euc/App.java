@@ -1,12 +1,7 @@
 package edu.csus.csc131.euc;
 import java.util.Arrays;
 
-/**
- * Hello world!
- *
- */
-
-public class App
+public class App 
 {
     // constants
     private static final int RATES_ARRAY_SIZE = 24;
@@ -15,6 +10,9 @@ public class App
     private static final float RATES_DEFAULT_MIDPEAK_SUMMER = (float)0.1671;
     private static final float RATES_DEFAULT_PEAK_SUMMER = (float)0.2941;
     private static final float RATES_DEFAULT_PEAK_NONSUMMER = (float)0.1388;
+
+    // Static Main window for application 
+    static UIwindow mainwindow = new UIwindow("Main Window", 800, 800);
 
     // helper method for setting default rates
     private static float[] setDefaultRates(boolean isSummer){
@@ -32,14 +30,22 @@ public class App
         return temp;
     }
 
+    // Initializing the main GUI for application
+    public static void initializeGUI() {
+
+        // Main Window initialization
+        mainwindow.initializeWindow();
+
+        // Other intializations for UI elements ...
+    } 
+
     public static void main( String[] args )
     {
         // input default rates
         float rates[] = setDefaultRates(true); //just for test. Boolean determines if summer or non summer
-        System.out.println(rates);
-        // make instance of the window
-        UIwindow window1 = new UIwindow("Main Window", 800, 800);
-        window1.initializeGUI();
+
+        // make instance of the window 
+        initializeGUI();
         
     }
 }
