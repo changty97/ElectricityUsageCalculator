@@ -8,6 +8,9 @@ public class Rates
     public Rates(){
         ratesVal = new float[24];
     }
+    public Rates(float[] values){
+        ratesVal = values;
+    }
 
     //setter
     public void setRate(float rate, int index) throws ArrayIndexOutOfBoundsException, NumberFormatException {
