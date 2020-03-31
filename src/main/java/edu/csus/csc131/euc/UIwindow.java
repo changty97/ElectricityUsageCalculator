@@ -1,44 +1,34 @@
-/*README
-    Make sure to add this to POM file
-*/
+/* Refactored by extending */ 
 
 // Main package import
 package edu.csus.csc131.euc;
 
+
 // Framework Imports
 import javax.swing.JFrame;
 
-public class UIwindow{
-    // Instance variables
-    JFrame window;
+public class UIwindow extends JFrame{
+    // Serial Verison ID 
+    private static final long serialVersionUID = 1L; 
 
-    // Variables for window creation
-    String title;
-    int height;
+    // Instance Variables 
+    String title; 
+    int height; 
     int width;
 
-    // Constructor for a Window
-    public UIwindow(String t, int w, int h){
-        this.title = t;
-        this.width = w;
+    // Specific constructor for this window 
+    UIwindow(String t, int h, int w){
+        this.title = t; 
         this.height = h;
+        this.width = w; 
     }
 
-    /* Functions of UIwindow */
-
-    public void initializeGUI(){
-        // Create set up the window
-        this.window = new JFrame(this.title);
-
-        // Set the close operation
-        this.window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Set Size
-        this.window.setSize(this.width, this.height);
-
-        // Show the GUI
-        this.window.setVisible(true);
+    // Initialize window with necessary parameters 
+    public void initializeWindow(){ 
+        // Frame Components 
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle(this.title);
+        this.setSize(this.height, this.width);
+        this.setVisible(true);
     }
-
-
 }

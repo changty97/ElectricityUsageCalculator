@@ -1,10 +1,5 @@
 package edu.csus.csc131.euc.model;
 
-/**
- * Hello world!
- *
- */
-
 public class Rates
 {
     private float ratesVal[];
