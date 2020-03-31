@@ -11,6 +11,9 @@ public class UsagePeriod{
   public UsagePeriod(){
     usage = new float[SIZE];
   }
+  public UsagePeriod(float[] values){
+    usage = values;
+  }
 
   //setter
   public void setUsage(float value, int index) throws ArrayIndexOutOfBoundsException, NumberFormatException{

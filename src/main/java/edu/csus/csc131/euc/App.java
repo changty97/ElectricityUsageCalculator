@@ -1,6 +1,7 @@
 package edu.csus.csc131.euc;
 import java.util.Arrays;
 import javax.swing.JFrame;
+import edu.csus.csc131.euc.model.*;
 
 /**
  * Hello world!
@@ -36,16 +37,24 @@ public class App
     public static void main( String[] args )
     {
         // input default rates
-        float rates[] = setDefaultRates(true); //just for test. Boolean determines if summer or non summer
-        System.out.println(rates);
+        float defaultRates[] = setDefaultRates(true); //just for test. Boolean determines if summer or non summer
+        Rates rates = new Rates(defaultRates);
         // make instance of the window
         //UIwindow window1 = new UIwindow("Main Window", 800, 800);
         // window1.initializeGUI();
         MainWindow mainWindow = new MainWindow();
-        mainWindow.toString();
+        try{
+            Profile p = new Profile(0);
+            p.setRates(rates);
+            mainWindow.addProfile(p);
+        }
+        catch(Exception e){
+            //do nothing
+        }
         JFrame frame = new JFrame();
         frame.setVisible(true);
-        frame.setSize(450, 300);
+        frame.setSize(490, 344);
         frame.add(mainWindow);
+
     }
 }

@@ -17,11 +17,19 @@ public class Profile {
       catch(Exception e) {
         throw new Exception("Error Could not Set User ID...", e);
       }
+      usage = new UsagePeriod();
+      rates = new Rates();
     }
 
     //setter
     public void setID(int id) {
       this.userID = id;
+    }
+    public void setUsage(UsagePeriod usage){
+      this.usage = usage;
+    }
+    public void setRates(Rates rates){
+      this.rates = rates;
     }
 
     //getter
