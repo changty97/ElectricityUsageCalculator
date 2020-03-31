@@ -3,7 +3,7 @@ import java.util.Arrays;
 import javax.swing.JFrame;
 import edu.csus.csc131.euc.model.*;
 
-public class App 
+public class App
 {
     // constants
     private static final int RATES_ARRAY_SIZE = 24;
@@ -13,7 +13,7 @@ public class App
     private static final float RATES_DEFAULT_PEAK_SUMMER = (float)0.2941;
     private static final float RATES_DEFAULT_PEAK_NONSUMMER = (float)0.1388;
 
-    // Static Main window for application 
+    // Static Main window for application
     static UIwindow mainwindow = new UIwindow("Main Window", 800, 800);
 
     // helper method for setting default rates
@@ -36,10 +36,10 @@ public class App
     public static void initializeGUI() {
 
         // Main Window initialization
-        mainwindow.initializeWindow();
+        // mainwindow.initializeWindow();
 
         // Other intializations for UI elements ...
-    } 
+    }
 
     public static void main( String[] args )
     {
@@ -63,8 +63,8 @@ public class App
         frame.setSize(490, 344);
         frame.add(mainWindow);
 
-        // make instance of the window 
-        initializeGUI();
-        
+        // make instance of the window
+        //initializeGUI();
+
     }
 }
