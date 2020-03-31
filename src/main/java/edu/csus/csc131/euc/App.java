@@ -1,5 +1,6 @@
 package edu.csus.csc131.euc;
 import java.util.Arrays;
+import javax.swing.JFrame;
 
 /**
  * Hello world!
@@ -38,8 +39,13 @@ public class App
         float rates[] = setDefaultRates(true); //just for test. Boolean determines if summer or non summer
         System.out.println(rates);
         // make instance of the window
-        UIwindow window1 = new UIwindow("Main Window", 800, 800);
-        window1.initializeGUI();
-
+        //UIwindow window1 = new UIwindow("Main Window", 800, 800);
+        // window1.initializeGUI();
+        MainWindow mainWindow = new MainWindow();
+        mainWindow.toString();
+        JFrame frame = new JFrame();
+        frame.setVisible(true);
+        frame.setSize(450, 300);
+        frame.add(mainWindow);
     }
 }
