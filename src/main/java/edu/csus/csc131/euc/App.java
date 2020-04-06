@@ -1,15 +1,20 @@
+/* PACKAGE PATH */
 package edu.csus.csc131.euc;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        // make instance of the window 
-        UIwindow window1 = new UIwindow("Main Window", 800, 800);
-        window1.initializeGUI();
+/* Local Imports */
+import edu.csus.csc131.euc.View.View;
+import edu.csus.csc131.euc.Model.Model; 
+import edu.csus.csc131.euc.Controller.Controller; 
+
+public class App {
+
+    public static void main(String [] args){
+
+        Model m = new Model(1);
+        View v = new View();
+        Controller c = new Controller(m , v); 
+        c.createAndShowGUI();
+
     }
+
 }
