@@ -27,6 +27,8 @@ public class View{
 
     // Each Panel View 
     private MainPanel mainpanel;
+
+    // In Panels
     private ManualInputPanel manualinputpanel; 
     private ViewCalculatePanel viewcalculatepanel; 
     private ImportPanel importpanel; 
@@ -53,7 +55,7 @@ public class View{
         this.viewcalculatepanel = new ViewCalculatePanel(); 
         this.importpanel = new ImportPanel(); 
 
-        // Add Necessary Panels to cards 
+        // Add Necessary Panels to Panels
         panels.add("Manual Input Panel", this.manualinputpanel.getPanel());
         panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
         panels.add("Import JSON Panel", this.importpanel.getPanel());
@@ -61,7 +63,6 @@ public class View{
         // Set the layout for each panel 
         this.frame.getContentPane().add(this.mainpanel.getPanel(), BorderLayout.WEST);
         this.frame.getContentPane().add(this.panels, BorderLayout.CENTER);
-
 
     }
 
@@ -73,6 +74,7 @@ public class View{
     public MainPanel getMainPanel(){ return this.mainpanel; }
     public ViewCalculatePanel getViewCalculatePanel(){ return this.viewcalculatepanel; }
     public ImportPanel getImportPanel(){ return this.importpanel; }
+    public ManualInputPanel getManualInputPanel(){ return this.manualinputpanel; }
     public JPanel getPanels(){ return this.panels; }
 
 

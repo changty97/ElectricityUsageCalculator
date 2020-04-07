@@ -1,17 +1,14 @@
 /* PACKAGE PATH */
 package edu.csus.csc131.euc.Controller;
 
-/* Local Imports */
-import edu.csus.csc131.euc.View.*;
-import edu.csus.csc131.euc.Model.Model;
-
+import java.awt.CardLayout;
 /* Library Imports */
-import java.awt.event.*;
-import edu.csus.csc131.euc.View.*;
-import edu.csus.csc131.euc.Model.Model;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*; 
-import java.awt.*;
+/* Local Imports */
+import edu.csus.csc131.euc.View.View;
+import edu.csus.csc131.euc.Model.Model;
 
 public class Controller {
     // Instance Variables for Controller
@@ -74,12 +71,18 @@ public class Controller {
         }
     }
 
+    // class AddEntryButtonListener implements ActionListener{
+    //     @Override 
+    //     public void actionPerformed(ActionEvent e){
+    //         ...
+    //     }
+    // }
+
     // MANUAL INPUT ACTION LISTENERS 
 
     // VIEW CALCULATE ANCTION LISTENERS 
 
     // IMPORT JSON PANEL ACTION LISTENERS 
-
 
 }
 

@@ -7,8 +7,11 @@ import java.awt.*;
 
 public class MainPanel{
 
+    /* Constants */ 
+    private static final Color BACKGROUND_COLOR = Color.CYAN;
+
     /* Panel for this Class */
-    private JPanel panel = new JPanel(new GridBagLayout()); 
+    private JPanel panel;
 
     /* Elements for the Main Frame */
     private JButton importjsonbutton, manualinputbutton, viewcalcbutton;
@@ -18,9 +21,33 @@ public class MainPanel{
 
     // Constructor 
     public MainPanel(){ 
-        // Set Panel Color 
-        panel.setBackground(Color.CYAN); 
+        /* Initializers for this Panel */ 
+        initializePanel(); 
+        initializeComponents(); 
+        intializeComponentPreferences();
+        intializeConstraints(); 
+    }
 
+    // Getters
+    public JPanel getPanel(){ return this.panel; }
+    public JButton getImportJsonButton(){ return this.importjsonbutton; }
+    public JButton getManualInpuButton(){ return this.manualinputbutton; }
+    public JButton getViewCalcButton(){ return this.viewcalcbutton; }
+
+    /* Functions for Main Panel */ 
+
+    // Intialize Panel 
+    public void initializePanel(){
+        /* Panel Initializations */ 
+        panel = new JPanel(new GridBagLayout()); 
+
+        // Set Panel Color 
+        panel.setBackground(BACKGROUND_COLOR); 
+    }
+
+    // Intialize All Components 
+    public void initializeComponents(){
+        /* Instantiate all components of panel here */ 
         // Instantiate Buttons
         this.importjsonbutton = new JButton("Import JSON"); 
         this.manualinputbutton = new JButton("Manual Input"); 
@@ -28,8 +55,14 @@ public class MainPanel{
 
         // Instantiate Labels 
         this.titleapp = new JLabel("Electricity Usage Calculator"); 
+    }
 
-        // Set Constraints for the Main Panel 
+    // Intializes Preferences for each Component 
+    public void intializeComponentPreferences(){}
+
+    // Initializes Constraints for GridBag Layout 
+    public void intializeConstraints(){
+        /* Set Constraints for GridBagLayout for each component */ 
         GridBagConstraints c = new GridBagConstraints(); 
 
         // Set insets for each element (Left, Right, Top, Bottom)
@@ -54,16 +87,6 @@ public class MainPanel{
         c.gridx = 0; 
         c.gridy = 3; 
         panel.add(this.viewcalcbutton, c); 
-
     }
-
-    // Setters
-
-    // Getters
-    public JPanel getPanel(){ return this.panel; }
-    public JButton getImportJsonButton(){ return this.importjsonbutton; }
-    public JButton getManualInpuButton(){ return this.manualinputbutton; }
-    public JButton getViewCalcButton(){ return this.viewcalcbutton; }
-
 
 }
