@@ -2,7 +2,7 @@
 package edu.csus.csc131.euc;
 import java.util.Arrays;
 import javax.swing.JFrame;
-import edu.csus.csc131.euc.model.*;
+import edu.csus.csc131.euc.Model.*;
 
 /* Local Imports */
 import edu.csus.csc131.euc.View.View;
