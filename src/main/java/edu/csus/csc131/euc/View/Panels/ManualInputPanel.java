@@ -5,16 +5,12 @@ package edu.csus.csc131.euc.View.Panels;
 import javax.swing.*; 
 import java.awt.*;
 
-public class ManualInputPanel{
+public class ManualInputPanel extends Panel{
 
     /* Constants */
-    private static final Color BACKGROUND_COLOR = Color.GREEN;
     private static final Dimension DIMENSION_TEXTFIELD = new Dimension(100, 25);
     private static final Dimension DIMENSION_SCROLL_PANE = new Dimension(200, 200);
     private static final Dimension DIMENSION_SCROLL_BAR = new Dimension(20, 200);
-
-    /* Panel for this class */
-    private JPanel panel;
 
     // Instance Elements
     private JButton addentrybutton;
@@ -23,13 +19,10 @@ public class ManualInputPanel{
     private JScrollPane scrollpane;
     private JTextField enterdatefield, enterperiodfield, enterusagefield;
 
-    // Labels
-    // Title Label temporary to denote which panel is used 
-    JLabel templabel = new JLabel("This is the Manual Input Panel");
-
     // Constructor
     public ManualInputPanel() {
         /* Intializers for this Panel */ 
+        setBackgroundColor(Color.BLUE);
         initializePanel(); 
         initializeComponents();
         intializeComponentPreferences();
@@ -51,17 +44,8 @@ public class ManualInputPanel{
     public JTextField getEnterDateField() { return this.enterdatefield; }
     public JTextField getEnterPeriodField() { return this.enterperiodfield; }
     public JTextField getEnterUsageField() { return this.enterusagefield; }
-    public JPanel getPanel(){ return this.panel; }
 
-    /* Functions for Manual Input Panel */ 
-    // Initialize Panel 
-    public void initializePanel(){
-        /* Panel Initializations */
-        panel = new JPanel(new GridBagLayout()); 
-
-        // Set Panel Color
-        this.panel.setBackground(BACKGROUND_COLOR);
-    }
+  
 
     // Intialize All Components 
     public void initializeComponents(){
@@ -89,29 +73,21 @@ public class ManualInputPanel{
 
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
-        /* Set Constraints for GridBagLayout for each component */ 
-        GridBagConstraints c = new GridBagConstraints();
 
-        // Set insets for each element (Left, Right, Top, Bottom)
-        c.insets = new Insets(10,10,10,10);
-
+        // Initialize Gridbag
+        setGridbagInsets(10,10,10,10);
         // Add Entry Button constraints
-        c.gridx = 0; c.gridy = 0; panel.add(this.addentrybutton, c);
+        setButtonConstraints(this.addentrybutton, 0, 0);
 
         // All Text Field Constraints
-        this.enterdatefield.setPreferredSize(DIMENSION_TEXTFIELD);
-        this.enterperiodfield.setPreferredSize(DIMENSION_TEXTFIELD);
-        this.enterusagefield.setPreferredSize(DIMENSION_TEXTFIELD);
-        c.gridx = 4; c.gridy = 1; panel.add(this.enterdatefield, c);
-        c.gridx = 4; c.gridy = 2; panel.add(this.enterperiodfield, c);
-        c.gridx = 4; c.gridy = 3; panel.add(this.enterusagefield, c);
+        setTextFieldConstraints(this.enterdatefield, 4, 1, DIMENSION_TEXTFIELD);
+        setTextFieldConstraints(this.enterperiodfield, 4, 2, DIMENSION_TEXTFIELD);
+        setTextFieldConstraints(this.enterusagefield, 4, 3, DIMENSION_TEXTFIELD);
 
         // Scroll Pane constraints
-        this.scrollpane.setPreferredSize(DIMENSION_SCROLL_PANE);
-        c.gridx = 1; c.gridy = 1; panel.add(this.scrollpane, c);
+        setScrollPaneConstraints(this.scrollpane, 1, 1, DIMENSION_SCROLL_PANE);
 
         // Scroll Bar constraints
-        this.scrollbar.setPreferredSize(DIMENSION_SCROLL_BAR);
-        c.gridx = 3; c.gridy = 1; panel.add(this.scrollbar, c);
+        setScrollBarConstraints(this.scrollbar, 3, 1, DIMENSION_SCROLL_BAR);
     }
 }
