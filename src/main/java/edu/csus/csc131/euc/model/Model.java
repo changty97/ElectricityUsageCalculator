@@ -2,7 +2,7 @@
 package edu.csus.csc131.euc.Model;
 
 /* Local Imports */
-import edu.csus.csc131.euc.Model.Data.*;
+import edu.csus.csc131.euc.Model.Data.*; 
 
 public class Model {
     // Instance Variables handling all the models 

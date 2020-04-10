@@ -11,7 +11,7 @@ public class Profile {
     private int userid;
     private float totalcost; 
     private Usage usage; 
-    private Rates rates;
+    private Rates rates; 
     private String unit, siteTimeZoneId;
 
     // Constructor for the profile class 
