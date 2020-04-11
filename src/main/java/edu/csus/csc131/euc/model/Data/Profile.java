@@ -12,7 +12,6 @@ public class Profile {
     private float totalcost; 
     private Usage usage; 
     private Rates rates; 
-    private String unit, siteTimeZoneId;
 
     // Constructor for the profile class 
     public Profile(int id){
@@ -24,17 +23,13 @@ public class Profile {
     // Setters 
     public void setProfileID(int id){ this.userid = id; };
     public void setProfileUsage(Usage u){ this.usage = u; };
-    public void setProfileRates(Rates r){ this.rates = r; };
-    public void setProfileUnit(String s){ this.unit = s; };
-    public void setProfileSiteTimeZoneID(String s){ this.siteTimeZoneId = s; };
+    public void setProfileRates(Rates r){ this.rates = r;};
     
     // Getters 
     public int getProfileID(){ return this.userid; };
     public Usage getProfileUsage(){ return this.usage; };
     public Rates getProfileRates(){ return this.rates; };
-    public float getTotalCost(){ return this.totalcost; };
-    public String setProfileUnit(){ return unit; };
-    public String setProfileSiteTimeZoneID(){ return siteTimeZoneId; };
+    public float getTotalCost(){ return this.totalcost; }
 
     /* Functions for Profile Class */
 
