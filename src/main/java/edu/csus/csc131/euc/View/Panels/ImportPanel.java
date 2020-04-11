@@ -5,16 +5,12 @@ package edu.csus.csc131.euc.View.Panels;
 import javax.swing.*; 
 import java.awt.*;
 
-public class ImportPanel{
+public class ImportPanel extends Panel {
 
     /* Constants */ 
-    private static final Color BACKGROUND_COLOR = Color.ORANGE;
     private static final Dimension IMPORT_FIELD_DIMENSIONS = new Dimension(750, 50); 
     private static final Dimension BROWSE_BUTTON_DIMENSIONS = new Dimension(165, 50);
     private static final Dimension IMPORT_BUTTON_DIMENSIONS = new Dimension(410,75);
-
-    /* Panel for this class */
-    private JPanel panel;
 
     /* Instance Variables */
     private JButton importbutton, browsebutton;
@@ -24,9 +20,9 @@ public class ImportPanel{
     // Constructor
     public ImportPanel() {
         /* Intializers for this Panel */
+        setBackgroundColor(Color.ORANGE);
         initializePanel(); 
         initializeComponents(); 
-        intializeComponentPreferences();
         intializeConstraints(); 
     }
 
@@ -94,18 +90,6 @@ public class ImportPanel{
     public JButton getImportButton() { return this.importbutton; }
     public JButton getBrowseButton() { return this.browsebutton; }
     public JTextField getImportField() { return this.importfield; }
-    public JPanel getPanel(){ return this.panel; }
-
-    /* Functions for Import Panel */ 
-
-    // Intialize Panel 
-    public void initializePanel(){
-        /* Panel Initializations */ 
-        panel = new JPanel(new GridBagLayout()); 
-
-        // Set Background color 
-        panel.setBackground(BACKGROUND_COLOR);
-    }
 
     // Intialize All Components 
     public void initializeComponents(){
@@ -123,42 +107,34 @@ public class ImportPanel{
         this.importbutton = new JButton("Import JSON");
     }
 
-    // Intializes Preferences for each Component 
-    public void intializeComponentPreferences(){
-        /* Component Preferences */ 
-        // import field
-        this.importfield.setPreferredSize(IMPORT_FIELD_DIMENSIONS);
-
-        // browse button
-        this.browsebutton.setPreferredSize(BROWSE_BUTTON_DIMENSIONS);
-
-        // import button 
-        this.importbutton.setPreferredSize(IMPORT_BUTTON_DIMENSIONS);
-    }
-
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
-        /* Set Constraints for GridBagLayout for each component */ 
-        GridBagConstraints c = new GridBagConstraints(); 
-
-        // Set insets for each element (Left, Right, Top, Bottom)
-        c.insets = new Insets(0,0,20,0);
+        // Initialize Gridbag
+        setGridbagInsets(0,0,20,0);
 
         // importfield constraints
-        c.gridx = 0; c.gridy = 0; 
-        panel.add(importfield, c); 
+        setTextFieldConstraints(this.importfield, 0, 0, IMPORT_FIELD_DIMENSIONS); 
 
         // browse button constraints 
-        c.gridx = 1; c.gridy = 0;
-        panel.add(browsebutton, c); 
+        setButtonConstraints(this.browsebutton, 1, 0, BROWSE_BUTTON_DIMENSIONS);
 
         // dragbox constraints 
-        c.gridx = 0; c.gridy = 1; 
-        panel.add(dragbox, c);
+        setDragBoxConstraints(dragbox, 0, 1);
 
         // importbutton Constraints 
-        c.gridx = 0; c.gridy = 2; 
-        panel.add(importbutton, c); 
+        setButtonConstraints(this.importbutton, 0, 2, IMPORT_BUTTON_DIMENSIONS);
 
+    }
+
+    public void setDragBoxConstraints(DragBoxDraw dragbox, int gridx, int gridy) {
+        //Get gridBagConstraints from Panel class
+        GridBagConstraints c = getGridbagConstraints();
+
+        // Setting the X-Axis and Y-Axis
+        c.gridx = gridx;
+        c.gridy = gridy;
+
+        // Adding the button constraints to the main panel
+        this.getPanel().add(dragbox, c);
     }
 }
