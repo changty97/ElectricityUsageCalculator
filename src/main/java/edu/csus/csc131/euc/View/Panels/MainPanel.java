@@ -5,7 +5,14 @@ package edu.csus.csc131.euc.View.Panels;
 import javax.swing.*; 
 import java.awt.*; 
 
-public class MainPanel extends Panel {
+public class MainPanel{
+
+    /* Constants */ 
+    private static final Color BACKGROUND_COLOR = Color.CYAN;
+
+    /* Panel for this Class */
+    private JPanel panel;
+
     /* Elements for the Main Frame */
     private JButton importjsonbutton, manualinputbutton, viewcalcbutton;
 
@@ -15,19 +22,28 @@ public class MainPanel extends Panel {
     // Constructor 
     public MainPanel(){ 
         /* Initializers for this Panel */ 
-        setBackgroundColor(Color.CYAN);
         initializePanel(); 
         initializeComponents(); 
+        intializeComponentPreferences();
         intializeConstraints(); 
     }
 
     // Getters
+    public JPanel getPanel(){ return this.panel; }
     public JButton getImportJsonButton(){ return this.importjsonbutton; }
     public JButton getManualInpuButton(){ return this.manualinputbutton; }
     public JButton getViewCalcButton(){ return this.viewcalcbutton; }
 
     /* Functions for Main Panel */ 
 
+    // Intialize Panel 
+    public void initializePanel(){
+        /* Panel Initializations */ 
+        panel = new JPanel(new GridBagLayout()); 
+
+        // Set Panel Color 
+        panel.setBackground(BACKGROUND_COLOR); 
+    }
 
     // Intialize All Components 
     public void initializeComponents(){
@@ -41,23 +57,36 @@ public class MainPanel extends Panel {
         this.titleapp = new JLabel("Electricity Usage Calculator"); 
     }
 
+    // Intializes Preferences for each Component 
+    public void intializeComponentPreferences(){}
+
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
+        /* Set Constraints for GridBagLayout for each component */ 
+        GridBagConstraints c = new GridBagConstraints(); 
 
         // Set insets for each element (Left, Right, Top, Bottom)
-        setGridbagInsets(10,10,10,10);
+        c.insets = new Insets(10,10,10,10);
 
         // titleapp Label constraints 
-        setLabelConstraints(titleapp, 0, 0);
+        c.gridx = 0;
+        c.gridy = 0;
+        panel.add(titleapp, c); 
 
         // Import JSON Button constraints 
-        setButtonConstraints(this.importjsonbutton, 0, 1);
+        c.gridx = 0; 
+        c.gridy = 1; 
+        panel.add(this.importjsonbutton, c); 
 
         // Manual Input Button constraints 
-        setButtonConstraints(this.manualinputbutton, 0, 2);
+        c.gridx = 0; 
+        c.gridy = 2; 
+        panel.add(this.manualinputbutton, c); 
 
         // View Calculate Button constraints 
-        setButtonConstraints(this.viewcalcbutton, 0, 3);
+        c.gridx = 0; 
+        c.gridy = 3; 
+        panel.add(this.viewcalcbutton, c); 
     }
 
 }
