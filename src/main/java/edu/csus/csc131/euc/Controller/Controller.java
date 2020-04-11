@@ -5,10 +5,12 @@ import java.awt.CardLayout;
 /* Library Imports */
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.*;
 
 /* Local Imports */
 import edu.csus.csc131.euc.View.View;
 import edu.csus.csc131.euc.Model.Model;
+
 
 public class Controller {
     // Instance Variables for Controller
@@ -24,9 +26,9 @@ public class Controller {
         initializeActionListeners();
     }
 
-    // Initializes all action listeners 
+    // Initializes all action listeners
     public void initializeActionListeners(){
-        // Action Listeners for Main Panel 
+        // Action Listeners for Main Panel
         view.getMainPanel().getImportJsonButton().addActionListener(new ImportJSONPanelButtonListener());
         view.getMainPanel().getManualInpuButton().addActionListener(new ManualInputButtonListener());
         view.getMainPanel().getViewCalcButton().addActionListener(new ViewCalculateButtonListener());
@@ -44,14 +46,14 @@ public class Controller {
         this.view = v;
     }
 
-    /* IMPLEMENTED BUTTON ACTION LISTENERS HERE */ 
+    /* IMPLEMENTED BUTTON ACTION LISTENERS HERE */
 
-    // MAIN PANEL ACTION LISTENERS 
+    // MAIN PANEL ACTION LISTENERS
     class ImportJSONPanelButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             CardLayout panels = (CardLayout) view.getPanels().getLayout();
-            panels.show(view.getPanels(), "Import JSON Panel"); 
+            panels.show(view.getPanels(), "Import JSON Panel");
         }
     }
 
@@ -59,7 +61,7 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             CardLayout panels = (CardLayout) view.getPanels().getLayout();
-            panels.show(view.getPanels(), "Manual Input Panel"); 
+            panels.show(view.getPanels(), "Manual Input Panel");
         }
     }
 
@@ -67,22 +69,40 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             CardLayout panels = (CardLayout) view.getPanels().getLayout();
-            panels.show(view.getPanels(), "View & Calculate Panel"); 
+            panels.show(view.getPanels(), "View & Calculate Panel");
         }
     }
 
     // class AddEntryButtonListener implements ActionListener{
-    //     @Override 
+    //     @Override
     //     public void actionPerformed(ActionEvent e){
     //         ...
     //     }
     // }
 
-    // MANUAL INPUT ACTION LISTENERS 
+    // MANUAL INPUT ACTION LISTENERS
+    class AddEntryButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
 
-    // VIEW CALCULATE ANCTION LISTENERS 
+            //get Usage Value from textfield
+            String usage = view.getManualInputPanel().getEnterUsageField().getText();
+            float usageFloat = Float.valueOf(usage);
 
-    // IMPORT JSON PANEL ACTION LISTENERS 
+
+
+            model.getModelProfile().setProfileUsage(usageFloat, h);;
+
+            JScrollPane scrollpane = view.getManualInputPanel().getScrollPane();
+            String[] data = {}; //Test
+            JList<String> list = new JList<String>(data); //Test
+            scrollpane = new JScrollPane(list);
+        }
+    }
+
+    // VIEW CALCULATE ANCTION LISTENERS
+
+    // IMPORT JSON PANEL ACTION LISTENERS
 
 }
 

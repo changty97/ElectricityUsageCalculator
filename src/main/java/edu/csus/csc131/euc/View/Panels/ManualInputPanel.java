@@ -1,8 +1,8 @@
-/* PACKAGE PATH */ 
+/* PACKAGE PATH */
 package edu.csus.csc131.euc.View.Panels;
 
 /* Library Imports */
-import javax.swing.*; 
+import javax.swing.*;
 import java.awt.*;
 
 public class ManualInputPanel extends Panel{
@@ -14,19 +14,19 @@ public class ManualInputPanel extends Panel{
 
     // Instance Elements
     private JButton addentrybutton;
-    private JList list;
+    private JList<String> list;
     private JScrollBar scrollbar;
     private JScrollPane scrollpane;
     private JTextField enterdatefield, enterperiodfield, enterusagefield;
 
     // Constructor
     public ManualInputPanel() {
-        /* Intializers for this Panel */ 
+        /* Intializers for this Panel */
         setBackgroundColor(Color.BLUE);
-        initializePanel(); 
+        initializePanel();
         initializeComponents();
         intializeComponentPreferences();
-        intializeConstraints(); 
+        intializeConstraints();
     }
 
     // Setters
@@ -45,11 +45,11 @@ public class ManualInputPanel extends Panel{
     public JTextField getEnterPeriodField() { return this.enterperiodfield; }
     public JTextField getEnterUsageField() { return this.enterusagefield; }
 
-  
 
-    // Intialize All Components 
+
+    // Intialize All Components
     public void initializeComponents(){
-       /* Instantiate all components of panel here */ 
+       /* Instantiate all components of panel here */
        this.addentrybutton = new JButton("Add Entry");
        this.scrollbar = new JScrollBar(JScrollBar.VERTICAL,0,100,0,255);
        this.scrollpane = new JScrollPane();
@@ -58,20 +58,21 @@ public class ManualInputPanel extends Panel{
        this.enterusagefield = new JTextField("Enter Usage");
 
        // Instantiate list components
-       String[] data = {"one","two","three"}; //Test
-       this.list = new JList(data); //Test
+       //String[] data = {"one","two","three"};
+       String[] data = {}; //Test
+       this.list = new JList<String>(data); //Test
        this.scrollpane = new JScrollPane(this.list); //Test
     }
 
-    // Intializes Preferences for each Component 
+    // Intializes Preferences for each Component
     public void intializeComponentPreferences(){
-        /* Component Preferences */ 
+        /* Component Preferences */
         this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         this.list.setLayoutOrientation(JList.VERTICAL);
         this.list.setVisibleRowCount(-1);
     }
 
-    // Initializes Constraints for GridBag Layout 
+    // Initializes Constraints for GridBag Layout
     public void intializeConstraints(){
 
         // Initialize Gridbag

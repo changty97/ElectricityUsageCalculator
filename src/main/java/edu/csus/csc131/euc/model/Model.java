@@ -2,20 +2,20 @@
 package edu.csus.csc131.euc.Model;
 
 /* Local Imports */
-import edu.csus.csc131.euc.Model.Data.*; 
+import edu.csus.csc131.euc.Model.Data.*;
 
 public class Model {
-    // Instance Variables handling all the models 
-    Profile profile; 
-    Usage usage; 
-    Rates rates; 
+    // Instance Variables handling all the models
+    Profile profile;
+    Usage usage;
+    Rates rates;
 
-    // Construtor for all Models 
+    // Construtor for all Models
     public Model(int id){
         this.profile = new Profile(id);
-        this.usage = new Usage(); 
-        // Always true for summer for now 
-        this.rates = new Rates(true); 
+        this.usage = new Usage();
+        // Always true for summer for now
+        this.rates = new Rates(true);
     }
 
     // Setters
