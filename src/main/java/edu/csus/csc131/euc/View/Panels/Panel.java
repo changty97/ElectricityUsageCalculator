@@ -35,15 +35,15 @@ public class Panel {
 
     }
 
-    // Set background color
+    // Setter 
     public void setBackgroundColor(Color c) { this.BACKGROUND_COLOR = c; }
-
-    public JPanel getPanel(){ return this.panel; }
-
     public void setGridbagInsets(int left, int right, int top, int bottom){ c.insets = new Insets(left,right,top,bottom); }
 
+    // Getter 
+    public JPanel getPanel(){ return this.panel; }
     public GridBagConstraints getGridbagConstraints(){ return this.c; }
 
+    /* Functions for Panel */ 
     public void setButtonConstraints(JButton button, int gridx, int gridy) {
         // Setting the X-Axis and Y-Axis
         c.gridx = gridx;
