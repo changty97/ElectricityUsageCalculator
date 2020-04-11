@@ -35,11 +35,18 @@ public class Panel {
 
     }
 
-    // Setter 
+    // Setters
     public void setBackgroundColor(Color c) { this.BACKGROUND_COLOR = c; }
+
+    // Overloaded with RGB 
+    public void setBackgroundColor(int r, int g, int b) { 
+        Color c = new Color(r, g, b); 
+        this.BACKGROUND_COLOR = c; 
+    }
+
     public void setGridbagInsets(int left, int right, int top, int bottom){ c.insets = new Insets(left,right,top,bottom); }
 
-    // Getter 
+    // Getters
     public JPanel getPanel(){ return this.panel; }
     public GridBagConstraints getGridbagConstraints(){ return this.c; }
 
