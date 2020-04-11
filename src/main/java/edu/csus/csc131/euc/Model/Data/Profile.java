@@ -1,5 +1,5 @@
 /* PACKAGE PATH */ 
-package edu.csus.csc131.euc.Model.Data;
+package edu.csus.csc131.euc.model.Data;
 
 // ----------------------------------------- //
 // Profile Class: Sets up user profile       //
