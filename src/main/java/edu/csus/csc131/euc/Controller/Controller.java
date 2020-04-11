@@ -19,7 +19,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 /* Local Imports */
 import edu.csus.csc131.euc.View.View;
-import edu.csus.csc131.euc.Model.Model;
+import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.Libraries.simple.JSONArray;
 import edu.csus.csc131.euc.Libraries.simple.JSONObject;
 import edu.csus.csc131.euc.Libraries.simple.parser.JSONParser;

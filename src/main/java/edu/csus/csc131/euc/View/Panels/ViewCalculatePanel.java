@@ -192,11 +192,11 @@ public class ViewCalculatePanel extends Panel {
         setButtonConstraints(this.navrightbutton, 5, 1);
 
         // Usage Details - Title 
-        c.gridx = 1; c.gridy = 0; panel.add(this.usagetitle, c); 
-        c.gridx = 2; c.gridy = 0; panel.add(this.usagestarttimetitle, c); 
-        c.gridx = 3; c.gridy = 0; panel.add(this.usagestarttime, c); 
-        c.gridx = 4; c.gridy = 0; panel.add(this.usageendtimetitle, c); 
-        c.gridx = 5; c.gridy = 0; panel.add(this.usageendtime, c); 
+        setLabelConstraints(this.usagetitle, 1, 0);
+        setLabelConstraints(this.usagestarttimetitle, 1, 0);
+        setTextFieldConstraints(this.usagestarttime, 1, 0);
+        setLabelConstraints(this.usageendtimetitle, 1, 0);
+        setTextFieldConstraints(this.usageendtime, 1, 0);
 
         // Usage Details - Usage - Labels
         setLabelConstraints(this.usagedetails[0], 1, 1);

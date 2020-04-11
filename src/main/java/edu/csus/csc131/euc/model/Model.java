@@ -1,8 +1,8 @@
 /* PACKAGE PATH */
-package edu.csus.csc131.euc.Model;
+package edu.csus.csc131.euc.model;
 
 /* Local Imports */
-import edu.csus.csc131.euc.Model.Data.*; 
+import edu.csus.csc131.euc.model.Data.*; 
 
 public class Model {
     // Instance Variables handling all the models 
