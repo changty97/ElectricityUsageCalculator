@@ -15,7 +15,7 @@ public class MainPanel extends Panel {
     // Constructor 
     public MainPanel(){ 
         /* Initializers for this Panel */ 
-        setBackgroundColor(Color.CYAN);
+        setBackgroundColor(2, 29, 62);
         initializePanel(); 
         initializeComponents(); 
         intializeConstraints(); 
@@ -27,7 +27,6 @@ public class MainPanel extends Panel {
     public JButton getViewCalcButton(){ return this.viewcalcbutton; }
 
     /* Functions for Main Panel */ 
-
 
     // Intialize All Components 
     public void initializeComponents(){
@@ -43,12 +42,8 @@ public class MainPanel extends Panel {
 
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
-
         // Set insets for each element (Left, Right, Top, Bottom)
-        setGridbagInsets(10,10,10,10);
-
-        // titleapp Label constraints 
-        setLabelConstraints(titleapp, 0, 0);
+        setGridbagInsets(0, 0, 0, 0);
 
         // Import JSON Button constraints 
         setButtonConstraints(this.importjsonbutton, 0, 1);
@@ -58,6 +53,15 @@ public class MainPanel extends Panel {
 
         // View Calculate Button constraints 
         setButtonConstraints(this.viewcalcbutton, 0, 3);
+
+        // titleapp Label constraints 
+        setGridbagInsets(55, 0, 290, 0);
+        setLabelConstraints(titleapp, 0, 0);
+
+        // Label for Bottom Of Main Panel 
+        JLabel logo = new JLabel("Logo Goes Here");
+        setGridbagInsets(290, 0, 50, 0);
+        setLabelConstraints(logo, 0, 4);
     }
 
 }
