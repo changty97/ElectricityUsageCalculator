@@ -5,11 +5,14 @@ package edu.csus.csc131.euc.View.Panels;
 import javax.swing.*; 
 import java.awt.*; 
 
-public class ViewCalculatePanel extends Panel {
+public class ViewCalculatePanel{
 
     /* Constants */
+    private static final Color BACKGROUND_COLOR = Color.lightGray;
     private static final Dimension DIMENSION_TEXTFIELD = new Dimension(100, 25);
     
+    /* Panel for this class */
+    private JPanel panel = new JPanel(new GridBagLayout()); 
 
     /* Instance Variables */
     private JButton navrightbutton, navleftbutton;
@@ -47,7 +50,6 @@ public class ViewCalculatePanel extends Panel {
     // Constructor
     public ViewCalculatePanel() {
         /* Intializers for this Panel */ 
-        setBackgroundColor(Color.lightGray);
         initializePanel(); 
         initializeComponents();
         intializeComponentPreferences();
@@ -81,6 +83,8 @@ public class ViewCalculatePanel extends Panel {
     public void setTotalCost(JTextField t) { this.totalcost = t; }
 
     /* Getters */
+    // Getters - Panel 
+    public JPanel getPanel(){ return this.panel; }
 
     // Getters - Navigational Buttons 
     public JButton getNavigateRightButton() { return this.navrightbutton; }
@@ -112,6 +116,14 @@ public class ViewCalculatePanel extends Panel {
     public JTextField setTotalCost() { return this.totalcost; }
 
     /* Functions for ViewCalculate Panel*/ 
+
+    // Initialize Panel 
+    public void initializePanel(){
+        /* Panel Initializations */ 
+        panel = new JPanel(new GridBagLayout()); 
+        // Set Background Color 
+        this.panel.setBackground(BACKGROUND_COLOR);
+    }
 
     // Intialize All Components 
     public void initializeComponents(){
@@ -154,97 +166,104 @@ public class ViewCalculatePanel extends Panel {
     public void intializeComponentPreferences(){
         /* Component Preferences */ 
         // Usage Details 
-        this.usagetotalday.setEditable(false);
-        this.usagenonpeak.setEditable(false);
-        this.usagemidpeak.setEditable(false);
-        this.usagepeak.setEditable(false);
+        this.usagetotalday.setPreferredSize(DIMENSION_TEXTFIELD); this.usagetotalday.setEditable(false);
+        this.usagenonpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.usagenonpeak.setEditable(false);
+        this.usagemidpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.usagemidpeak.setEditable(false);
+        this.usagepeak.setPreferredSize(DIMENSION_TEXTFIELD); this.usagepeak.setEditable(false);
 
-        this.costtotalday.setEditable(false);
-        this.costnonpeak.setEditable(false);
-        this.costmidpeak.setEditable(false);
-        this.costpeak.setEditable(false);
+        this.costtotalday.setPreferredSize(DIMENSION_TEXTFIELD); this.costtotalday.setEditable(false);
+        this.costnonpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.costnonpeak.setEditable(false);
+        this.costmidpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.costmidpeak.setEditable(false);
+        this.costpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.costpeak.setEditable(false);
+
+        // Summary Details 
+        this.summeroffpeak.setPreferredSize(DIMENSION_TEXTFIELD);
+        this.summermidpeak.setPreferredSize(DIMENSION_TEXTFIELD);
+        this.summerpeak.setPreferredSize(DIMENSION_TEXTFIELD);
+        this.nonsummeroffpeak.setPreferredSize(DIMENSION_TEXTFIELD);
+        this.nonsummerpeak.setPreferredSize(DIMENSION_TEXTFIELD);
 
         // Total 
-        this.totalusage.setEditable(false);
-        this.totalcost.setEditable(false);
+        this.totalusage.setPreferredSize(DIMENSION_TEXTFIELD); this.totalusage.setEditable(false);
+        this.totalcost.setPreferredSize(DIMENSION_TEXTFIELD); this.totalcost.setEditable(false);
     }
 
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
+        /* Set Constraints for GridBagLayout for each component */ 
+        GridBagConstraints c = new GridBagConstraints();
+
         // Set insets for each element (Left, Right, Top, Bottom)
-        setGridbagInsets(10,10,10,10);
+        c.insets = new Insets(10,10,10,10);
 
         /* Component Constraints */
 
         // USAGE DETAILS
         // Navigation Elements 
-        setButtonConstraints(this.navleftbutton, 0, 1);
-        setButtonConstraints(this.navrightbutton, 5, 1);
+        c.gridx = 0; c.gridy = 1; panel.add(this.navleftbutton, c);
+        c.gridx = 5; c.gridy = 1; panel.add(this.navrightbutton, c);
 
         // Usage Details - Title 
-        setLabelConstraints(this.usagetitle, 1, 0);
+        c.gridx = 1; c.gridy = 0; panel.add(this.usagetitle, c); 
 
         // Usage Details - Usage - Labels
-        setLabelConstraints(this.usagedetails[0], 1, 1);
-        setLabelConstraints(this.usagedetails[1], 1, 2);
-        setLabelConstraints(this.usagedetails[2], 1, 3);
-        setLabelConstraints(this.usagedetails[3], 1, 4);
+        c.gridx = 1; c.gridy = 1; panel.add(this.usagedetails[0], c);
+        c.gridx = 1; c.gridy = 2; panel.add(this.usagedetails[1], c);
+        c.gridx = 1; c.gridy = 3; panel.add(this.usagedetails[2], c);
+        c.gridx = 1; c.gridy = 4; panel.add(this.usagedetails[3], c);
 
         // Usage Details - Usage - Data 
-        setTextFieldConstraints(this.usagetotalday, 2, 1, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.usagenonpeak, 2, 2, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.usagemidpeak, 2, 3, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.usagepeak, 2, 4, DIMENSION_TEXTFIELD);
+        c.gridx = 2; c.gridy = 1; panel.add(this.usagetotalday, c);
+        c.gridx = 2; c.gridy = 2; panel.add(this.usagenonpeak, c);
+        c.gridx = 2; c.gridy = 3; panel.add(this.usagemidpeak, c);
+        c.gridx = 2; c.gridy = 4; panel.add(this.usagepeak, c);
 
         // Usage Details - Cost - Labels
-        setLabelConstraints(this.usagedetails[4], 3, 1);
-        setLabelConstraints(this.usagedetails[5], 3, 2);
-        setLabelConstraints(this.usagedetails[6], 3, 3);
-        setLabelConstraints(this.usagedetails[7], 3, 4);
+        c.gridx = 3; c.gridy = 1; panel.add(this.usagedetails[4], c);
+        c.gridx = 3; c.gridy = 2; panel.add(this.usagedetails[5], c);
+        c.gridx = 3; c.gridy = 3; panel.add(this.usagedetails[6], c);
+        c.gridx = 3; c.gridy = 4; panel.add(this.usagedetails[7], c);
 
         // Usage Details - Cost - Data 
-        setTextFieldConstraints(this.costtotalday, 4, 1, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.costnonpeak, 4, 2, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.costmidpeak, 4, 3, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.costpeak, 4, 4, DIMENSION_TEXTFIELD);
+        c.gridx = 4; c.gridy = 1; panel.add(this.costtotalday, c);
+        c.gridx = 4; c.gridy = 2; panel.add(this.costnonpeak, c);
+        c.gridx = 4; c.gridy = 3; panel.add(this.costmidpeak, c);
+        c.gridx = 4; c.gridy = 4; panel.add(this.costpeak, c);
         
-        //Blank space
-        getGridbagConstraints().gridx = 0; 
-        getGridbagConstraints().gridy = 5; 
-        getPanel().add(new JLabel(""), getGridbagConstraints()); 
+        c.gridx = 0; c.gridy = 5; panel.add(new JLabel(""), c); //Blank space
 
         // SUMMARY DETAILS
         // Summary Details - General Labels
-        setLabelConstraints(this.summarydetails[2], 0, 8);
-        setLabelConstraints(this.summarydetails[3], 0, 9);
-        setLabelConstraints(this.summarydetails[4], 0, 10);
+        c.gridx = 0; c.gridy = 8; panel.add(this.summarydetails[2], c);
+        c.gridx = 0; c.gridy = 9; panel.add(this.summarydetails[3], c);
+        c.gridx = 0; c.gridy = 10; panel.add(this.summarydetails[4], c);
 
         // Summary Details - Title 
-        setLabelConstraints(this.summarytitle, 1, 6);
+        c.gridx = 1; c.gridy = 6; panel.add(this.summarytitle, c);
 
         // Summary Details - Summer - Label
-        setLabelConstraints(this.summarydetails[0], 1, 7);
+        c.gridx = 1; c.gridy = 7; panel.add(this.summarydetails[0], c);
 
         // Summary Details - Summer - Data
-        setTextFieldConstraints(this.summeroffpeak, 1, 8, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.summermidpeak, 1, 9, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.summerpeak, 1, 10, DIMENSION_TEXTFIELD);
+        c.gridx = 1; c.gridy = 8; panel.add(this.summeroffpeak, c);
+        c.gridx = 1; c.gridy = 9; panel.add(this.summermidpeak, c);
+        c.gridx = 1; c.gridy = 10; panel.add(this.summerpeak, c);
 
         // Summary Details - Non-Summer - Label 
-        setLabelConstraints(this.summarydetails[1], 2, 7);
+        c.gridx = 2; c.gridy = 7; panel.add(this.summarydetails[1], c);
 
         // Summary Details - Non-Summer - Data
-        setTextFieldConstraints(this.nonsummeroffpeak, 2, 8, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.nonsummerpeak, 2, 10, DIMENSION_TEXTFIELD);
+        c.gridx = 2; c.gridy = 8; panel.add(this.nonsummeroffpeak, c);
+        c.gridx = 2; c.gridy = 10; panel.add(this.nonsummerpeak, c);
 
         // TOTAL DETAILS 
         // Total Details - General Labels 
-        setLabelConstraints(this.totaldetails[0], 3, 8);
-        setLabelConstraints(this.totaldetails[1], 3, 9);
+        c.gridx = 3; c.gridy = 8; panel.add(this.totaldetails[0], c);
+        c.gridx = 3; c.gridy = 9; panel.add(this.totaldetails[1], c);
 
         // Total Details - Data - Usage, Cost
-        setTextFieldConstraints(this.totalusage, 4, 8, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.totalcost, 4, 9, DIMENSION_TEXTFIELD);
+        c.gridx = 4; c.gridy = 8; panel.add(this.totalusage, c);
+        c.gridx = 4; c.gridy = 9; panel.add(this.totalcost, c);
         
     }
 
