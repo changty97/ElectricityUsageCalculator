@@ -183,6 +183,10 @@ public class ViewCalculatePanel extends Panel {
 
         // Usage Details - Title 
         setLabelConstraints(this.usagetitle, 1, 0);
+        setLabelConstraints(this.usagestarttimetitle, 1, 0);
+        setTextFieldConstraints(this.usagestarttime, 1, 0);
+        setLabelConstraints(this.usageendtimetitle, 1, 0);
+        setTextFieldConstraints(this.usageendtime, 1, 0);
 
         // Usage Details - Usage - Labels
         setLabelConstraints(this.usagedetails[0], 1, 1);
