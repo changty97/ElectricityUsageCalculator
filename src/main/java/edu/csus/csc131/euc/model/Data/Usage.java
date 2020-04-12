@@ -1,5 +1,9 @@
 /* PACKAGE PATH */ 
+<<<<<<< HEAD
 package edu.csus.csc131.euc.model.data;
+=======
+package edu.csus.csc131.euc.Model.Data;
+>>>>>>> 83032d465435b8a494a067d40aeeac63905c6793
 
 // ----------------------------------------- //
 // Usage Class: Contains usages              //

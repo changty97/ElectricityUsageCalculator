@@ -7,17 +7,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /* Local Imports */
-<<<<<<< HEAD
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
-=======
-import edu.csus.csc131.euc.View.View;
 import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.Libraries.simple.JSONArray;
 import edu.csus.csc131.euc.Libraries.simple.JSONObject;
 import edu.csus.csc131.euc.Libraries.simple.parser.JSONParser;
 import edu.csus.csc131.euc.Libraries.simple.parser.ParseException;
->>>>>>> fa855d1a9cc13b316a5682c5d16377a28889e2e1
+
 
 public class Controller {
     // Instance Variables for Controller
