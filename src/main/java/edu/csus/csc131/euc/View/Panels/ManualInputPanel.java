@@ -22,7 +22,7 @@ public class ManualInputPanel extends Panel{
     // Constructor
     public ManualInputPanel() {
         /* Intializers for this Panel */ 
-        setBackgroundColor(Color.BLUE);
+        setBackgroundColor(Color.LIGHT_GRAY);
         initializePanel(); 
         initializeComponents();
         intializeComponentPreferences();
