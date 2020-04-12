@@ -15,10 +15,10 @@ public class ViewCalculatePanel extends Panel {
     private JButton navrightbutton, navleftbutton;
     private JTextField usagetotalday, usagenonpeak, usagemidpeak, usagepeak,
         costtotalday, costnonpeak, costmidpeak, costpeak, totalusage, totalcost,
-        summeroffpeak, summermidpeak, summerpeak, nonsummeroffpeak, nonsummerpeak;
+        summeroffpeak, summermidpeak, summerpeak, nonsummeroffpeak, nonsummerpeak, usagestarttime, usageendtime;
 
     // Labels
-    JLabel summarytitle, usagetitle; 
+    JLabel summarytitle, usagetitle, usagestarttimetitle, usageendtimetitle; 
 
     JLabel [] totaldetails = {
         new JLabel("Total Usage"), 
@@ -47,7 +47,7 @@ public class ViewCalculatePanel extends Panel {
     // Constructor
     public ViewCalculatePanel() {
         /* Intializers for this Panel */ 
-        setBackgroundColor(12, 159, 206);
+        setBackgroundColor(Color.lightGray);
         initializePanel(); 
         initializeComponents();
         intializeComponentPreferences();
@@ -60,6 +60,8 @@ public class ViewCalculatePanel extends Panel {
     public void setUsageNonPeak(JTextField t) { this.usagenonpeak = t; }
     public void setUsageMidPeak(JTextField t) { this.usagemidpeak = t; }
     public void setUsagePeak(JTextField t) { this.usagepeak = t; }
+    public void setUsageStartTime(JTextField t) { this.usagestarttime = t; }
+    public void setUsageEndTime(JTextField t) { this.usageendtime = t; }
 
     // Setters - Usage Details - Cost 
     public void setCostDayTotal(JTextField t) { this.costtotalday = t; }
@@ -87,29 +89,31 @@ public class ViewCalculatePanel extends Panel {
     public JButton getNavigateLeftButton() { return this.navleftbutton; }
 
     // Getters - Usage Details - Usage 
-    public JTextField setUsageDayTotal() { return this.usagetotalday; }
-    public JTextField setUsageNonPeak() { return this.usagenonpeak; }
-    public JTextField setUsageMidPeak() { return this.usagemidpeak; }
-    public JTextField setUsagePeak() { return this.usagepeak; }
+    public JTextField getUsageDayTotal() { return this.usagetotalday; }
+    public JTextField getUsageNonPeak() { return this.usagenonpeak; }
+    public JTextField getUsageMidPeak() { return this.usagemidpeak; }
+    public JTextField getUsagePeak() { return this.usagepeak; }
+    public JTextField getUsageStartTime() { return this.usagestarttime; }
+    public JTextField getUsageEndTime() { return this.usageendtime; }
     
     // Getters - Usage Details - Cost 
-    public JTextField setCostDayTotal() { return this.costtotalday; }
-    public JTextField setCostNonPeak() { return this.costnonpeak; }
-    public JTextField setCostMidPeak() { return this.costmidpeak; }
-    public JTextField setCostPeak() { return this.costpeak; }
+    public JTextField getCostDayTotal() { return this.costtotalday; }
+    public JTextField getCostNonPeak() { return this.costnonpeak; }
+    public JTextField getCostMidPeak() { return this.costmidpeak; }
+    public JTextField getCostPeak() { return this.costpeak; }
 
     // Getters - Summary Details - Summer 
-    public JTextField setSummerOffPeak() { return this.summeroffpeak; }
-    public JTextField setSummerMidPeak() { return this.summermidpeak; }
-    public JTextField setSummerPeak() { return this.summerpeak; }
+    public JTextField getSummerOffPeak() { return this.summeroffpeak; }
+    public JTextField getSummerMidPeak() { return this.summermidpeak; }
+    public JTextField getSummerPeak() { return this.summerpeak; }
 
     // Getters - Summary Details - Non-Summer
-    public JTextField setNonSummerOffPeak() { return this.nonsummeroffpeak; }
-    public JTextField setNonSummerPeak() { return this.nonsummerpeak; }
+    public JTextField getNonSummerOffPeak() { return this.nonsummeroffpeak; }
+    public JTextField getNonSummerPeak() { return this.nonsummerpeak; }
 
     // Getters - Total Details
-    public JTextField setTotalUsage() { return this.totalusage; }
-    public JTextField setTotalCost() { return this.totalcost; }
+    public JTextField getTotalUsage() { return this.totalusage; }
+    public JTextField getTotalCost() { return this.totalcost; }
 
     /* Functions for ViewCalculate Panel*/ 
 
@@ -118,6 +122,8 @@ public class ViewCalculatePanel extends Panel {
         /* Instantiate all components of panel here */ 
         // Usage Details 
         this.usagetitle = new JLabel("Usage Details"); 
+        this.usagestarttimetitle = new JLabel("Usage Start Time"); 
+        this.usageendtimetitle = new JLabel("Usage End Time"); 
 
         // Usage Nav Buttons 
         this.navrightbutton = new JButton(">");
@@ -128,6 +134,8 @@ public class ViewCalculatePanel extends Panel {
         this.usagenonpeak = new JTextField("Usage Non-Peak");
         this.usagemidpeak = new JTextField("Usage Mid-Peak");
         this.usagepeak = new JTextField("Usage Peak");
+        this.usagestarttime = new JTextField("Usage Start Time");
+        this.usageendtime = new JTextField("Usage Start Time");
 
         // Usage Text Fields - Cost
         this.costtotalday = new JTextField("Total Cost (day)");
@@ -154,10 +162,12 @@ public class ViewCalculatePanel extends Panel {
     public void intializeComponentPreferences(){
         /* Component Preferences */ 
         // Usage Details 
-        this.usagetotalday.setEditable(false);
-        this.usagenonpeak.setEditable(false);
-        this.usagemidpeak.setEditable(false);
-        this.usagepeak.setEditable(false);
+        this.usagetotalday.setPreferredSize(DIMENSION_TEXTFIELD); this.usagetotalday.setEditable(false);
+        this.usagenonpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.usagenonpeak.setEditable(false);
+        this.usagemidpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.usagemidpeak.setEditable(false);
+        this.usagepeak.setPreferredSize(DIMENSION_TEXTFIELD); this.usagepeak.setEditable(false);
+        this.usagestarttime.setPreferredSize(DIMENSION_TEXTFIELD); this.usagestarttime.setEditable(false);
+        this.usageendtime.setPreferredSize(DIMENSION_TEXTFIELD); this.usageendtime.setEditable(false);
 
         this.costtotalday.setEditable(false);
         this.costnonpeak.setEditable(false);
@@ -183,6 +193,10 @@ public class ViewCalculatePanel extends Panel {
 
         // Usage Details - Title 
         setLabelConstraints(this.usagetitle, 1, 0);
+        setLabelConstraints(this.usagestarttimetitle, 1, 0);
+        setTextFieldConstraints(this.usagestarttime, 1, 0);
+        setLabelConstraints(this.usageendtimetitle, 1, 0);
+        setTextFieldConstraints(this.usageendtime, 1, 0);
 
         // Usage Details - Usage - Labels
         setLabelConstraints(this.usagedetails[0], 1, 1);
