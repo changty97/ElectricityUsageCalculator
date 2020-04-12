@@ -1,9 +1,5 @@
 /* PACKAGE PATH */ 
-<<<<<<< HEAD
 package edu.csus.csc131.euc.model.data;
-=======
-package edu.csus.csc131.euc.Model.Data;
->>>>>>> 83032d465435b8a494a067d40aeeac63905c6793
 
 /* Libaray Imports */ 
 import java.util.Arrays;
@@ -24,6 +20,8 @@ public class Rates {
 
     // Instance Variables 
     private float [] rates;
+    private String [] startTime;
+    private String [] endTime;
 
     // Default Constructor 
     public Rates(boolean isSummer){
@@ -31,17 +29,27 @@ public class Rates {
         isSummer = true; 
 
         rates = setDefaultRates(isSummer); 
+        startTime = setDefaultTime();
+        endTime = setDefaultTime();
     }
 
     // Setters
     public void setRate(float [] r){ this.rates = r; }
+    public void setEndTime(String [] r){ this.endTime = r; }
+    public void setStartTime(String [] r){ this.startTime = r; }
     public void setRateAtIndex(float r, int i){ this.rates[i] = r; }
+    public void setEndTimeAtIndex(String r, int i){ this.endTime[i] = r; }
+    public void setStartTimeAtIndex(String r, int i){ this.startTime[i] = r; }
 
     // Getters
     public float [] getRates(){ return this.rates; }
+    public String [] getEndTime(){ return this.endTime; }
+    public String [] getStartTime(){ return this.startTime; }
     public float getRateAtIndex(int i){ return this.rates[i]; }
+    public String getEndTimeAtIndex(int i){ return this.endTime[i]; }
+    public String getStartTimeAtIndex(int i){ return this.startTime[i]; }
 
-    // Method for detting default rate values 
+    // Method for setting default time values 
     private float [] setDefaultRates(boolean isSummer){
         float temp[] = new float[HOURS];
         if(isSummer){
@@ -56,6 +64,13 @@ public class Rates {
         }
 
         return temp; 
+    }
+
+    // Method for setting the default time values 
+    private String [] setDefaultTime(){
+        String temp[] = new String[HOURS];
+        Arrays.fill(temp, 0, 23, "");
+        return temp;
     }
 
 }

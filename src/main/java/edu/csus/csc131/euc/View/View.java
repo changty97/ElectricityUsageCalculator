@@ -39,8 +39,7 @@ public class View{
         this.frame = new JFrame("Electicity Usage Calculator"); 
 
         // Set layout of this frame 
-        BoxLayout layout = new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS);
-        this.frame.setLayout(layout); 
+        this.frame.setLayout(new BorderLayout()); 
         
         // Default size for the main frame and sizeable options of frame 
         this.frame.setMinimumSize(size);
@@ -61,9 +60,9 @@ public class View{
         panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
         panels.add("Import JSON Panel", this.importpanel.getPanel());
 
-        // Set the position for each panel on main view 
-        this.frame.getContentPane().add( this.mainpanel.getPanel() );
-        this.frame.getContentPane().add( this.panels );
+        // Set the layout for each panel 
+        this.frame.getContentPane().add(this.mainpanel.getPanel(), BorderLayout.WEST);
+        this.frame.getContentPane().add(this.panels, BorderLayout.CENTER);
 
     }
 
@@ -77,5 +76,8 @@ public class View{
     public ImportPanel getImportPanel(){ return this.importpanel; }
     public ManualInputPanel getManualInputPanel(){ return this.manualinputpanel; }
     public JPanel getPanels(){ return this.panels; }
+
+
+
 
 }
