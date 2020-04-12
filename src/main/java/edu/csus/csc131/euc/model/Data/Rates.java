@@ -1,5 +1,5 @@
 /* PACKAGE PATH */ 
-package edu.csus.csc131.euc.Model.Data;
+package edu.csus.csc131.euc.model.data;
 
 /* Libaray Imports */ 
 import java.util.Arrays;

@@ -1,5 +1,5 @@
 /* PACKAGE PATH */ 
-package edu.csus.csc131.euc.View.Panels;
+package edu.csus.csc131.euc.view.panels;
 
 /* Local Imports */
 import javax.swing.*; 

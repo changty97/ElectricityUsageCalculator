@@ -1,5 +1,5 @@
 /* PACKAGE PATH */
-package edu.csus.csc131.euc.Controller;
+package edu.csus.csc131.euc.controller;
 
 import java.awt.CardLayout;
 /* Library Imports */
@@ -7,8 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /* Local Imports */
-import edu.csus.csc131.euc.View.View;
-import edu.csus.csc131.euc.Model.Model;
+import edu.csus.csc131.euc.view.View;
+import edu.csus.csc131.euc.model.Model;
 
 public class Controller {
     // Instance Variables for Controller
