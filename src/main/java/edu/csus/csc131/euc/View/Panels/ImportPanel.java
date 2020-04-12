@@ -20,7 +20,7 @@ public class ImportPanel extends Panel {
     // Constructor
     public ImportPanel() {
         /* Intializers for this Panel */
-        setBackgroundColor(Color.ORANGE);
+        setBackgroundColor(Color.WHITE);
         initializePanel(); 
         initializeComponents(); 
         intializeConstraints(); 
