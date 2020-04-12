@@ -3,7 +3,7 @@
  * Created on 2006-4-15
  */
 //package org.json.simple;
-package edu.csus.csc131.euc.Libraries.simple.parser;
+package edu.csus.csc131.euc.libraries.simple.parser;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -12,8 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import edu.csus.csc131.euc.Libraries.simple.JSONArray;
-import edu.csus.csc131.euc.Libraries.simple.JSONObject;
+import edu.csus.csc131.euc.libraries.simple.JSONArray;
+import edu.csus.csc131.euc.libraries.simple.JSONObject;
 
 
 /**

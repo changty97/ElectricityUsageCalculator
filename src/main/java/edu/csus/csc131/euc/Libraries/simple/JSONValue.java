@@ -3,7 +3,7 @@
  * Created on 2006-4-15
  */
 //package org.json.simple;
-package edu.csus.csc131.euc.Libraries.simple;
+package edu.csus.csc131.euc.libraries.simple;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -14,8 +14,8 @@ import java.util.Collection;
 // import java.util.List;
 import java.util.Map;
 
-import edu.csus.csc131.euc.Libraries.simple.parser.JSONParser;
-import edu.csus.csc131.euc.Libraries.simple.parser.ParseException;
+import edu.csus.csc131.euc.libraries.simple.parser.JSONParser;
+import edu.csus.csc131.euc.libraries.simple.parser.ParseException;
 
 
 /**

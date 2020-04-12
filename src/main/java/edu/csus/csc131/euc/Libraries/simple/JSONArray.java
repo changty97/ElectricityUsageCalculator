@@ -3,7 +3,7 @@
  * Created on 2006-4-10
  */
 //package org.json.simple;
-package edu.csus.csc131.euc.Libraries.simple;
+package edu.csus.csc131.euc.libraries.simple;
 
 import java.io.IOException;
 import java.io.StringWriter;

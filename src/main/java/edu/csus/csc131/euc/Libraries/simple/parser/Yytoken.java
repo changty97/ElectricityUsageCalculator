@@ -3,7 +3,7 @@
  * Created on 2006-4-15
  */
 //package org.json.simple;
-package edu.csus.csc131.euc.Libraries.simple.parser;
+package edu.csus.csc131.euc.libraries.simple.parser;
 
 /**
  * @author FangYidong<fangyidong@yahoo.com.cn>

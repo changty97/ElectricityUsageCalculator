@@ -20,15 +20,10 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 /* Local Imports */
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
-import edu.csus.csc131.euc.model.Model;
-import edu.csus.csc131.euc.Libraries.simple.JSONArray;
-import edu.csus.csc131.euc.Libraries.simple.JSONObject;
-import edu.csus.csc131.euc.Libraries.simple.parser.JSONParser;
-import edu.csus.csc131.euc.Libraries.simple.parser.ParseException;
-<<<<<<< HEAD
-
-=======
->>>>>>> pb23_7-9_khoo
+import edu.csus.csc131.euc.libraries.simple.JSONArray;
+import edu.csus.csc131.euc.libraries.simple.JSONObject;
+import edu.csus.csc131.euc.libraries.simple.parser.JSONParser;
+import edu.csus.csc131.euc.libraries.simple.parser.ParseException;
 
 public class Controller {
     // Instance Variables for Controller

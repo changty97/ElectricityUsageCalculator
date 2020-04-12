@@ -1,5 +1,5 @@
 //package org.json.simple;
-package edu.csus.csc131.euc.Libraries.simple.parser;
+package edu.csus.csc131.euc.libraries.simple.parser;
 
 import java.io.IOException;
 

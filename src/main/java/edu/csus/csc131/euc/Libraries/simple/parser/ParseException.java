@@ -1,5 +1,5 @@
 //package org.json.simple;
-package edu.csus.csc131.euc.Libraries.simple.parser;
+package edu.csus.csc131.euc.libraries.simple.parser;
 
 /**
  * ParseException explains why and where the error occurs in source JSON text.

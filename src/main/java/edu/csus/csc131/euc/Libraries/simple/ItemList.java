@@ -3,7 +3,7 @@
  * Created on 2006-3-24
  */
 //package org.json.simple;
-package edu.csus.csc131.euc.Libraries.simple;
+package edu.csus.csc131.euc.libraries.simple;
 
 import java.util.ArrayList;
 import java.util.List;
