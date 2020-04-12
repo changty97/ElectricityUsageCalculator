@@ -47,7 +47,7 @@ public class ViewCalculatePanel extends Panel {
     // Constructor
     public ViewCalculatePanel() {
         /* Intializers for this Panel */ 
-        setBackgroundColor(Color.lightGray);
+        setBackgroundColor(12, 159, 206);
         initializePanel(); 
         initializeComponents();
         intializeComponentPreferences();

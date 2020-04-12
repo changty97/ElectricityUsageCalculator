@@ -6,14 +6,15 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Panel {
-    
     /* Panel for this class */
     private JPanel panel;
+
     /* Set Constraints variable for GridBagLayout */ 
+    GridBagLayout gb = new GridBagLayout(); 
     private GridBagConstraints c = new GridBagConstraints();
     
     /* Constant Colors */
-    private static final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
+    private final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
     private Color BACKGROUND_COLOR;
 
     public Panel() {
@@ -24,7 +25,7 @@ public class Panel {
     // Initialize Panel 
     public void initializePanel(){
         /* Panel Initializations */
-        panel = new JPanel(new GridBagLayout()); 
+        panel = new JPanel(gb); 
 
         // Set Panel Color
         if(this.BACKGROUND_COLOR == null) {
@@ -37,6 +38,7 @@ public class Panel {
 
     // Setters
     public void setBackgroundColor(Color c) { this.BACKGROUND_COLOR = c; }
+    public void setPanelSize(Dimension s){ panel.setSize(s); }
 
     // Overloaded with RGB 
     public void setBackgroundColor(int r, int g, int b) { 
@@ -49,6 +51,7 @@ public class Panel {
     // Getters
     public JPanel getPanel(){ return this.panel; }
     public GridBagConstraints getGridbagConstraints(){ return this.c; }
+    public GridBagLayout getGridBagLayout(){ return this.gb; }
 
     /* Functions for Panel */ 
     public void setButtonConstraints(JButton button, int gridx, int gridy) {

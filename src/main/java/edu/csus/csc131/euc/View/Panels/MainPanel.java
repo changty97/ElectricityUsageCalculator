@@ -6,6 +6,10 @@ import javax.swing.*;
 import java.awt.*; 
 
 public class MainPanel extends Panel {
+    /* CONSTANTS */ 
+    private final Dimension PANEL_SIZE = new Dimension(360, 810); 
+
+
     /* Elements for the Main Frame */
     private JButton importjsonbutton, manualinputbutton, viewcalcbutton;
 
@@ -14,8 +18,11 @@ public class MainPanel extends Panel {
 
     // Constructor 
     public MainPanel(){ 
-        /* Initializers for this Panel */ 
+        /* Setting attributes for this Panel */ 
         setBackgroundColor(2, 29, 62);
+        setPanelSize(PANEL_SIZE); 
+
+        /* Initializers */ 
         initializePanel(); 
         initializeComponents(); 
         intializeConstraints(); 
@@ -32,16 +39,20 @@ public class MainPanel extends Panel {
     public void initializeComponents(){
         /* Instantiate all components of panel here */ 
         // Instantiate Buttons
-        this.importjsonbutton = new JButton("Import JSON"); 
-        this.manualinputbutton = new JButton("Manual Input"); 
+        this.importjsonbutton = new JButton("Add File"); 
+        this.manualinputbutton = new JButton("Enter Usage"); 
         this.viewcalcbutton = new JButton("View & Calculate"); 
 
-        // Instantiate Labels 
+        // Instantiate Labels
         this.titleapp = new JLabel("Electricity Usage Calculator"); 
+        this.titleapp.setFont(new Font("Poppins", Font.PLAIN, 20));
+        this.titleapp.setForeground(Color.WHITE); 
     }
 
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
+
+
         // Set insets for each element (Left, Right, Top, Bottom)
         setGridbagInsets(0, 0, 0, 0);
 
@@ -60,6 +71,7 @@ public class MainPanel extends Panel {
 
         // Label for Bottom Of Main Panel 
         JLabel logo = new JLabel("Logo Goes Here");
+        logo.setForeground(Color.WHITE);
         setGridbagInsets(290, 0, 50, 0);
         setLabelConstraints(logo, 0, 4);
     }
