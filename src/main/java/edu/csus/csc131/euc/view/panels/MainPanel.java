@@ -17,10 +17,6 @@ public class MainPanel extends Panel {
     private final Insets TITLE_PADDING = new Insets(90, 15, 160, 15);
     private final Insets LOGO_PADDING = new Insets(142, 0, 0, 0);
 
-    // Padding inside Button 
-    private final Insets BUTTON_INNER_PADDING = new Insets(0, 50, 0, 50 ); 
-
-
     /* Elements for the Main Frame */
     private JButton importjsonbutton, manualinputbutton, viewcalcbutton;
 
@@ -53,9 +49,9 @@ public class MainPanel extends Panel {
     public void initializeComponents(){
         /* Instantiate all components of panel here */ 
         // Instantiate Buttons
-        this.importjsonbutton = new JButton("Add File", new ImageIcon("src\\main\\assets\\mainpanelres\\ImportJSON Icon.png") ); 
-        this.manualinputbutton = new JButton("Enter Usage", new ImageIcon("src\\main\\assets\\mainpanelres\\Manual Input Icon.png") ); 
-        this.viewcalcbutton = new JButton("View & Calculate", new ImageIcon("src\\main\\assets\\mainpanelres\\Calculate Icon.png")); 
+        this.importjsonbutton = new JButton(new ImageIcon("src\\main\\assets\\mainpanelres\\ImportButton.png")); 
+        this.manualinputbutton = new JButton(new ImageIcon("src\\main\\assets\\mainpanelres\\ManualButton.png")); 
+        this.viewcalcbutton = new JButton(new ImageIcon("src\\main\\assets\\mainpanelres\\ViewCalcButton.png")); 
 
         // Instantiate Labels
         this.titleapp = new JLabel("Electricity Usage Calculator"); 
@@ -70,22 +66,13 @@ public class MainPanel extends Panel {
         setButtonConstraints(this.importjsonbutton, 0, 1, BUTTON_SIZE, BUTTON_PADDING);        
 
         /* IMPORT JSON BUTTON ATTRIBUTES */ 
-        // Set gap between icon and text 
-        importjsonbutton.setIconTextGap(45);
-
-        // Set alignment of text 
-        importjsonbutton.setHorizontalAlignment(SwingConstants.LEFT);
-
-        // Set padding within the button 
-        importjsonbutton.setMargin(BUTTON_INNER_PADDING); 
-
-        // Sets the font and color
-        importjsonbutton.setFont(new Font("Poppins", Font.PLAIN, 20));
-        importjsonbutton.setForeground(Color.WHITE);
-
         // Removes Focus Border
-        importjsonbutton.setFocusPainted(false); 
-        importjsonbutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\selection.png") );
+        importjsonbutton.setFocusPainted(false);
+
+        // Rollover and Select Icon will be the same
+        importjsonbutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\ImportSelected.png") );
+        importjsonbutton.setSelectedIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\ImportCurrSelected.png") ); 
+        
 
         // Set opacity of button 
         importjsonbutton.setOpaque(true);
@@ -96,22 +83,12 @@ public class MainPanel extends Panel {
         setButtonConstraints(this.manualinputbutton, 0, 2, BUTTON_SIZE, BUTTON_PADDING);
 
         /* MANUAL INPUT BUTTON ATTRIBUTES */ 
-        // Set gap between icon and text 
-        manualinputbutton.setIconTextGap(40);
-
-        // Set padding within the button 
-        manualinputbutton.setMargin(BUTTON_INNER_PADDING); 
-
-        // Set alignment of text 
-        manualinputbutton.setHorizontalAlignment(SwingConstants.LEFT);
-
-        // Sets the font and color
-        manualinputbutton.setFont(new Font("Poppins", Font.PLAIN, 20));
-        manualinputbutton.setForeground(Color.WHITE);
-
         // Removes Focus Border
         manualinputbutton.setFocusPainted(false); 
-        manualinputbutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\selection.png") );
+
+        // Rollover and Select Icon will be the same
+        manualinputbutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\ManualSelected.png"));
+        manualinputbutton.setSelectedIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\ManualCurrSelected.png"));
 
         // Set opacity of button 
         manualinputbutton.setOpaque(true);
@@ -122,22 +99,12 @@ public class MainPanel extends Panel {
         setButtonConstraints(this.viewcalcbutton, 0, 3, BUTTON_SIZE, BUTTON_PADDING);
 
         /* VIEW CALCULATE BUTTON ATTRIBUTES */ 
-        // Set gap between icon and text 
-        viewcalcbutton.setIconTextGap(50);
-
-        // Set alignment of text 
-        viewcalcbutton.setHorizontalAlignment(SwingConstants.LEFT);
-
-        // Set padding within the button 
-        viewcalcbutton.setMargin(BUTTON_INNER_PADDING); 
-
-        // Sets the font and color
-        viewcalcbutton.setFont(new Font("Poppins", Font.PLAIN, 20));
-        viewcalcbutton.setForeground(Color.WHITE);
-
         // Removes Focus Border
         viewcalcbutton.setFocusPainted(false); 
-        viewcalcbutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\selection_calculate.png") );
+
+        // Rollover and Select Icon will be the same 
+        viewcalcbutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\ViewCalcSelected.png"));
+        viewcalcbutton.setSelectedIcon(new ImageIcon("src\\main\\assets\\mainpanelres\\ViewCalcCurrSelected.png"));
 
         // Set opacity of button 
         viewcalcbutton.setOpaque(true);
