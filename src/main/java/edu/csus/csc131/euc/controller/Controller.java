@@ -46,8 +46,14 @@ public class Controller {
 
         // Action Listeners for Main Panel 
         view.getMainPanel().getImportJsonButton().addActionListener(new actionListener("Import JSON Panel", view));
-        view.getMainPanel().getManualInpuButton().addActionListener(new actionListener("Manual Input Panel", view));
+        view.getMainPanel().getManualInputButton().addActionListener(new actionListener("Manual Input Panel", view));
         view.getMainPanel().getViewCalcButton().addActionListener(new actionListener("View & Calculate Panel", view));
+
+        // Add Change Listeners for Main Panel 
+        // view.getMainPanel().getImportJsonButton().addChangeListener(new ImportJSONPanelChangeListener());
+        // view.getMainPanel().getManualInputButton().addChangeistener(new ManualInputPanelChangeListener());
+        // view.getMainPanel().getViewCalcButton().addChangeListener(new ViewCalcPanelChangeListener());
+
 
         // Action Listener for Import JSON Panel
         view.getImportPanel().getBrowseButton().addActionListener(new BrowseButtonListener());
@@ -58,6 +64,13 @@ public class Controller {
         // Display Window
         this.view.getFrame().pack();
         this.view.getFrame().setVisible(true);
+
+        // DEBUG FOR PANEL SIZES 
+        System.out.println("Dim Frame: " + view.getFrame().getSize() ); 
+        System.out.println("Dim Main Panel: " + view.getMainPanel().getPanel().getSize() ); 
+        System.out.println("Dim View and Calculate Panel: " + view.getViewCalculatePanel().getPanel().getSize() ); 
+        System.out.println("Dim Import Panel: " + view.getImportPanel().getPanel().getSize() ); 
+        System.out.println("Dim Manual Input Panel: " + view.getManualInputPanel().getPanel().getSize() ); 
     }
 
     public void initializeView() {

@@ -57,9 +57,12 @@ public class View{
         this.importpanel = new ImportPanel(); 
 
         // Add Necessary Panels to Panels
+        // Blank Panel 
+        panels.add("Blank", new JPanel() );
+        
         panels.add("Manual Input Panel", this.manualinputpanel.getPanel());
-        panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
         panels.add("Import JSON Panel", this.importpanel.getPanel());
+        panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
 
         // Set the position for each panel on main view 
         this.frame.getContentPane().add( this.mainpanel.getPanel() );

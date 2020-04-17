@@ -12,6 +12,9 @@ public class ManualInputPanel extends Panel{
     private static final Dimension DIMENSION_SCROLL_PANE = new Dimension(200, 200);
     private static final Dimension DIMENSION_SCROLL_BAR = new Dimension(20, 200);
 
+    // Padding 
+    private static final Insets GLOBAL_PADDING = new Insets(10, 10, 10, 10); 
+
     // Instance Elements
     private JButton addentrybutton;
     private JList list;
@@ -74,20 +77,18 @@ public class ManualInputPanel extends Panel{
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
 
-        // Initialize Gridbag
-        setGridbagInsets(10,10,10,10);
         // Add Entry Button constraints
-        setButtonConstraints(this.addentrybutton, 0, 0);
+        setButtonConstraints(this.addentrybutton, 0, 0, null, GLOBAL_PADDING);
 
         // All Text Field Constraints
-        setTextFieldConstraints(this.enterdatefield, 4, 1, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.enterperiodfield, 4, 2, DIMENSION_TEXTFIELD);
-        setTextFieldConstraints(this.enterusagefield, 4, 3, DIMENSION_TEXTFIELD);
+        setTextFieldConstraints(this.enterdatefield, 4, 1, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        setTextFieldConstraints(this.enterperiodfield, 4, 2, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        setTextFieldConstraints(this.enterusagefield, 4, 3, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
 
         // Scroll Pane constraints
-        setScrollPaneConstraints(this.scrollpane, 1, 1, DIMENSION_SCROLL_PANE);
+        setScrollPaneConstraints(this.scrollpane, 1, 1, DIMENSION_SCROLL_PANE, GLOBAL_PADDING);
 
         // Scroll Bar constraints
-        setScrollBarConstraints(this.scrollbar, 3, 1, DIMENSION_SCROLL_BAR);
+        setScrollBarConstraints(this.scrollbar, 3, 1, DIMENSION_SCROLL_BAR, GLOBAL_PADDING);
     }
 }
