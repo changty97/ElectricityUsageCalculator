@@ -12,6 +12,9 @@ public class ImportPanel extends Panel {
     private static final Dimension BROWSE_BUTTON_DIMENSIONS = new Dimension(165, 50);
     private static final Dimension IMPORT_BUTTON_DIMENSIONS = new Dimension(410,75);
 
+    // Padding 
+    private final Insets GLOBAL_PADDING = new Insets(0,0,20,0);
+
     /* Instance Variables */
     private JButton importbutton, browsebutton;
     private JTextField importfield;
@@ -109,20 +112,18 @@ public class ImportPanel extends Panel {
 
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
-        // Initialize Gridbag
-        setGridbagInsets(0,0,20,0);
 
         // importfield constraints
-        setTextFieldConstraints(this.importfield, 0, 0, IMPORT_FIELD_DIMENSIONS); 
+        setTextFieldConstraints(this.importfield, 0, 0, IMPORT_FIELD_DIMENSIONS, GLOBAL_PADDING); 
 
         // browse button constraints 
-        setButtonConstraints(this.browsebutton, 1, 0, BROWSE_BUTTON_DIMENSIONS);
+        setButtonConstraints(this.browsebutton, 1, 0, BROWSE_BUTTON_DIMENSIONS, GLOBAL_PADDING);
 
         // dragbox constraints 
         setDragBoxConstraints(dragbox, 0, 1);
 
         // importbutton Constraints 
-        setButtonConstraints(this.importbutton, 0, 2, IMPORT_BUTTON_DIMENSIONS);
+        setButtonConstraints(this.importbutton, 0, 2, IMPORT_BUTTON_DIMENSIONS, GLOBAL_PADDING);
 
     }
 
