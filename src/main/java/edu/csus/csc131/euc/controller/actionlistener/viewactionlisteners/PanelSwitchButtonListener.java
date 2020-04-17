@@ -1,5 +1,5 @@
 /* PACKAGE PATH */
-package edu.csus.csc131.euc.controller.actionlistener;
+package edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners; 
 
 /* Library Imports */
 // AWT Imports 
