@@ -46,7 +46,7 @@ public class Controller {
 
         // Action Listeners for Main Panel 
         view.getMainPanel().getImportJsonButton().addActionListener(new actionListener("Import JSON Panel", view));
-        view.getMainPanel().getManualInpuButton().addActionListener(new actionListener("Manual Input Panel", view));
+        view.getMainPanel().getManualInputButton().addActionListener(new actionListener("Manual Input Panel", view));
         view.getMainPanel().getViewCalcButton().addActionListener(new actionListener("View & Calculate Panel", view));
 
         // Add Change Listeners for Main Panel 
