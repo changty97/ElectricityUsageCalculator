@@ -3,16 +3,13 @@ package edu.csus.csc131.euc.controller;
 
 /* Library Imports */
 // AWT Imports 
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 
 // Swing Imports 
 import javax.swing.*; 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
 
 // IO Imports 
 import java.io.File;
@@ -35,16 +32,13 @@ import java.text.DateFormat;
 // Local MVC Imports 
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
-import edu.csus.csc131.euc.controller.actionlistener.*; 
+import edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners.*; 
 
 // Simple Local Import
 import edu.csus.csc131.euc.libraries.simple.JSONArray;
 import edu.csus.csc131.euc.libraries.simple.JSONObject;
 import edu.csus.csc131.euc.libraries.simple.parser.JSONParser;
 import edu.csus.csc131.euc.libraries.simple.parser.ParseException;
-
-
-
 
 public class Controller {
     // Instance Variables for Controller
@@ -83,7 +77,6 @@ public class Controller {
 
     }
 
-
     public void createAndShowGUI() {
         // Display Window
         this.view.getFrame().pack();
@@ -103,15 +96,7 @@ public class Controller {
         this.view = v;
     }
 
-    /* IMPLEMENTED BUTTON ACTION LISTENERS HERE */ 
-
-    // MAIN PANEL ACTION LISTENERS 
-
-    // MANUAL INPUT ACTION LISTENERS 
-
-    // VIEW CALCULATE ANCTION LISTENERS 
-
-    // IMPORT JSON PANEL ACTION LISTENERS 
+    // IMPORT JSON PANEL ACTION LISTENERS - PS: NEEDS TO BE MOVED TO MODEL ACTION LISTENER
     class BrowseButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
