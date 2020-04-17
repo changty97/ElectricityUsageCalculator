@@ -15,7 +15,7 @@ public class App {
 
         Model m = new Model(1);
         View v = new View();
-        Controller c = new Controller(m , v); 
+        Controller c = new Controller(m , v);
         c.createAndShowGUI();
 
     }

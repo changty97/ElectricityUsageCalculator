@@ -43,10 +43,11 @@ public class Controller {
 
     // Initializes all action listeners 
     public void initializeActionListeners(){
+
         // Action Listeners for Main Panel 
-        view.getMainPanel().getImportJsonButton().addActionListener(new ImportJSONPanelButtonListener());
-        view.getMainPanel().getManualInputButton().addActionListener(new ManualInputButtonListener());
-        view.getMainPanel().getViewCalcButton().addActionListener(new ViewCalculateButtonListener());
+        view.getMainPanel().getImportJsonButton().addActionListener(new actionListener("Import JSON Panel", view));
+        view.getMainPanel().getManualInpuButton().addActionListener(new actionListener("Manual Input Panel", view));
+        view.getMainPanel().getViewCalcButton().addActionListener(new actionListener("View & Calculate Panel", view));
 
         // Add Change Listeners for Main Panel 
         // view.getMainPanel().getImportJsonButton().addChangeListener(new ImportJSONPanelChangeListener());
@@ -81,38 +82,6 @@ public class Controller {
     /* IMPLEMENTED BUTTON ACTION LISTENERS HERE */ 
 
     // MAIN PANEL ACTION LISTENERS 
-    class ImportJSONPanelButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            CardLayout panels = (CardLayout) view.getPanels().getLayout();
-            panels.show(view.getPanels(), "Import JSON Panel"); 
-        }
-    }
-
-    class ManualInputButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            CardLayout panels = (CardLayout) view.getPanels().getLayout();
-            panels.show(view.getPanels(), "Manual Input Panel"); 
-        }
-    }
-
-    class ViewCalculateButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            CardLayout panels = (CardLayout) view.getPanels().getLayout();
-            panels.show(view.getPanels(), "View & Calculate Panel"); 
-        }
-    }
-    
-
-
-    // class AddEntryButtonListener implements ActionListener{
-    //     @Override 
-    //     public void actionPerformed(ActionEvent e){
-    //         ...
-    //     }
-    // }
 
     // MANUAL INPUT ACTION LISTENERS 
 
