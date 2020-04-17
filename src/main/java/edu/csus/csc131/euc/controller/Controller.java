@@ -1,29 +1,50 @@
 /* PACKAGE PATH */
 package edu.csus.csc131.euc.controller;
 
-import java.awt.CardLayout;
 /* Library Imports */
+// AWT Imports 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+
+// Swing Imports 
+import javax.swing.*; 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
+
+// IO Imports 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-/* import java.nio.file.Files;
+
+/* 
+// Util Imports 
 import java.util.Date;
 import java.util.Iterator;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;*/
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+
+// Text Imports 
+import java.text.SimpleDateFormat;
+import java.text.DateFormat;
+*/
 
 /* Local Imports */
+// Local MVC Imports 
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
+import edu.csus.csc131.euc.controller.actionlistener.*; 
+
+// Simple Local Import
 import edu.csus.csc131.euc.libraries.simple.JSONArray;
 import edu.csus.csc131.euc.libraries.simple.JSONObject;
 import edu.csus.csc131.euc.libraries.simple.parser.JSONParser;
 import edu.csus.csc131.euc.libraries.simple.parser.ParseException;
+
+
+
 
 public class Controller {
     // Instance Variables for Controller
@@ -44,21 +65,24 @@ public class Controller {
     // Initializes all action listeners 
     public void initializeActionListeners(){
 
-        // Action Listeners for Main Panel 
-        view.getMainPanel().getImportJsonButton().addActionListener(new actionListener("Import JSON Panel", view));
-        view.getMainPanel().getManualInputButton().addActionListener(new actionListener("Manual Input Panel", view));
-        view.getMainPanel().getViewCalcButton().addActionListener(new actionListener("View & Calculate Panel", view));
+        /* Action Listeners for Main Panel */
+        
+        // Get References to Buttons
+        JButton ib = view.getMainPanel().getImportJsonButton();
+        JButton mb = view.getMainPanel().getManualInputButton();
+        JButton vcb = view.getMainPanel().getViewCalcButton();
 
-        // Add Change Listeners for Main Panel 
-        // view.getMainPanel().getImportJsonButton().addChangeListener(new ImportJSONPanelChangeListener());
-        // view.getMainPanel().getManualInputButton().addChangeistener(new ManualInputPanelChangeListener());
-        // view.getMainPanel().getViewCalcButton().addChangeListener(new ViewCalcPanelChangeListener());
-
+        // Set AL for Panels 
+        ib.addActionListener(new PanelSwitchButtonListener(view, ib, "Import JSON Panel"));
+        mb.addActionListener(new PanelSwitchButtonListener(view, mb, "Manual Input Panel"));
+        vcb.addActionListener(new PanelSwitchButtonListener(view, vcb, "View & Calculate Panel"));
 
         // Action Listener for Import JSON Panel
         view.getImportPanel().getBrowseButton().addActionListener(new BrowseButtonListener());
         view.getImportPanel().getImportButton().addActionListener(new ImportButtonListener());
+
     }
+
 
     public void createAndShowGUI() {
         // Display Window
