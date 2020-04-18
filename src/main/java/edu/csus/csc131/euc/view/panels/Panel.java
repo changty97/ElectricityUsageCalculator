@@ -4,6 +4,7 @@ package edu.csus.csc131.euc.view.panels;
 /* Library Imports */
 import javax.swing.*; 
 import java.awt.*;
+import javax.swing.table.*;
 
 /* Local Imports */ 
 import edu.csus.csc131.euc.view.renders.*;
@@ -162,6 +163,22 @@ public class Panel {
 
         // Adding the button constraints to the main panel
         this.getPanel().add(dragbox, c);
+    }
+
+    public void setTableConstraints(Table table,  int gridx, int gridy, Insets inset) {
+        // Set new GridBagConstraints per element 
+        c = new GridBagConstraints();
+
+        // Setting the X-Axis and Y-Axis
+        c.gridx = gridx;
+        c.gridy = gridy;
+
+        
+        // Setting the padding 
+        if( inset != null ){  c.insets = inset; }
+
+        // Adding the button constraints to the main panel
+        this.getPanel().add(table, c);
     }
 
 }
