@@ -81,12 +81,15 @@ public class Controller {
         this.view.getFrame().pack();
         this.view.getFrame().setVisible(true);
 
+        // RUN DEBUG PRINT OUTS FOR COMPONENTS HERE 
+        
         // DEBUG FOR PANEL SIZES 
         System.out.println("Dim Frame: " + view.getFrame().getSize() ); 
         System.out.println("Dim Main Panel: " + view.getMainPanel().getPanel().getSize() ); 
         System.out.println("Dim View and Calculate Panel: " + view.getViewCalculatePanel().getPanel().getSize() ); 
         System.out.println("Dim Import Panel: " + view.getImportPanel().getPanel().getSize() ); 
         System.out.println("Dim Manual Input Panel: " + view.getManualInputPanel().getPanel().getSize() ); 
+        
     }
 
     public void initializeView() {

@@ -19,6 +19,9 @@ public class DragBoxDraw extends JPanel {
     public DragBoxDraw(Dimension s){
         this.size = s; 
 
+        // Set Background of panel
+        this.setBackground(Color.WHITE);
+
         // Set panel to the preffered size 
         this.setPreferredSize(s);
         this.setSize(s);
@@ -50,7 +53,7 @@ public class DragBoxDraw extends JPanel {
 
         // Create Border 
         float dash1[] = {10.0f};
-        BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
+        BasicStroke dashed = new BasicStroke(3.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f); 
 
         // Update Parameters 
         g2.setColor(Color.black);
@@ -62,7 +65,7 @@ public class DragBoxDraw extends JPanel {
 
         // String Attributes 
         g2.setColor(Color.black);
-        g2.setFont(new Font("TimesRoman", Font.PLAIN, 20));
+        g2.setFont(new Font("Poppins", Font.PLAIN, 20));
 
         // Draw Rectangle String 
         g2.drawString("Browse or Drag Files Here", filelabelorigin.x, filelabelorigin.y);
