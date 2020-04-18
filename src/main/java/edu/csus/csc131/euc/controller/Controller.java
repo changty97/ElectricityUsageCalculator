@@ -70,9 +70,11 @@ public class Controller {
 
         // Set AL for Buttons in Import JSON Panel
         // For Button Views
+        view.getImportPanel().getAddNewFileButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getBrowseButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getImportButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getImportButton().addActionListener(new IJPanelIBActionListener(view, model));
+
 
     }
 

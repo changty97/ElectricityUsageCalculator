@@ -15,7 +15,9 @@ import java.io.Reader;
 // Swing Imports 
 import javax.swing.AbstractButton;
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JButton;
 
 /* Local Imports */
 // Local MVC Imports 
@@ -29,7 +31,7 @@ public class IJPanelButtonViewListener implements ActionListener{
     private File file; 
 
     public IJPanelButtonViewListener(View v){ this.view = v; }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         // If Selected 
