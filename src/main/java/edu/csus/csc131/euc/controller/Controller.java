@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 // Swing Imports 
-import javax.swing.*; 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -32,7 +31,9 @@ import java.text.DateFormat;
 // Local MVC Imports 
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
+import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*;
 import edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners.*; 
+// import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*; 
 
 // Simple Local Import
 import edu.csus.csc131.euc.libraries.simple.JSONArray;
@@ -44,12 +45,10 @@ public class Controller {
     // Instance Variables for Controller
     private View view;
     private Model model;
-    private File file;
 
     public Controller(Model m, View v) {
         this.model = m;
         this.view = v;
-        this.file = null;
 
         // Initializers for the Controller
         initializeView();
@@ -61,19 +60,19 @@ public class Controller {
 
         /* Action Listeners for Main Panel */
         
-        // Get References to Buttons
-        JButton ib = view.getMainPanel().getImportJsonButton();
-        JButton mb = view.getMainPanel().getManualInputButton();
-        JButton vcb = view.getMainPanel().getViewCalcButton();
-
         // Set AL for Panels 
-        ib.addActionListener(new PanelSwitchButtonListener(view, ib, "Import JSON Panel"));
-        mb.addActionListener(new PanelSwitchButtonListener(view, mb, "Manual Input Panel"));
-        vcb.addActionListener(new PanelSwitchButtonListener(view, vcb, "View & Calculate Panel"));
+        view.getMainPanel().getImportJsonButton().addActionListener(new PanelSwitchButtonListener(view, "Import JSON Panel"));
+        view.getMainPanel().getManualInputButton().addActionListener(new PanelSwitchButtonListener(view, "Manual Input Panel"));
+        view.getMainPanel().getViewCalcButton().addActionListener(new PanelSwitchButtonListener(view,"View & Calculate Panel"));
 
-        // Action Listener for Import JSON Panel
-        view.getImportPanel().getBrowseButton().addActionListener(new BrowseButtonListener());
+        // Action Listener for Import JSON Panel for Model & View : Needs RF to remove coupling with Model&View 
         view.getImportPanel().getImportButton().addActionListener(new ImportButtonListener());
+
+        // Set AL for Buttons in Import JSON Panel
+        // For Button Views
+        view.getImportPanel().getBrowseButton().addActionListener(new IJPanelButtonViewListener(view));
+        view.getImportPanel().getImportButton().addActionListener(new IJPanelButtonViewListener(view));
+        view.getImportPanel().getImportButton().addActionListener(new IJPanelIBActionListener(view, model));
 
     }
 
@@ -96,38 +95,11 @@ public class Controller {
         this.view = v;
     }
 
-    // IMPORT JSON PANEL ACTION LISTENERS - PS: NEEDS TO BE MOVED TO MODEL ACTION LISTENER
-    class BrowseButtonListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JFileChooser chooser = new JFileChooser();
-
-            chooser.setAcceptAllFileFilterUsed(false);
-            chooser.setCurrentDirectory(new java.io.File("."));
-            chooser.setDialogTitle("Locat JSON to import");
-            chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-            chooser.setMultiSelectionEnabled(false);
-            chooser.addChoosableFileFilter(new FileNameExtensionFilter("JSON File", "json"));
-
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-                file = chooser.getSelectedFile();
-                System.out.println("getCurrentDirectory(): "+ chooser.getCurrentDirectory());
-                System.out.println("getSelectedFile(): "+ chooser.getSelectedFile());
-                System.out.println("getAbsolutePath(): "+ file.getAbsolutePath());
-
-                // Set new import field text
-                view.getImportPanel().getImportField().setText("" + chooser.getSelectedFile());
-            } else {
-                System.out.println("No Selection ");
-                file = null;
-            }
-        }
-    }
-
     class ImportButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             JSONParser parser = new JSONParser();
+            File file = new File(view.getImportPanel().getImportField().getText());
 
             try (Reader reader = new FileReader(file)) {
                 
@@ -139,7 +111,8 @@ public class Controller {
                 model.getModelProfile().setProfileSiteTimeZoneID((String) jsonObject.get("siteTimeZoneId"));
 
                 JSONArray reads = (JSONArray) jsonObject.get("reads");
-                //TEST// System.out.println(jsonObject);
+                //TEST
+                System.out.println(jsonObject);
 
                 // Imports the data to the model under read: for the startTime, endTime, and value
                 for (int i = 0; i < reads.size(); i++) {

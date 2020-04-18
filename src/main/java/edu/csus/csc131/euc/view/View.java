@@ -18,7 +18,8 @@ public class View{
     private JFrame frame; 
 
     // Size of frame 
-    private Dimension size = new Dimension(1440,810); 
+    private final Dimension FRAME_SIZE = new Dimension(1440,810);
+    private final Dimension CARD_PANELS_SIZE = new Dimension(1013, 786);  
 
     /* Declare each Panel */
 
@@ -39,13 +40,14 @@ public class View{
         this.frame = new JFrame("Electicity Usage Calculator"); 
 
         // Set layout of this frame 
-        BoxLayout layout = new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS);
+        // BoxLayout layout = new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS);
+        GridBagLayout layout = new GridBagLayout();
         this.frame.setLayout(layout); 
         
         // Default size for the main frame and sizeable options of frame 
-        this.frame.setMinimumSize(size);
+        this.frame.setMinimumSize(FRAME_SIZE);
+        this.frame.setSize(FRAME_SIZE);
         this.frame.setResizable(false);
-        this.frame.setSize(size);
 
         // Set Close operation for the main frame 
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,15 +60,26 @@ public class View{
 
         // Add Necessary Panels to Panels
         // Blank Panel 
-        panels.add("Blank", new JPanel() );
-        
+        //JPanel blank = new JPanel(); 
+        panels.add("Blank", new JPanel());
         panels.add("Manual Input Panel", this.manualinputpanel.getPanel());
         panels.add("Import JSON Panel", this.importpanel.getPanel());
         panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
+        panels.setPreferredSize(CARD_PANELS_SIZE);
 
         // Set the position for each panel on main view 
-        this.frame.getContentPane().add( this.mainpanel.getPanel() );
-        this.frame.getContentPane().add( this.panels );
+        GridBagConstraints c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1; 
+        c.gridx = 0; 
+        c.gridy = 0; 
+        c.anchor = GridBagConstraints.WEST; 
+        this.frame.getContentPane().add( this.mainpanel.getPanel(), c );
+
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1; 
+        c.gridx = 1; 
+        c.gridy = 0; 
+        this.frame.getContentPane().add( this.panels, c );
 
     }
 
