@@ -3,8 +3,8 @@ package edu.csus.csc131.euc;
 
 /* Local Imports */
 import edu.csus.csc131.euc.view.View;
-import edu.csus.csc131.euc.model.Model; 
-import edu.csus.csc131.euc.controller.Controller; 
+import edu.csus.csc131.euc.model.Model;
+import edu.csus.csc131.euc.controller.Controller;
 
 public class App {
 
