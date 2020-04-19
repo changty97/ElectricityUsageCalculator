@@ -5,8 +5,8 @@ package edu.csus.csc131.euc.view;
 import edu.csus.csc131.euc.view.panels.*;
 
 /* Library Imports */
-import javax.swing.*; 
-import java.awt.*; 
+import javax.swing.*;
+import java.awt.*;
 
 // ----------------------------------------- //
 // View Class: Manages UI View of App        //
@@ -15,58 +15,66 @@ import java.awt.*;
 
 public class View{
     /* Create Instance of View Frame */
-    private JFrame frame; 
+    private JFrame frame;
 
-    // Size of frame 
-    private Dimension size = new Dimension(1440,810); 
+    // Size of frame
+    private Dimension size = new Dimension(1440,810);
 
     /* Declare each Panel */
 
-    // JPanel to hold all other panels 
-    private JPanel panels = new JPanel(new CardLayout()); 
+    // JPanel to hold all other panels
+    private JPanel panels = new JPanel(new CardLayout());
 
-    // Each Panel View 
+    // Each Panel View
     private MainPanel mainpanel;
 
     // In Panels
-    private ManualInputPanel manualinputpanel; 
-    private ViewCalculatePanel viewcalculatepanel; 
-    private ImportPanel importpanel; 
+    private ManualInputPanel manualinputpanel;
+    private ViewCalculatePanel viewcalculatepanel;
+    private ImportPanel importpanel;
 
-    // Construtor 
+    //focus track
+    private boolean dateIsFocused;
+    private boolean entryIsFocused;
+
+    // Construtor
     public View(){
-        // This sets the title and new instance of the Frame 
-        this.frame = new JFrame("Electicity Usage Calculator"); 
+        // This sets the title and new instance of the Frame
+        this.frame = new JFrame("Electicity Usage Calculator");
 
-        // Set layout of this frame 
+        // Set layout of this frame
         BoxLayout layout = new BoxLayout(frame.getContentPane(), BoxLayout.X_AXIS);
-        this.frame.setLayout(layout); 
-        
-        // Default size for the main frame and sizeable options of frame 
+        this.frame.setLayout(layout);
+
+        // Default size for the main frame and sizeable options of frame
         this.frame.setMinimumSize(size);
         this.frame.setResizable(false);
         this.frame.setSize(size);
 
-        // Set Close operation for the main frame 
+        // Set Close operation for the main frame
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        // Instatiate all panels 
-        this.mainpanel = new MainPanel(); 
-        this.manualinputpanel = new ManualInputPanel(); 
-        this.viewcalculatepanel = new ViewCalculatePanel(); 
-        this.importpanel = new ImportPanel(); 
+
+        // Instatiate all panels
+        this.mainpanel = new MainPanel();
+        this.manualinputpanel = new ManualInputPanel();
+        this.viewcalculatepanel = new ViewCalculatePanel();
+        this.importpanel = new ImportPanel();
 
         // Add Necessary Panels to Panels
-        // Blank Panel 
+        // Blank Panel
         panels.add("Blank", new JPanel() );
-        
+
         panels.add("Manual Input Panel", this.manualinputpanel.getPanel());
         panels.add("Import JSON Panel", this.importpanel.getPanel());
         panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
 
-        // Set the position for each panel on main view 
+        // Set the position for each panel on main view
         this.frame.getContentPane().add( this.mainpanel.getPanel() );
         this.frame.getContentPane().add( this.panels );
+
+        //initialize focus variables
+        dateIsFocused = false;
+        entryIsFocused = false;
 
     }
 
