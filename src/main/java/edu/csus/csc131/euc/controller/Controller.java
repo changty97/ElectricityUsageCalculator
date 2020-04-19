@@ -10,8 +10,6 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 // IO Imports
 import java.io.File;

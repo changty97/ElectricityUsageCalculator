@@ -33,9 +33,6 @@ public class View{
     private ViewCalculatePanel viewcalculatepanel;
     private ImportPanel importpanel;
 
-    //focus track
-    private boolean dateIsFocused;
-    private boolean entryIsFocused;
 
     // Construtor
     public View(){
@@ -72,9 +69,6 @@ public class View{
         this.frame.getContentPane().add( this.mainpanel.getPanel() );
         this.frame.getContentPane().add( this.panels );
 
-        //initialize focus variables
-        dateIsFocused = false;
-        entryIsFocused = false;
 
     }
 
