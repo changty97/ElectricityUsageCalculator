@@ -8,14 +8,15 @@ import java.awt.*;
 public class MainPanel extends Panel {
     /* CONSTANTS */ 
     // Size per Element 
-    private final Dimension PANEL_SIZE = new Dimension(427, 817); 
+    private final Dimension PANEL_SIZE = new Dimension(427, 825); 
     private final Dimension BUTTON_SIZE = new Dimension(427, 60); 
     private final Dimension LOGO_BG_SIZE = new Dimension(427, 175);
 
     // Padding per Element 
     private final Insets BUTTON_PADDING = new Insets(0, 0, 0, 0); 
-    private final Insets TITLE_PADDING = new Insets(90, 15, 160, 15);
+    private final Insets TITLE_PADDING = new Insets(90, 0, 160, 0);
     private final Insets LOGO_PADDING = new Insets(142, 0, 0, 0);
+
 
     /* Elements for the Main Frame */
     private JButton importjsonbutton, manualinputbutton, viewcalcbutton;
@@ -64,6 +65,7 @@ public class MainPanel extends Panel {
 
         // Import JSON Button constraints 
         setButtonConstraints(this.importjsonbutton, 0, 1, BUTTON_SIZE, BUTTON_PADDING);        
+
 
         /* IMPORT JSON BUTTON ATTRIBUTES */ 
         // Removes Focus Border
@@ -124,7 +126,8 @@ public class MainPanel extends Panel {
         /* LOGO LABEL ATTRIBUTES */ 
         // Set Background color for Logo 
         logo.setBackground(new Color(23, 104, 172));
-        logo.setOpaque(true); 
+        logo.setOpaque(true);
+        
 
     }
 

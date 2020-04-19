@@ -2,88 +2,39 @@
 package edu.csus.csc131.euc.view.panels;
 
 /* Library Imports */
-import javax.swing.*; 
+import javax.swing.*;
 import java.awt.*;
 
-public class ImportPanel extends Panel {
+/* Local Imports */ 
+import edu.csus.csc131.euc.view.renders.*;
 
-    /* Constants */ 
-    private static final Dimension IMPORT_FIELD_DIMENSIONS = new Dimension(750, 50); 
+public class ImportPanel extends Panel {
+    /* CONSTANTS */
+    // Size Per Element 
+    private static final Dimension IMPORT_FIELD_DIMENSIONS = new Dimension(700, 50); 
     private static final Dimension BROWSE_BUTTON_DIMENSIONS = new Dimension(165, 50);
     private static final Dimension IMPORT_BUTTON_DIMENSIONS = new Dimension(410,75);
+    private static final Dimension DRAG_FILE_PANEL_DIMENSIONS = new Dimension(700, 332);
 
     // Padding 
-    private final Insets GLOBAL_PADDING = new Insets(0,0,20,0);
+    private final Insets IMPORT_FIELD_PADDING  = new Insets(0,0,0,0); 
+    private final Insets BROWSE_BUTTON_PADDING  = new Insets(0,0,0,0); 
+    private final Insets IMPORT_BUTTON_PADDING  = new Insets(30,0,0,0); 
+    private final Insets DRAGBOX_PADDING = new Insets(0,0,0,0); 
 
     /* Instance Variables */
     private JButton importbutton, browsebutton;
     private JTextField importfield;
     private DragBoxDraw dragbox;
-
+ 
     // Constructor
     public ImportPanel() {
         /* Intializers for this Panel */
         setBackgroundColor(Color.WHITE);
+
         initializePanel(); 
         initializeComponents(); 
         intializeConstraints(); 
-    }
-
-    // Private Class to draw the DragBox using Graphic override
-    private class DragBoxDraw extends JPanel {
-
-        /* Constants */ 
-        private Dimension DRAG_FILE_PANEL_DIMENSIONS = new Dimension(920, 332);
-        private Point DRAG_FILE_RECT_ORIGIN = new Point(0,0);
-        private Point DRAG_FILE_LABEL_ORIGIN = new Point(332, 332);       
-
-        // Seriable ID 
-        private static final long serialVersionUID = 1L;
-
-        // Initialize Panel to draw the drag box
-        public DragBoxDraw(){
-            this.setPreferredSize(DRAG_FILE_PANEL_DIMENSIONS);
-            this.setSize(DRAG_FILE_PANEL_DIMENSIONS);
-        }
-
-        @Override
-        protected void paintComponent(Graphics g) {
-
-            // Setting Rectangle Parameters 
-            Graphics2D g2 = (Graphics2D) g; 
-            super.paintComponent(g2); 
-
-            // Rectangle Attributes 
-            int thickness = 2; 
-
-            // Create Rectangle 
-            Rectangle rect = new Rectangle(
-                DRAG_FILE_RECT_ORIGIN.x, 
-                DRAG_FILE_RECT_ORIGIN.y , 
-                DRAG_FILE_PANEL_DIMENSIONS.width-1, 
-                DRAG_FILE_PANEL_DIMENSIONS.height-1
-            );
-
-            // Create Border 
-            float dash1[] = {10.0f};
-            BasicStroke dashed = new BasicStroke(1.0f, BasicStroke.CAP_BUTT, BasicStroke.JOIN_MITER, 10.0f, dash1, 0.0f);
-
-            // Update Parameters 
-            g2.setColor(Color.black);
-            g2.setStroke(new BasicStroke(thickness));
-            g2.setStroke(dashed);
-
-            // Draw Rectangle 
-            g2.draw(rect);
-
-            // String Attributes 
-            g2.setColor(Color.black);
-            g2.setFont(new Font("TimesRoman", Font.PLAIN, 20));
-
-            // Draw Rectangle String 
-            g2.drawString("Browse or Drag Files Here", DRAG_FILE_LABEL_ORIGIN.x, DRAG_FILE_LABEL_ORIGIN.y/2);
-
-        }
     }
 
     // Setters
@@ -101,41 +52,54 @@ public class ImportPanel extends Panel {
         this.importfield = new JTextField(" C:\\...\\Desktop... "); 
 
         // browse button
-        this.browsebutton = new JButton("Browse"); 
+        this.browsebutton = new JButton(new ImageIcon("src\\main\\assets\\importjsonres\\browsebutton.png")); 
 
         // Drag Box 
-        this.dragbox = new DragBoxDraw(); 
+        this.dragbox = new DragBoxDraw(DRAG_FILE_PANEL_DIMENSIONS); 
 
         // import button 
-        this.importbutton = new JButton("Import JSON");
+        this.importbutton = new JButton(new ImageIcon("src\\main\\assets\\importjsonres\\submitfile.png"));
     }
 
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
 
         // importfield constraints
-        setTextFieldConstraints(this.importfield, 0, 0, IMPORT_FIELD_DIMENSIONS, GLOBAL_PADDING); 
+        setTextFieldConstraints(this.importfield, 0, 0, IMPORT_FIELD_DIMENSIONS, IMPORT_FIELD_PADDING);
 
         // browse button constraints 
-        setButtonConstraints(this.browsebutton, 1, 0, BROWSE_BUTTON_DIMENSIONS, GLOBAL_PADDING);
+        setButtonConstraints(this.browsebutton, 1, 0, BROWSE_BUTTON_DIMENSIONS, BROWSE_BUTTON_PADDING);
+        /*BROWSE BUTTON ATTRIBUTES */ 
+        // Removes Focus Border
+        browsebutton.setFocusPainted(false); 
+
+        // Set opacity of button 
+        browsebutton.setOpaque(true);
+        browsebutton.setContentAreaFilled(false);
+        browsebutton.setBorderPainted(false);
+
+        // Rollover and Select Icon will be the same 
+        browsebutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\importjsonres\\browsebuttonroll.png"));
+        browsebutton.setSelectedIcon(new ImageIcon("src\\main\\assets\\importjsonres\\browseclicked.png"));
 
         // dragbox constraints 
-        setDragBoxConstraints(dragbox, 0, 1);
+        setDragBoxConstraints(dragbox, 0, 1, DRAGBOX_PADDING);
 
         // importbutton Constraints 
-        setButtonConstraints(this.importbutton, 0, 2, IMPORT_BUTTON_DIMENSIONS, GLOBAL_PADDING);
+        setButtonConstraints(this.importbutton, 0, 2, IMPORT_BUTTON_DIMENSIONS, IMPORT_BUTTON_PADDING);
+        /*IMPORT BUTTON ATTRIBUTES */ 
+        // Removes Focus Border
+        importbutton.setFocusPainted(false); 
+
+        // Set opacity of button 
+        importbutton.setOpaque(true);
+        importbutton.setContentAreaFilled(false);
+        importbutton.setBorderPainted(false);
+
+        // Rollover and Select Icon will be the same 
+        importbutton.setRolloverIcon(new ImageIcon("src\\main\\assets\\importjsonres\\submitfileroll.png"));
+        importbutton.setSelectedIcon(new ImageIcon("src\\main\\assets\\importjsonres\\resubmitfile.png"));
 
     }
 
-    public void setDragBoxConstraints(DragBoxDraw dragbox, int gridx, int gridy) {
-        //Get gridBagConstraints from Panel class
-        GridBagConstraints c = getGridbagConstraints();
-
-        // Setting the X-Axis and Y-Axis
-        c.gridx = gridx;
-        c.gridy = gridy;
-
-        // Adding the button constraints to the main panel
-        this.getPanel().add(dragbox, c);
-    }
 }
