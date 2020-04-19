@@ -15,7 +15,9 @@ import java.io.Reader;
 // Swing Imports 
 import javax.swing.AbstractButton;
 import javax.swing.JFileChooser;
+import javax.swing.JTextField;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JButton;
 
 /* Local Imports */
 // Local MVC Imports 
@@ -27,14 +29,20 @@ public class IJPanelButtonViewListener implements ActionListener{
 
     // For Browse button Purposes 
     private File file; 
-    
-    public IJPanelButtonViewListener(View v){ this.view = v; }
 
+    public IJPanelButtonViewListener(View v){ this.view = v; }
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         // If Selected 
         if(!((AbstractButton)e.getSource()).isSelected())
         {
+            if(((AbstractButton)e.getSource()) == view.getImportPanel().getImportButton()){
+                if(view.getImportPanel().getImportField().getText().equals("Enter file path here, or browse. . .")){
+                    return; 
+                }
+            }
+
             // Set it to true 
             ((AbstractButton)e.getSource()).setSelected(true); 
         }
@@ -45,7 +53,7 @@ public class IJPanelButtonViewListener implements ActionListener{
 
             chooser.setAcceptAllFileFilterUsed(false);
             chooser.setCurrentDirectory(new java.io.File("."));
-            chooser.setDialogTitle("Locat JSON to import");
+            chooser.setDialogTitle("Locate JSON FILE to import");
             chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
             chooser.setMultiSelectionEnabled(false);
             chooser.addChoosableFileFilter(new FileNameExtensionFilter("JSON File", "json"));
@@ -61,7 +69,20 @@ public class IJPanelButtonViewListener implements ActionListener{
             } else {
                 System.out.println("No Selection ");
                 file = null;
+                ((AbstractButton)e.getSource()).setSelected(false); 
             }
         }
+
+        // If reset button was selected then reset view 
+        if( ((AbstractButton)e.getSource()) == view.getImportPanel().getAddNewFileButton() ){
+            // Set Browse and Submit to not selected 
+            view.getImportPanel().getBrowseButton().setSelected(false);
+            view.getImportPanel().getImportButton().setSelected(false);
+
+            // Reset textfield 
+            view.getImportPanel().getImportField().setText("Enter file path here, or browse. . .");
+        }
+
+
     }
 }

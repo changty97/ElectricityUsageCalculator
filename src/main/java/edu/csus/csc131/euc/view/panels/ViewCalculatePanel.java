@@ -1,19 +1,37 @@
-/* PACKAGE PATH */ 
+/* PACKAGE PATH */
 package edu.csus.csc131.euc.view.panels;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Insets;
-
-/* Local Imports */
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField; 
+/*Library Imports*/
+import javax.swing.*;
+import java.awt.*; 
+import edu.csus.csc131.euc.view.panels.subpanels.*; 
 
 public class ViewCalculatePanel extends Panel {
 
+    // Main Sub Panels 
+    JPanel usagedetailspanel, summarydetailspanel; 
+
+    // Sub Panels 
+    RoundedPanel seasondetailspanel, usagecostdetailspanel; 
+    JPanel totalusagepanel, totalcostpanel; 
+
     /* Constants */
     private static final Dimension DIMENSION_TEXTFIELD = new Dimension(100, 25);
+
+    // Main Sub Panels Size 
+    private final Dimension MAIN_SUB_PANEL_SIZE = new Dimension(1013, 393);  
+
+    // Sub Panels Size 
+    // Rounded 
+    private final Dimension SEASON_DETAIL_PANEL_SIZE = new Dimension(270, 73); 
+    private final Dimension USAGE_COST_DETAIL_PANEL_SIZE = new Dimension(870, 190); 
+
+    // JPanel 
+    private final Dimension TOTAL_USAGE_PANEL_SIZE = new Dimension(580,130); 
+    private final Dimension TOTAL_COST_PANEL_SIZE = new Dimension(580,130); 
+
+    // Titles 
+    private final Dimension USAGE_DETAIL_TITLE_SIZE = new Dimension(270,40); 
 
     // Padding 
     private static final Insets GLOBAL_PADDING = new Insets(10, 10, 10, 10);   
@@ -168,6 +186,46 @@ public class ViewCalculatePanel extends Panel {
     // Intializes Preferences for each Component 
     public void intializeComponentPreferences(){
         /* Component Preferences */ 
+
+        // Initialize Main Sub Panels 
+        usagedetailspanel = new JPanel(new GridBagLayout()); 
+        summarydetailspanel = new JPanel(new GridBagLayout()); 
+
+        // Init Rounded Sub Panels 
+        seasondetailspanel = new RoundedPanel(); 
+        usagecostdetailspanel = new RoundedPanel(); 
+
+        // Init Sub Panels 
+        totalusagepanel = new JPanel();
+        totalcostpanel = new JPanel();  
+
+        // Set Usage Main Sub Panel Size
+        usagedetailspanel.setMinimumSize(MAIN_SUB_PANEL_SIZE); 
+        usagedetailspanel.setPreferredSize(MAIN_SUB_PANEL_SIZE);
+
+        // Set Summary Detail Main Sub Panel Size
+        summarydetailspanel.setMinimumSize(MAIN_SUB_PANEL_SIZE); 
+        summarydetailspanel.setPreferredSize(MAIN_SUB_PANEL_SIZE);
+
+        // Set Season Detail Sub Panel Size
+        seasondetailspanel.setMinimumSize(SEASON_DETAIL_PANEL_SIZE); 
+        seasondetailspanel.setPreferredSize(SEASON_DETAIL_PANEL_SIZE);
+
+        // Set Usage Detail Sub Panel Size
+        usagecostdetailspanel.setMinimumSize(USAGE_COST_DETAIL_PANEL_SIZE); 
+        usagecostdetailspanel.setPreferredSize(USAGE_COST_DETAIL_PANEL_SIZE);
+
+        // Set Total Usage Sub Panel Size 
+        totalusagepanel.setMinimumSize(TOTAL_USAGE_PANEL_SIZE); 
+        totalusagepanel.setPreferredSize(TOTAL_USAGE_PANEL_SIZE);
+
+        // Set Total Cost Sub Panel Size 
+        totalcostpanel.setMinimumSize(TOTAL_COST_PANEL_SIZE); 
+        totalcostpanel.setPreferredSize(TOTAL_COST_PANEL_SIZE);
+
+        // TITLE Sizes 
+        usagetitle.setPreferredSize(USAGE_DETAIL_TITLE_SIZE);
+
         // Usage Details 
         this.usagetotalday.setPreferredSize(DIMENSION_TEXTFIELD); this.usagetotalday.setEditable(false);
         this.usagenonpeak.setPreferredSize(DIMENSION_TEXTFIELD); this.usagenonpeak.setEditable(false);
@@ -188,81 +246,137 @@ public class ViewCalculatePanel extends Panel {
 
     // Initializes Constraints for GridBag Layout 
     public void intializeConstraints(){
+        /* Main Sub Panel Constraints */
+        // Usage Details 
+        usagedetailspanel.setBackground(new Color(13, 156, 204));
+
+        GridBagConstraints c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0; 
+        c.gridx = 0; 
+        c.gridy = 0; 
+        c.anchor = GridBagConstraints.NORTH; 
+        getPanel().add(usagedetailspanel, c);
+
+        // Summary Detail
+        summarydetailspanel.setBackground(Color.WHITE);
+
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0; 
+        c.gridx = 0; 
+        c.gridy = 1; 
+        c.anchor = GridBagConstraints.SOUTH; 
+        getPanel().add(summarydetailspanel, c);
+
+        /* Main Sub Panel Elements  */
+        // Usage Detail 
+        // Main Sub Panel Title 
+        usagetitle.setForeground(Color.WHITE);
+        usagetitle.setFont(new Font("Poppins", Font.BOLD, 30)); 
+
+        c = new GridBagConstraints();
+        c.weightx = c.weighty = 1.0;
+        c.gridwidth = 2; 
+        c.gridx = 0; 
+        c.gridy = 0; 
+        c.insets = new Insets(15,0,0,160); 
+        usagedetailspanel.add(usagetitle, c);
+
+        //Season Details Sub Panel
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0; 
+        c.anchor = GridBagConstraints.EAST; 
+        c.gridwidth = 1; 
+        c.gridx = 2; 
+        c.gridy = 0;
+        c.insets = new Insets(0,0,0,0); 
+        usagedetailspanel.add(seasondetailspanel, c);
+
+
+        //Usage Cost Details Sub Panel
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0; 
+        c.anchor = GridBagConstraints.WEST; 
+        c.gridwidth = 2; 
+        c.gridx = 1; 
+        c.gridy = 1;
+        c.insets = new Insets(0,70,0,50);
+        usagedetailspanel.add(usagecostdetailspanel, c); 
+
         /* Component Constraints */
 
-        // USAGE DETAILS
-        // Navigation Elements 
-        setButtonConstraints(this.navleftbutton, 0, 1, null, GLOBAL_PADDING);
-        setButtonConstraints(this.navrightbutton, 5, 1, null, GLOBAL_PADDING);
+        // // USAGE DETAILS
+        // // Navigation Elements 
+        // setButtonConstraints(this.navleftbutton, 0, 1, null, GLOBAL_PADDING);
+        // setButtonConstraints(this.navrightbutton, 5, 1, null, GLOBAL_PADDING);
 
-        // Usage Details - Title 
-        setLabelConstraints(this.usagetitle, 1, 0, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usagestarttimetitle, 2, 0, null, GLOBAL_PADDING);
-        setTextFieldConstraints(this.usagestarttime, 3, 0, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usageendtimetitle, 4, 0, null, GLOBAL_PADDING);
-        setTextFieldConstraints(this.usageendtime, 5, 0, null, GLOBAL_PADDING);
+        // // Usage Details - Title 
+        // setLabelConstraints(this.usagetitle, 1, 0, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usagestarttimetitle, 2, 0, null, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.usagestarttime, 3, 0, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usageendtimetitle, 4, 0, null, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.usageendtime, 5, 0, null, GLOBAL_PADDING);
 
-        // Usage Details - Usage - Labels
-        setLabelConstraints(this.usagedetails[0], 1, 1, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usagedetails[1], 1, 2, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usagedetails[2], 1, 3, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usagedetails[3], 1, 4, null, GLOBAL_PADDING);
+        // // Usage Details - Usage - Labels
+        // setLabelConstraints(this.usagedetails[0], 1, 1, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usagedetails[1], 1, 2, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usagedetails[2], 1, 3, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usagedetails[3], 1, 4, null, GLOBAL_PADDING);
 
-        // Usage Details - Usage - Data 
-        setTextFieldConstraints(this.usagetotalday, 2, 1, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.usagenonpeak, 2, 2, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.usagemidpeak, 2, 3, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.usagepeak, 2, 4, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // // Usage Details - Usage - Data 
+        // setTextFieldConstraints(this.usagetotalday, 2, 1, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.usagenonpeak, 2, 2, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.usagemidpeak, 2, 3, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.usagepeak, 2, 4, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
 
-        // Usage Details - Cost - Labels
-        setLabelConstraints(this.usagedetails[4], 3, 1, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usagedetails[5], 3, 2, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usagedetails[6], 3, 3, null, GLOBAL_PADDING);
-        setLabelConstraints(this.usagedetails[7], 3, 4, null, GLOBAL_PADDING);
+        // // Usage Details - Cost - Labels
+        // setLabelConstraints(this.usagedetails[4], 3, 1, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usagedetails[5], 3, 2, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usagedetails[6], 3, 3, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.usagedetails[7], 3, 4, null, GLOBAL_PADDING);
 
-        // Usage Details - Cost - Data 
-        setTextFieldConstraints(this.costtotalday, 4, 1, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.costnonpeak, 4, 2, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.costmidpeak, 4, 3, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.costpeak, 4, 4, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // // Usage Details - Cost - Data 
+        // setTextFieldConstraints(this.costtotalday, 4, 1, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.costnonpeak, 4, 2, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.costmidpeak, 4, 3, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.costpeak, 4, 4, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
         
-        //Blank space
-        getGridbagConstraints().gridx = 0; 
-        getGridbagConstraints().gridy = 5; 
-        getPanel().add(new JLabel(""), getGridbagConstraints()); 
+        // //Blank space
+        // getGridbagConstraints().gridx = 0; 
+        // getGridbagConstraints().gridy = 5; 
+        // getPanel().add(new JLabel(""), getGridbagConstraints()); 
 
-        // SUMMARY DETAILS
-        // Summary Details - General Labels
-        setLabelConstraints(this.summarydetails[2], 0, 8, null, GLOBAL_PADDING);
-        setLabelConstraints(this.summarydetails[3], 0, 9, null, GLOBAL_PADDING);
-        setLabelConstraints(this.summarydetails[4], 0, 10, null, GLOBAL_PADDING);
+        // // SUMMARY DETAILS
+        // // Summary Details - General Labels
+        // setLabelConstraints(this.summarydetails[2], 0, 8, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.summarydetails[3], 0, 9, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.summarydetails[4], 0, 10, null, GLOBAL_PADDING);
 
-        // Summary Details - Title 
-        setLabelConstraints(this.summarytitle, 1, 6, null, GLOBAL_PADDING);
+        // // Summary Details - Title 
+        // setLabelConstraints(this.summarytitle, 1, 6, null, GLOBAL_PADDING);
 
-        // Summary Details - Summer - Label
-        setLabelConstraints(this.summarydetails[0], 1, 7, null, GLOBAL_PADDING);
+        // // Summary Details - Summer - Label
+        // setLabelConstraints(this.summarydetails[0], 1, 7, null, GLOBAL_PADDING);
 
-        // Summary Details - Summer - Data
-        setTextFieldConstraints(this.summeroffpeak, 1, 8, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.summermidpeak, 1, 9, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.summerpeak, 1, 10, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // // Summary Details - Summer - Data
+        // setTextFieldConstraints(this.summeroffpeak, 1, 8, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.summermidpeak, 1, 9, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.summerpeak, 1, 10, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
 
-        // Summary Details - Non-Summer - Label 
-        setLabelConstraints(this.summarydetails[1], 2, 7, null, GLOBAL_PADDING);
+        // // Summary Details - Non-Summer - Label 
+        // setLabelConstraints(this.summarydetails[1], 2, 7, null, GLOBAL_PADDING);
 
-        // Summary Details - Non-Summer - Data
-        setTextFieldConstraints(this.nonsummeroffpeak, 2, 8, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.nonsummerpeak, 2, 10, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // // Summary Details - Non-Summer - Data
+        // setTextFieldConstraints(this.nonsummeroffpeak, 2, 8, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.nonsummerpeak, 2, 10, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
 
-        // TOTAL DETAILS 
-        // Total Details - General Labels 
-        setLabelConstraints(this.totaldetails[0], 3, 8, null, GLOBAL_PADDING);
-        setLabelConstraints(this.totaldetails[1], 3, 9, null, GLOBAL_PADDING);
+        // // TOTAL DETAILS 
+        // // Total Details - General Labels 
+        // setLabelConstraints(this.totaldetails[0], 3, 8, null, GLOBAL_PADDING);
+        // setLabelConstraints(this.totaldetails[1], 3, 9, null, GLOBAL_PADDING);
 
-        // Total Details - Data - Usage, Cost
-        setTextFieldConstraints(this.totalusage, 4, 8, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
-        setTextFieldConstraints(this.totalcost, 4, 9, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // // Total Details - Data - Usage, Cost
+        // setTextFieldConstraints(this.totalusage, 4, 8, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
+        // setTextFieldConstraints(this.totalcost, 4, 9, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
         
     }
 

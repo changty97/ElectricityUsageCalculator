@@ -66,20 +66,10 @@ public class Controller {
 
         /* Action Listeners for Main Panel */
 
-        // Get References to Buttons
-        JButton ib = view.getMainPanel().getImportJsonButton();
-        JButton mb = view.getMainPanel().getManualInputButton();
-        JButton vcb = view.getMainPanel().getViewCalcButton();
-
-        // Set AL for Panels
-        ib.addActionListener(new PanelSwitchButtonListener(view, "Import JSON Panel"));
-        mb.addActionListener(new PanelSwitchButtonListener(view, "Manual Input Panel"));
-        vcb.addActionListener(new PanelSwitchButtonListener(view,  "View & Calculate Panel"));
-
         // Set AL for Panels
         view.getMainPanel().getImportJsonButton().addActionListener(new PanelSwitchButtonListener(view, "Import JSON Panel"));
         view.getMainPanel().getManualInputButton().addActionListener(new PanelSwitchButtonListener(view, "Manual Input Panel"));
-        view.getMainPanel().getViewCalcButton().addActionListener(new PanelSwitchButtonListener(view,"View & Calculate Panel"));
+        view.getMainPanel().getViewCalcButton().addActionListener(new PanelSwitchButtonListener(view,  "View & Calculate Panel"));
 
         // Action Listener for Add Entry button
         view.getManualInputPanel().getAddEntryButton().addActionListener(new AddEntryListener());
@@ -89,6 +79,7 @@ public class Controller {
         view.getManualInputPanel().getEnterDateField().addFocusListener(new Focus());
         // Set AL for Buttons in Import JSON Panel
         // For Button Views
+        view.getImportPanel().getAddNewFileButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getBrowseButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getImportButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getImportButton().addActionListener(new IJPanelIBActionListener(view, model));
@@ -100,12 +91,15 @@ public class Controller {
         this.view.getFrame().pack();
         this.view.getFrame().setVisible(true);
 
-        // DEBUG FOR PANEL SIZES
-        System.out.println("Dim Frame: " + view.getFrame().getSize() );
-        System.out.println("Dim Main Panel: " + view.getMainPanel().getPanel().getSize() );
-        System.out.println("Dim View and Calculate Panel: " + view.getViewCalculatePanel().getPanel().getSize() );
-        System.out.println("Dim Import Panel: " + view.getImportPanel().getPanel().getSize() );
-        System.out.println("Dim Manual Input Panel: " + view.getManualInputPanel().getPanel().getSize() );
+        // RUN DEBUG PRINT OUTS FOR COMPONENTS HERE 
+        
+        // DEBUG FOR PANEL SIZES 
+        System.out.println("Dim Frame: " + view.getFrame().getSize() ); 
+        System.out.println("Dim Main Panel: " + view.getMainPanel().getPanel().getSize() ); 
+        System.out.println("Dim View and Calculate Panel: " + view.getViewCalculatePanel().getPanel().getSize() ); 
+        System.out.println("Dim Import Panel: " + view.getImportPanel().getPanel().getSize() ); 
+        System.out.println("Dim Manual Input Panel: " + view.getManualInputPanel().getPanel().getSize() ); 
+        
     }
 
     public void initializeView() {
@@ -114,6 +108,7 @@ public class Controller {
         this.view = v;
     }
 
+    // Additional Action Listeners needs to be put into appropriate folders 
 
     class AddEntryListener implements ActionListener {
         @Override
