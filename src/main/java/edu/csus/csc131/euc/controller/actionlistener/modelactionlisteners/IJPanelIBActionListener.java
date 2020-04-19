@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 // IO Imports 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -47,8 +48,10 @@ public class IJPanelIBActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         JSONParser parser = new JSONParser();
-        File file = new File(view.getImportPanel().getImportField().getText());
 
+        // Throws a FILENOTFOUNDEXCEPTION which cascades into other issues.. need to debug this. 
+        File file = new File(view.getImportPanel().getImportField().getText()); 
+ 
         try (Reader reader = new FileReader(file)) {
                 
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
@@ -83,9 +86,11 @@ public class IJPanelIBActionListener implements ActionListener {
             view.getViewCalculatePanel().getUsageStartTime().setText(model.getModelRates().getStartTimeAtIndex(model.getModelIndex()));
             view.getViewCalculatePanel().getUsageEndTime().setText(model.getModelRates().getEndTimeAtIndex(model.getModelIndex()));
                 
-        } catch (IOException exception) { exception.printStackTrace();
-        } catch (IndexOutOfBoundsException exception) { exception.printStackTrace();
-        } catch (ParseException exception) { exception.printStackTrace(); 
-        } catch (NullPointerException exception) { System.out.println("No file selected."); }
+        }
+        catch (IOException exception) { exception.printStackTrace(); } 
+        catch (IndexOutOfBoundsException exception) { exception.printStackTrace(); } 
+        catch (ParseException exception) { exception.printStackTrace(); } 
+        catch (NullPointerException exception) { System.out.println("No file selected."); }
     }
-}
+} 
+

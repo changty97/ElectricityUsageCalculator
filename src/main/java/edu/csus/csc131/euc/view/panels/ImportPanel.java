@@ -3,8 +3,6 @@ package edu.csus.csc131.euc.view.panels;
 
 /* Library Imports */
 import javax.swing.*;
-import javax.swing.plaf.DimensionUIResource;
-
 import java.awt.*;
 
 /* Local Imports */ 
@@ -17,19 +15,19 @@ public class ImportPanel extends Panel {
     private static final Dimension BROWSE_BUTTON_DIMENSIONS = new Dimension(165, 50);
     private static final Dimension IMPORT_BUTTON_DIMENSIONS = new Dimension(410,75);
     private final Dimension ADD_NEW_FILE_BUTTON_DIMENSIONS  = new Dimension(165, 50);
-    // private static final Dimension DRAG_FILE_PANEL_DIMENSIONS = new Dimension(700, 332);
+    private static final Dimension DRAG_FILE_PANEL_DIMENSIONS = new Dimension(700, 332);
     
     // Padding 
     private final Insets IMPORT_FIELD_PADDING  = new Insets(0,0,0,0); 
     private final Insets BROWSE_BUTTON_PADDING  = new Insets(0,0,0,0); 
     private final Insets IMPORT_BUTTON_PADDING  = new Insets(10,0,0,0); 
     private final Insets ADD_NEW_FILE_BUTTON_PADDING  = new Insets(10,0,0,0); 
-    // private final Insets DRAGBOX_PADDING = new Insets(0,0,0,0); 
+    private final Insets DRAGBOX_PADDING = new Insets(0,0,0,0); 
 
     /* Instance Variables */
     private JButton importbutton, browsebutton, addnewfile;
     private JTextField importfield;
-    // private DragBoxDraw dragbox;
+    private DragBoxDraw dragbox;
  
     // Constructor
     public ImportPanel() {
@@ -61,7 +59,7 @@ public class ImportPanel extends Panel {
         this.browsebutton = new JButton(new ImageIcon("src\\main\\assets\\importjsonres\\browsebutton.png")); 
 
         // Drag Box 
-        // this.dragbox = new DragBoxDraw(DRAG_FILE_PANEL_DIMENSIONS); 
+        this.dragbox = new DragBoxDraw(DRAG_FILE_PANEL_DIMENSIONS); 
 
         // add new file button 
         this.addnewfile = new JButton(new ImageIcon("src\\main\\assets\\importjsonres\\addnewfile.png")); 
@@ -91,13 +89,13 @@ public class ImportPanel extends Panel {
         browsebutton.setSelectedIcon(new ImageIcon("src\\main\\assets\\importjsonres\\browseclicked.png"));
 
         // dragbox constraints 
-        // setDragBoxConstraints(dragbox, 0, 1, DRAGBOX_PADDING);
+        setDragBoxConstraints(dragbox, 0, 1, DRAGBOX_PADDING);
 
         // importbutton Constraints 
-        // setButtonConstraints(this.importbutton, 0, 2, IMPORT_BUTTON_DIMENSIONS, IMPORT_BUTTON_PADDING);
+        setButtonConstraints(this.importbutton, 0, 2, IMPORT_BUTTON_DIMENSIONS, IMPORT_BUTTON_PADDING);
 
         // without dragbox 
-        setButtonConstraints(this.importbutton, 0, 1, IMPORT_BUTTON_DIMENSIONS, IMPORT_BUTTON_PADDING);
+        // setButtonConstraints(this.importbutton, 0, 1, IMPORT_BUTTON_DIMENSIONS, IMPORT_BUTTON_PADDING);
 
         /*IMPORT BUTTON ATTRIBUTES */ 
         // Removes Focus Border
@@ -113,7 +111,7 @@ public class ImportPanel extends Panel {
         importbutton.setSelectedIcon(new ImageIcon("src\\main\\assets\\importjsonres\\resubmitfile.png"));
 
         // add new file button constraints 
-        setButtonConstraints(this.addnewfile, 1, 1, ADD_NEW_FILE_BUTTON_DIMENSIONS, ADD_NEW_FILE_BUTTON_PADDING);
+        setButtonConstraints(this.addnewfile, 1, 2, ADD_NEW_FILE_BUTTON_DIMENSIONS, ADD_NEW_FILE_BUTTON_PADDING);
         // Removes Focus Border
         addnewfile.setFocusPainted(false); 
 

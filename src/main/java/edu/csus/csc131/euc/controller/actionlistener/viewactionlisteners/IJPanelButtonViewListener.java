@@ -37,6 +37,12 @@ public class IJPanelButtonViewListener implements ActionListener{
         // If Selected 
         if(!((AbstractButton)e.getSource()).isSelected())
         {
+            if(((AbstractButton)e.getSource()) == view.getImportPanel().getImportButton()){
+                if(view.getImportPanel().getImportField().getText().equals("Enter file path here, or browse. . .")){
+                    return; 
+                }
+            }
+
             // Set it to true 
             ((AbstractButton)e.getSource()).setSelected(true); 
         }
@@ -75,8 +81,6 @@ public class IJPanelButtonViewListener implements ActionListener{
 
             // Reset textfield 
             view.getImportPanel().getImportField().setText("Enter file path here, or browse. . .");
-
-            // Revalidate panel 
         }
 
 
