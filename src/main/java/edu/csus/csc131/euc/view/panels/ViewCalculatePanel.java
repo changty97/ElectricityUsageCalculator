@@ -40,14 +40,12 @@ public class ViewCalculatePanel extends Panel {
     private JLabel usagetitle; 
     // Usage Details: Sub Panels
     private RoundedPanel seasondetailspanel, usagecostdetailspanel;
-
+    
     /* Usage Details: Sub Panel Components */
-    // Season Details Comps
-    private JLabel seasondetailtitle, seasonicon, seasondetailsdate;
+    // Season Details Comps & Navigation Comps
+    private JLabel seasondetailtitle, seasonicon, seasondetailsdate, navrightbutton, navleftbutton;
 
     // Usage Cost Comps
-    // Navigation 
-    private JButton navrightbutton, navleftbutton;
     // Labels for Start & End Time 
     private JTextField usagestarttime, usageendtime;
     // 1st Column: Usage (Labels)
@@ -184,8 +182,8 @@ public class ViewCalculatePanel extends Panel {
     public JLabel getSeasonDetailDate() { return this.seasondetailsdate; }
 
     // Getters - Navigational Buttons 
-    public JButton getNavigateRightButton() { return this.navrightbutton; }
-    public JButton getNavigateLeftButton() { return this.navleftbutton; }
+    public JLabel getNavigateRightButton() { return this.navrightbutton; }
+    public JLabel getNavigateLeftButton() { return this.navleftbutton; }
 
     // Getters - Start & End 
     public JTextField getUsageStartTime() { return this.usagestarttime; }
@@ -248,8 +246,8 @@ public class ViewCalculatePanel extends Panel {
         this.usageendtime = new JTextField("Usage End Time"); 
 
         // Usage Nav Buttons 
-        this.navrightbutton = new JButton(">");
-        this.navleftbutton = new JButton("<");
+        this.navrightbutton = new JLabel( new ImageIcon("src\\main\\assets\\viewandcalculateres\\nextdaybutton.png"));
+        this.navleftbutton = new JLabel( new ImageIcon("src\\main\\assets\\viewandcalculateres\\previousdaybutton.png"));
 
         // Usage Text Fields - Usage
         this.usagestarttime = new JTextField("Usage Start Time");
@@ -359,6 +357,7 @@ public class ViewCalculatePanel extends Panel {
         // Usage Cost Details Sub Panel
         // Regular Attributes
         // Grid Bag Attributes
+        // Label Attributes
         c = new GridBagConstraints(); 
         c.weightx = c.weighty = 1.0;
         c.anchor = GridBagConstraints.WEST; 
@@ -367,6 +366,79 @@ public class ViewCalculatePanel extends Panel {
         c.gridy = 1;
         c.insets = new Insets(0,70,20,50);
         usagedetailspanel.add(usagecostdetailspanel, c); 
+        // Navigation Attributes
+        c.insets = new Insets(0,30,20,50);
+        usagecostdetailspanel.add(navleftbutton, c);
+    
+        c.insets = new Insets(0,750,20,0);
+        usagecostdetailspanel.add(navrightbutton, c);
+
+        usagecosttotalusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        c.insets = new Insets(0,150,150,0);
+        usagecostdetailspanel.add(usagecosttotalusagelbl, c);
+
+        usagecostnonpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        c.insets = new Insets(0,150,110,0);
+        usagecostdetailspanel.add(usagecostnonpeakusagelbl, c);
+       
+        usagecostmidpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        c.insets = new Insets(0,150,70,0);
+        usagecostdetailspanel.add(usagecostmidpeakusagelbl, c);
+       
+        usagecostpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        c.insets = new Insets(0,150,30,0);
+        usagecostdetailspanel.add(usagecostpeakusagelbl, c);
+       
+        // // 1st Column: Usage (Values)
+        // usagecosttotalusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecosttotalusage, c);
+       
+        // usagecostnonpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostnonpeakusage, c);
+       
+        // usagecostmidpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostmidpeakusage, c);
+       
+        // usagecostpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostpeakusage, c);
+       
+        // 2nd Column: Usage (Labels)
+        // usagecosttotalcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecosttotalcostlbl, c);
+       
+        // usagecostnonpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostnonpeakcostlbl, c);
+       
+        // usagecostmidpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostmidpeakcostlbl, c);
+       
+        // usagecostpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostpeakcostlbl, c);
+       
+        // 2nd Column: Usage (Values)
+        // usagecosttotalcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecosttotalcost, c);
+       
+        // usagecostnonpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostnonpeakcost, c);
+       
+        // usagecostmidpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostmidpeakcost, c);
+       
+        // usagecostpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        // c.insets = new Insets(0,150,150,0);
+        // usagecostdetailspanel.add(usagecostpeakcost, c);
 
         /* Summary Details Main Sub Panel */
         //  Summary West Panel
@@ -667,6 +739,16 @@ public class ViewCalculatePanel extends Panel {
         seasondetailspanel.add(seasondetailsdate, c);
 
 
+        // public void setConstraints(JComponent pane, JComponent j, double weight, int gridwidth, int gridx, int gridy, Insets inset) {
+        //     GridbagConstraints c = new GridbagConstraints();
+        //     c.weightx = c.weighty = weight;
+        //     c.anchor = GridBagConstraints.WEST; 
+        //     c.gridwidth = gridwidth; 
+        //     c.gridx = gridx; 
+        //     c.gridy = gridy;
+        //     c.insets = new Insets(0,70,20,50);
+        //     pane.add(j, c); 
+        // }
         
     }
 
