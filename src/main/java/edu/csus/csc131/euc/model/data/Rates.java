@@ -1,7 +1,7 @@
-/* PACKAGE PATH */ 
+/* PACKAGE PATH */
 package edu.csus.csc131.euc.model.data;
 
-/* Libaray Imports */ 
+/* Libaray Imports */
 import java.util.Arrays;
 
 // ----------------------------------------- //
@@ -10,25 +10,26 @@ import java.util.Arrays;
 
 public class Rates {
 
-    // Constants 
-    private static final int HOURS = 24; 
-    private static final float RATES_DEFAULT_OFFPEAK_SUMMER = (float)0.1209;
-    private static final float RATES_DEFAULT_OFFPEAK_NONSUMMER = (float)0.1006;
-    private static final float RATES_DEFAULT_MIDPEAK_SUMMER = (float)0.1671;
-    private static final float RATES_DEFAULT_PEAK_SUMMER = (float)0.2941;
-    private static final float RATES_DEFAULT_PEAK_NONSUMMER = (float)0.1388;
+    // Constants
+    private static final int HOURS = 24;
+    //removed final property
+    private static float RATES_DEFAULT_OFFPEAK_SUMMER = (float)0.1209;
+    private static float RATES_DEFAULT_OFFPEAK_NONSUMMER = (float)0.1006;
+    private static float RATES_DEFAULT_MIDPEAK_SUMMER = (float)0.1671;
+    private static float RATES_DEFAULT_PEAK_SUMMER = (float)0.2941;
+    private static float RATES_DEFAULT_PEAK_NONSUMMER = (float)0.1388;
 
-    // Instance Variables 
+    // Instance Variables
     private float [] rates;
     private String [] startTime;
     private String [] endTime;
 
-    // Default Constructor 
+    // Default Constructor
     public Rates(boolean isSummer){
-        // Always true for now 
-        isSummer = true; 
+        // Always true for now
+        isSummer = true;
 
-        rates = setDefaultRates(isSummer); 
+        rates = setDefaultRates(isSummer);
         startTime = setDefaultTime();
         endTime = setDefaultTime();
     }
@@ -48,8 +49,31 @@ public class Rates {
     public float getRateAtIndex(int i){ return this.rates[i]; }
     public String getEndTimeAtIndex(int i){ return this.endTime[i]; }
     public String getStartTimeAtIndex(int i){ return this.startTime[i]; }
+    public static float getOffPeakSummer(){ return RATES_DEFAULT_OFFPEAK_SUMMER;}
+    public static float getMidPeakSummer(){ return RATES_DEFAULT_MIDPEAK_SUMMER;}
+    public static float getPeakSummer(){ return RATES_DEFAULT_PEAK_SUMMER;}
+    public static float getPeakNonSummer(){ return RATES_DEFAULT_PEAK_NONSUMMER;}
+    public static float getOffPeakNonSummer(){ return RATES_DEFAULT_OFFPEAK_NONSUMMER;}
 
-    // Method for setting default time values 
+
+    //setters for default rates
+    public static void setOffPeakSummer(float value){
+        RATES_DEFAULT_OFFPEAK_SUMMER = value;
+    }
+    public static void setMidPeakSummer(float value){
+        RATES_DEFAULT_MIDPEAK_SUMMER = value;
+    }
+    public static void setPeakSummer(float value){
+        RATES_DEFAULT_PEAK_SUMMER = value;
+    }
+    public static void setPeakNonSummer(float value){
+        RATES_DEFAULT_PEAK_NONSUMMER = value;
+    }
+    public static void setOffPeakNonSummer(float value){
+        RATES_DEFAULT_PEAK_NONSUMMER = value;
+    }
+
+    // Method for setting default time values
     private float [] setDefaultRates(boolean isSummer){
         float temp[] = new float[HOURS];
         if(isSummer){
@@ -63,10 +87,10 @@ public class Rates {
             Arrays.fill(temp, 20, 23, RATES_DEFAULT_OFFPEAK_NONSUMMER);
         }
 
-        return temp; 
+        return temp;
     }
 
-    // Method for setting the default time values 
+    // Method for setting the default time values
     private String [] setDefaultTime(){
         String temp[] = new String[HOURS];
         Arrays.fill(temp, 0, 23, "");
