@@ -12,7 +12,8 @@ public class ViewCalculatePanel extends Panel {
     JPanel usagedetailspanel, summarydetailspanel; 
 
     // Sub Panels 
-    RoundedPanel seasondetailspanel, usagecostdetailspanel; 
+    RoundedPanel seasondetailspanel;
+    RoundedPanel usagecostdetailspanel; 
     JPanel totalusagepanel, totalcostpanel; 
 
     /* Constants */
@@ -23,7 +24,7 @@ public class ViewCalculatePanel extends Panel {
 
     // Sub Panels Size 
     // Rounded 
-    private final Dimension SEASON_DETAIL_PANEL_SIZE = new Dimension(270, 73); 
+    private final Dimension SEASON_DETAIL_PANEL_SIZE = new Dimension(230, 73); 
     private final Dimension USAGE_COST_DETAIL_PANEL_SIZE = new Dimension(870, 190); 
 
     // JPanel 
@@ -43,7 +44,10 @@ public class ViewCalculatePanel extends Panel {
         summeroffpeak, summermidpeak, summerpeak, nonsummeroffpeak, nonsummerpeak, usagestarttime, usageendtime;
 
     // Labels
-    JLabel summarytitle, usagetitle, usagestarttimetitle, usageendtimetitle; 
+    JLabel summarytitle, usagetitle, usagestarttimetitle, usageendtimetitle;  
+    
+    // Season Details Panel Labels
+    JLabel seasondetailtitle, seasonicon, seasondetailsdate; 
 
     JLabel [] totaldetails = {
         new JLabel("Total Usage"), 
@@ -80,6 +84,10 @@ public class ViewCalculatePanel extends Panel {
     }
 
     /* Setters */
+    // Setters - Season Detail Panel  
+    public void setSeasonDetailTitle(JLabel t) { this.seasondetailtitle = t; }
+    public void setSeasonDetailDate(JLabel t) { this.seasondetailsdate = t; }
+
     // Setters - Usage Details - Usage 
     public void setUsageDayTotal(JTextField t) { this.usagetotalday = t; }
     public void setUsageNonPeak(JTextField t) { this.usagenonpeak = t; }
@@ -108,6 +116,10 @@ public class ViewCalculatePanel extends Panel {
     public void setTotalCost(JTextField t) { this.totalcost = t; }
 
     /* Getters */
+
+    // Getters - Season Detail Panel
+    public JLabel getSeasonDetailTitle() { return this.seasondetailtitle; }
+    public JLabel getSeasonDetailDate() { return this.seasondetailsdate; }
 
     // Getters - Navigational Buttons 
     public JButton getNavigateRightButton() { return this.navrightbutton; }
@@ -144,7 +156,22 @@ public class ViewCalculatePanel extends Panel {
 
     // Intialize All Components 
     public void initializeComponents(){
+        // Initialize Main Sub Panels 
+        this.usagedetailspanel = new JPanel(new GridBagLayout()); 
+        this.summarydetailspanel = new JPanel(new GridBagLayout()); 
+
+        // Initalize Sub Panels 
+        this.seasondetailspanel = new RoundedPanel(); 
+        this.usagecostdetailspanel = new RoundedPanel(); 
+        this.totalusagepanel = new JPanel();
+        this.totalcostpanel = new JPanel();  
+
         /* Instantiate all components of panel here */ 
+        // Season Detail Panel Elements 
+        this.seasondetailtitle = new JLabel("Summer"); 
+        this.seasonicon = new JLabel( new ImageIcon("src\\main\\assets\\viewandcalculateres\\summericon.png"));
+        this.seasondetailsdate = new JLabel("June 1 - September 30"); 
+
         // Usage Details 
         this.usagetitle = new JLabel("Usage Details"); 
         this.usagestarttimetitle = new JLabel("Usage Start Time"); 
@@ -186,19 +213,6 @@ public class ViewCalculatePanel extends Panel {
     // Intializes Preferences for each Component 
     public void intializeComponentPreferences(){
         /* Component Preferences */ 
-
-        // Initialize Main Sub Panels 
-        usagedetailspanel = new JPanel(new GridBagLayout()); 
-        summarydetailspanel = new JPanel(new GridBagLayout()); 
-
-        // Init Rounded Sub Panels 
-        seasondetailspanel = new RoundedPanel(); 
-        usagecostdetailspanel = new RoundedPanel(); 
-
-        // Init Sub Panels 
-        totalusagepanel = new JPanel();
-        totalcostpanel = new JPanel();  
-
         // Set Usage Main Sub Panel Size
         usagedetailspanel.setMinimumSize(MAIN_SUB_PANEL_SIZE); 
         usagedetailspanel.setPreferredSize(MAIN_SUB_PANEL_SIZE);
@@ -281,7 +295,7 @@ public class ViewCalculatePanel extends Panel {
         c.insets = new Insets(15,0,0,160); 
         usagedetailspanel.add(usagetitle, c);
 
-        //Season Details Sub Panel
+        // Season Details Sub Panel
         c = new GridBagConstraints(); 
         c.weightx = c.weighty = 1.0; 
         c.anchor = GridBagConstraints.EAST; 
@@ -291,10 +305,46 @@ public class ViewCalculatePanel extends Panel {
         c.insets = new Insets(0,0,0,0); 
         usagedetailspanel.add(seasondetailspanel, c);
 
+        // Season Details Title 
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 0; 
+        // (top, left, bottom, right)
+        c.insets = new Insets(10,0,0,0); 
+
+        /* Season Detail Atrributes */
+        seasondetailtitle.setFont(new Font("Poppins", Font.BOLD, 20)); 
+
+        seasondetailspanel.add(seasondetailtitle, c);
+
+        // Season Icon 
+        c = new GridBagConstraints(); 
+        c.weightx = 1.0;
+        c.weighty = 1.0;
+        c.gridheight = 2;
+        c.anchor = GridBagConstraints.CENTER; 
+        c.gridx = 1; 
+        c.gridy = 0; 
+        c.insets = new Insets(0,0,0,0); 
+        seasondetailspanel.add(seasonicon, c);
+
+        // Season Date 
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.anchor = GridBagConstraints.NORTH; 
+        c.gridx = 0; 
+        c.gridy = 1; 
+        c.insets = new Insets(0,0,0,0); 
+
+        /* Season Date Atrributes */
+        seasondetailsdate.setFont(new Font("Poppins", Font.PLAIN, 12)); 
+
+        seasondetailspanel.add(seasondetailsdate, c);
 
         //Usage Cost Details Sub Panel
         c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0; 
+        c.weightx = c.weighty = 1.0;
         c.anchor = GridBagConstraints.WEST; 
         c.gridwidth = 2; 
         c.gridx = 1; 

@@ -37,6 +37,9 @@ public class RoundedPanel extends JPanel {
     public RoundedPanel() {
         super();
         setOpaque(false);
+
+        // Initialize with a grid bag layout 
+        this.setLayout(new GridBagLayout());
     }
 
     @Override
