@@ -158,12 +158,13 @@ public class Controller {
                 view.getManualInputPanel().getEnterDateField().setText("Enter Date");
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
                 view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
+                updateComponentsViewCalculate();
             }
             catch(Exception ex){
                 System.out.println("Usage has to be float!");
                 JOptionPane.showMessageDialog(view.getFrame(), "Usage has to be a number.");
             }
-            updateComponentsViewCalculate();
+
         }
     }
     class Focus implements FocusListener {
@@ -188,14 +189,29 @@ public class Controller {
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton) e.getSource();
-            if(dayIndex + 1 < model.getModelProfile().getDays().size() && dayIndex == 0)
+            try {
+
+                model.getModelProfile().getDays().get(dayIndex-1);
                 if(b.getText().equals("<")){
                     dayIndex--;
+                    updateComponentsViewCalculate();
                 }
-                else{
+
+            }
+            catch (Exception ex){
+            }
+            try{
+                model.getModelProfile().getDays().get(dayIndex+1);
+                if(b.getText().equals(">")) {
                     dayIndex++;
+                    updateComponentsViewCalculate();
                 }
-            updateComponentsViewCalculate();
+            }
+            catch (Exception ex){
+
+            }
+
+
             System.out.println("Navigation button pressed!");
         }
 
