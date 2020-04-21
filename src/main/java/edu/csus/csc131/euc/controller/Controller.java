@@ -9,15 +9,8 @@ import java.awt.event.ActionListener;
 
 // Swing Imports
 import javax.swing.*;
-// Swing Imports
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 // IO Imports
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.Reader;
 import java.awt.event.FocusListener;
 import java.awt.event.FocusEvent;
 
@@ -39,13 +32,6 @@ import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners.*;
 import edu.csus.csc131.euc.model.data.Day;
 import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*;
-// import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*;
-
-// Simple Local Import
-import edu.csus.csc131.euc.libraries.simple.JSONArray;
-import edu.csus.csc131.euc.libraries.simple.JSONObject;
-import edu.csus.csc131.euc.libraries.simple.parser.JSONParser;
-import edu.csus.csc131.euc.libraries.simple.parser.ParseException;
 
 public class Controller {
     // Instance Variables for Controller
