@@ -22,7 +22,8 @@ public class ViewCalculatePanel extends Panel {
 
     // Titles 
     private final Dimension USAGE_DETAIL_TITLE_SIZE = new Dimension(270,40); 
-    
+
+    // Sizes of Sub Panels of Usage Cost Panel 
     private final Dimension PANEL_1_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
     private final Dimension PANEL_2_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 * 3 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
     private final Dimension PANEL_3_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
