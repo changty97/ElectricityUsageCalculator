@@ -26,8 +26,17 @@ public class ViewCalculatePanel extends Panel {
     private final Dimension USAGE_DETAIL_TITLE_SIZE = new Dimension(270,40); 
 
     // Padding 
-    private static final Insets GLOBAL_PADDING = new Insets(10, 10, 10, 10);
-    
+    private static final Insets GLOBAL_PADDING                       = new Insets(10, 10, 10, 10);   
+    private static final Insets DEFUALT_INSETS                       = new Insets(0,0,0,0);
+    private static final Insets USAGE_DETAIL_PANEL_INSETS            = new Insets(0,70,20,50);
+    private static final Insets USAGE_COST_TOTAL_USAGE_LBL           = new Insets(0,150,150,0);
+    private static final Insets USAGE_NAV_LEFT_INSETS                = new Insets(0,30,20,50);
+    private static final Insets USAGE_NAV_RIGHT_INSETS               = new Insets(0,750,20,0);
+    private static final Insets USAGE_COST_NON_PEAK_DETAIL_LBL       = new Insets(0,150,110,0);
+    private static final Insets USAGE_COST_MID_PEAK_DETAIL_LBL       = new Insets(0,150,70,0);
+    private static final Insets USAGE_COST_DETAIL_LBL                = new Insets(0,150,30,0);
+    private static final Insets USAGE_DETAILS_MAIN_PANEL                                  = new Insets(50,0,0,230);
+
     // Cost Usage Sub-Panels Constants
     private final Dimension PANEL_1_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
     private final Dimension PANEL_2_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 * 3 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
@@ -46,7 +55,8 @@ public class ViewCalculatePanel extends Panel {
     
     /* Usage Details: Sub Panel Components */
     // Season Details Comps & Navigation Comps
-    private JLabel seasondetailtitle, seasonicon, seasondetailsdate, navrightbutton, navleftbutton;
+    private JLabel seasondetailtitle, seasonicon, seasondetailsdate;
+    private JButton navrightbutton, navleftbutton;
 
     // Usage Cost Comps
     // Labels for Start & End Time 
@@ -183,8 +193,8 @@ public class ViewCalculatePanel extends Panel {
     public JLabel getSeasonDetailDate() { return this.seasondetailsdate; }
 
     // Getters - Navigational Buttons 
-    public JLabel getNavigateRightButton() { return this.navrightbutton; }
-    public JLabel getNavigateLeftButton() { return this.navleftbutton; }
+    public JButton getNavigateRightButton() { return this.navrightbutton; }
+    public JButton getNavigateLeftButton() { return this.navleftbutton; }
 
     // Getters - Start & End 
     public JTextField getUsageStartTime() { return this.usagestarttime; }
@@ -247,8 +257,8 @@ public class ViewCalculatePanel extends Panel {
         this.usageendtime = new JTextField("Usage End Time"); 
 
         // Usage Nav Buttons 
-        this.navrightbutton = new JLabel( new ImageIcon("src\\main\\assets\\viewandcalculateres\\nextdaybutton.png"));
-        this.navleftbutton = new JLabel( new ImageIcon("src\\main\\assets\\viewandcalculateres\\previousdaybutton.png"));
+        this.navrightbutton = new JButton( new ImageIcon("src\\main\\assets\\viewandcalculateres\\nextdaybutton.png"));
+        this.navleftbutton = new JButton( new ImageIcon("src\\main\\assets\\viewandcalculateres\\previousdaybutton.png"));
 
         // Usage Text Fields - Usage
         this.usagestarttime = new JTextField("Usage Start Time");
@@ -326,6 +336,7 @@ public class ViewCalculatePanel extends Panel {
         /* Usage Details Main Sub Panel */
         // Main Sub Panel Title 
         // Regular Attributes
+        // setFont(usagedetailspanel, usagetitle, 0, 0, Font.BOLD, 30, USAGE_DETAILS_MAIN_PANEL);
         usagetitle.setForeground(Color.WHITE);
         usagetitle.setFont(new Font("Poppins", Font.BOLD, 30)); 
         // Grid Bag Attributes
@@ -340,228 +351,93 @@ public class ViewCalculatePanel extends Panel {
         // Season Details Sub Panel
         // Regular Attributes
         // Grid Bag Attributes
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0; 
-        c.anchor = GridBagConstraints.EAST; 
-        c.gridwidth = 1; 
-        c.gridx = 2; 
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0); 
-        usagedetailspanel.add(seasondetailspanel, c);
+        setVeiewCalConstraints(usagedetailspanel, seasondetailspanel, 1.0, GridBagConstraints.EAST, 1, 2, 0, DEFUALT_INSETS);
+        // c = new GridBagConstraints(); 
+        // c.weightx = c.weighty = 1.0; 
+        // c.anchor = GridBagConstraints.EAST; 
+        // c.gridwidth = 1; 
+        // c.gridx = 2; 
+        // c.gridy = 0;
+        // c.insets = new Insets(0,0,0,0); 
+        // usagedetailspanel.add(seasondetailspanel, c);
 
         // Usage Cost Details Sub Panel
         // Regular Attributes
         // Grid Bag Attributes
         // Label Attributes
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.anchor = GridBagConstraints.WEST; 
-        c.gridwidth = 2; 
-        c.gridx = 1; 
-        c.gridy = 1;
-        c.insets = new Insets(0,70,20,50);
-        usagedetailspanel.add(usagecostdetailspanel, c);
+        setVeiewCalConstraints(usagedetailspanel, usagecostdetailspanel, 1.0, GridBagConstraints.WEST, 2, 1, 1, USAGE_DETAIL_PANEL_INSETS);
+        // c = new GridBagConstraints(); 
+        // c.weightx = c.weighty = 1.0;
+        // c.anchor = GridBagConstraints.WEST; 
+        // c.gridwidth = 2; 
+        // c.gridx = 1; 
+        // c.gridy = 1;
+        // c.insets = new Insets(0,70,20,50);
+        // usagedetailspanel.add(usagecostdetailspanel, c);
         
 
         JPanel usagecostleft = new JPanel(new GridBagLayout());
-        usagecostleft.setMinimumSize(PANEL_1_SIZE);
-        usagecostleft.setSize(PANEL_1_SIZE);
-        usagecostleft.setPreferredSize(PANEL_1_SIZE);
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.anchor = GridBagConstraints.WEST;
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 0;
-        usagecostdetailspanel.add(usagecostleft);
+        createPanel(usagecostdetailspanel, usagecostleft, PANEL_1_SIZE, GridBagConstraints.BOTH, GridBagConstraints.WEST, 0, 0);
 
         JPanel usagecostcenter = new JPanel(new GridBagLayout());
-        usagecostcenter.setMinimumSize(PANEL_2_SIZE);
-        usagecostcenter.setSize(PANEL_2_SIZE);
-        usagecostcenter.setPreferredSize(PANEL_2_SIZE);
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 0;
-        usagecostdetailspanel.add(usagecostcenter);
-
+        createPanel(usagecostdetailspanel, usagecostcenter, PANEL_2_SIZE, GridBagConstraints.BOTH, GridBagConstraints.BOTH, 0, 0);
+     
         JPanel usagecostright = new JPanel(new GridBagLayout());
-        usagecostright.setMinimumSize(PANEL_3_SIZE);
-        usagecostright.setSize(PANEL_3_SIZE);
-        usagecostright.setPreferredSize(PANEL_3_SIZE);
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 0;
-        usagecostdetailspanel.add(usagecostright);
+        createPanel(usagecostdetailspanel, usagecostright, PANEL_3_SIZE, GridBagConstraints.BOTH, GridBagConstraints.BOTH, 0, 0);
 
         // Navigation Attributes
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.anchor = GridBagConstraints.WEST;
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-        usagecostleft.add(navleftbutton, c);
-    
-        c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        c.anchor = GridBagConstraints.EAST;
-        c.weightx = 1.0;
-        c.weighty = 4.0;
-        c.gridx = 6; 
-        c.gridy = 2;
-        c.insets = new Insets(0,0,0,0);
-        usagecostright.add(navrightbutton, c);
+        setLeftArrow(usagecostleft, navleftbutton, GridBagConstraints.BOTH, GridBagConstraints.WEST, 0, 0, DEFUALT_INSETS);
+        setRightArrow(usagecostright, navrightbutton, GridBagConstraints.BOTH,  GridBagConstraints.EAST, 1.0, 4.0, 6, 2, DEFUALT_INSETS);
 
         // Panel Details
         //Labels
         //total lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-        usagecosttotalusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecosttotalusagelbl, c);
+        setViewCalculateFont(usagecostcenter, usagecosttotalusagelbl, 0, 0, Font.BOLD, 20, DEFUALT_INSETS);
 
         //non-peak lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 1;
-        c.insets = new Insets(0,0,0,0);
-        usagecostnonpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostnonpeakusagelbl, c);
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakusagelbl, 0, 1, Font.BOLD, 20, DEFUALT_INSETS);
        
         //mid-peak lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 2;
-        c.insets = new Insets(0,0,0,0);
-        usagecostmidpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostmidpeakusagelbl, c);
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakusagelbl, 0, 2, Font.BOLD, 20, DEFUALT_INSETS);
        
         //peak lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0; 
-        c.gridy = 3;
-        c.insets = new Insets(0,0,0,0);
-        usagecostpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostpeakusagelbl, c);
+        setViewCalculateFont(usagecostcenter, usagecostpeakusagelbl, 0, 3, Font.BOLD, 20, DEFUALT_INSETS);
 
         //total cost lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 2; 
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-        usagecosttotalcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecosttotalcostlbl, c);
+        setViewCalculateFont(usagecostcenter, usagecosttotalcostlbl, 2, 0, Font.BOLD, 20, DEFUALT_INSETS);
 
         // non cost lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 2; 
-        c.gridy = 1;
-        c.insets = new Insets(0,0,0,0);
-        usagecostnonpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostnonpeakcostlbl, c);
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakcostlbl, 2, 1, Font.BOLD, 20, DEFUALT_INSETS);
 
         // mid cost lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 2; 
-        c.gridy = 2;
-        c.insets = new Insets(0,0,0,0);
-        usagecostmidpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostmidpeakcostlbl, c);
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakcostlbl, 2, 2, Font.BOLD, 20, DEFUALT_INSETS);
 
         //  peak cost lbl
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 2; 
-        c.gridy = 3;
-        c.insets = new Insets(0,0,0,0);
-        usagecostpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostpeakcostlbl, c);    
+        setViewCalculateFont(usagecostcenter, usagecostpeakcostlbl, 2, 3, Font.BOLD, 20, DEFUALT_INSETS);
 
        
         // Usage (Values)
         // total usage
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 1; 
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-        usagecosttotalusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecosttotalusage, c);
+        setViewCalculateFont(usagecostcenter, usagecosttotalusage, 1, 0, Font.BOLD, 20, DEFUALT_INSETS);
        
         // non usage
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 1; 
-        c.gridy = 1;
-        c.insets = new Insets(0,0,0,0);
-        usagecostnonpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostnonpeakusage, c);
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakusage, 1, 1, Font.BOLD, 20, DEFUALT_INSETS);
        
         // mid usage
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 1; 
-        c.gridy = 2;
-        c.insets = new Insets(0,0,0,0);
-        usagecostmidpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostmidpeakusage, c);
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakusage, 1, 2, Font.BOLD, 20, DEFUALT_INSETS);
        
         // peak usage
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 1; 
-        c.gridy = 3;
-        c.insets = new Insets(0,0,0,0);
-        usagecostpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostpeakusage, c);
+        setViewCalculateFont(usagecostcenter, usagecostpeakusage, 1, 3, Font.BOLD, 20, DEFUALT_INSETS);
        
        // total cost usage
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 3; 
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-        usagecosttotalcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecosttotalcost, c);
+       setViewCalculateFont(usagecostcenter, usagecosttotalcost, 3, 0, Font.BOLD, 20, DEFUALT_INSETS);
        
         // total cost usage
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 3; 
-        c.gridy = 1;
-        c.insets = new Insets(0,0,0,0);
-        usagecostnonpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostnonpeakcost, c);
-       
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 3; 
-        c.gridy = 2;
-        c.insets = new Insets(0,0,0,0);
-        usagecostmidpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostmidpeakcost, c);
-       
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 3; 
-        c.gridy = 3;
-        c.insets = new Insets(0,0,0,0);
-        usagecostpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        usagecostcenter.add(usagecostpeakcost, c);
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakcost, 3, 1, Font.BOLD, 20, DEFUALT_INSETS);  
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakcost, 3, 2, Font.BOLD, 20, DEFUALT_INSETS);
+        setViewCalculateFont(usagecostcenter, usagecostpeakcost, 3, 3, Font.BOLD, 20, DEFUALT_INSETS);
 
+       
         /* Summary Details Main Sub Panel */
         //  Summary West Panel
         // Regular Attributes
@@ -950,17 +826,6 @@ public class ViewCalculatePanel extends Panel {
 
         totalcostpanel.add(totalcost, c);
 
-        // public void setConstraints(JComponent pane, JComponent j, double weight, int gridwidth, int gridx, int gridy, Insets inset) {
-        //     GridbagConstraints c = new GridbagConstraints();
-        //     c.weightx = c.weighty = weight;
-        //     c.anchor = GridBagConstraints.WEST; 
-        //     c.gridwidth = gridwidth; 
-        //     c.gridx = gridx; 
-        //     c.gridy = gridy;
-        //     c.insets = new Insets(0,70,20,50);
-        //     pane.add(j, c); 
-        // }
-        
     }
 
 }

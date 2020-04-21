@@ -3,6 +3,9 @@ package edu.csus.csc131.euc.view.panels;
 
 /* Library Imports */
 import javax.swing.*;
+
+// import org.graalvm.compiler.hotspot.nodes.DimensionsNode;
+
 import java.awt.*;
 
 /* Local Imports */
@@ -168,6 +171,107 @@ public class Panel {
 
     }
 
+    //with gridwidth
+    public void setVeiewCalConstraints(JComponent pane, JComponent comp, double weight, int anchor, int gridwidth, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+
+        c.weightx = c.weighty = weight;
+        c.anchor = anchor; 
+        c.gridwidth = gridwidth; 
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c); 
+    }
+
+    //without gridwidth and wieghts are together
+    public void setVeiewCalConstraints(JComponent pane, JComponent comp, double weight, int anchor, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+
+        c.weightx = c.weighty = weight;
+        c.anchor = anchor; 
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c); 
+    }
+
+    //without gridwidth and wieghts are together and with fill
+    public void setVeiewCalConstraints(JComponent pane, JComponent comp, int fill, double weight, int anchor, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+
+        c.fill = fill;
+        c.weightx = c.weighty = weight;
+        c.anchor = anchor; 
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c); 
+    }
+
+    public void setVeiewCalConstraints(JComponent pane, JComponent comp, int fill, double weightx, double weighty, int anchor, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+
+        c.fill = fill;
+        c.weightx = weightx;
+        c.weighty = weighty;
+        c.anchor = anchor; 
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c); 
+    }
+
+
+
+    //with gridwidth and weights are seperate
+    public void setVeiewCalConstraints(JComponent pane, JComponent comp, double weightx, double weighty, int anchor, int gridwidth, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+
+        c.weightx = weightx;
+        c.weighty = weighty;
+        c.anchor = anchor; 
+        c.gridwidth = gridwidth; 
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c); 
+    }
+
+    //without gridwidth
+    public void setVeiewCalConstraints(JComponent pane, JComponent comp, double weightx, double weighty, int anchor, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+
+        c.weightx = weightx;
+        c.weighty = weighty;
+        c.anchor = anchor; 
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c); 
+    }
+
+    public void setViewCalculateFont(JComponent pane, JComponent comp, int gridx, int gridy, int style, int size, Insets inset) {
+        // Set new GridBagConstraints per element
+        c = new GridBagConstraints();
+        c.weightx = c.weighty = 1.0;
+        // Setting the X-Axis and Y-Axis
+        c.gridx = gridx;
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+
+        comp.setFont(new Font("Poppins", style, size));
+        pane.add(comp, c);
+    }
+
+
     public void setDragBoxConstraints(DragBoxDraw dragbox, int gridx, int gridy, Insets inset) {
         c = new GridBagConstraints();
 
@@ -178,11 +282,46 @@ public class Panel {
         // Setting the padding
         if( inset != null ){  c.insets = inset; }
 
-        // Setting the padding
-        if( inset != null ){  c.insets = inset; }
-
         // Adding the button constraints to the main panel
         this.getPanel().add(dragbox, c);
     }
 
+    public void createPanel(JComponent pane, JComponent comp, Dimension d, int fill, int anchor, int gridx, int gridy) {
+        comp.setMinimumSize(d);
+        comp.setSize(d);
+        comp.setPreferredSize(d);
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+        pane.add(comp);
+    }
+
+    public void setLeftArrow(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+         // Setting the padding
+         if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c);
+    }
+
+    public void setRightArrow(JComponent pane, JComponent comp, int fill, int anchor, double weightx, double weighty, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor; 
+        c.weightx = weightx;
+        c.weighty = weighty;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c); 
+    }
 }
