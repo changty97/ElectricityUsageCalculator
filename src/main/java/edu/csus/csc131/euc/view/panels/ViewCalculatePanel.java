@@ -59,20 +59,20 @@ public class ViewCalculatePanel extends Panel {
     private JLabel usagecostmidpeakusagelbl = new JLabel("Non-Peak: ");
     private JLabel usagecostpeakusagelbl = new JLabel("Peak: ");
     // 1st Column: Usage (Values)
-    private JLabel usagecosttotalusage = new JLabel("24.383 kWH");
-    private JLabel usagecostnonpeakusage = new JLabel("12.192 kWH");
-    private JLabel usagecostmidpeakusage = new JLabel("9.143 kWH");
-    private JLabel usagecostpeakusage = new JLabel("3.048 kWH");
+    private JLabel usagecosttotalusage = new JLabel("");
+    private JLabel usagecostnonpeakusage = new JLabel("");
+    private JLabel usagecostmidpeakusage = new JLabel("");
+    private JLabel usagecostpeakusage = new JLabel("");
     // 2nd Column: Usage (Labels)
     private JLabel usagecosttotalcostlbl = new JLabel("Total Cost: ");
     private JLabel usagecostnonpeakcostlbl = new JLabel("Cost Non-Peak: ");
     private JLabel usagecostmidpeakcostlbl = new JLabel(" Cost Non-Peak: ");
     private JLabel usagecostpeakcostlbl = new JLabel("Cost Peak: ");
     // 2nd Column: Usage (Values)
-    private JLabel usagecosttotalcost = new JLabel("$3.89");
-    private JLabel usagecostnonpeakcost = new JLabel("$1.47");
-    private JLabel usagecostmidpeakcost = new JLabel("$1.53");
-    private JLabel usagecostpeakcost = new JLabel("$0.89");
+    private JLabel usagecosttotalcost = new JLabel("");
+    private JLabel usagecostnonpeakcost = new JLabel("");
+    private JLabel usagecostmidpeakcost = new JLabel("");
+    private JLabel usagecostpeakcost = new JLabel("");
 
     /* Summary Details: Main Sub Panel Components */
     // Title Label
