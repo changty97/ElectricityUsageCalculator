@@ -6,7 +6,6 @@ package edu.csus.csc131.euc.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 // Swing Imports
 import javax.swing.*;
 
@@ -28,9 +27,12 @@ import java.text.DateFormat;
 /* Local Imports */
 // Local MVC Imports
 import edu.csus.csc131.euc.view.View;
+import edu.csus.csc131.euc.view.panels.ViewCalculatePanel;
 import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners.*;
 import edu.csus.csc131.euc.model.data.Day;
+import edu.csus.csc131.euc.model.data.Profile;
+import edu.csus.csc131.euc.model.data.Rates;
 import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*;
 
 public class Controller {
@@ -38,9 +40,13 @@ public class Controller {
     private View view;
     private Model model;
 
+    //current Day Index
+    private int dayIndex;
+
     public Controller(Model m, View v) {
         this.model = m;
         this.view = v;
+        dayIndex = 0;
 
         // Initializers for the Controller
         initializeView();
@@ -70,6 +76,10 @@ public class Controller {
         view.getImportPanel().getImportButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getImportButton().addActionListener(new IJPanelIBActionListener(view, model));
 
+        // Set AL for View Calculate Panel
+        view.getViewCalculatePanel().getNavigateLeftButton().addActionListener(new ArrowNavigation());
+        view.getViewCalculatePanel().getNavigateRightButton().addActionListener(new ArrowNavigation());
+
     }
 
     public void createAndShowGUI() {
@@ -77,15 +87,15 @@ public class Controller {
         this.view.getFrame().pack();
         this.view.getFrame().setVisible(true);
 
-        // RUN DEBUG PRINT OUTS FOR COMPONENTS HERE 
-        
-        // DEBUG FOR PANEL SIZES 
-        System.out.println("Dim Frame: " + view.getFrame().getSize() ); 
-        System.out.println("Dim Main Panel: " + view.getMainPanel().getPanel().getSize() ); 
-        System.out.println("Dim View and Calculate Panel: " + view.getViewCalculatePanel().getPanel().getSize() ); 
-        System.out.println("Dim Import Panel: " + view.getImportPanel().getPanel().getSize() ); 
-        System.out.println("Dim Manual Input Panel: " + view.getManualInputPanel().getPanel().getSize() ); 
-        
+        // RUN DEBUG PRINT OUTS FOR COMPONENTS HERE
+
+        // DEBUG FOR PANEL SIZES
+        System.out.println("Dim Frame: " + view.getFrame().getSize() );
+        System.out.println("Dim Main Panel: " + view.getMainPanel().getPanel().getSize() );
+        System.out.println("Dim View and Calculate Panel: " + view.getViewCalculatePanel().getPanel().getSize() );
+        System.out.println("Dim Import Panel: " + view.getImportPanel().getPanel().getSize() );
+        System.out.println("Dim Manual Input Panel: " + view.getManualInputPanel().getPanel().getSize() );
+
     }
 
     public void initializeView() {
@@ -94,7 +104,29 @@ public class Controller {
         this.view = v;
     }
 
-    // Additional Action Listeners needs to be put into appropriate folders 
+
+    public void updateComponentsViewCalculate(){
+        ViewCalculatePanel panel = view.getViewCalculatePanel();
+        Profile profile = model.getModelProfile();
+
+        //updates the rate values
+        panel.getNonSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
+        panel.getNonSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
+        panel.getSummerMidPeakRate().setText(Float.toString(Rates.getMidPeakSummer()));
+        panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
+        panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
+
+        //updates the total values by day
+        panel.getCostDayTotal().setText(Float.toString(profile.getTotalCostByDay(dayIndex)));
+        panel.getUsageDayTotal().setText(Float.toString(profile.getTotalUsageByDay(dayIndex)));
+
+        //updates the total values
+        panel.getTotalCost().setText(Float.toString(profile.calculateKWH()));
+        panel.getTotalUsage().setText(Float.toString(profile.getTotalUsage()));
+
+    }
+
+    // Additional Action Listeners needs to be put into appropriate folders
 
     class AddEntryListener implements ActionListener {
         @Override
@@ -104,13 +136,15 @@ public class Controller {
             float usage = 0;
             try{
                 usage = Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText());
-                Day day = new Day(date);
+                //always uses summer rates for now
+                Day day = new Day(date, true);
                 day.setUsage(usage, index);
                 model.getModelProfile().addDay(day);
                 view.getManualInputPanel().getListModel().addElement(date + " " + index + ":00 - " + (int)(index+1) + ":00" + " " + usage);
                 view.getManualInputPanel().getEnterDateField().setText("Enter Date");
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
                 view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
+                updateComponentsViewCalculate();
             }
             catch(Exception ex){
                 System.out.println("Usage has to be float!");
@@ -132,6 +166,39 @@ public class Controller {
         public void focusLost(FocusEvent e) {
             //nothing
 
+        }
+
+    }
+
+    class ArrowNavigation implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JButton b = (JButton) e.getSource();
+            try {
+
+                model.getModelProfile().getDays().get(dayIndex-1);
+                if(b.getText().equals("<")){
+                    dayIndex--;
+                    updateComponentsViewCalculate();
+                }
+
+            }
+            catch (Exception ex){
+            }
+            try{
+                model.getModelProfile().getDays().get(dayIndex+1);
+                if(b.getText().equals(">")) {
+                    dayIndex++;
+                    updateComponentsViewCalculate();
+                }
+            }
+            catch (Exception ex){
+
+            }
+
+
+            System.out.println("Navigation button pressed!");
         }
 
     }

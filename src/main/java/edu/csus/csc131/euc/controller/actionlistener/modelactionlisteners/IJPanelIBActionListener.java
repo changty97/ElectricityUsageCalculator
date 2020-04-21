@@ -2,29 +2,29 @@
 package edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners;
 
 /* Library Imports */
-// AWT Imports 
+// AWT Imports
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// IO Imports 
+// IO Imports
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 
-/* 
-// Util Imports 
+/*
+// Util Imports
 import java.util.Date;
 import java.util.Iterator;
 import java.text.DateFormat;
 
-// Text Imports 
+// Text Imports
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 */
 
 /* Local Imports */
-// Local MVC Imports 
+// Local MVC Imports
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
 
@@ -35,24 +35,24 @@ import edu.csus.csc131.euc.libraries.simple.parser.JSONParser;
 import edu.csus.csc131.euc.libraries.simple.parser.ParseException;
 
 public class IJPanelIBActionListener implements ActionListener {
-    // Instance Variables 
-    View view; 
+    // Instance Variables
+    View view;
     Model model;
 
     public IJPanelIBActionListener(View v, Model m){
-        this.view = v; 
-        this.model = m; 
+        this.view = v;
+        this.model = m;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JSONParser parser = new JSONParser();
 
-        // Throws a FILENOTFOUNDEXCEPTION which cascades into other issues.. need to debug this. 
-        File file = new File(view.getImportPanel().getImportField().getText()); 
- 
+        // Throws a FILENOTFOUNDEXCEPTION which cascades into other issues.. need to debug this.
+        File file = new File(view.getImportPanel().getImportField().getText());
+
         try (Reader reader = new FileReader(file)) {
-                
+
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
             // Imports the data to the model for the profileID (userId), unit, and siteTimeZoneId
@@ -71,7 +71,7 @@ public class IJPanelIBActionListener implements ActionListener {
                 String endTime = readsInternalObject.get("endTime").toString();
                 double value = (double) readsInternalObject.get("value");
                 //TEST// System.out.println("startTime: " + startTime + ", endTime: " + endTime + ", value: " + value);
-                    
+
                 model.getModelRates().setStartTimeAtIndex(startTime, i);
                 model.getModelRates().setEndTimeAtIndex(endTime, i);
                 model.getModelRates().setRateAtIndex((float) value, i);
@@ -82,14 +82,14 @@ public class IJPanelIBActionListener implements ActionListener {
             // In this case, after importing the program, the index will be at 0 and we will see the start/end
             // time and the rate in the beginning of the dataset in the JSON file.
             model.setModelIndex(0); // this will always set the index value to 0 at import.
-            // view.getViewCalculatePanel().getUsageStartTime().setText(model.getModelRates().getStartTimeAtIndex(model.getModelIndex()));
-            // view.getViewCalculatePanel().getUsageEndTime().setText(model.getModelRates().getEndTimeAtIndex(model.getModelIndex()));
-                
+            view.getViewCalculatePanel().getUsageStartTime().setText(model.getModelRates().getStartTimeAtIndex(model.getModelIndex()));
+            view.getViewCalculatePanel().getUsageEndTime().setText(model.getModelRates().getEndTimeAtIndex(model.getModelIndex()));
+
         }
-        catch (IOException exception) { System.out.println("File Not Found."); } 
-        catch (IndexOutOfBoundsException exception) { exception.printStackTrace(); } 
-        catch (ParseException exception) { exception.printStackTrace(); } 
+        catch (IOException exception) { System.out.println("File not found."); } //exception.printStackTrace(); } 
+        catch (IndexOutOfBoundsException exception) { System.out.println("Index out of bounds."); } //exception.printStackTrace(); } 
+        catch (ParseException exception) { System.out.println("Parsing Error."); } //exception.printStackTrace(); } 
         catch (NullPointerException exception) { System.out.println("No file selected."); }
     }
-} 
+}
 
