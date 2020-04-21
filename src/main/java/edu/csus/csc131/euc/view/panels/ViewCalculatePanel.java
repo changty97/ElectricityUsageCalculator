@@ -23,6 +23,10 @@ public class ViewCalculatePanel extends Panel {
     // Titles 
     private final Dimension USAGE_DETAIL_TITLE_SIZE = new Dimension(270,40); 
     
+    private final Dimension PANEL_1_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
+    private final Dimension PANEL_2_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 * 3 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
+    private final Dimension PANEL_3_SIZE = new Dimension((int) USAGE_COST_DETAIL_PANEL_SIZE.getWidth()/5 , (int) USAGE_COST_DETAIL_PANEL_SIZE.getHeight());
+    
     // Instance Variables Organization
     // README: Understands structure below if you plan to add instance variables 
     // /*=============================================================
@@ -407,79 +411,205 @@ public class ViewCalculatePanel extends Panel {
         c.insets = new Insets(0,70,20,50);
         usagedetailsmainpanel.add(usagecostdetailspanel, c);
         
+
+        JPanel usagecostleft = new JPanel(new GridBagLayout());
+        usagecostleft.setMinimumSize(PANEL_1_SIZE);
+        usagecostleft.setSize(PANEL_1_SIZE);
+        usagecostleft.setPreferredSize(PANEL_1_SIZE);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.anchor = GridBagConstraints.WEST;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 0;
+        usagecostdetailspanel.add(usagecostleft);
+
+        JPanel usagecostcenter = new JPanel(new GridBagLayout());
+        usagecostcenter.setMinimumSize(PANEL_2_SIZE);
+        usagecostcenter.setSize(PANEL_2_SIZE);
+        usagecostcenter.setPreferredSize(PANEL_2_SIZE);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 0;
+        usagecostdetailspanel.add(usagecostcenter);
+
+        JPanel usagecostright = new JPanel(new GridBagLayout());
+        usagecostright.setMinimumSize(PANEL_3_SIZE);
+        usagecostright.setSize(PANEL_3_SIZE);
+        usagecostright.setPreferredSize(PANEL_3_SIZE);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 0;
+        usagecostdetailspanel.add(usagecostright);
+
         // Navigation Attributes
-        c.insets = new Insets(0,30,20,50);
-        usagecostdetailspanel.add(navleftbutton, c);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.anchor = GridBagConstraints.WEST;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 0;
+        c.insets = new Insets(0,0,0,0);
+        usagecostleft.add(navleftbutton, c);
     
-        c.insets = new Insets(0,750,20,0);
-        usagecostdetailspanel.add(navrightbutton, c);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.BOTH;
+        c.anchor = GridBagConstraints.EAST;
+        c.weightx = 1.0;
+        c.weighty = 4.0;
+        c.gridx = 6; 
+        c.gridy = 2;
+        c.insets = new Insets(0,0,0,0);
+        usagecostright.add(navrightbutton, c);
 
+        // Panel Details
+        //Labels
+        //total lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 0;
+        c.insets = new Insets(0,0,0,0);
         usagecosttotalusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        c.insets = new Insets(0,150,150,0);
-        usagecostdetailspanel.add(usagecosttotalusagelbl, c);
+        usagecostcenter.add(usagecosttotalusagelbl, c);
 
+        //non-peak lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 1;
+        c.insets = new Insets(0,0,0,0);
         usagecostnonpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        c.insets = new Insets(0,150,110,0);
-        usagecostdetailspanel.add(usagecostnonpeakusagelbl, c);
+        usagecostcenter.add(usagecostnonpeakusagelbl, c);
        
+        //mid-peak lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 2;
+        c.insets = new Insets(0,0,0,0);
         usagecostmidpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        c.insets = new Insets(0,150,70,0);
-        usagecostdetailspanel.add(usagecostmidpeakusagelbl, c);
+        usagecostcenter.add(usagecostmidpeakusagelbl, c);
        
+        //peak lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0; 
+        c.gridy = 3;
+        c.insets = new Insets(0,0,0,0);
         usagecostpeakusagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        c.insets = new Insets(0,150,30,0);
-        usagecostdetailspanel.add(usagecostpeakusagelbl, c);
+        usagecostcenter.add(usagecostpeakusagelbl, c);
+
+        //total cost lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 2; 
+        c.gridy = 0;
+        c.insets = new Insets(0,0,0,0);
+        usagecosttotalcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecosttotalcostlbl, c);
+
+        // non cost lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 2; 
+        c.gridy = 1;
+        c.insets = new Insets(0,0,0,0);
+        usagecostnonpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostnonpeakcostlbl, c);
+
+        // mid cost lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 2; 
+        c.gridy = 2;
+        c.insets = new Insets(0,0,0,0);
+        usagecostmidpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostmidpeakcostlbl, c);
+
+        //  peak cost lbl
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 2; 
+        c.gridy = 3;
+        c.insets = new Insets(0,0,0,0);
+        usagecostpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostpeakcostlbl, c);    
+
        
-        // // 1st Column: Usage (Values)
-        // usagecosttotalusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecosttotalusage, c);
+        // Usage (Values)
+        // total usage
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 1; 
+        c.gridy = 0;
+        c.insets = new Insets(0,0,0,0);
+        usagecosttotalusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecosttotalusage, c);
        
-        // usagecostnonpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostnonpeakusage, c);
+        // non usage
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 1; 
+        c.gridy = 1;
+        c.insets = new Insets(0,0,0,0);
+        usagecostnonpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostnonpeakusage, c);
        
-        // usagecostmidpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostmidpeakusage, c);
+        // mid usage
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 1; 
+        c.gridy = 2;
+        c.insets = new Insets(0,0,0,0);
+        usagecostmidpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostmidpeakusage, c);
        
-        // usagecostpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostpeakusage, c);
+        // peak usage
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 1; 
+        c.gridy = 3;
+        c.insets = new Insets(0,0,0,0);
+        usagecostpeakusage.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostpeakusage, c);
        
-        // 2nd Column: Usage (Labels)
-        // usagecosttotalcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecosttotalcostlbl, c);
+       // total cost usage
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 3; 
+        c.gridy = 0;
+        c.insets = new Insets(0,0,0,0);
+        usagecosttotalcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecosttotalcost, c);
        
-        // usagecostnonpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostnonpeakcostlbl, c);
+        // total cost usage
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 3; 
+        c.gridy = 1;
+        c.insets = new Insets(0,0,0,0);
+        usagecostnonpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostnonpeakcost, c);
        
-        // usagecostmidpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostmidpeakcostlbl, c);
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 3; 
+        c.gridy = 2;
+        c.insets = new Insets(0,0,0,0);
+        usagecostmidpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostmidpeakcost, c);
        
-        // usagecostpeakcostlbl.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostpeakcostlbl, c);
-       
-        // 2nd Column: Usage (Values)
-        // usagecosttotalcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecosttotalcost, c);
-       
-        // usagecostnonpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostnonpeakcost, c);
-       
-        // usagecostmidpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostmidpeakcost, c);
-       
-        // usagecostpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
-        // c.insets = new Insets(0,150,150,0);
-        // usagecostdetailspanel.add(usagecostpeakcost, c);
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 3; 
+        c.gridy = 3;
+        c.insets = new Insets(0,0,0,0);
+        usagecostpeakcost.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagecostcenter.add(usagecostpeakcost, c);
 
         /* Summary Details Main Sub Panel */
         //  Summary West Panel
