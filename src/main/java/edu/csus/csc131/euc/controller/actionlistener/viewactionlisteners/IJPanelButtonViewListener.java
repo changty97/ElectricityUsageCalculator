@@ -1,48 +1,48 @@
 /* PACKAGE PATH */
-package edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners; 
+package edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners;
 
 /* Library Imports */
-// AWT Imports 
+// AWT Imports
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-// IO Imports 
+// IO Imports
 import java.io.File;
 
-// Swing Imports 
+// Swing Imports
 import javax.swing.AbstractButton;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 /* Local Imports */
-// Local MVC Imports 
+// Local MVC Imports
 import edu.csus.csc131.euc.view.View;
 
 public class IJPanelButtonViewListener implements ActionListener{
-    // Instance variable of the view 
-    private View view; 
+    // Instance variable of the view
+    private View view;
 
-    // For Browse button Purposes 
-    private File file; 
+    // For Browse button Purposes
+    private File file;
 
     public IJPanelButtonViewListener(View v){ this.view = v; }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
-        // If Selected 
+        // If Selected
         if(!((AbstractButton)e.getSource()).isSelected())
         {
             if(((AbstractButton)e.getSource()) == view.getImportPanel().getImportButton()){
                 if(view.getImportPanel().getImportField().getText().equals("Enter file path here, or browse. . .")){
-                    return; 
+                    return;
                 }
             }
 
-            // Set it to true 
-            ((AbstractButton)e.getSource()).setSelected(true); 
+            // Set it to true
+            ((AbstractButton)e.getSource()).setSelected(true);
         }
 
-        // If the button being selected is the browse button then find file and display it 
+        // If the button being selected is the browse button then find file and display it
         if( ((AbstractButton)e.getSource()) == view.getImportPanel().getBrowseButton() ){
             JFileChooser chooser = new JFileChooser();
 
@@ -64,17 +64,17 @@ public class IJPanelButtonViewListener implements ActionListener{
             } else {
                 System.out.println("No Selection ");
                 file = null;
-                ((AbstractButton)e.getSource()).setSelected(false); 
+                ((AbstractButton)e.getSource()).setSelected(false);
             }
         }
 
-        // If reset button was selected then reset view 
+        // If reset button was selected then reset view
         if( ((AbstractButton)e.getSource()) == view.getImportPanel().getAddNewFileButton() ){
-            // Set Browse and Submit to not selected 
+            // Set Browse and Submit to not selected
             view.getImportPanel().getBrowseButton().setSelected(false);
             view.getImportPanel().getImportButton().setSelected(false);
 
-            // Reset textfield 
+            // Reset textfield
             view.getImportPanel().getImportField().setText("Enter file path here, or browse. . .");
         }
 

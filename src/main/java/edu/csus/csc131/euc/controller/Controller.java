@@ -6,7 +6,6 @@ package edu.csus.csc131.euc.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-
 // Swing Imports
 import javax.swing.*;
 
@@ -28,22 +27,13 @@ import java.text.DateFormat;
 /* Local Imports */
 // Local MVC Imports
 import edu.csus.csc131.euc.view.View;
+import edu.csus.csc131.euc.view.panels.ViewCalculatePanel;
 import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners.*;
 import edu.csus.csc131.euc.model.data.Day;
+import edu.csus.csc131.euc.model.data.Profile;
+import edu.csus.csc131.euc.model.data.Rates;
 import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*;
-<<<<<<< HEAD
-// import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*;
-
-// Simple Local Import
-import edu.csus.csc131.euc.libraries.simple.JSONArray;
-import edu.csus.csc131.euc.libraries.simple.JSONObject;
-import edu.csus.csc131.euc.libraries.simple.parser.JSONParser;
-import edu.csus.csc131.euc.libraries.simple.parser.ParseException;
-import edu.csus.csc131.euc.model.data.*;
-import edu.csus.csc131.euc.view.panels.*;
-=======
->>>>>>> 19aa706a9f6ba03a5913c3100597850ec02dd68c
 
 public class Controller {
     // Instance Variables for Controller
@@ -120,11 +110,11 @@ public class Controller {
         Profile profile = model.getModelProfile();
 
         //updates the rate values
-        panel.getNonSummerOffPeak().setText(Float.toString(Rates.getOffPeakNonSummer()));
-        panel.getNonSummerPeak().setText(Float.toString(Rates.getPeakNonSummer()));
-        panel.getSummerMidPeak().setText(Float.toString(Rates.getMidPeakSummer()));
-        panel.getSummerOffPeak().setText(Float.toString(Rates.getOffPeakSummer()));
-        panel.getSummerPeak().setText(Float.toString(Rates.getPeakSummer()));
+        panel.getNonSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
+        panel.getNonSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
+        panel.getSummerMidPeakRate().setText(Float.toString(Rates.getMidPeakSummer()));
+        panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
+        panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
 
         //updates the total values by day
         panel.getCostDayTotal().setText(Float.toString(profile.getTotalCostByDay(dayIndex)));
