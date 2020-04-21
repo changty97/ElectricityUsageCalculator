@@ -9,8 +9,6 @@ import edu.csus.csc131.euc.view.panels.subpanels.*;
 public class ViewCalculatePanel extends Panel {
 
     /* Constants */
-    private static final Dimension DIMENSION_TEXTFIELD = new Dimension(100, 25);
-
     // Main Sub Panels Size 
     private final Dimension USAGE_DETAILS_SUB_PANEL_SIZE = new Dimension(1013, 393);  
     private final Dimension SUMMARY_DETAILS_SUB_PANEL_SIZE = new Dimension(1013, 393);  
@@ -89,7 +87,6 @@ public class ViewCalculatePanel extends Panel {
     private JButton resetdefault = new JButton("Reset Default Values"); 
     private JButton submituservaluesbutton = new JButton("Submit Values"); 
 
-
     // Values - Summer
     private JTextField summeroffpeakrate = new JTextField("$0.1209 / kWH"); 
     private JTextField summeroffpeakperiod = new JTextField("Midnight - Noon");
@@ -104,7 +101,6 @@ public class ViewCalculatePanel extends Panel {
     private JTextField nonsummerpeakrate = new JTextField("$0.1006 / kWH"); 
     private JTextField nonsummerpeakperiod = new JTextField("Midnight - 5PM , 5PM - 8PM");
 
-
     // Summary Details: Section Panels 
     private JPanel summarydetailwestgrouppanels = new JPanel( new CardLayout() ); 
     private JPanel summarydetailwestpanelsummer = new JPanel( new GridBagLayout() );
@@ -112,20 +108,20 @@ public class ViewCalculatePanel extends Panel {
     private JPanel summarydetaileastpanel = new JPanel( new GridBagLayout() ); 
 
     // Summary Details: Sub-Panels
-    private JPanel totalusagepanel, totalcostpanel;
+    private RoundedPanel totalusagepanel, totalcostpanel;
     
     /* Summary Details: Sub Panel Components */
     // Total Usage Panel Comps
     // Label
     JLabel totalusagepaneltitle = new JLabel("Total Usage"); 
     // Value
-    private JTextField totalusage;
+    private JLabel totalusage;
 
     // Total Cost Panel Comps
     // Label
     JLabel totalcostpaneltitle = new JLabel("Total Cost"); 
     // Value
-    private JTextField totalcost;
+    private JLabel totalcost;
 
 
     // Constructor
@@ -174,8 +170,8 @@ public class ViewCalculatePanel extends Panel {
     public void setNonSummerPeakPeriod(JTextField t) { this.nonsummerpeakperiod = t; }
 
     // Setters - Total Details
-    public void setTotalUsage(JTextField t) { this.totalusage = t; }
-    public void setTotalCost(JTextField t) { this.totalcost = t; }
+    public void setTotalUsage(JLabel t) { this.totalusage = t; }
+    public void setTotalCost(JLabel t) { this.totalcost = t; }
 
     /* Getters */
 
@@ -219,8 +215,8 @@ public class ViewCalculatePanel extends Panel {
     public JTextField getNonSummerPeakPeriod(JTextField t) { return this.nonsummerpeakperiod; }
 
     // Getters - Total Details
-    public JTextField getTotalUsage() { return this.totalusage; }
-    public JTextField getTotalCost() { return this.totalcost; }
+    public JLabel getTotalUsage() { return this.totalusage; }
+    public JLabel getTotalCost() { return this.totalcost; }
 
     /* Functions for ViewCalculate Panel*/ 
 
@@ -233,8 +229,8 @@ public class ViewCalculatePanel extends Panel {
         // Initalize Sub Panels 
         this.seasondetailspanel = new RoundedPanel(); 
         this.usagecostdetailspanel = new RoundedPanel(); 
-        this.totalusagepanel = new JPanel(new GridBagLayout());
-        this.totalcostpanel = new JPanel(new GridBagLayout());  
+        this.totalusagepanel = new RoundedPanel();
+        this.totalcostpanel = new RoundedPanel();
 
         /* Instantiate all components of panel here */ 
         // Season Detail Panel Elements 
@@ -259,8 +255,8 @@ public class ViewCalculatePanel extends Panel {
         this.summarytitle = new JLabel("Summary Details");
 
         // Total Details
-        this.totalusage = new JTextField("Total Usage");
-        this.totalcost = new JTextField("Total Cost");
+        this.totalusage = new JLabel("<html>58.73 <font size=5>kWH</font></html>");
+        this.totalcost = new JLabel("$ 21.94");
     }
 
     // Intializes Preferences for each Component 
@@ -293,12 +289,6 @@ public class ViewCalculatePanel extends Panel {
         // TITLE Sizes 
         usagetitle.setPreferredSize(USAGE_DETAIL_TITLE_SIZE);
 
-        // Total 
-        this.totalusage.setEditable(false);
-        this.totalcost.setEditable(false);
-
-        // Summary Detail Comp. 
-
     }
 
     // Initializes Constraints for GridBag Layout 
@@ -324,7 +314,7 @@ public class ViewCalculatePanel extends Panel {
         c.weightx = c.weighty = 1.0; 
         c.gridx = 0; 
         c.gridy = 1;
-        c.ipadx = c.ipady = 100; 
+        c.ipadx = c.ipady = 50; 
         c.anchor = GridBagConstraints.SOUTH; 
         getPanel().add(summarydetailspanel, c);
 
@@ -569,31 +559,46 @@ public class ViewCalculatePanel extends Panel {
         summarydetailwestpanelsummer.add(summerpeakperiod, c);
 
         // Season Toggle Button
-        seasontoggle.setFont(new Font("Poppins", Font.BOLD, 15));
+        // Regular Attributes
+        seasontoggle.setFont(new Font("Poppins", Font.BOLD, 20));
+        seasontoggle.setForeground(Color.WHITE);
+        seasontoggle.setBackground(new Color(2, 29, 62));
+        seasontoggle.setBorderPainted(false);
+        seasontoggle.setFocusPainted(false);
         // GridBag Attributes 
         c.weightx = c.weighty = 1.0;
         c.gridx = 0; 
-        c.gridy = 0;
+        c.gridy = 2;
         c.insets = new Insets(25,0,0,0);
         c.anchor = GridBagConstraints.WEST; 
         summarydetaileastpanel.add(seasontoggle, c);
 
         // Reset Default Button
-        resetdefault.setFont(new Font("Poppins", Font.BOLD, 15));
+        // Regular Attributes
+        resetdefault.setFont(new Font("Poppins", Font.BOLD, 20));
+        resetdefault.setForeground(Color.WHITE);
+        resetdefault.setBackground(new Color(2, 29, 62));
+        resetdefault.setBorderPainted(false);
+        resetdefault.setFocusPainted(false);
         // GridBag Attributes 
         c.weightx = c.weighty = 1.0;
         c.gridx = 0; 
-        c.gridy = 1;
+        c.gridy = 3;
         c.insets = new Insets(5,0,0,5);
         c.anchor = GridBagConstraints.WEST; 
         summarydetaileastpanel.add(resetdefault, c);
 
         // Reset Default Button
-        submituservaluesbutton.setFont(new Font("Poppins", Font.BOLD, 15));
+        // Regular Attributes
+        submituservaluesbutton.setFont(new Font("Poppins", Font.BOLD, 20));
+        submituservaluesbutton.setForeground(Color.WHITE);
+        submituservaluesbutton.setBackground(new Color(62, 142, 37));
+        submituservaluesbutton.setBorderPainted(false);
+        submituservaluesbutton.setFocusPainted(false);
         // GridBag Attributes 
         c.weightx = c.weighty = 1.0;
         c.gridx = 0; 
-        c.gridy = 2;
+        c.gridy = 4;
         c.insets = new Insets(5,0,0,25);
         c.anchor = GridBagConstraints.WEST; 
         summarydetaileastpanel.add(submituservaluesbutton, c);
@@ -605,7 +610,7 @@ public class ViewCalculatePanel extends Panel {
         c = new GridBagConstraints(); 
         c.weightx = c.weighty = 1.0;
         c.gridx = 0; 
-        c.gridy = 3;
+        c.gridy = 0;
         c.insets = new Insets(5,0,0,5);
         summarydetaileastpanel.add(totalusagepanel, c); 
 
@@ -616,7 +621,7 @@ public class ViewCalculatePanel extends Panel {
         c = new GridBagConstraints(); 
         c.weightx = c.weighty = 1.0;
         c.gridx = 0; 
-        c.gridy = 4;
+        c.gridy = 1;
         c.insets = new Insets(5,0,0,5);
         summarydetaileastpanel.add(totalcostpanel, c); 
 
@@ -661,13 +666,86 @@ public class ViewCalculatePanel extends Panel {
         c.weightx = c.weighty = 1.0;
         c.anchor = GridBagConstraints.NORTH; 
         c.gridx = 0; 
-        c.gridy = 1; 
+        c.gridy = 1;
         c.insets = new Insets(0,0,0,0); 
 
         seasondetailspanel.add(seasondetailsdate, c);
 
+        /* Total Usage Sub Panel Components */
+        // Total Usage Label
+        // Regular Attributes 
+        totalusagepaneltitle.setFont(new Font("Poppins", Font.PLAIN, 30)); 
+        totalusagepaneltitle.setForeground(Color.WHITE);
+        totalusagepaneltitle.setHorizontalAlignment(SwingConstants.CENTER);
 
-        
+        // GridBag Attributes 
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.anchor = GridBagConstraints.CENTER; 
+        c.gridx = 0; 
+        c.gridy = 0; 
+        c.insets = new Insets(0,0,0,0);
+
+        totalusagepanel.add(totalusagepaneltitle, c);
+
+        // Total Usage Value
+        // Regular Attributes 
+        totalusage.setFont(new Font("Poppins", Font.BOLD, 50)); 
+        totalusage.setForeground(Color.WHITE);
+        totalusage.setBackground(new Color(23, 104, 172));
+        totalusage.setHorizontalAlignment(SwingConstants.CENTER);
+        totalusage.setBounds(new Rectangle(300,75));
+        totalusage.setOpaque(true); 
+
+        // GridBag Attributes 
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.anchor = GridBagConstraints.CENTER; 
+        c.gridx = 1; 
+        c.gridy = 0;
+        c.fill = GridBagConstraints.HORIZONTAL; 
+        c.insets = new Insets(0,0,0,10); 
+
+        totalusagepanel.add(totalusage, c);
+
+
+        /* Total Cost Sub Panel Components */ 
+        // Total Cost Label
+        // Regular Attributes 
+        totalcostpaneltitle.setFont(new Font("Poppins", Font.PLAIN, 30)); 
+        totalcostpaneltitle.setForeground(Color.WHITE);
+        totalcostpaneltitle.setHorizontalAlignment(SwingConstants.CENTER);
+
+        // GridBag Attributes 
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.anchor = GridBagConstraints.CENTER; 
+        c.gridx = 0; 
+        c.gridy = 0; 
+        c.insets = new Insets(0,0,0,0); 
+
+        totalcostpanel.add(totalcostpaneltitle, c);
+
+        // Total Cost Value   
+        // Regular Attributes 
+        totalcost.setFont(new Font("Poppins", Font.BOLD, 46)); 
+        totalcost.setForeground(Color.WHITE);
+        totalcost.setBackground(new Color(11, 83, 81));
+        totalcost.setHorizontalAlignment(SwingConstants.CENTER);
+        // totalcost.setBounds(new Rectangle(300,75));
+        totalcost.setOpaque(true); 
+
+        // GridBag Attributes 
+        c = new GridBagConstraints(); 
+        c.weightx = c.weighty = 1.0;
+        c.anchor = GridBagConstraints.CENTER; 
+        c.gridx = 1; 
+        c.gridy = 0; 
+        c.insets = new Insets(0,0,0,10); 
+        c.fill = GridBagConstraints.HORIZONTAL; 
+
+        totalcostpanel.add(totalcost, c);
+
     }
 
 }

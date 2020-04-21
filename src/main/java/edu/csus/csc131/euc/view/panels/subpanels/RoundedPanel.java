@@ -6,9 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 
 /* Local Imports */ 
-import edu.csus.csc131.euc.view.renders.*;
 
 // Used from: CodeProject
+// Modified by: AltF4 
 // https://www.codeproject.com/articles/114959/rounded-border-jpanel-jpanel-graphics-improvements
 // Author: b4rc0ll0
 
