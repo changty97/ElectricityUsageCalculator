@@ -53,7 +53,8 @@ public class IJPanelButtonViewListener implements ActionListener{
             chooser.setMultiSelectionEnabled(false);
             chooser.addChoosableFileFilter(new FileNameExtensionFilter("JSON File", "json"));
 
-            if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            int returnVal = chooser.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
                 file = chooser.getSelectedFile();
                 System.out.println("getCurrentDirectory(): "+ chooser.getCurrentDirectory());
                 System.out.println("getSelectedFile(): "+ chooser.getSelectedFile());
@@ -61,8 +62,10 @@ public class IJPanelButtonViewListener implements ActionListener{
 
                 // Set new import field text
                 view.getImportPanel().getImportField().setText("" + chooser.getSelectedFile());
+            } else if (returnVal == JFileChooser.CANCEL_OPTION) {
+                System.out.println("Cancel Option ");
             } else {
-                System.out.println("No Selection ");
+                System.out.println("No Selection or Error "); // Technically dont need this anymore
                 file = null;
                 ((AbstractButton)e.getSource()).setSelected(false);
             }

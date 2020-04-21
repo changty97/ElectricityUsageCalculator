@@ -86,9 +86,9 @@ public class IJPanelIBActionListener implements ActionListener {
             view.getViewCalculatePanel().getUsageEndTime().setText(model.getModelRates().getEndTimeAtIndex(model.getModelIndex()));
 
         }
-        catch (IOException exception) { exception.printStackTrace(); }
-        catch (IndexOutOfBoundsException exception) { exception.printStackTrace(); }
-        catch (ParseException exception) { exception.printStackTrace(); }
+        catch (IOException exception) { System.out.println("File not found."); } //exception.printStackTrace(); } 
+        catch (IndexOutOfBoundsException exception) { System.out.println("Index out of bounds."); } //exception.printStackTrace(); } 
+        catch (ParseException exception) { System.out.println("Parsing Error."); } //exception.printStackTrace(); } 
         catch (NullPointerException exception) { System.out.println("No file selected."); }
     }
 }
