@@ -18,7 +18,7 @@ public class View{
     private JFrame frame;
 
     // Size of frame
-    private Dimension size = new Dimension(1440,810);
+    // private Dimension size = new Dimension(1440,810);
     // Size of frame
     private final Dimension FRAME_SIZE = new Dimension(1440,810);
     private final Dimension CARD_PANELS_SIZE = new Dimension(1013, 786);
