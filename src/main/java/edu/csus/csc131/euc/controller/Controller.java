@@ -77,8 +77,8 @@ public class Controller {
         view.getImportPanel().getImportButton().addActionListener(new IJPanelIBActionListener(view, model));
 
         // Set AL for View Calculate Panel
-        view.getViewCalculatePanel().getNavigateLeftButton().addActionListener(new ArrowNavigation());
-        view.getViewCalculatePanel().getNavigateRightButton().addActionListener(new ArrowNavigation());
+        view.getViewCalculatePanel().getNavLeftButton().addActionListener(new ArrowNavigation());
+        view.getViewCalculatePanel().getNavRightButton().addActionListener(new ArrowNavigation());
 
     }
 
@@ -117,8 +117,8 @@ public class Controller {
         panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
 
         //updates the total values by day
-        panel.getCostDayTotal().setText(Float.toString(profile.getTotalCostByDay(dayIndex)));
-        panel.getUsageDayTotal().setText(Float.toString(profile.getTotalUsageByDay(dayIndex)));
+        panel.getUsageCostTotalCost().setText(Float.toString(profile.getTotalCostByDay(dayIndex)));
+        panel.getUsageCostTotalUsage().setText(Float.toString(profile.getTotalUsageByDay(dayIndex)));
 
         //updates the total values
         panel.getTotalCost().setText(Float.toString(profile.calculateKWH()));
@@ -178,7 +178,7 @@ public class Controller {
             try {
 
                 model.getModelProfile().getDays().get(dayIndex-1);
-                if(b.getText().equals("<")){
+                if(b.equals(view.getViewCalculatePanel().getNavLeftButton())){
                     dayIndex--;
                     updateComponentsViewCalculate();
                 }
@@ -188,7 +188,7 @@ public class Controller {
             }
             try{
                 model.getModelProfile().getDays().get(dayIndex+1);
-                if(b.getText().equals(">")) {
+                if(b.equals(view.getViewCalculatePanel().getNavRightButton())) {
                     dayIndex++;
                     updateComponentsViewCalculate();
                 }

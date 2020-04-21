@@ -82,8 +82,8 @@ public class IJPanelIBActionListener implements ActionListener {
             // In this case, after importing the program, the index will be at 0 and we will see the start/end
             // time and the rate in the beginning of the dataset in the JSON file.
             model.setModelIndex(0); // this will always set the index value to 0 at import.
-            view.getViewCalculatePanel().getUsageStartTime().setText(model.getModelRates().getStartTimeAtIndex(model.getModelIndex()));
-            view.getViewCalculatePanel().getUsageEndTime().setText(model.getModelRates().getEndTimeAtIndex(model.getModelIndex()));
+            // view.getViewCalculatePanel().getUsageStartTime().setText(model.getModelRates().getStartTimeAtIndex(model.getModelIndex()));
+            // view.getViewCalculatePanel().getUsageEndTime().setText(model.getModelRates().getEndTimeAtIndex(model.getModelIndex()));
 
         }
         catch (IOException exception) { System.out.println("File not found."); } //exception.printStackTrace(); } 

@@ -294,29 +294,29 @@ public class ViewCalculatePanel extends Panel {
     public JLabel getUsageCostPeakCost(){  return this.usagecostpeakcost; }
 
     // seasondetailspanel
-    public JLabel getSeasonDetailTitle(String s){ return this.seasondetailtitle; }
-    public JLabel getSeasonDetailDate(String s){ return this.seasondetailsdate; }
-    public JLabel getSeasonIcon(JLabel i){ return this.seasonicon; }
+    public JLabel getSeasonDetailTitle(){ return this.seasondetailtitle; }
+    public JLabel getSeasonDetailDate(){ return this.seasondetailsdate; }
+    public JLabel getSeasonIcon(){ return this.seasonicon; }
 
     //summarydetailwestpanelsummer
-    public JTextField getSummerOffPeakRate(float f){ return this.summeroffpeakrate; }
-    public JTextField getSummerOffPeakPeriod(float f){ return this.summeroffpeakperiod; }
-    public JTextField getSummerOffMidPeakRate(float f){ return this.summermidpeakrate; }
-    public JTextField getSummerOffMidPeakPeriod(float f){return this.summermidpeakperiod; }
-    public JTextField getSummerPeakRate(float f){ return this.summerpeakrate; }
-    public JTextField getSummerPeakPeriod(float f){ return this.summerpeakperiod; }
+    public JTextField getSummerOffPeakRate(){ return this.summeroffpeakrate; }
+    public JTextField getSummerOffPeakPeriod(){ return this.summeroffpeakperiod; }
+    public JTextField getSummerMidPeakRate(){ return this.summermidpeakrate; }
+    public JTextField getSummerMidPeakPeriod(){return this.summermidpeakperiod; }
+    public JTextField getSummerPeakRate(){ return this.summerpeakrate; }
+    public JTextField getSummerPeakPeriod(){ return this.summerpeakperiod; }
     
     //summarydetailwestpanelnonsummer
-    public JTextField getNonSummerOffPeakRate(float f){ return this.nonsummeroffpeakrate; }
-    public JTextField getNonSummerOffPeakPeriod(float f){ return this.nonsummeroffpeakperiod; }
-    public JTextField getNonSummerPeakRate(float f){ return this.nonsummerpeakperiod; }
-    public JTextField getNonSummerPeakPeriod(float f){ return this.nonsummerpeakperiod; }
+    public JTextField getNonSummerOffPeakRate(){ return this.nonsummeroffpeakrate; }
+    public JTextField getNonSummerOffPeakPeriod(){ return this.nonsummeroffpeakperiod; }
+    public JTextField getNonSummerPeakRate(){ return this.nonsummerpeakperiod; }
+    public JTextField getNonSummerPeakPeriod(){ return this.nonsummerpeakperiod; }
 
     // totalusagepanel
-    public JLabel getTotalUsage(float f){ return this.totalusage; }
+    public JLabel getTotalUsage(){ return this.totalusage; }
 
     // totalcostpanel
-    public JLabel getTotalCost(float f){ return this.totalcost; }
+    public JLabel getTotalCost(){ return this.totalcost; }
 
     /* END SETTERS AND GETTERS */ 
     // -------------------------------------------------------------
