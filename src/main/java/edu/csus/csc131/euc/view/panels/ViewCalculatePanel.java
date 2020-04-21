@@ -396,28 +396,14 @@ public class ViewCalculatePanel extends Panel {
         // Regular Attributes
         // Grid Bag Attributes
         setVeiewCalConstraints(usagedetailsmainpanel, seasondetailspanel, 1.0, GridBagConstraints.EAST, 1, 2, 0, DEFUALT_INSETS);
-        // c = new GridBagConstraints(); 
-        // c.weightx = c.weighty = 1.0; 
-        // c.anchor = GridBagConstraints.EAST; 
-        // c.gridwidth = 1; 
-        // c.gridx = 2; 
-        // c.gridy = 0;
-        // c.insets = new Insets(0,0,0,0); 
-        // usagedetailspanel.add(seasondetailspanel, c);
+       
 
         // Usage Cost Details Sub Panel
         // Regular Attributes
         // Grid Bag Attributes
         // Label Attributes
         setVeiewCalConstraints(usagedetailsmainpanel, usagecostdetailspanel, 1.0, GridBagConstraints.WEST, 2, 1, 1, USAGE_DETAIL_PANEL_INSETS);
-        // c = new GridBagConstraints(); 
-        // c.weightx = c.weighty = 1.0;
-        // c.anchor = GridBagConstraints.WEST; 
-        // c.gridwidth = 2; 
-        // c.gridx = 1; 
-        // c.gridy = 1;
-        // c.insets = new Insets(0,70,20,50);
-        // usagedetailspanel.add(usagecostdetailspanel, c);
+       
         
 
         JPanel usagecostleft = new JPanel(new GridBagLayout());
@@ -430,7 +416,7 @@ public class ViewCalculatePanel extends Panel {
         createPanel(usagecostdetailspanel, usagecostright, PANEL_3_SIZE, GridBagConstraints.BOTH, GridBagConstraints.BOTH, 0, 0);
 
         // Navigation Attributes
-        setLeftArrow(usagecostleft, navleftbutton, GridBagConstraints.BOTH, GridBagConstraints.WEST, 0, 0, DEFUALT_INSETS);
+        setPanelContraints(usagecostleft, navleftbutton, GridBagConstraints.BOTH, GridBagConstraints.WEST, 0, 0, DEFUALT_INSETS);
         setRightArrow(usagecostright, navrightbutton, GridBagConstraints.BOTH,  GridBagConstraints.EAST, 1.0, 4.0, 6, 2, DEFUALT_INSETS);
 
         // Panel Details
@@ -492,14 +478,7 @@ public class ViewCalculatePanel extends Panel {
         summarydetailwestgrouppanels.add(summarydetailwestpanelnonsummer, "nonsummer");
 
         // GridBag Attributes 
-        c = new GridBagConstraints(); 
-        c.weightx = c.weighty = 1.0;
-        c.anchor = GridBagConstraints.WEST; 
-        c.gridx = 0; 
-        c.gridy = 1;
-        c.insets = new Insets(0,0,0,0);
-        c.fill = GridBagConstraints.VERTICAL;
-        summarydetailsmainpanel.add(summarydetailwestgrouppanels, c); 
+        setPanelContraints(summarydetailsmainpanel, summarydetailwestgrouppanels, GridBagConstraints.VERTICAL, GridBagConstraints.WEST, 0, 1, DEFUALT_INSETS);
 
         // Summary East Panel
         // Regular Attributes

@@ -299,7 +299,7 @@ public class Panel {
         pane.add(comp);
     }
 
-    public void setLeftArrow(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset) {
+    public void setPanelContraints(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset) {
         c = new GridBagConstraints();
         c.fill = fill;
         c.anchor = anchor;
