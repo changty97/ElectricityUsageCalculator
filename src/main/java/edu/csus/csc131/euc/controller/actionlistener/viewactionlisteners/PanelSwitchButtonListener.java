@@ -1,18 +1,18 @@
 /* PACKAGE PATH */
-package edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners; 
+package edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners;
 
 /* Library Imports */
-// AWT Imports 
+// AWT Imports
 import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.AbstractButton;
-// Swing Imports 
+// Swing Imports
 import javax.swing.JButton;
 
 /* Local Imports */
-// Local MVC Imports 
+// Local MVC Imports
 import edu.csus.csc131.euc.view.View;
 
 public class PanelSwitchButtonListener implements ActionListener {
@@ -48,26 +48,26 @@ public class PanelSwitchButtonListener implements ActionListener {
 
             // Deselect All Other Buttons
             if(e.getSource() == ib){
-                mb.setSelected(false); 
-                vcb.setSelected(false); 
+                mb.setSelected(false);
+                vcb.setSelected(false);
             }else if(e.getSource() == mb){
-                ib.setSelected(false); 
+                ib.setSelected(false);
                 vcb.setSelected(false);
             }else if(e.getSource() == vcb){
-                ib.setSelected(false); 
-                mb.setSelected(false);  
+                ib.setSelected(false);
+                mb.setSelected(false);
             }
             // Display Panel
-            panels.show(view.getPanels(), this.panelname ); 
+            panels.show(view.getPanels(), this.panelname );
         }
-        // If Current Button is Already Selected 
+        // If Current Button is Already Selected
         else if(((AbstractButton) e.getSource()).isSelected()) {
             // Deselect
             ((AbstractButton) e.getSource()).setSelected(false);
 
-            // Display Blank Screen 
+            // Display Blank Screen
             panels.show(view.getPanels(), "Blank" );
         }
     }
-    
+
 }

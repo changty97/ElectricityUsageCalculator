@@ -4,10 +4,12 @@ public class Day {
 
   private String date;
   private Usage usage;
+  private boolean isSummer;
 
-  public Day(String date){
+  public Day(String date, boolean isSummer){
     this.date = date;
     this.usage = new Usage();
+    this.isSummer = isSummer;
   }
 
   //getters
@@ -20,6 +22,18 @@ public class Day {
     return usage;
   }
 
+  public float getTotalUsage(){
+    float sum = 0;
+    for(int i  = 0; i < 24; i++){
+      sum += usage.getUsageAtIndex(i);
+    }
+    return sum;
+  }
+
+  public boolean isSummer(){
+    return isSummer;
+  }
+
   //setters
 
   public void setDate(String date){
@@ -29,5 +43,9 @@ public class Day {
   // This function initializes usage specific for the profile
   public void setUsage(float value, int index){
     usage.setUsageAtIndex(value, index);
+  }
+
+  public void setSummer(boolean isSummer){
+    this.isSummer = isSummer;
   }
 }
