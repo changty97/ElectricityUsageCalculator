@@ -11,6 +11,8 @@ import javax.swing.*;
 
 // IO Imports
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.FocusEvent;
 
 /*
@@ -40,7 +42,7 @@ public class Controller {
     private View view;
     private Model model;
 
-    //current Day Index
+    // current Day Index
     private int dayIndex;
 
     public Controller(Model m, View v) {
@@ -54,14 +56,17 @@ public class Controller {
     }
 
     // Initializes all action listeners
-    public void initializeActionListeners(){
+    public void initializeActionListeners() {
 
         /* Action Listeners for Main Panel */
 
         // Set AL for Panels
-        view.getMainPanel().getImportJsonButton().addActionListener(new PanelSwitchButtonListener(view, "Import JSON Panel"));
-        view.getMainPanel().getManualInputButton().addActionListener(new PanelSwitchButtonListener(view, "Manual Input Panel"));
-        view.getMainPanel().getViewCalcButton().addActionListener(new PanelSwitchButtonListener(view,  "View & Calculate Panel"));
+        view.getMainPanel().getImportJsonButton()
+                .addActionListener(new PanelSwitchButtonListener(view, "Import JSON Panel"));
+        view.getMainPanel().getManualInputButton()
+                .addActionListener(new PanelSwitchButtonListener(view, "Manual Input Panel"));
+        view.getMainPanel().getViewCalcButton()
+                .addActionListener(new PanelSwitchButtonListener(view, "View & Calculate Panel"));
 
         // Action Listener for Add Entry button
         view.getManualInputPanel().getAddEntryButton().addActionListener(new AddEntryListener());
@@ -79,6 +84,33 @@ public class Controller {
         // Set AL for View Calculate Panel
         view.getViewCalculatePanel().getNavLeftButton().addActionListener(new ArrowNavigation());
         view.getViewCalculatePanel().getNavRightButton().addActionListener(new ArrowNavigation());
+
+        // Set AL for Manual Input Panel
+        view.getManualInputPanel().getEnterDateField().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                char c = e.getKeyChar();
+                if (!((c >= '0') && (c <= '9') ||
+                   (c == KeyEvent.VK_BACK_SPACE) ||
+                   (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_SLASH)))        
+                {
+                  JOptionPane.showMessageDialog(null, "Please Enter Valid");
+                  e.consume();
+                }
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+                // Do Nothing
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                // Do Nothing
+
+            }
+        });
 
     }
 
@@ -104,7 +136,6 @@ public class Controller {
         this.view = v;
     }
 
-
     public void updateComponentsViewCalculate(){
         ViewCalculatePanel panel = view.getViewCalculatePanel();
         Profile profile = model.getModelProfile();
@@ -121,8 +152,8 @@ public class Controller {
         panel.getUsageCostTotalUsage().setText(Float.toString(profile.getTotalUsageByDay(dayIndex)));
 
         //updates the total values
-        panel.getTotalCost().setText(Float.toString(profile.calculateKWH()));
-        panel.getTotalUsage().setText(Float.toString(profile.getTotalUsage()));
+        panel.getTotalCost().setText(panel.getDollarSign() + Float.toString(profile.calculateKWH()));
+        panel.getTotalUsage().setText("<html>" + Float.toString(profile.getTotalUsage()) + " <font size=5>kWH</font></html>" );
 
     }
 
@@ -141,7 +172,7 @@ public class Controller {
                 day.setUsage(usage, index);
                 model.getModelProfile().addDay(day);
                 view.getManualInputPanel().getListModel().addElement(date + " " + index + ":00 - " + (int)(index+1) + ":00" + " " + usage);
-                view.getManualInputPanel().getEnterDateField().setText("Enter Date");
+                view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
                 view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
                 updateComponentsViewCalculate();

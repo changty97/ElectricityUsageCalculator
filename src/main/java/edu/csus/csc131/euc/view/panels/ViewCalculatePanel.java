@@ -175,8 +175,8 @@ public class ViewCalculatePanel extends Panel {
             /* summarydetaileastpanel: Components */
                 // Buttons for Summary Details 
                     private JButton seasontoggle = new JButton("Summer/Non-Summer"); 
-                    private JButton resetdefault = new JButton("Reset Default Values"); 
-                    private JButton submituservaluesbutton = new JButton("Submit Values"); 
+                    private JButton resetdefault = new JButton("Reset Default Rate Values"); 
+                    private JButton submituservaluesbutton = new JButton("Submit New Rate Values"); 
 
                 // totalusagepanel : Sub Panel 1 of summarydetaileastpanel
                 private RoundedPanel totalusagepanel = new RoundedPanel(); 
@@ -195,6 +195,7 @@ public class ViewCalculatePanel extends Panel {
                             JLabel totalcostpaneltitle = new JLabel("Total Cost");
                         // Value
                             private JLabel totalcost = new JLabel("$ 21.94");
+                            private String dollarsign = "$ "; 
 
     /* END INSTANCE VARIABLES */ 
     // -------------------------------------------------------------
@@ -317,6 +318,8 @@ public class ViewCalculatePanel extends Panel {
 
     // totalcostpanel
     public JLabel getTotalCost(){ return this.totalcost; }
+    public String getDollarSign(){ return this.dollarsign; }
+
 
     /* END SETTERS AND GETTERS */ 
     // -------------------------------------------------------------
@@ -628,7 +631,7 @@ public class ViewCalculatePanel extends Panel {
         // Regular Attributes
         submituservaluesbutton.setFont(new Font("Poppins", Font.BOLD, 20));
         submituservaluesbutton.setForeground(Color.WHITE);
-        submituservaluesbutton.setBackground(new Color(62, 142, 37));
+        submituservaluesbutton.setBackground(new Color(76,175,106));
         submituservaluesbutton.setBorderPainted(false);
         submituservaluesbutton.setFocusPainted(false);
         // GridBag Attributes
