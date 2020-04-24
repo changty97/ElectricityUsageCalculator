@@ -45,6 +45,12 @@ public class Day {
     usage.setUsageAtIndex(value, index);
   }
 
+  public void setUsage(float value, int from, int to){
+    for(int i = from; i < to; i++){
+      usage.setUsageAtIndex(value, i);
+    }
+  }
+
   public void setSummer(boolean isSummer){
     this.isSummer = isSummer;
   }
