@@ -37,8 +37,8 @@ public class Profile {
     // Getters
     public int getProfileID(){ return this.userid; };
     public ArrayList<Day> getDays(){ return days;}
-    public static Rates getSummerRates(){ return summerRates; };
-    public static Rates getNonSummerRates(){ return nonSummerRates; };
+    public Rates getSummerRates(){ return summerRates; };
+    public Rates getNonSummerRates(){ return nonSummerRates; };
     public float getTotalCost(){ return this.totalcost; };
     public String setProfileUnit(){ return unit; };
     public String setProfileSiteTimeZoneID(){ return siteTimeZoneId; };
@@ -86,6 +86,9 @@ public class Profile {
     }
 
     public float getTotalCostByDay(int dayIndex){
+        if(days.size() == 0){
+            return 0;
+        }
         float sum = 0;
         Rates rates;
         if(days.get(dayIndex).isSummer()){
@@ -101,11 +104,25 @@ public class Profile {
     }
 
     public float getTotalUsageByDay(int dayIndex){
+        if(days.size() == 0){
+            return 0;
+        }
         float sum = 0;
         for (int i = 0; i < 24; i++){
             sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
         }
         return sum;
+    }
+
+    public void resetToNewRates(){
+        summerRates = new Rates(true);
+        nonSummerRates = new Rates(false);
+    }
+
+    public void resetDefault(){
+        Rates.setDefaultRates();
+        summerRates = new Rates(true);
+        nonSummerRates = new Rates(false);
     }
 
 
