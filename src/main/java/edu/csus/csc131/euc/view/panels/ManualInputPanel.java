@@ -18,7 +18,9 @@ public class ManualInputPanel extends Panel{
     private static final int HOURS = 24;
 
     // Padding
-    private static final Insets GLOBAL_PADDING = new Insets(10, 10, 10, 10);
+    private static final Insets GLOBAL_PADDING  = new Insets(10, 10, 10, 10);
+    private static final Insets DEFAULT_INSETS  = new Insets(0, 0, 0, 0);
+    private static final Insets TITLE_INSETS    = new Insets(0,10,0,10);
 
     // Main Panels
     private JPanel tablepanel = new JPanel(new GridBagLayout()); 
@@ -117,6 +119,7 @@ public class ManualInputPanel extends Panel{
         tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
         // Gridbag Attributes 
         GridBagConstraints c = new GridBagConstraints();
+        // setPanelContraints(getPanel(), tablepanel, GridBagConstraints.VERTICAL, GridBagConstraints.WEST, 0, 0, DEFAULT_INSETS);
         c.weightx = c.weighty = 1.0; 
         c.gridx = 0; 
         c.gridy = 0; 
@@ -130,6 +133,8 @@ public class ManualInputPanel extends Panel{
         // Regular Attributes
         scrollpane.setFont(new Font("Poppins", Font.BOLD, 20));
         // Gridbag Attributes 
+        // setPanelContraints(tablepanel, scrollpane, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 0, 0, DEFAULT_INSETS);
+
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1.0; 
         c.gridx = 0; 
@@ -143,6 +148,8 @@ public class ManualInputPanel extends Panel{
         inputpanel.setBackground(new Color(10, 169, 212));
         inputpanel.setPreferredSize(INPUT_PANEL_SIZE);
         // Gridbag Attributes 
+        // setPanelContraints(getPanel(), inputpanel, GridBagConstraints.VERTICAL, GridBagConstraints.EAST, 1, 0, GLOBAL_PADDING);
+
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1.0; 
         c.gridx = 1; 
@@ -159,6 +166,8 @@ public class ManualInputPanel extends Panel{
         inputfieldtitle.setHorizontalAlignment(SwingConstants.CENTER);
         inputfieldtitle.setFont(new Font("Poppins", Font.BOLD, 30));
         // Gridbag Attributes 
+        // setPanelContraints(inputpanel, inputfieldtitle, GridBagConstraints.HORIZONTAL, 0, 0, 0, TITLE_INSETS);
+
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1.0; 
         c.gridx = 0; 
