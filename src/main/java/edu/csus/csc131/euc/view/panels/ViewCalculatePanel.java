@@ -10,13 +10,14 @@ public class ViewCalculatePanel extends Panel {
 
     /* Constants */
     // Main Sub Panels Size
-    private final Dimension USAGE_DETAILS_SUB_PANEL_SIZE = new Dimension(1013, 393);
-    private final Dimension SUMMARY_DETAILS_SUB_PANEL_SIZE = new Dimension(1013, 393);
+    private final Dimension USAGE_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
+    private final Dimension SUMMARY_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
 
     // Padding
     private static final Insets DEFUALT_INSETS                       = new Insets(0,0,0,0);
     private static final Insets USAGE_DETAIL_PANEL_INSETS            = new Insets(0,70,20,50);
     private static final Insets SUMMARY_TITLE                        = new Insets(0,70,0,0);
+    private static final Insets USAGE_TITLE                          = new Insets(50,0,0,230);
     private static final Insets OFF_PEAK_TITLE                       = new Insets(0,65,0,0);
     private static final Insets OFF_PERIOD_LBL                       = new Insets(0,75,0,0);
     private static final Insets PERIOD_TITLE_INSETS                  = new Insets(0,100,0,0);
@@ -368,16 +369,12 @@ public class ViewCalculatePanel extends Panel {
     public void intializeConstraints(){
         /* MAIN SUB PANEL CONSTRAINTS */
 
-        // Usage Details Main Sub Panel
+        GridBagConstraints c = new GridBagConstraints(); 
+
+        // Usage Details Main Sub Panel 
         // Regular Attributes
         usagedetailsmainpanel.setBackground(new Color(13, 156, 204));
-        // Grid Bag Attributes
-        GridBagConstraints c = new GridBagConstraints();
-        c.weightx = c.weighty = 1.0;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.anchor = GridBagConstraints.NORTH;
-        getPanel().add(usagedetailsmainpanel, c);
+        setPanelContraints(getPanel(), usagedetailsmainpanel, 0, GridBagConstraints.NORTH, 0, 0, DEFUALT_INSETS);
 
         // Summary Detail Main Sub Panel
         // Regular Attributes
@@ -396,16 +393,15 @@ public class ViewCalculatePanel extends Panel {
         /* Usage Details Main Sub Panel */
         // Main Sub Panel Title
         // Regular Attributes
-        // setFont(usagedetailspanel, usagetitle, 0, 0, Font.BOLD, 30, USAGE_DETAILS_MAIN_PANEL);
         usagetitle.setForeground(Color.WHITE);
         usagetitle.setFont(new Font("Poppins", Font.BOLD, 30));
         // Grid Bag Attributes
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1.0;
-        c.gridwidth = 2;
-        c.gridx = 0;
-        c.gridy = 0;
-        c.insets = new Insets(50,0,0,230);
+        c.gridwidth = 2; 
+        c.gridx = 0; 
+        c.gridy = 0; 
+        c.insets = USAGE_TITLE; 
         usagedetailsmainpanel.add(usagetitle, c);
 
         // Season Details Sub Panel
@@ -419,8 +415,7 @@ public class ViewCalculatePanel extends Panel {
         // Grid Bag Attributes
         // Label Attributes
         setVeiewCalConstraints(usagedetailsmainpanel, usagecostdetailspanel, 1.0, GridBagConstraints.WEST, 2, 1, 1, USAGE_DETAIL_PANEL_INSETS);
-
-
+       
 
         JPanel usagecostleft = new JPanel(new GridBagLayout());
         createPanel(usagecostdetailspanel, usagecostleft, PANEL_1_SIZE, GridBagConstraints.BOTH, GridBagConstraints.WEST, 0, 0);
@@ -521,29 +516,15 @@ public class ViewCalculatePanel extends Panel {
         // Off Peak Rate
         // Regular Attributes
         summeroffpeakrate.setFont(new Font("Poppins", Font.BOLD, 15));
-        // GridBag Attributes
-        setPanelContraints(summarydetailwestpanelsummer, summeroffpeakrate, 0, GridBagConstraints.WEST, 2, 1, DEFUALT_INSETS);
-        // c = new GridBagConstraints();
-        // c.weightx = c.weighty = 1.0;
-        // c.gridx = 2;
-        // c.gridy = 1;
-        // c.insets = new Insets(0,0,0,0);
-        // c.anchor = GridBagConstraints.WEST;
-        // summarydetailwestpanelsummer.add(summeroffpeakrate, c);
+        // GridBag Attributes 
+        setPanelContraints(summarydetailwestpanelsummer, summeroffpeakrate, 0, GridBagConstraints.WEST, 2, 1, DEFUALT_INSETS);  
 
         // Off Peak Period Label
         // Regular Attributes
         periodlbls[0].setFont(new Font("Poppins", Font.BOLD, 15));
-        // GridBag Attributes
-        setPanelContraints(summarydetailwestpanelsummer, periodlbls[0], 0, GridBagConstraints.EAST, 1, 2, OFF_PERIOD_LBL);
-
-        // c.weightx = c.weighty = 1.0;
-        // c.gridx = 1;
-        // c.gridy = 2;
-        // c.insets = new Insets(0,75,0,0);
-        // c.anchor = GridBagConstraints.EAST;
-        // summarydetailwestpanelsummer.add(periodlbls[0], c);
-
+        // GridBag Attributes 
+        setPanelContraints(summarydetailwestpanelsummer, periodlbls[0], 0, GridBagConstraints.EAST, 1, 2, OFF_PERIOD_LBL);  
+        
         // Off Peak Period
         // Regular Attributes
         summeroffpeakperiod.setFont(new Font("Poppins", Font.BOLD, 15));
@@ -553,8 +534,8 @@ public class ViewCalculatePanel extends Panel {
         // Mid-peak Label
         // Regular Attributes
         // midpeaktitle.setFont(new Font("Poppins", Font.BOLD, 20));
-        // GridBag Attributes
-        setViewCalculateFont(summarydetailwestpanelsummer, midpeaktitle, 0, 3, Font.BOLD, 15, OFF_PEAK_TITLE);
+        // GridBag Attributes 
+        setViewCalculateFont(summarydetailwestpanelsummer, midpeaktitle, 0, 3, Font.BOLD, 20, OFF_PEAK_TITLE);  
 
 
         // Mid-peak Rate Label
@@ -583,12 +564,6 @@ public class ViewCalculatePanel extends Panel {
         peaktitle.setFont(new Font("Poppins", Font.BOLD, 20));
         // GridBag Attributes
         setViewCalculateFont(summarydetailwestpanelsummer, peaktitle, 0, 5, Font.BOLD, 20, PERIOD_TITLE_INSETS);
-
-        // c.weightx = c.weighty = 1.0;
-        // c.gridx = 0;
-        // c.gridy = 5;
-        // c.insets = new Insets(0,100,0,0);
-        // summarydetailwestpanelsummer.add(peaktitle, c);
 
         // Peak Rate Label
         ratelbls[2].setFont(new Font("Poppins", Font.BOLD, 15));
@@ -658,25 +633,21 @@ public class ViewCalculatePanel extends Panel {
 
         /* Season Details Components */
 
-        // Season Detail Title
-        // Regular Attributes
-        seasondetailtitle.setFont(new Font("Poppins", Font.BOLD, 20));
+        // Season Detail Title 
+        // Regular Attributes 
         setViewCalculateFont(seasondetailspanel, seasondetailtitle, 0, 0, Font.BOLD, 20, SEASON_DETAIL_TITLE);
 
         // Season Icon
-        // Regular Attributes
-        // GridBag Attributes
-        // setPanelContraints(seasondetailspanel, seasonicon, 0, GridBagConstraints.CENTER, 1, 0, DEFUALT_INSETS);
-
-        c = new GridBagConstraints();
+        // Regular Attributes 
+        // GridBag Attributes 
+        c = new GridBagConstraints();  
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.gridheight = 2;
-        c.anchor = GridBagConstraints.CENTER;
-        c.gridx = 1;
-        c.gridy = 0;
-        c.insets = new Insets(0,0,0,0);
-
+        c.anchor = GridBagConstraints.CENTER; 
+        c.gridx = 1; 
+        c.gridy = 0; 
+        c.insets = DEFUALT_INSETS; 
         seasondetailspanel.add(seasonicon, c);
 
         // Season Date

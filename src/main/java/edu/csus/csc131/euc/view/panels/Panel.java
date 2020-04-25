@@ -174,7 +174,7 @@ public class Panel {
     //with gridwidth
     public void setVeiewCalConstraints(JComponent pane, JComponent comp, double weight, int anchor, int gridwidth, int gridx, int gridy, Insets inset) {
         c = new GridBagConstraints();
-
+        
         c.weightx = c.weighty = weight;
         c.anchor = anchor; 
         c.gridwidth = gridwidth; 
