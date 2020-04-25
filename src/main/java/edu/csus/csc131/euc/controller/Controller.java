@@ -303,17 +303,17 @@ public class Controller {
         }
     }
 
-    private Object[] row = new Object[1];
+    private Object[] row = new Object[5];
 
     class modelActionListeners implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            row[0] = view.getManualInputPanel().getEnterDateField().getText() + " " + view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString() + " " + view.getManualInputPanel().getEnterUsageField().getText() + " " + "Edit" + " " + "X";
-            // row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
-            // row[2] = view.getManualInputPanel().getEnterUsageField().getText();
-            // row[3] = "edit";
-            // row[4] = "X";
+            row[0] = view.getManualInputPanel().getEnterDateField().getText(); // + " " + view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString() + " " + view.getManualInputPanel().getEnterUsageField().getText() + " " + "Edit" + " " + "X";
+             row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
+             row[2] = view.getManualInputPanel().getEnterUsageField().getText();
+             row[3] = "edit";
+             row[4] = "X";
             view.getManualInputPanel().getModel().addRow(row);
         }
     }

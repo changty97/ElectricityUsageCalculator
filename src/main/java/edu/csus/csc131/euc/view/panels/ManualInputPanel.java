@@ -94,8 +94,8 @@ public class ManualInputPanel extends Panel{
            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
        }
         
-       Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
-    //    Object[] columns = {" Date " , " Period " , " Usage " , " Edit " , " Delete "};
+       //Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
+        Object[] columns = {" Date " , " Period " , " Usage " , " Edit " , " Delete "};
 
        this.enterusagefield = new JTextField("Enter Usage");
        this.model.setColumnIdentifiers(columns);
@@ -128,10 +128,17 @@ public class ManualInputPanel extends Panel{
     public void intializeConstraints(){
 
         // table panel
+        
         // Regular Attributes
         tablepanel.setBackground(Color.LIGHT_GRAY);
         tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
         tablepanel.setRowHeight(30);
+        tablepanel.setFont(new Font("Poppins", Font.BOLD, 15));
+        
+        //Change the Default alignment from left to center on the table.
+        DefaultTableCellRenderer centerRender = (DefaultTableCellRenderer)tablepanel.getDefaultRenderer(Object.class);
+        centerRender.setHorizontalAlignment(SwingConstants.CENTER);
+        
         // Gridbag Attributes 
         GridBagConstraints c = new GridBagConstraints();
         // setPanelContraints(getPanel(), tablepanel, GridBagConstraints.VERTICAL, GridBagConstraints.WEST, 0, 0, DEFAULT_INSETS);
