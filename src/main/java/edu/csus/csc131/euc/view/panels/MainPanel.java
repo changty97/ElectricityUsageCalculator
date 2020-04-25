@@ -8,13 +8,13 @@ import java.awt.*;
 public class MainPanel extends Panel {
     /* CONSTANTS */ 
     // Size per Element 
-    private final Dimension PANEL_SIZE = new Dimension(427, 825); 
-    private final Dimension BUTTON_SIZE = new Dimension(427, 60); 
-    private final Dimension LOGO_BG_SIZE = new Dimension(427, 175);
+    private final Dimension PANEL_SIZE = new Dimension(412, 825); 
+    private final Dimension BUTTON_SIZE = new Dimension(412, 60); 
+    private final Dimension LOGO_BG_SIZE = new Dimension(412, 175);
 
     // Padding per Element 
     private final Insets BUTTON_PADDING = new Insets(0, 0, 0, 0); 
-    private final Insets TITLE_PADDING = new Insets(90, 0, 160, 0);
+    private final Insets TITLE_PADDING = new Insets(90, 0, 95, 0);
     private final Insets LOGO_PADDING = new Insets(142, 0, 0, 0);
 
 
@@ -55,9 +55,7 @@ public class MainPanel extends Panel {
         this.viewcalcbutton = new JButton(new ImageIcon("src\\main\\assets\\mainpanelres\\ViewCalcButton.png")); 
 
         // Instantiate Labels
-        this.titleapp = new JLabel("Electricity Usage Calculator"); 
-        this.titleapp.setFont(new Font("Poppins", Font.PLAIN, 20));
-        this.titleapp.setForeground(Color.WHITE); 
+        this.titleapp = new JLabel("<html><center>Electricity Usage <br />Calculator</center></html>"); 
     }
 
     // Initializes Constraints for GridBag Layout 
@@ -118,7 +116,8 @@ public class MainPanel extends Panel {
 
         /* TITLE APP LABEL ATTRIBUTES */ 
         // Set Font and Size 
-        titleapp.setFont(new Font("Poppins", Font.BOLD, 30));
+        titleapp.setForeground(Color.WHITE); 
+        titleapp.setFont(new Font("Poppins", Font.BOLD, 40));
 
         // Label for Bottom Of Main Panel 
         setLabelConstraints(logo, 0, 4, LOGO_BG_SIZE, LOGO_PADDING);

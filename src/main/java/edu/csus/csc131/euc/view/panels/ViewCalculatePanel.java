@@ -10,8 +10,8 @@ public class ViewCalculatePanel extends Panel {
 
     /* Constants */
     // Main Sub Panels Size
-    private final Dimension USAGE_DETAILS_SUB_PANEL_SIZE = new Dimension(1013, 393);
-    private final Dimension SUMMARY_DETAILS_SUB_PANEL_SIZE = new Dimension(1013, 393);
+    private final Dimension USAGE_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
+    private final Dimension SUMMARY_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
 
     // Padding
     private static final Insets DEFUALT_INSETS                       = new Insets(0,0,0,0);
@@ -554,7 +554,7 @@ public class ViewCalculatePanel extends Panel {
         // Regular Attributes
         // midpeaktitle.setFont(new Font("Poppins", Font.BOLD, 20));
         // GridBag Attributes
-        setViewCalculateFont(summarydetailwestpanelsummer, midpeaktitle, 0, 3, Font.BOLD, 15, OFF_PEAK_TITLE);
+        setViewCalculateFont(summarydetailwestpanelsummer, midpeaktitle, 0, 3, Font.BOLD, 20, OFF_PEAK_TITLE);
 
 
         // Mid-peak Rate Label

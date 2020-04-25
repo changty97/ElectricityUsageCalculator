@@ -60,15 +60,14 @@ public class View{
         this.importpanel = new ImportPanel();
 
         // Add Necessary Panels to Panels
-        // Blank Panel
-        panels.add("Blank", new JPanel() );
 
         // Blank Panel
-        //JPanel blank = new JPanel();
-        panels.add("Blank", new JPanel());
+        // panels.add("Blank", new JPanel());
+
+        panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
         panels.add("Manual Input Panel", this.manualinputpanel.getPanel());
         panels.add("Import JSON Panel", this.importpanel.getPanel());
-        panels.add("View & Calculate Panel", this.viewcalculatepanel.getPanel());
+
         panels.setPreferredSize(CARD_PANELS_SIZE);
 
         // Set the position for each panel on main view
