@@ -44,6 +44,7 @@ public class Controller {
 
     // current Day Index
     private int dayIndex;
+    private boolean isSummer = true;
 
     public Controller(Model m, View v) {
         this.model = m;
@@ -69,21 +70,27 @@ public class Controller {
                 .addActionListener(new PanelSwitchButtonListener(view, "View & Calculate Panel"));
 
         // Action Listener for Add Entry button
-        view.getManualInputPanel().getAddEntryButton().addActionListener(new AddEntryListener());
+        // view.getManualInputPanel().getAddEntryButton().addActionListener(new AddEntryListener());
+        view.getManualInputPanel().getAddEntryButton().addActionListener(new modelActionListeners());
 
         // Focus Listener for UsageTextField and date
-        view.getManualInputPanel().getEnterUsageField().addFocusListener(new Focus());
-        view.getManualInputPanel().getEnterDateField().addFocusListener(new Focus());
+        // view.getManualInputPanel().getEnterUsageField().addFocusListener(new Focus());
+        // view.getManualInputPanel().getEnterDateField().addFocusListener(new Focus());
+        // view.getManualInputPanel().getEnterUsageField().addActionListener(new modelActionListeners());
+        // view.getManualInputPanel().getEnterDateField().addActionListener(new modelActionListeners());
         // Set AL for Buttons in Import JSON Panel
         // For Button Views
         view.getImportPanel().getAddNewFileButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getBrowseButton().addActionListener(new IJPanelButtonViewListener(view));
         view.getImportPanel().getImportButton().addActionListener(new IJPanelButtonViewListener(view));
-        view.getImportPanel().getImportButton().addActionListener(new IJPanelIBActionListener(view, model));
+        view.getImportPanel().getImportButton().addActionListener(new IJPanelIBActionListener(view, model, this));
 
         // Set AL for View Calculate Panel
         view.getViewCalculatePanel().getNavLeftButton().addActionListener(new ArrowNavigation());
         view.getViewCalculatePanel().getNavRightButton().addActionListener(new ArrowNavigation());
+        view.getViewCalculatePanel().getSeasonToggleButton().addActionListener(new SummerToggle());
+        view.getViewCalculatePanel().getSubmitUserValuesButton().addActionListener(new InputRates());
+        view.getViewCalculatePanel().getResetDefaultButton().addActionListener(new ResetDefault());
 
         // Set AL for Manual Input Panel
         view.getManualInputPanel().getEnterDateField().addKeyListener(new KeyListener() {
@@ -92,7 +99,7 @@ public class Controller {
                 char c = e.getKeyChar();
                 if (!((c >= '0') && (c <= '9') ||
                    (c == KeyEvent.VK_BACK_SPACE) ||
-                   (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_SLASH)))        
+                   (c == KeyEvent.VK_DELETE) || (c == KeyEvent.VK_SLASH)))
                 {
                   JOptionPane.showMessageDialog(null, "Please Enter Valid");
                   e.consume();
@@ -141,20 +148,35 @@ public class Controller {
         Profile profile = model.getModelProfile();
 
         //updates the rate values
-        panel.getNonSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
-        panel.getNonSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
-        panel.getSummerMidPeakRate().setText(Float.toString(Rates.getMidPeakSummer()));
-        panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
-        panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
+        if(isSummer){
+            panel.getSummerMidPeakRate().setText(Float.toString(Rates.getMidPeakSummer()));
+            panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
+            panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
+            panel.getSummerOffPeakPeriod().setText("Midnight - Noon");
+            panel.getSummerMidPeakPeriod().setText("Noon - 5pm/8pm - Midnight");
+        }
+        else{
+            panel.getSummerMidPeakRate().setText("N/A");
+            panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
+            panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
+            panel.getSummerOffPeakPeriod().setText("Midnight - 5pm/ 8pm - Midnight");
+            panel.getSummerMidPeakPeriod().setText("N/A");
+        }
+
 
         //updates the total values by day
-        panel.getUsageCostTotalCost().setText(Float.toString(profile.getTotalCostByDay(dayIndex)));
-        panel.getUsageCostTotalUsage().setText(Float.toString(profile.getTotalUsageByDay(dayIndex)));
+        panel.getUsageCostTotalCost().setText(formatDecimals(profile.getTotalCostByDay(dayIndex)));
+        panel.getUsageCostTotalUsage().setText(formatDecimals(profile.getTotalUsageByDay(dayIndex)));
 
         //updates the total values
-        panel.getTotalCost().setText(panel.getDollarSign() + Float.toString(profile.calculateKWH()));
-        panel.getTotalUsage().setText("<html>" + Float.toString(profile.getTotalUsage()) + " <font size=5>kWH</font></html>" );
+        panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH()));
+        panel.getTotalUsage().setText("<html>" + formatDecimals(profile.getTotalUsage()) + " <font size=5>kWH</font></html>" );
 
+    }
+
+    public String formatDecimals(float value){
+        String s = String.format("%.2f", value);
+        return s;
     }
 
     // Additional Action Listeners needs to be put into appropriate folders
@@ -232,6 +254,68 @@ public class Controller {
             System.out.println("Navigation button pressed!");
         }
 
+    }
+
+    class SummerToggle implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+           isSummer = !isSummer;
+           updateComponentsViewCalculate();
+
+        }
+
+    }
+
+    class InputRates implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            try{
+                if(isSummer){
+                    model.getModelProfile().getSummerRates().setPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerPeakRate().getText()));
+                    model.getModelProfile().getSummerRates().setMidPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerMidPeakRate().getText()));
+                    model.getModelProfile().getSummerRates().setOffPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
+                }
+                else{
+                    model.getModelProfile().getNonSummerRates().setPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerPeakRate().getText()));
+                    model.getModelProfile().getNonSummerRates().setMidPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerMidPeakRate().getText()));
+                    model.getModelProfile().getNonSummerRates().setOffPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
+                }
+
+                model.getModelProfile().resetToNewRates();
+                updateComponentsViewCalculate();
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(view.getFrame(), "Rate values have to be a number.");
+            }
+
+        }
+    }
+
+    class ResetDefault implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            model.getModelProfile().resetDefault();
+            updateComponentsViewCalculate();
+        }
+    }
+
+    private Object[] row = new Object[1];
+
+    class modelActionListeners implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            row[0] = view.getManualInputPanel().getEnterDateField().getText() + " " + view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString() + " " + view.getManualInputPanel().getEnterUsageField().getText() + " " + "Edit" + " " + "X";
+            // row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
+            // row[2] = view.getManualInputPanel().getEnterUsageField().getText();
+            // row[3] = "edit";
+            // row[4] = "X";
+            view.getManualInputPanel().getModel().addRow(row);
+        }
     }
 }
 

@@ -3,6 +3,8 @@ package edu.csus.csc131.euc.view.panels;
 
 /* Library Imports */
 import javax.swing.*;
+import javax.swing.table.*;
+
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -23,7 +25,8 @@ public class ManualInputPanel extends Panel{
     private static final Insets TITLE_INSETS    = new Insets(0,10,0,10);
 
     // Main Panels
-    private JPanel tablepanel = new JPanel(new GridBagLayout()); 
+    // private JPanel tablepanel = new JPanel(new GridBagLayout()); 
+    private JTable tablepanel = new JTable(); 
     private JPanel inputpanel = new JPanel(new GridBagLayout()); 
 
     // Instance Elements
@@ -47,6 +50,8 @@ public class ManualInputPanel extends Panel{
     private JTextField enterusagefield;
     private JButton addentrybutton;
 
+    private DefaultTableModel model = new DefaultTableModel();
+
     // Constructor
     public ManualInputPanel() {
         /* Intializers for this Panel */
@@ -63,6 +68,8 @@ public class ManualInputPanel extends Panel{
     public void setEnterDateField(JFormattedTextField t) { this.enterdatefield = t; }
     public void setEnterPeriodField(JComboBox<String> t) { this.enterperiodfield = t; }
     public void setEnterUsageField(JTextField t) { this.enterusagefield = t; }
+    public void setModel(DefaultTableModel tm) { this.model = tm; }
+
 
     // Getters
     public JButton getAddEntryButton() { return this.addentrybutton; }
@@ -71,6 +78,7 @@ public class ManualInputPanel extends Panel{
     public JComboBox<String> getEnterPeriodField() { return this.enterperiodfield; }
     public JTextField getEnterUsageField() { return this.enterusagefield; }
     public DefaultListModel<String> getListModel(){ return listModel;}
+    public DefaultTableModel getModel() { return this.model; }
 
 
 
@@ -85,16 +93,22 @@ public class ManualInputPanel extends Panel{
        for(int i = 0; i < HOURS; i++){
            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
        }
+        
+       Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
+    //    Object[] columns = {" Date " , " Period " , " Usage " , " Edit " , " Delete "};
 
        this.enterusagefield = new JTextField("Enter Usage");
-
+       this.model.setColumnIdentifiers(columns);
+       this.tablepanel.setModel(this.model);
        // Instantiate list components
 
 
        listModel = new DefaultListModel<String>();
        //add listModel to list to dynamically be able to change the list
        this.list = new JList<>(listModel);
-       this.scrollpane = new JScrollPane(this.list);
+    //    this.scrollpane = new JScrollPane(this.list);
+       this.scrollpane = new JScrollPane(this.tablepanel);
+    //    this.scrollpane.setBounds(0, 0, 800, 200);
 
        //sets the date field and usage field to be focusable
        enterdatefield.setFocusable(true);
@@ -117,6 +131,7 @@ public class ManualInputPanel extends Panel{
         // Regular Attributes
         tablepanel.setBackground(Color.LIGHT_GRAY);
         tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
+        tablepanel.setRowHeight(30);
         // Gridbag Attributes 
         GridBagConstraints c = new GridBagConstraints();
         // setPanelContraints(getPanel(), tablepanel, GridBagConstraints.VERTICAL, GridBagConstraints.WEST, 0, 0, DEFAULT_INSETS);
