@@ -74,10 +74,8 @@ public class Controller {
         view.getManualInputPanel().getAddEntryButton().addActionListener(new modelActionListeners());
 
         // Focus Listener for UsageTextField and date
-        // view.getManualInputPanel().getEnterUsageField().addFocusListener(new Focus());
-        // view.getManualInputPanel().getEnterDateField().addFocusListener(new Focus());
-        // view.getManualInputPanel().getEnterUsageField().addActionListener(new modelActionListeners());
-        // view.getManualInputPanel().getEnterDateField().addActionListener(new modelActionListeners());
+        view.getManualInputPanel().getEnterUsageField().addFocusListener(new Focus());
+        view.getManualInputPanel().getEnterDateField().addFocusListener(new Focus());
         // Set AL for Buttons in Import JSON Panel
         // For Button Views
         view.getImportPanel().getAddNewFileButton().addActionListener(new IJPanelButtonViewListener(view));
@@ -303,17 +301,17 @@ public class Controller {
         }
     }
 
-    private Object[] row = new Object[1];
+    private Object[] row = new Object[5];
 
     class modelActionListeners implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            row[0] = view.getManualInputPanel().getEnterDateField().getText() + " " + view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString() + " " + view.getManualInputPanel().getEnterUsageField().getText() + " " + "Edit" + " " + "X";
-            // row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
-            // row[2] = view.getManualInputPanel().getEnterUsageField().getText();
-            // row[3] = "edit";
-            // row[4] = "X";
+            row[0] = view.getManualInputPanel().getEnterDateField().getText(); 
+            row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
+            row[2] = view.getManualInputPanel().getEnterUsageField().getText();
+            row[3] = "edit";
+            row[4] = "X";
             view.getManualInputPanel().getModel().addRow(row);
         }
     }

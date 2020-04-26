@@ -25,8 +25,9 @@ public class ManualInputPanel extends Panel{
     private static final Insets TITLE_INSETS    = new Insets(0,10,0,10);
 
     // Main Panels
+    private DefaultTableModel model = new DefaultTableModel();
     // private JPanel tablepanel = new JPanel(new GridBagLayout()); 
-    private JTable tablepanel = new JTable(); 
+    private JTable tablepanel = new JTable(model); 
     private JPanel inputpanel = new JPanel(new GridBagLayout()); 
 
     // Instance Elements
@@ -50,7 +51,6 @@ public class ManualInputPanel extends Panel{
     private JTextField enterusagefield;
     private JButton addentrybutton;
 
-    private DefaultTableModel model = new DefaultTableModel();
 
     // Constructor
     public ManualInputPanel() {
@@ -58,7 +58,6 @@ public class ManualInputPanel extends Panel{
         // setBackgroundColor(Color.LIGHT_GRAY);
         initializePanel();
         initializeComponents();
-        intializeComponentPreferences();
         intializeConstraints();
     }
 
@@ -81,7 +80,6 @@ public class ManualInputPanel extends Panel{
     public DefaultTableModel getModel() { return this.model; }
 
 
-
     // Intialize All Components
     public void initializeComponents(){
        /* Instantiate all components of panel here */
@@ -94,35 +92,21 @@ public class ManualInputPanel extends Panel{
            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
        }
         
-       Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
-    //    Object[] columns = {" Date " , " Period " , " Usage " , " Edit " , " Delete "};
+    //    Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
+        Object[] columns = {"Date" , "Period" , "Usage" , "Edit" , "Delete"};
 
        this.enterusagefield = new JTextField("Enter Usage");
        this.model.setColumnIdentifiers(columns);
        this.tablepanel.setModel(this.model);
-       // Instantiate list components
-
-
-       listModel = new DefaultListModel<String>();
-       //add listModel to list to dynamically be able to change the list
-       this.list = new JList<>(listModel);
-    //    this.scrollpane = new JScrollPane(this.list);
        this.scrollpane = new JScrollPane(this.tablepanel);
-    //    this.scrollpane.setBounds(0, 0, 800, 200);
-
+       // Instantiate list components
+       
        //sets the date field and usage field to be focusable
        enterdatefield.setFocusable(true);
        enterusagefield.setFocusable(true);
 
     }
 
-    // Intializes Preferences for each Component
-    public void intializeComponentPreferences(){
-        /* Component Preferences */
-        this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        this.list.setLayoutOrientation(JList.VERTICAL);
-        this.list.setVisibleRowCount(-1);
-    }
 
     // Initializes Constraints for GridBag Layout
     public void intializeConstraints(){
@@ -134,29 +118,23 @@ public class ManualInputPanel extends Panel{
         tablepanel.setRowHeight(30);
         // Gridbag Attributes 
         GridBagConstraints c = new GridBagConstraints();
-        // setPanelContraints(getPanel(), tablepanel, GridBagConstraints.VERTICAL, GridBagConstraints.WEST, 0, 0, DEFAULT_INSETS);
-        c.weightx = c.weighty = 1.0; 
-        c.gridx = 0; 
-        c.gridy = 0; 
-        c.anchor = GridBagConstraints.WEST;
-        c.fill = GridBagConstraints.VERTICAL;
-        getPanel().add(tablepanel, c);
 
         /* table panel components */
 
         // setScrollPaneConstraints(this.scrollpane, 1, 1, DIMENSION_SCROLL_PANE, GLOBAL_PADDING);
         // Regular Attributes
         scrollpane.setFont(new Font("Poppins", Font.BOLD, 20));
+        scrollpane.setPreferredSize(TABLE_PANEL_SIZE);
+        scrollpane.setMaximumSize(TABLE_PANEL_SIZE);
+        scrollpane.setMinimumSize(TABLE_PANEL_SIZE);
         // Gridbag Attributes 
-        // setPanelContraints(tablepanel, scrollpane, GridBagConstraints.BOTH, GridBagConstraints.CENTER, 0, 0, DEFAULT_INSETS);
-
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1.0; 
         c.gridx = 0; 
         c.gridy = 0; 
         c.anchor = GridBagConstraints.CENTER;
         c.fill = GridBagConstraints.BOTH;
-        tablepanel.add(scrollpane, c);
+        getPanel().add(scrollpane, c);
 
         // input panel 
         // Regular Attributes

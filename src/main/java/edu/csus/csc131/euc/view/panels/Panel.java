@@ -174,7 +174,7 @@ public class Panel {
     //with gridwidth
     public void setVeiewCalConstraints(JComponent pane, JComponent comp, double weight, int anchor, int gridwidth, int gridx, int gridy, Insets inset) {
         c = new GridBagConstraints();
-        
+
         c.weightx = c.weighty = weight;
         c.anchor = anchor; 
         c.gridwidth = gridwidth; 
@@ -244,7 +244,7 @@ public class Panel {
     }
 
     //without gridwidth
-    public void setVeiewCalConstraints(JComponent pane, JComponent comp, double weightx, double weighty, int anchor, int gridx, int gridy, Insets inset) {
+    public void setViewCalConstraints(JComponent pane, JComponent comp, double weightx, double weighty, int anchor, int gridx, int gridy, Insets inset) {
         c = new GridBagConstraints();
 
         c.weightx = weightx;
