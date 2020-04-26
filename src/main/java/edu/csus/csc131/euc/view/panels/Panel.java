@@ -271,6 +271,27 @@ public class Panel {
         pane.add(comp, c);
     }
 
+    // Override for alignment 
+    public void setViewCalculateFont(JComponent pane, JComponent comp, int gridx, int gridy, int style, int size, Insets inset, String alignment) {
+        // Set new GridBagConstraints per element
+        c = new GridBagConstraints();
+        c.weightx = c.weighty = 1.0;
+        // Setting the X-Axis and Y-Axis
+        c.gridx = gridx;
+        c.gridy = gridy;
+
+        if(alignment == "east"){
+            c.anchor = GridBagConstraints.EAST; 
+        }else{
+            c.anchor = GridBagConstraints.WEST; 
+        }
+
+        if( inset != null ){  c.insets = inset; }
+
+        comp.setFont(new Font("Poppins", style, size));
+        pane.add(comp, c);
+    }
+
 
     public void setDragBoxConstraints(DragBoxDraw dragbox, int gridx, int gridy, Insets inset) {
         c = new GridBagConstraints();
