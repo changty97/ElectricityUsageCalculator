@@ -27,7 +27,11 @@ public class ManualInputPanel extends Panel{
     // Main Panels
     private DefaultTableModel model = new DefaultTableModel();
     // private JPanel tablepanel = new JPanel(new GridBagLayout()); 
+<<<<<<< HEAD
     private JTable tablepanel = new JTable(model); 
+=======
+    private JTable tablepanel;
+>>>>>>> a33c2c8d539bcb5e2f2c1d20e2dd0804eb3cefe1
     private JPanel inputpanel = new JPanel(new GridBagLayout()); 
 
     // Instance Elements
@@ -51,6 +55,10 @@ public class ManualInputPanel extends Panel{
     private JTextField enterusagefield;
     private JButton addentrybutton;
 
+<<<<<<< HEAD
+=======
+    DefaultTableModel model = new DefaultTableModel(); 
+>>>>>>> a33c2c8d539bcb5e2f2c1d20e2dd0804eb3cefe1
 
     // Constructor
     public ManualInputPanel() {
@@ -68,6 +76,7 @@ public class ManualInputPanel extends Panel{
     public void setEnterPeriodField(JComboBox<String> t) { this.enterperiodfield = t; }
     public void setEnterUsageField(JTextField t) { this.enterusagefield = t; }
     public void setModel(DefaultTableModel tm) { this.model = tm; }
+    //public void addTable()
 
 
     // Getters
@@ -92,15 +101,41 @@ public class ManualInputPanel extends Panel{
            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
        }
         
+<<<<<<< HEAD
     //    Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
         Object[] columns = {"Date" , "Period" , "Usage" , "Edit" , "Delete"};
 
+=======
+       //Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
+        String[] columns = {" Date " , " Period " , " Usage " , " Edit " , " Delete "};
+        String[][] empty = {};
+>>>>>>> a33c2c8d539bcb5e2f2c1d20e2dd0804eb3cefe1
        this.enterusagefield = new JTextField("Enter Usage");
+
        this.model.setColumnIdentifiers(columns);
+<<<<<<< HEAD
        this.tablepanel.setModel(this.model);
        this.scrollpane = new JScrollPane(this.tablepanel);
        // Instantiate list components
        
+=======
+       
+       tablepanel = new JTable(empty, columns);
+
+       tablepanel.setModel(model);
+       // Instantiate list components
+
+
+       listModel = new DefaultListModel<String>();
+       //add listModel to list to dynamically be able to change the list
+       this.list = new JList<>(listModel);
+    //    this.scrollpane = new JScrollPane(this.list);
+       this.scrollpane = new JScrollPane(this.tablepanel);
+       scrollpane.setColumnHeaderView(tablepanel.getTableHeader());
+
+    //    this.scrollpane.setBounds(0, 0, 800, 200);
+
+>>>>>>> a33c2c8d539bcb5e2f2c1d20e2dd0804eb3cefe1
        //sets the date field and usage field to be focusable
        enterdatefield.setFocusable(true);
        enterusagefield.setFocusable(true);
@@ -112,10 +147,17 @@ public class ManualInputPanel extends Panel{
     public void intializeConstraints(){
 
         // table panel
+        
         // Regular Attributes
         tablepanel.setBackground(Color.LIGHT_GRAY);
         tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
         tablepanel.setRowHeight(30);
+        tablepanel.setFont(new Font("Poppins", Font.BOLD, 15));
+        
+        //Change the Default alignment from left to center on the table.
+        DefaultTableCellRenderer centerRender = (DefaultTableCellRenderer)tablepanel.getDefaultRenderer(Object.class);
+        centerRender.setHorizontalAlignment(SwingConstants.CENTER);
+        
         // Gridbag Attributes 
         GridBagConstraints c = new GridBagConstraints();
 

@@ -307,11 +307,19 @@ public class Controller {
 
         @Override
         public void actionPerformed(ActionEvent e) {
+<<<<<<< HEAD
             row[0] = view.getManualInputPanel().getEnterDateField().getText(); 
             row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
             row[2] = view.getManualInputPanel().getEnterUsageField().getText();
             row[3] = "edit";
             row[4] = "X";
+=======
+            row[0] = view.getManualInputPanel().getEnterDateField().getText(); // + " " + view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString() + " " + view.getManualInputPanel().getEnterUsageField().getText() + " " + "Edit" + " " + "X";
+             row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
+             row[2] = view.getManualInputPanel().getEnterUsageField().getText();
+             row[3] = "edit";
+             row[4] = "X";
+>>>>>>> a33c2c8d539bcb5e2f2c1d20e2dd0804eb3cefe1
             view.getManualInputPanel().getModel().addRow(row);
         }
     }
