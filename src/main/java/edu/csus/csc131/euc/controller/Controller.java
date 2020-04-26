@@ -165,6 +165,20 @@ public class Controller {
         panel.getUsageCostTotalCost().setText(formatDecimals(profile.getTotalCostByDay(dayIndex)));
         panel.getUsageCostTotalUsage().setText(formatDecimals(profile.getTotalUsageByDay(dayIndex)));
 
+        // Set up season detail dates 
+        panel.getSeasonDetailDate().setText(profile.getDays().get(dayIndex).getDate());
+        // If it is summer, display summer icon and summer ; Else display, non-summer icon and non-summer
+        System.out.println("Boolean for this day: " + profile.getDays().get(dayIndex).isSummer());
+        if(profile.getDays().get(dayIndex).isSummer()){ 
+            panel.getSeasonDetailTitle().setText("Summer");
+            panel.displaySummerIcon();
+        }
+        else { 
+            panel.getSeasonDetailTitle().setText("Non-Summer");
+            panel.displayNonSummerIcon();
+        }
+
+
         //updates the total values
         panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH()));
         panel.getTotalUsage().setText("<html>" + formatDecimals(profile.getTotalUsage()) + " <font size=5>kWH</font></html>" );
@@ -184,16 +198,31 @@ public class Controller {
             String date = view.getManualInputPanel().getEnterDateField().getText();
             int index =  view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
             float usage = 0;
+
+            // Set the summer/non-summer boolean 
+            String[] dateArray = date.split("/");
+            int month = Integer.parseInt(dateArray[0]);
+            
+
             try{
                 usage = Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText());
                 //always uses summer rates for now
                 Day day = new Day(date, true);
+
+                //if between start of June and before October
+                if(month > 6 && month < 10){
+                    day.setSummer(true);
+                }else{
+                    day.setSummer(false); 
+                }
+
                 day.setUsage(usage, index);
                 model.getModelProfile().addDay(day);
                 view.getManualInputPanel().getListModel().addElement(date + " " + index + ":00 - " + (int)(index+1) + ":00" + " " + usage);
                 view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
                 view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
+
                 updateComponentsViewCalculate();
             }
             catch(Exception ex){
