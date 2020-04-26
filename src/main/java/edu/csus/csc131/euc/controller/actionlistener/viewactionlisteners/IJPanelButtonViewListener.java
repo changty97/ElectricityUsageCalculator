@@ -37,7 +37,6 @@ public class IJPanelButtonViewListener implements ActionListener{
                     return;
                 }
             }
-
             // Set it to true
             ((AbstractButton)e.getSource()).setSelected(true);
         }

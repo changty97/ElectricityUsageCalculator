@@ -322,7 +322,41 @@ public class Panel {
         this.getPanel().add(dragbox, c);
     }
 
+
+    public void createPanel(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+        pane.add(comp);
+    }
+
     public void createPanel(JComponent pane, JComponent comp, Dimension d, int fill, int anchor, int gridx, int gridy) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+        pane.add(comp);
+    }
+
+
+    public void createPanel(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets i) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+        c.insets = i;
+        pane.add(comp);
+    }
+
+
+    public void createPanel(JComponent pane, JComponent comp, Dimension d, int fill, int anchor, int gridx, int gridy, Insets i) {
         comp.setMinimumSize(d);
         comp.setSize(d);
         comp.setPreferredSize(d);
@@ -332,7 +366,22 @@ public class Panel {
         c.weightx = c.weighty = 1.0;
         c.gridx = gridx; 
         c.gridy = gridy;
+        c.insets = i;
         pane.add(comp);
+    }
+
+    // with jlabel explicitly 
+    public void setPanelContraints(JComponent pane, JLabel comp, int fill, int anchor, int gridx, int gridy, Insets inset) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        c.weightx = c.weighty = 1.0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+         // Setting the padding
+         if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c);
     }
 
     public void setPanelContraints(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset) {
@@ -348,11 +397,12 @@ public class Panel {
         pane.add(comp, c);
     }
 
+    // no weight and gridwidth 3 
     public void setPanelContraints(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset, int gridwidth) {
         c = new GridBagConstraints();
         c.fill = fill;
         c.anchor = anchor;
-        c.weightx = c.weighty = 1.0;
+        c.weightx = c.weighty = 0.5;
         c.gridwidth = 3; 
         c.gridx = gridx; 
         c.gridy = gridy;

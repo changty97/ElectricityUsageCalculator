@@ -146,6 +146,7 @@ public class Controller {
 
         //updates the rate values
         if(isSummer){
+            panel.displaySummerSeasonTitle();
             panel.getSummerMidPeakRate().setText(Float.toString(Rates.getMidPeakSummer()));
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
@@ -153,6 +154,7 @@ public class Controller {
             panel.getSummerMidPeakPeriod().setText("Noon - 5pm/8pm - Midnight");
         }
         else{
+            panel.displayNonSummerSeasonTitle();
             panel.getSummerMidPeakRate().setText("N/A");
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
@@ -254,18 +256,15 @@ public class Controller {
     }
 
     class ArrowNavigation implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton) e.getSource();
             try {
-
                 model.getModelProfile().getDays().get(dayIndex-1);
                 if(b.equals(view.getViewCalculatePanel().getNavLeftButton())){
                     dayIndex--;
                     updateComponentsViewCalculate();
                 }
-
             }
             catch (Exception ex){
             }
@@ -277,13 +276,9 @@ public class Controller {
                 }
             }
             catch (Exception ex){
-
             }
-
-
             System.out.println("Navigation button pressed!");
         }
-
     }
 
     class SummerToggle implements ActionListener{
