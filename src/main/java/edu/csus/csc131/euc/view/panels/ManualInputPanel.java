@@ -26,7 +26,7 @@ public class ManualInputPanel extends Panel{
 
     // Main Panels
     // private JPanel tablepanel = new JPanel(new GridBagLayout()); 
-    private JTable tablepanel = new JTable(); 
+    private JTable tablepanel;
     private JPanel inputpanel = new JPanel(new GridBagLayout()); 
 
     // Instance Elements
@@ -50,7 +50,7 @@ public class ManualInputPanel extends Panel{
     private JTextField enterusagefield;
     private JButton addentrybutton;
 
-    private DefaultTableModel model = new DefaultTableModel();
+    DefaultTableModel model = new DefaultTableModel(); 
 
     // Constructor
     public ManualInputPanel() {
@@ -69,6 +69,7 @@ public class ManualInputPanel extends Panel{
     public void setEnterPeriodField(JComboBox<String> t) { this.enterperiodfield = t; }
     public void setEnterUsageField(JTextField t) { this.enterusagefield = t; }
     public void setModel(DefaultTableModel tm) { this.model = tm; }
+    //public void addTable()
 
 
     // Getters
@@ -95,11 +96,15 @@ public class ManualInputPanel extends Panel{
        }
         
        //Object[] columns = {" Date " + " Period " + " Usage " + " Edit " + " Delete "};
-        Object[] columns = {" Date " , " Period " , " Usage " , " Edit " , " Delete "};
-
+        String[] columns = {" Date " , " Period " , " Usage " , " Edit " , " Delete "};
+        String[][] empty = {};
        this.enterusagefield = new JTextField("Enter Usage");
+
        this.model.setColumnIdentifiers(columns);
-       this.tablepanel.setModel(this.model);
+       
+       tablepanel = new JTable(empty, columns);
+
+       tablepanel.setModel(model);
        // Instantiate list components
 
 
@@ -108,6 +113,8 @@ public class ManualInputPanel extends Panel{
        this.list = new JList<>(listModel);
     //    this.scrollpane = new JScrollPane(this.list);
        this.scrollpane = new JScrollPane(this.tablepanel);
+       scrollpane.setColumnHeaderView(tablepanel.getTableHeader());
+
     //    this.scrollpane.setBounds(0, 0, 800, 200);
 
        //sets the date field and usage field to be focusable
