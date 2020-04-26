@@ -95,6 +95,8 @@ public class IJPanelIBActionListener implements ActionListener {
                 //if between start of June and before October
                 if(month > 6 && month < 10){
                     day.setSummer(true);
+                }else{
+                    day.setSummer(false); 
                 }
 
                 //set date if it is not done already

@@ -40,6 +40,7 @@ public class Day {
     this.date = date;
   }
 
+
   // This function initializes usage specific for the profile
   public void setUsage(float value, int index){
     usage.setUsageAtIndex(value, index);
