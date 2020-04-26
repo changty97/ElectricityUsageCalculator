@@ -36,14 +36,14 @@ public class ManualInputPanel extends Panel{
     // Input Field Components 
     private JLabel inputfieldtitle = new JLabel("Entry Details");
 
-    private JLabel periodlbl = new JLabel("Period");
+    private JLabel periodlbl = new JLabel("Period", new ImageIcon("src\\main\\assets\\manualinputres\\clockicon.png"), SwingConstants.LEFT );
     private JComboBox<String> enterperiodfield;
 
-    private JLabel datelbl = new JLabel("Date");
+    private JLabel datelbl = new JLabel("Date", new ImageIcon("src\\main\\assets\\manualinputres\\datecalendar.png"), SwingConstants.LEFT );
     private DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
     private JFormattedTextField enterdatefield;
 
-    private JLabel usagelbl = new JLabel("Usage");
+    private JLabel usagelbl = new JLabel("Usage", new ImageIcon("src\\main\\assets\\manualinputres\\plugicon.png"), SwingConstants.LEFT ); 
     private JTextField enterusagefield;
     private JButton addentrybutton;
 
@@ -82,6 +82,8 @@ public class ManualInputPanel extends Panel{
        this.enterperiodfield = new JComboBox<>();
        enterperiodfield.setEditable(false);
 
+
+
        for(int i = 0; i < HOURS; i++){
            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
        }
@@ -89,8 +91,6 @@ public class ManualInputPanel extends Panel{
        this.enterusagefield = new JTextField("Enter Usage");
 
        // Instantiate list components
-
-
        listModel = new DefaultListModel<String>();
        //add listModel to list to dynamically be able to change the list
        this.list = new JList<>(listModel);
@@ -176,14 +176,17 @@ public class ManualInputPanel extends Panel{
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(inputfieldtitle, c);
 
+
         // Date Field Label 
         // Regular Attributes
         datelbl.setForeground(Color.WHITE);
         datelbl.setHorizontalAlignment(SwingConstants.CENTER);
         datelbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        datelbl.setHorizontalTextPosition(SwingConstants.LEFT);
+        datelbl.setIconTextGap(10);
         // Gridbag Attributes 
-        c.weightx = c.weighty = 0.25; 
         c = new GridBagConstraints();
+        c.weightx = c.weighty = 0.25; 
         c.gridx = 0; 
         c.gridy = 1; 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -197,7 +200,7 @@ public class ManualInputPanel extends Panel{
         enterdatefield.setHorizontalAlignment(SwingConstants.CENTER);
         // Gridbag Attributes 
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 0.25; 
+        c.weightx = c.weighty = 0.125; 
         c.gridx = 0; 
         c.gridy = 2; 
         c.fill = GridBagConstraints.HORIZONTAL;
@@ -209,6 +212,8 @@ public class ManualInputPanel extends Panel{
         periodlbl.setForeground(Color.WHITE);
         periodlbl.setHorizontalAlignment(SwingConstants.CENTER);
         periodlbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        periodlbl.setHorizontalTextPosition(SwingConstants.LEFT);
+        periodlbl.setIconTextGap(10);
         // Gridbag Attributes 
         c = new GridBagConstraints();
         c.weightx = c.weighty = 0.125; 
@@ -234,6 +239,8 @@ public class ManualInputPanel extends Panel{
         usagelbl.setForeground(Color.WHITE);
         usagelbl.setHorizontalAlignment(SwingConstants.CENTER);
         usagelbl.setFont(new Font("Poppins", Font.BOLD, 20));
+        usagelbl.setHorizontalTextPosition(SwingConstants.LEFT);
+        usagelbl.setIconTextGap(10);
         // Gridbag Attributes 
         c = new GridBagConstraints();
         c.weightx = c.weighty = 0.125; 

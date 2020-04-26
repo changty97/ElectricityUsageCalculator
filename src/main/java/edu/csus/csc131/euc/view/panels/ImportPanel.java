@@ -55,6 +55,7 @@ public class ImportPanel extends Panel {
         /* Instantiate all components of panel here */
         // import field
         this.importfield = new JTextField("Enter file path here, or browse. . .");
+        this.importfield.setFont(new Font("Poppins", Font.PLAIN, 15)); 
 
         // browse button
         this.browsebutton = new JButton(new ImageIcon("src\\main\\assets\\importjsonres\\browsebutton.png"));

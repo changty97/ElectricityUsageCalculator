@@ -146,6 +146,7 @@ public class Controller {
 
         //updates the rate values
         if(isSummer){
+            panel.displaySummerSeasonTitle();
             panel.getSummerMidPeakRate().setText(Float.toString(Rates.getMidPeakSummer()));
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
@@ -153,6 +154,7 @@ public class Controller {
             panel.getSummerMidPeakPeriod().setText("Noon - 5pm/8pm - Midnight");
         }
         else{
+            panel.displayNonSummerSeasonTitle();
             panel.getSummerMidPeakRate().setText("N/A");
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
@@ -162,11 +164,13 @@ public class Controller {
 
 
         //updates the total values by day
-        panel.getUsageCostTotalCost().setText(formatDecimals(profile.getTotalCostByDay(dayIndex)));
-        panel.getUsageCostTotalUsage().setText(formatDecimals(profile.getTotalUsageByDay(dayIndex)));
+        panel.getUsageCostTotalCost().setText("<html>" + formatDecimals(profile.getTotalCostByDay(dayIndex)) + " <font size=3>kWH</font></html>");
+        panel.getUsageCostTotalUsage().setText( panel.getDollarSign() + profile.getTotalUsageByDay(dayIndex));
 
         // Set up season detail dates 
         panel.getSeasonDetailDate().setText(profile.getDays().get(dayIndex).getDate());
+        panel.getSeasonDetailPeriod().setText(profile.getDays().get(dayIndex).getPeriod());
+
         // If it is summer, display summer icon and summer ; Else display, non-summer icon and non-summer
         System.out.println("Boolean for this day: " + profile.getDays().get(dayIndex).isSummer());
         if(profile.getDays().get(dayIndex).isSummer()){ 
@@ -217,6 +221,8 @@ public class Controller {
                 }
 
                 day.setUsage(usage, index);
+                day.setPeriod(index + ":00 - " + (int)(index+1) + ":00");
+
                 model.getModelProfile().addDay(day);
                 view.getManualInputPanel().getListModel().addElement(date + " " + index + ":00 - " + (int)(index+1) + ":00" + " " + usage);
                 view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
@@ -250,18 +256,15 @@ public class Controller {
     }
 
     class ArrowNavigation implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
             JButton b = (JButton) e.getSource();
             try {
-
                 model.getModelProfile().getDays().get(dayIndex-1);
                 if(b.equals(view.getViewCalculatePanel().getNavLeftButton())){
                     dayIndex--;
                     updateComponentsViewCalculate();
                 }
-
             }
             catch (Exception ex){
             }
@@ -273,13 +276,9 @@ public class Controller {
                 }
             }
             catch (Exception ex){
-
             }
-
-
             System.out.println("Navigation button pressed!");
         }
-
     }
 
     class SummerToggle implements ActionListener{
