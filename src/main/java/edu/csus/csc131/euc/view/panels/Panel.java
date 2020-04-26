@@ -271,6 +271,21 @@ public class Panel {
         pane.add(comp, c);
     }
 
+    // For no weight
+    public void setViewCalculateFont(JComponent pane, JComponent comp, int gridx, int gridy, int style, int size, Insets inset, Boolean isWeight) {
+        // Set new GridBagConstraints per element
+        c = new GridBagConstraints();
+        // c.weightx = c.weighty = 1.0;
+        // Setting the X-Axis and Y-Axis
+        c.gridx = gridx;
+        c.gridy = gridy;
+
+        if( inset != null ){  c.insets = inset; }
+
+        comp.setFont(new Font("Poppins", style, size));
+        pane.add(comp, c);
+    }
+
     // Override for alignment 
     public void setViewCalculateFont(JComponent pane, JComponent comp, int gridx, int gridy, int style, int size, Insets inset, String alignment) {
         // Set new GridBagConstraints per element
@@ -325,6 +340,35 @@ public class Panel {
         c.fill = fill;
         c.anchor = anchor;
         c.weightx = c.weighty = 1.0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+         // Setting the padding
+         if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c);
+    }
+
+    public void setPanelContraints(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset, int gridwidth) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        c.weightx = c.weighty = 1.0;
+        c.gridwidth = 3; 
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+         // Setting the padding
+         if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c);
+    }
+
+
+    // for no weight
+    public void setPanelContraints(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset, Boolean isWeight) {
+        c = new GridBagConstraints();
+        c.fill = fill;
+        c.anchor = anchor;
+        // c.weightx = c.weighty = 0;
         c.gridx = gridx; 
         c.gridy = gridy;
 

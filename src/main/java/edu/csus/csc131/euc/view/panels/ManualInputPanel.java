@@ -82,6 +82,8 @@ public class ManualInputPanel extends Panel{
        this.enterperiodfield = new JComboBox<>();
        enterperiodfield.setEditable(false);
 
+
+
        for(int i = 0; i < HOURS; i++){
            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
        }
@@ -89,8 +91,6 @@ public class ManualInputPanel extends Panel{
        this.enterusagefield = new JTextField("Enter Usage");
 
        // Instantiate list components
-
-
        listModel = new DefaultListModel<String>();
        //add listModel to list to dynamically be able to change the list
        this.list = new JList<>(listModel);
@@ -175,6 +175,7 @@ public class ManualInputPanel extends Panel{
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(inputfieldtitle, c);
+
 
         // Date Field Label 
         // Regular Attributes
