@@ -51,7 +51,7 @@ public final class ComponentIconDefaults {
         // TODO
     }
 
-    private static String CLEAR = "/edu/csus/csc131/euc/libraries/jdatepicker/resources/org/jdatepicker/icons/clear.png";
+    private static String CLEAR = "/assets/clear.png";
 
     private Icon clearIcon;
     private Icon nextMonthIconEnabled;
@@ -67,7 +67,8 @@ public final class ComponentIconDefaults {
     private ComponentIconDefaults() {
         // TODO consider making all the icons vector images which will scale
         try {
-            clearIcon = loadIcon(CLEAR);
+            clearIcon = new ImageIcon("src\\main\\assets\\clear.png");
+            //clearIcon = loadIcon(CLEAR);
             nextMonthIconEnabled = new JNextIcon(4, 7, false, true);
             nextYearIconEnabled = new JNextIcon(8, 7, true, true);
             previousMonthIconEnabled = new JPreviousIcon(4, 7, false, true);
@@ -77,7 +78,7 @@ public final class ComponentIconDefaults {
             previousMonthIconDisabled = new JPreviousIcon(4, 7, false, false);
             previousYearIconDisabled = new JPreviousIcon(8, 7, true, false);
             popupButtonIcon = null;
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
