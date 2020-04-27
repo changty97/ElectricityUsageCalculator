@@ -26,24 +26,24 @@ public class ManualInputPanel extends Panel{
 
     // Main Panels
     private DefaultTableModel model = new DefaultTableModel();
-    private JTable tablepanel = new JTable(model); 
+    private JTable tablepanel = new JTable(model);
     private JTableHeader header = tablepanel.getTableHeader();
-    private JPanel inputpanel = new JPanel(new GridBagLayout()); 
+    private JPanel inputpanel = new JPanel(new GridBagLayout());
 
     // Instance Elements
 
-    // Table Field Components 
+    // Table Field Components
     private JScrollPane scrollpane;
 
-    // Input Field Components 
+    // Input Field Components
     private JLabel inputfieldtitle = new JLabel("Entry Details");
-    private JLabel periodlbl = new JLabel("Period", new ImageIcon("src\\main\\assets\\manualinputres\\clockicon.png"), SwingConstants.LEFT );    
+    private JLabel periodlbl = new JLabel("Period", new ImageIcon("src\\main\\assets\\manualinputres\\clockicon.png"), SwingConstants.LEFT );
     private JComboBox<String> enterperiodfield;
     private JLabel datelbl = new JLabel("Date", new ImageIcon("src\\main\\assets\\manualinputres\\datecalendar.png"), SwingConstants.LEFT );
     private DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
     private JFormattedTextField enterdatefield;
 
-    private JLabel usagelbl = new JLabel("Usage", new ImageIcon("src\\main\\assets\\manualinputres\\plugicon.png"), SwingConstants.LEFT ); 
+    private JLabel usagelbl = new JLabel("Usage", new ImageIcon("src\\main\\assets\\manualinputres\\plugicon.png"), SwingConstants.LEFT );
     private JTextField enterusagefield;
     private JButton addentrybutton;
 
@@ -81,26 +81,30 @@ public class ManualInputPanel extends Panel{
     // Intialize All Components
     public void initializeComponents(){
        /* Instantiate all components of panel here */
-       this.addentrybutton = new JButton("Add Entry");
-       this.enterdatefield = new JFormattedTextField(df);
-       this.enterperiodfield = new JComboBox<>();
-       enterperiodfield.setEditable(false);
+        this.addentrybutton = new JButton("Add Entry");
+        this.enterdatefield = new JFormattedTextField(df);
+        this.enterperiodfield = new JComboBox<>();
+        enterperiodfield.setEditable(false);
 
-       for(int i = 0; i < HOURS; i++){
-           enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
-       }
-        
-        Object[] columns = {"Date" , "Period" , "Usage" , "Edit" , "Delete"};
+        for(int i = 0; i < HOURS; i++){
+            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
+        }
 
-       this.enterusagefield = new JTextField("Enter Usage");
-       this.model.setColumnIdentifiers(columns);
-       this.tablepanel.setModel(this.model);
-       this.scrollpane = new JScrollPane(this.tablepanel);
-       // Instantiate list components
-       
-       //sets the date field and usage field to be focusable
-       enterdatefield.setFocusable(true);
-       enterusagefield.setFocusable(true);
+            Object[] columns = {"Date" , "Period" , "Usage" , "Edit" , "Delete"};
+
+        this.enterusagefield = new JTextField("Enter Usage");
+        this.model.setColumnIdentifiers(columns);
+        this.tablepanel.setModel(this.model);
+        this.scrollpane = new JScrollPane(this.tablepanel);
+
+        RowSorter<TableModel> sorter =
+        new TableRowSorter<TableModel>(model);
+        tablepanel.setRowSorter(sorter);
+        // Instantiate list components
+
+        //sets the date field and usage field to be focusable
+        enterdatefield.setFocusable(true);
+        enterusagefield.setFocusable(true);
 
     }
 
@@ -109,19 +113,19 @@ public class ManualInputPanel extends Panel{
     public void intializeConstraints(){
 
         // table panel
-        
+
         // Regular Attributes
         tablepanel.setBackground(Color.WHITE);
         tablepanel.setGridColor(Color.WHITE);
         tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
         tablepanel.setRowHeight(30);
         tablepanel.setFont(new Font("Poppins", Font.BOLD, 15));
-        
+
         //Change the Default alignment from left to center on the table.
         DefaultTableCellRenderer centerRender = (DefaultTableCellRenderer)tablepanel.getDefaultRenderer(Object.class);
         centerRender.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        // Gridbag Attributes 
+
+        // Gridbag Attributes
         GridBagConstraints c = new GridBagConstraints();
 
         /* table panel components */
@@ -133,26 +137,26 @@ public class ManualInputPanel extends Panel{
         scrollpane.setPreferredSize(TABLE_PANEL_SIZE);
         scrollpane.setMaximumSize(TABLE_PANEL_SIZE);
         scrollpane.setMinimumSize(TABLE_PANEL_SIZE);
-        // Gridbag Attributes 
+        // Gridbag Attributes
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 1.0; 
-        c.gridx = 0; 
-        c.gridy = 0; 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0;
+        c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
         c.fill = GridBagConstraints.BOTH;
         getPanel().add(scrollpane, c);
 
-        // input panel 
+        // input panel
         // Regular Attributes
         inputpanel.setBackground(new Color(10, 169, 212));
         inputpanel.setPreferredSize(INPUT_PANEL_SIZE);
-        // Gridbag Attributes 
+        // Gridbag Attributes
         // setPanelContraints(getPanel(), inputpanel, GridBagConstraints.VERTICAL, GridBagConstraints.EAST, 1, 0, GLOBAL_PADDING);
 
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 1.0; 
-        c.gridx = 1; 
-        c.gridy = 0; 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 1;
+        c.gridy = 0;
         c.anchor = GridBagConstraints.EAST;
         c.fill = GridBagConstraints.VERTICAL;
         getPanel().add(inputpanel, c);
@@ -164,18 +168,18 @@ public class ManualInputPanel extends Panel{
         inputfieldtitle.setForeground(Color.WHITE);
         inputfieldtitle.setHorizontalAlignment(SwingConstants.CENTER);
         inputfieldtitle.setFont(new Font("Poppins", Font.BOLD, 30));
-        // Gridbag Attributes 
+        // Gridbag Attributes
         // setPanelContraints(inputpanel, inputfieldtitle, GridBagConstraints.HORIZONTAL, 0, 0, 0, TITLE_INSETS);
 
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 1.0; 
-        c.gridx = 0; 
-        c.gridy = 0; 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0;
+        c.gridy = 0;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(inputfieldtitle, c);
 
-        // Date Field Label 
+        // Date Field Label
         // Regular Attributes
         datelbl.setForeground(Color.WHITE);
         datelbl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -183,11 +187,11 @@ public class ManualInputPanel extends Panel{
         datelbl.setHorizontalTextPosition(SwingConstants.LEFT);
         datelbl.setIconTextGap(10);
 
-        // Gridbag Attributes 
-        c.weightx = c.weighty = 0.25; 
+        // Gridbag Attributes
+        c.weightx = c.weighty = 0.25;
         c = new GridBagConstraints();
-        c.gridx = 0; 
-        c.gridy = 1; 
+        c.gridx = 0;
+        c.gridy = 1;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(datelbl, c);
@@ -196,16 +200,16 @@ public class ManualInputPanel extends Panel{
         enterdatefield.setFont(new Font("Poppins", Font.PLAIN, 15));
         enterdatefield.setText("mm/dd/yyyy");
         enterdatefield.setHorizontalAlignment(SwingConstants.CENTER);
-        // Gridbag Attributes 
+        // Gridbag Attributes
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 0.125; 
-        c.gridx = 0; 
-        c.gridy = 2; 
+        c.weightx = c.weighty = 0.125;
+        c.gridx = 0;
+        c.gridy = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(enterdatefield, c);
 
-        // Period Field Label 
+        // Period Field Label
         // Regular Attributes
         periodlbl.setForeground(Color.WHITE);
         periodlbl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -213,11 +217,11 @@ public class ManualInputPanel extends Panel{
         periodlbl.setHorizontalTextPosition(SwingConstants.LEFT);
         periodlbl.setIconTextGap(10);
 
-        // Gridbag Attributes 
+        // Gridbag Attributes
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 0.125; 
-        c.gridx = 0; 
-        c.gridy = 3; 
+        c.weightx = c.weighty = 0.125;
+        c.gridx = 0;
+        c.gridy = 3;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(periodlbl, c);
@@ -225,15 +229,15 @@ public class ManualInputPanel extends Panel{
         // setConstraints(this.enterperiodfield, 4, 2, DIMENSION_TEXTFIELD, GLOBAL_PADDING);
         // Regular Attributes
         enterperiodfield.setFont(new Font("Poppins", Font.PLAIN, 15));
-        // Gridbag Attributes 
+        // Gridbag Attributes
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 0.125; 
-        c.gridx = 0; 
-        c.gridy = 4; 
+        c.weightx = c.weighty = 0.125;
+        c.gridx = 0;
+        c.gridy = 4;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(enterperiodfield, c);
 
-        // Usage Field Label 
+        // Usage Field Label
         // Regular Attributes
         usagelbl.setForeground(Color.WHITE);
         usagelbl.setHorizontalAlignment(SwingConstants.CENTER);
@@ -241,11 +245,11 @@ public class ManualInputPanel extends Panel{
         usagelbl.setHorizontalTextPosition(SwingConstants.LEFT);
         usagelbl.setIconTextGap(10);
 
-        // Gridbag Attributes 
+        // Gridbag Attributes
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 0.125; 
-        c.gridx = 0; 
-        c.gridy = 5; 
+        c.weightx = c.weighty = 0.125;
+        c.gridx = 0;
+        c.gridy = 5;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(usagelbl, c);
@@ -254,12 +258,12 @@ public class ManualInputPanel extends Panel{
         // Regular Attributes
         enterusagefield.setFont(new Font("Poppins", Font.PLAIN, 15));
         enterusagefield.setHorizontalAlignment(SwingConstants.CENTER);
-        
-        // Gridbag Attributes 
+
+        // Gridbag Attributes
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 0.125; 
-        c.gridx = 0; 
-        c.gridy = 6; 
+        c.weightx = c.weighty = 0.125;
+        c.gridx = 0;
+        c.gridy = 6;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(enterusagefield, c);
@@ -271,12 +275,12 @@ public class ManualInputPanel extends Panel{
         addentrybutton.setText("+ Add Entry");
         addentrybutton.setForeground(Color.WHITE);
         addentrybutton.setBackground(new Color(76,175,106));
-        addentrybutton.setFocusable(false); 
-        // Gridbag Attributes 
+        addentrybutton.setFocusable(false);
+        // Gridbag Attributes
         c = new GridBagConstraints();
-        c.weightx = c.weighty = 1.0; 
-        c.gridx = 0; 
-        c.gridy = 7; 
+        c.weightx = c.weighty = 1.0;
+        c.gridx = 0;
+        c.gridy = 7;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
         inputpanel.add(addentrybutton, c);
