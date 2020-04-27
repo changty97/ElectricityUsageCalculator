@@ -64,9 +64,15 @@ public class PanelSwitchButtonListener implements ActionListener {
         else if(((AbstractButton) e.getSource()).isSelected()) {
             // Deselect
             ((AbstractButton) e.getSource()).setSelected(false);
-
+            
             // Display Blank Screen
-            panels.show(view.getPanels(), "Blank" );
+            // panels.show(view.getPanels(), "Blank" );
+
+            // By default View and Calculate is then Selected 
+            vcb.setSelected(true); 
+
+            // Display Default Screen 
+            panels.show(view.getPanels(), "View & Calculate Panel");
         }
     }
 

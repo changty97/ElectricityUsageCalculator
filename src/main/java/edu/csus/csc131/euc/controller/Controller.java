@@ -148,6 +148,7 @@ public class Controller {
 
         //updates the rate values
         if(isSummer){
+            panel.displaySummerSeasonTitle();
             panel.getSummerMidPeakRate().setText(Float.toString(Rates.getMidPeakSummer()));
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
@@ -155,6 +156,7 @@ public class Controller {
             panel.getSummerMidPeakPeriod().setText("Noon - 5pm/8pm - Midnight");
         }
         else{
+            panel.displayNonSummerSeasonTitle();
             panel.getSummerMidPeakRate().setText("N/A");
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
@@ -164,8 +166,24 @@ public class Controller {
 
 
         //updates the total values by day
-        panel.getUsageCostTotalCost().setText(formatDecimals(profile.getTotalCostByDay(dayIndex)));
-        panel.getUsageCostTotalUsage().setText(formatDecimals(profile.getTotalUsageByDay(dayIndex)));
+        panel.getUsageCostTotalCost().setText("<html>" + formatDecimals(profile.getTotalCostByDay(dayIndex)) + " <font size=3>kWH</font></html>");
+        panel.getUsageCostTotalUsage().setText( panel.getDollarSign() + profile.getTotalUsageByDay(dayIndex));
+
+        // Set up season detail dates 
+        panel.getSeasonDetailDate().setText(profile.getDays().get(dayIndex).getDate());
+        panel.getSeasonDetailPeriod().setText(profile.getDays().get(dayIndex).getPeriod());
+
+        // If it is summer, display summer icon and summer ; Else display, non-summer icon and non-summer
+        System.out.println("Boolean for this day: " + profile.getDays().get(dayIndex).isSummer());
+        if(profile.getDays().get(dayIndex).isSummer()){ 
+            panel.getSeasonDetailTitle().setText("Summer");
+            panel.displaySummerIcon();
+        }
+        else { 
+            panel.getSeasonDetailTitle().setText("Non-Summer");
+            panel.displayNonSummerIcon();
+        }
+
 
         //updates the total values
         panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH()));
@@ -211,7 +229,7 @@ public class Controller {
                 }
 
                 //always uses summer rates for now
-                final Day day = new Day(date, true);
+                Day day = new Day(date, true);
 
                 //if between start of June and before October
                 if(month > 6 && month < 10){
@@ -256,18 +274,15 @@ public class Controller {
     }
 
     class ArrowNavigation implements ActionListener{
-
         @Override
         public void actionPerformed(final ActionEvent e) {
             final JButton b = (JButton) e.getSource();
             try {
-
                 model.getModelProfile().getDays().get(dayIndex-1);
                 if(b.equals(view.getViewCalculatePanel().getNavLeftButton())){
                     dayIndex--;
                     updateComponentsViewCalculate();
                 }
-
             }
             catch (final Exception ex){
             }
@@ -278,14 +293,10 @@ public class Controller {
                     updateComponentsViewCalculate();
                 }
             }
-            catch (final Exception ex){
-
+            catch (Exception ex){
             }
-
-
             System.out.println("Navigation button pressed!");
         }
-
     }
 
     class SummerToggle implements ActionListener{

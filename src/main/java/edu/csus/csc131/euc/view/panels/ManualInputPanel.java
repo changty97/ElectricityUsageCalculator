@@ -37,7 +37,8 @@ public class ManualInputPanel extends Panel{
 
     // Input Field Components 
     private JLabel inputfieldtitle = new JLabel("Entry Details");
-    private JLabel periodlbl = new JLabel("Period", new ImageIcon("src\\main\\assets\\manualinputres\\clockicon.png"), SwingConstants.LEFT );    private JComboBox<String> enterperiodfield;
+    private JLabel periodlbl = new JLabel("Period", new ImageIcon("src\\main\\assets\\manualinputres\\clockicon.png"), SwingConstants.LEFT );    
+    private JComboBox<String> enterperiodfield;
     private JLabel datelbl = new JLabel("Date", new ImageIcon("src\\main\\assets\\manualinputres\\datecalendar.png"), SwingConstants.LEFT );
     private DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
     private JFormattedTextField enterdatefield;

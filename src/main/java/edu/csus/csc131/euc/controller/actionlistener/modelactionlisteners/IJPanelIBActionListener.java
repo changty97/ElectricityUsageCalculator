@@ -96,13 +96,14 @@ public class IJPanelIBActionListener implements ActionListener {
                 if(month > 6 && month < 10){
                     day.setSummer(true);
                 }
-
                 //set date if it is not done already
                 if(day.getDate().equals("")){
                     day.setDate(date);
                 }
 
                 day.setUsage(value, Integer.parseInt(timeStart[0]), Integer.parseInt(timeEnd[0]));
+                
+                day.setPeriod(i + ":00 - " + (int)(i+1) + ":00");
             }
             model.getModelProfile().addDay(day);
             //updates the view calculate panel
