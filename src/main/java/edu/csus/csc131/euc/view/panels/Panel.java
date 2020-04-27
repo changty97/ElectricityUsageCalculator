@@ -402,7 +402,7 @@ public class Panel {
         c = new GridBagConstraints();
         c.fill = fill;
         c.anchor = anchor;
-        c.weightx = c.weighty = 0.5;
+        // c.weightx = c.weighty = 0.5;
         c.gridwidth = 3; 
         c.gridx = gridx; 
         c.gridy = gridy;
