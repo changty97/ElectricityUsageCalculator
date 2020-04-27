@@ -12,10 +12,11 @@ public class ViewCalculatePanel extends Panel {
     // Main Sub Panels Size
     private final Dimension USAGE_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
     private final Dimension SUMMARY_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
+    private final Dimension SUMMARY_DETAILS_BUTTON_SIZE = new Dimension(150,30);
 
     // Padding
     private static final Insets DEFAULT_INSETS                       = new Insets(0,0,0,0);
-    private static final Insets SUMMARY_DETAIL_BUTTON_INSETS         = new Insets(0,30,0,0);
+    private static final Insets SUMMARY_DETAIL_BUTTON_INSETS         = new Insets(5,30,5,0);
     private static final Insets COSTUSAGE_COMP_PADDING               = new Insets(0,0,0,37);
     private static final Insets USAGE_DETAIL_PANEL_INSETS            = new Insets(0,70,20,50);
     private static final Insets SUMMARY_TITLE                        = new Insets(0,0,0,50);
@@ -152,7 +153,7 @@ public class ViewCalculatePanel extends Panel {
             /* summarydetailwestgrouppanels: Components */
                 // General Labels
                     // TODO: For some reason the icon does not show at all... when displaying 
-                    private JLabel summertitle = new JLabel("Summer", new ImageIcon("euc\\src\\main\\assets\\viewandcalculateres\\summer.png"), SwingConstants.LEFT); 
+                    private JLabel summertitle = new JLabel("Summer", new ImageIcon("euc\\src\\main\\assets\\viewandcalculateres\\summericon.png"), SwingConstants.LEFT); 
                     private JLabel nonsummertitle = new JLabel("Non-Summer", new ImageIcon("euc\\src\\main\\assets\\viewandcalculateres\\nonsummer.png"), SwingConstants.LEFT); 
                     private JLabel offpeaktitle = new JLabel("Off-Peak");
                     private JLabel midpeaktitle = new JLabel("Mid-Peak");
@@ -162,6 +163,7 @@ public class ViewCalculatePanel extends Panel {
 
                 // summarydetailwestpanelsummer : Sub Panel 1 of summarydetailwestgrouppanels
                     private JPanel summarydetailwestpanelsummer = new JPanel(new GridBagLayout());
+                    // private RoundedPanel summarydetailwestpanelsummer = new RoundedPanel();
 
                     // summarydetailwestpanelsummer : Components
                         private JTextField summeroffpeakrate = new JTextField("$0.1209");
@@ -184,12 +186,12 @@ public class ViewCalculatePanel extends Panel {
 
             private JPanel summarydetaileastpanel = new JPanel(new GridBagLayout());
 
-            /* summarydetaileastpanel: Components */
-                // Buttons for Summary Details
-                    private JButton seasontoggle = new JButton("Summer/Non-Summer");
-                    private JButton resetdefault = new JButton("Reset Default Rate Values");
-                    private JButton submituservaluesbutton = new JButton("Submit New Rate Values");
+                    // Buttons for Summary Details
+                    private JButton seasontoggle = new JButton("Change Season");
+                    private JButton resetdefault = new JButton("Reset Defaults");
+                    private JButton submituservaluesbutton = new JButton("Submit Values");
 
+            /* summarydetaileastpanel: Components */
                 // totalusagepanel : Sub Panel 1 of summarydetaileastpanel
                 private RoundedPanel totalusagepanel = new RoundedPanel();
 
@@ -536,9 +538,10 @@ public class ViewCalculatePanel extends Panel {
 
         // Summary Details Panel Title
         // Regular Attributes
-        summarytitle.setFont(new Font("Poppins", Font.BOLD, 40));
+        summarytitle.setFont(new Font("Poppins", Font.BOLD, 30));
         // GridBag Attributes
-        setPanelContraints(summarydetailsmainpanel, summarytitle, 0, GridBagConstraints.CENTER, 1, 0, SUMMARY_TITLE);
+        // setPanelContraints(summarydetailsmainpanel, summarytitle, 0, GridBagConstraints.CENTER, 1, 0, SUMMARY_TITLE, false);
+        setPanelContraints(summarydetaileastpanel, summarytitle, 0, GridBagConstraints.CENTER, 0, 0, SUMMARY_TITLE, false);
 
         // Summary Details Panel Season Title / Summer 
         // Regular Attributes
@@ -547,7 +550,8 @@ public class ViewCalculatePanel extends Panel {
         summertitle.setHorizontalTextPosition(SwingConstants.RIGHT);
         summertitle.setIconTextGap(10);
         // GridBag Attributes
-        setPanelContraints(summarydetailsmainpanel, summertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE);
+        // setPanelContraints(summarydetailsmainpanel, summertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE, false);
+        setPanelContraints(summarydetailwestpanelsummer, summertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE, false);
 
         // Summary Details Panel Season Title / Non-Summer
         // Regular Attributes
@@ -557,7 +561,8 @@ public class ViewCalculatePanel extends Panel {
         nonsummertitle.setIconTextGap(10);
         nonsummertitle.setVisible(false); 
         // GridBag Attributes
-        setPanelContraints(summarydetailsmainpanel, nonsummertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE);
+        // setPanelContraints(summarydetailsmainpanel, nonsummertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE, false);
+        setPanelContraints(summarydetailwestpanelsummer, nonsummertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE, false);
 
 
         // Off Peak Label
@@ -645,32 +650,34 @@ public class ViewCalculatePanel extends Panel {
 
         // Season Toggle Button
         // Regular Attributes
-        seasontoggle.setFont(new Font("Poppins", Font.BOLD, 20));
+        seasontoggle.setFont(new Font("Poppins", Font.BOLD, 15));
         seasontoggle.setForeground(Color.WHITE);
         seasontoggle.setBackground(new Color(2, 29, 62));
         seasontoggle.setBorderPainted(false);
         seasontoggle.setFocusPainted(false);
+        seasontoggle.setPreferredSize(SUMMARY_DETAILS_BUTTON_SIZE);
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, seasontoggle, 0, GridBagConstraints.WEST, 0, 7, SUMMARY_DETAIL_BUTTON_INSETS  , 3);
 
-
         // Reset Default Button
         // Regular Attributes
-        resetdefault.setFont(new Font("Poppins", Font.BOLD, 20));
+        resetdefault.setFont(new Font("Poppins", Font.BOLD, 15));
         resetdefault.setForeground(Color.WHITE);
         resetdefault.setBackground(new Color(2, 29, 62));
         resetdefault.setBorderPainted(false);
         resetdefault.setFocusPainted(false);
+        resetdefault.setPreferredSize(SUMMARY_DETAILS_BUTTON_SIZE);
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, resetdefault, 0, GridBagConstraints.WEST, 0, 8, SUMMARY_DETAIL_BUTTON_INSETS  , 3);
 
         // Reset Default Button
         // Regular Attributes
-        submituservaluesbutton.setFont(new Font("Poppins", Font.BOLD, 20));
+        submituservaluesbutton.setFont(new Font("Poppins", Font.BOLD, 15));
         submituservaluesbutton.setForeground(Color.WHITE);
         submituservaluesbutton.setBackground(new Color(76,175,106));
         submituservaluesbutton.setBorderPainted(false);
         submituservaluesbutton.setFocusPainted(false);
+        submituservaluesbutton.setPreferredSize(SUMMARY_DETAILS_BUTTON_SIZE);
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, submituservaluesbutton, 0, GridBagConstraints.WEST, 0, 9, SUMMARY_DETAIL_BUTTON_INSETS  , 3);
 
@@ -678,13 +685,13 @@ public class ViewCalculatePanel extends Panel {
         // Regular Attributes
         totalusagepanel.setBackground(new Color(2,29,62));
         // GridBag Attributes
-        setPanelContraints(summarydetaileastpanel, totalusagepanel, 0, GridBagConstraints.WEST, 0, 0, RESET_DEFAULT_INSETS);
+        setPanelContraints(summarydetaileastpanel, totalusagepanel, 0, GridBagConstraints.WEST, 0, 1, RESET_DEFAULT_INSETS, false);
 
         // Total Cost Sub Panel
         // Regular Attributes
         totalcostpanel.setBackground(new Color(76,175,106));
         // GridBag Attributes
-        setPanelContraints(summarydetaileastpanel, totalcostpanel, 0, GridBagConstraints.WEST, 0, 1, RESET_DEFAULT_INSETS);
+        setPanelContraints(summarydetaileastpanel, totalcostpanel, 0, GridBagConstraints.WEST, 0, 2, RESET_DEFAULT_INSETS, false);
 
         /* INDIVIDUAL SUB PANEL COMPONENT CONSTRAINTS */
 
