@@ -9,8 +9,11 @@ import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePanel;
+import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePicker;
+import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.UtilDateModel;
 
-public class ManualInputPanel extends Panel{
+public class ManualInputPanel extends Panel {
 
     /* Constants */
     private static final Dimension DIMENSION_TEXTFIELD = new Dimension(100, 25);
@@ -20,9 +23,12 @@ public class ManualInputPanel extends Panel{
     private static final int HOURS = 24;
 
     // Padding
-    private static final Insets GLOBAL_PADDING  = new Insets(10, 10, 10, 10);
-    private static final Insets DEFAULT_INSETS  = new Insets(0, 0, 0, 0);
-    private static final Insets TITLE_INSETS    = new Insets(0,10,0,10);
+    private static final Insets GLOBAL_PADDING = new Insets(10, 10, 10, 10);
+    private static final Insets DEFAULT_INSETS = new Insets(0, 0, 0, 0);
+    private static final Insets TITLE_INSETS = new Insets(0, 10, 0, 10);
+    private UtilDateModel datemodel = new UtilDateModel();
+    private JDatePanel datePanel = new JDatePanel(datemodel);
+    private JDatePicker datePicker = new JDatePicker(datePanel);
 
     // Main Panels
     private DefaultTableModel model = new DefaultTableModel(){
@@ -87,10 +93,13 @@ public class ManualInputPanel extends Panel{
     public JTextField getEnterUsageField() { return this.enterusagefield; }
     public JTable getTable() { return this.tablepanel; }
     public DefaultTableModel getModel() { return this.model; }
+    public JDatePicker getDatePicker(){ return datePicker;}
 
 
     // Intialize All Components
     public void initializeComponents(){
+
+        tablepanel.getTableHeader().setReorderingAllowed(false);
        /* Instantiate all components of panel here */
         this.addentrybutton = new JButton("Add Entry");
         this.enterdatefield = new JFormattedTextField(df);
@@ -98,7 +107,7 @@ public class ManualInputPanel extends Panel{
         enterperiodfield.setEditable(false);
 
         for(int i = 0; i < HOURS; i++){
-            enterperiodfield.addItem(i + ":00 - " + (int)(i+1) + ":00");
+            enterperiodfield.addItem(String.format("%02d:00 - " + "%02d" + ":00", i, (int)(i+1)) );
         }
 
             Object[] columns = {"Date" , "Period" , "Usage" , "Edit" , "Delete"};
@@ -220,7 +229,7 @@ public class ManualInputPanel extends Panel{
         c.gridy = 2;
         c.fill = GridBagConstraints.HORIZONTAL;
         c.insets = new Insets(0,10,0,10);
-        inputpanel.add(enterdatefield, c);
+        inputpanel.add(datePicker, c);
 
         // Period Field Label
         // Regular Attributes

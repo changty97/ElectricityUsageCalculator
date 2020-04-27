@@ -8,10 +8,6 @@ import java.awt.event.ActionListener;
 
 // Swing Imports
 import javax.swing.*;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.text.TableView;
-
 import java.awt.*;
 
 // IO Imports
@@ -19,6 +15,10 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.FocusEvent;
+
+import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePanel;
+import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePicker;
+import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.UtilDateModel;
 
 /*
 // Util Imports
@@ -41,6 +41,7 @@ import edu.csus.csc131.euc.model.data.Day;
 import edu.csus.csc131.euc.view.panels.ViewCalculatePanel;
 import edu.csus.csc131.euc.model.data.Profile;
 import edu.csus.csc131.euc.model.data.Rates;
+import edu.csus.csc131.euc.model.data.Record;
 
 public class Controller {
     // Instance Variables for Controller
@@ -50,6 +51,9 @@ public class Controller {
     // current Day Index
     private int dayIndex;
     private boolean isSummer = true;
+
+    //array to keep track of duplicate entries
+
 
     public Controller(final Model m, final View v) {
         this.model = m;
@@ -172,8 +176,8 @@ public class Controller {
 
         try{
             //updates the total values by day
-            panel.getUsageCostTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.getTotalCostByDay(dayIndex)));
-            panel.getUsageCostTotalUsage().setText( "<html>" + profile.getTotalUsageByDay(dayIndex) + " <font size=3>kWH</font></html>");
+            panel.getUsageCostTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.getTotalCostByDay(dayIndex), 2));
+            panel.getUsageCostTotalUsage().setText( "<html>" + formatDecimals(profile.getTotalUsageByDay(dayIndex), 4) + " <font size=3>kWH</font></html>");
 
             // Set up season detail dates
             panel.getSeasonDetailDate().setText(profile.getDays().get(dayIndex).getDate());
@@ -194,13 +198,13 @@ public class Controller {
 
         }
         //updates the total values
-        panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH()));
-        panel.getTotalUsage().setText("<html>" + formatDecimals(profile.getTotalUsage()) + " <font size=5>kWH</font></html>" );
+        panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH(), 2));
+        panel.getTotalUsage().setText("<html>" + formatDecimals(profile.getTotalUsage(), 2) + " <font size=5>kWH</font></html>" );
 
     }
 
-    public String formatDecimals(final float value){
-        final String s = String.format("%.2f", value);
+    public String formatDecimals(final float value, int decimal){
+        final String s = String.format("%."+decimal+"f", value);
         return s;
     }
 
@@ -234,63 +238,114 @@ public class Controller {
     class AddEntryListener implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
-            String date = view.getManualInputPanel().getEnterDateField().getText();
+            String date = view.getManualInputPanel().getDatePicker().getTextField().getText();
+
+            int month = view.getManualInputPanel().getDatePicker().getMonth();
+
+            System.out.println(date);
+
             int index =  view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
             int rows = view.getManualInputPanel().getModel().getRowCount();
-            float usage = 0;
 
             // Set the summer/non-summer boolean
-            String[] dateArray = date.split("/");
-            int month = Integer.parseInt(dateArray[0]);
             Object[] row = new Object[5];
+            if(!date.equals("")){
+                try{
+                    float usage = Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText());
 
-            try{
-                usage = Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText());
+                    //Add's a row to View and Calculate Panel
+                    row[0] = view.getManualInputPanel().getDatePicker().getTextField().getText();
+                    row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
+                    row[2] = String.format("%.4f", Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText()));
+                    // row[3] = "edit";
+                    // row[4] = "X";
+                    //Add Edit button
+                    view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(new ButtonRenderer());
+                    view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(new ButtonEditor(new JTextField("Edit")));
+                    //Add Delete Button
+                    view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(new ButtonRenderer());
+                    view.getManualInputPanel().getTable().getColumn("Delete").setCellEditor(new ButtonEditor(new JTextField("X")));
 
-                //Add's a row to View and Calculate Panel
-                row[0] = view.getManualInputPanel().getEnterDateField().getText();
-                row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
-                row[2] = view.getManualInputPanel().getEnterUsageField().getText();
-                //Add Edit button
-                view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(new ButtonRenderer());
-                view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(new ButtonEditor(new JTextField("Edit")));
-                //Add Delete Button
-                view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(new ButtonRenderer());
-                view.getManualInputPanel().getTable().getColumn("Delete").setCellEditor(new ButtonEditor(new JTextField("X")));
 
-                view.getManualInputPanel().getModel().addRow(row);
-                
+                    //Alternate Row Colors
+                    if(rows % 2 == 1) {
+                        view.getManualInputPanel().getTable().setBackground(Color.WHITE);
+                    } else {
+                        // view.getManualInputPanel().getTable().setBackground(Color.blue);
+                    }
 
-                //Alternate Row Colors
-                if(rows % 2 == 1) {
-                    view.getManualInputPanel().getTable().setBackground(Color.WHITE);
-                } else {
-                    // view.getManualInputPanel().getTable().setBackground(Color.blue);
+                    //always uses summer rates for now
+                    Day day = new Day(date, true);
+
+                    boolean duplicateExists = (Record.findDuplicateDay(date) != -1);
+
+
+                    //if there isn't a duplicate day
+                    if(!duplicateExists){
+                        //if between start of June and before October
+                        if(month > 6 && month < 10){
+                            day.setSummer(true);
+                        }else{
+                            day.setSummer(false);
+                        }
+                        day.setUsage(usage, index);
+
+                        model.getModelProfile().addDay(day);
+                        Record.addRecord(new Record(date, index));
+                        view.getManualInputPanel().getModel().addRow(row);
+
+                    }
+                    //if there is a duplicate day
+                    else{
+                        //no duplicate record
+                        if(Record.findDuplicate(date, index) == -1){
+
+                            model.getModelProfile().getDay(date).setUsage(usage, index);
+                            Record.addRecord(new Record(date, index));
+                            view.getManualInputPanel().getModel().addRow(row);
+                        }
+                        else{
+                            int result = JOptionPane.showConfirmDialog(
+                                view.getFrame(), "Duplicate record found! Do you want to replace?", "Duplicate",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.QUESTION_MESSAGE);
+                            if(result == JOptionPane.YES_OPTION){
+
+                                int rowNo = Record.findDuplicate(date, index);
+
+                                //remove duplicate row
+                                model.getModelProfile().deleteRecord(date, index);
+                                Record.deleteRecord(rowNo);
+                                view.getManualInputPanel().getModel().removeRow(rowNo);
+
+                                //sync day data
+                                model.getModelProfile().getDay(date).setUsage(usage, index);
+                                Record.addRecord(new Record(date, index));
+                                view.getManualInputPanel().getModel().addRow(row);
+                            }
+
+                        }
+
+                    }
+                    view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
+                    view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
+                    view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
+
+
+
+                    updateComponentsViewCalculate();
                 }
-
-                //always uses summer rates for now
-                Day day = new Day(date, true);
-
-                //if between start of June and before October
-                if(month > 6 && month < 10){
-                    day.setSummer(true);
-                }else{
-                    day.setSummer(false);
+                // catch(final NullPointerException ex){
+                //     System.out.println("Usage cannot be empty");
+                //     JOptionPane.showMessageDialog(view.getFrame(), "Usage cannot be empty");
+                // }
+                catch(final NumberFormatException ex){
+                    System.out.println("Usage has to be float!");
+                    JOptionPane.showMessageDialog(view.getFrame(), "Usage has to be a number.");
                 }
-
-                day.setUsage(usage, index);
-
-                model.getModelProfile().addDay(day);
-                view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
-                view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
-                view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
-                
-
-                updateComponentsViewCalculate();
             }
-            catch(final Exception ex){
-                System.out.println("Usage has to be float!");
-                JOptionPane.showMessageDialog(view.getFrame(), "Usage has to be a number.");
+            else{
+                JOptionPane.showMessageDialog(view.getFrame(), "Choose a Date.");
             }
 
         }
@@ -387,5 +442,3 @@ public class Controller {
     }
 
 }
-
-

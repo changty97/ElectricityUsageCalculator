@@ -31,6 +31,7 @@ import java.text.DateFormat;
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.model.data.Day;
+import edu.csus.csc131.euc.model.data.Record;
 import edu.csus.csc131.euc.controller.Controller;
 // Simple Local Import
 import edu.csus.csc131.euc.libraries.simple.JSONArray;
@@ -90,7 +91,51 @@ public class IJPanelIBActionListener implements ActionListener {
                 String[] timeEnd = end[1].split(":");
 
                 String[] dateArray = date.split("-");
+                int year = Integer.parseInt(dateArray[0]);
                 int month = Integer.parseInt(dateArray[1]);
+                int dayvalue = Integer.parseInt(dateArray[2]);
+
+                date = "";
+                switch (month){
+                    case 1:
+                        date += "Jan";
+                        break;
+                    case 2:
+                        date += "Feb";
+                        break;
+                    case 3:
+                        date += "Mar";
+                        break;
+                    case 4:
+                        date += "Apr";
+                        break;
+                    case 5:
+                        date += "May";
+                        break;
+                    case 6:
+                        date += "Jun";
+                        break;
+                    case 7:
+                        date += "Jul";
+                        break;
+                    case 8:
+                        date += "Aug";
+                        break;
+                    case 9:
+                        date += "Sep";
+                        break;
+                    case 10:
+                        date += "Oct";
+                        break;
+                    case 11:
+                        date += "Nov";
+                        break;
+                    case 12:
+                        date += "Dec";
+                        break;
+                }
+                date += " " + dayvalue + ", " + year;
+                System.out.println(date);
 
                 //if between start of June and before October
                 if(month > 6 && month < 10){
@@ -100,9 +145,19 @@ public class IJPanelIBActionListener implements ActionListener {
                 if(day.getDate().equals("")){
                     day.setDate(date);
                 }
+                Object[] row = new Object[5];
+
+                row[0] = date;
+                view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(Integer.parseInt(timeStart[0]));
+                row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
+                row[2] = String.format("%.4f", value);
+                row[3] = "edit";
+                row[4] = "X";
 
                 day.setUsage(value, Integer.parseInt(timeStart[0]), Integer.parseInt(timeEnd[0]));
-                
+                Record.addRecord(new Record(date, Integer.parseInt(timeStart[0])));
+                view.getManualInputPanel().getModel().addRow(row);
+
             }
             model.getModelProfile().addDay(day);
             //updates the view calculate panel

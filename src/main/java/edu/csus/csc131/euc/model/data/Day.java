@@ -30,6 +30,10 @@ public class Day {
     return sum;
   }
 
+  public float getUsageAtIndex(int index){
+    return usage.getUsageAtIndex(index);
+  }
+
   public boolean isSummer(){
     return isSummer;
   }
@@ -54,4 +58,6 @@ public class Day {
   public void setSummer(boolean isSummer){
     this.isSummer = isSummer;
   }
+
+
 }
