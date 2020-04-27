@@ -55,6 +55,7 @@ public class Controller {
         // Initializers for the Controller
         initializeView();
         initializeActionListeners();
+        updateComponentsViewCalculate();
     }
 
     // Initializes all action listeners
