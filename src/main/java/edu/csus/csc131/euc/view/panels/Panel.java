@@ -416,7 +416,26 @@ public class Panel {
     // for no weight
     public void setPanelContraints(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset, Boolean isWeight) {
         c = new GridBagConstraints();
-        c.fill = fill;
+        if(fill > 0){
+            c.fill = fill;
+        }
+        c.anchor = anchor;
+        // c.weightx = c.weighty = 0;
+        c.gridx = gridx; 
+        c.gridy = gridy;
+
+         // Setting the padding
+         if( inset != null ){  c.insets = inset; }
+        pane.add(comp, c);
+    }
+
+    // for no weight, + gridwidth
+    public void setPanelContraints(JComponent pane, JComponent comp, int fill, int anchor, int gridx, int gridy, Insets inset, Boolean isWeight, int gridwidth) {
+        c = new GridBagConstraints();
+        if(fill > 0){
+            c.fill = fill;
+        }
+        c.gridwidth = GridBagConstraints.RELATIVE;
         c.anchor = anchor;
         // c.weightx = c.weighty = 0;
         c.gridx = gridx; 

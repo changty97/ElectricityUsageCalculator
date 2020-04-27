@@ -155,6 +155,7 @@ public class Controller {
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
             panel.getSummerOffPeakPeriod().setText("Midnight - Noon");
             panel.getSummerMidPeakPeriod().setText("Noon - 5pm/8pm - Midnight");
+            panel.displaySummerSeasonTitle();
         }
         else{
             panel.displayNonSummerSeasonTitle();
@@ -164,6 +165,7 @@ public class Controller {
             panel.getSummerOffPeakPeriod().setText("Midnight - 5pm/ 8pm - Midnight");
             panel.getSummerMidPeakPeriod().setText("N/A");
             System.out.println(panel.getSummerOffPeakRate().getText());
+            panel.displayNonSummerSeasonTitle();
         }
 
         try{
