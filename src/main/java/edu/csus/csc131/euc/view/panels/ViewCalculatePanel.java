@@ -12,7 +12,8 @@ public class ViewCalculatePanel extends Panel {
     // Main Sub Panels Size
     private final Dimension USAGE_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
     private final Dimension SUMMARY_DETAILS_SUB_PANEL_SIZE = new Dimension(1028, 432);
-    private final Dimension SUMMARY_DETAILS_BUTTON_SIZE = new Dimension(150,30);
+    private final Dimension SUMMARY_DETAILS_BUTTON_SIZE = new Dimension(150,30); 
+    private final Dimension SUMMARY_DETAILS_TEXTFIELD_SIZE = new Dimension(180,30); 
 
     // Padding
     private static final Insets DEFAULT_INSETS                       = new Insets(0,0,0,0);
@@ -576,6 +577,7 @@ public class ViewCalculatePanel extends Panel {
 
         // Off Peak Rate
         // Regular Attributes
+        summeroffpeakrate.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summeroffpeakrate.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes 
         setPanelContraints(summarydetailwestpanelsummer, summeroffpeakrate, 0, GridBagConstraints.WEST, 2, 1, DEFAULT_INSETS, false);  
@@ -588,6 +590,7 @@ public class ViewCalculatePanel extends Panel {
         
         // Off Peak Period
         // Regular Attributes
+        summeroffpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summeroffpeakperiod.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, summeroffpeakperiod, 0, GridBagConstraints.WEST, 2, 2, DEFAULT_INSETS, false);
@@ -606,6 +609,7 @@ public class ViewCalculatePanel extends Panel {
 
 
         // Mid-peak Rate
+        summermidpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summermidpeakperiod.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, summermidpeakrate, 0, GridBagConstraints.WEST, 2, 3, DEFAULT_INSETS, false);
@@ -616,7 +620,8 @@ public class ViewCalculatePanel extends Panel {
         setPanelContraints(summarydetailwestpanelsummer, periodlbls[1], 0, GridBagConstraints.EAST, 1, 4, DEFAULT_INSETS, false);
 
 
-        // Mid-peak Period
+        // Mid-peak Rate
+        summermidpeakrate.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summermidpeakrate.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, summermidpeakperiod, 0, GridBagConstraints.WEST, 2, 4, DEFAULT_INSETS, false);
@@ -632,6 +637,7 @@ public class ViewCalculatePanel extends Panel {
         setPanelContraints(summarydetailwestpanelsummer, ratelbls[2], 0, GridBagConstraints.EAST, 1, 5, DEFAULT_INSETS, false);
 
         // Peak Rate
+        summerpeakrate.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summerpeakrate.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, summerpeakrate, 0, GridBagConstraints.WEST, 2, 5, DEFAULT_INSETS, false);
@@ -642,6 +648,7 @@ public class ViewCalculatePanel extends Panel {
         setPanelContraints(summarydetailwestpanelsummer, periodlbls[2], 0, GridBagConstraints.EAST, 1, 6, DEFAULT_INSETS, false);
 
         // Peak Period
+        summerpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summerpeakperiod.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes
         setPanelContraints(summarydetailwestpanelsummer, summerpeakperiod, 0, GridBagConstraints.WEST, 2, 6, DEFAULT_INSETS, false);
