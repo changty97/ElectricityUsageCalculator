@@ -107,7 +107,7 @@ public class ViewCalculatePanel extends Panel {
                 // 1st Column: Usage (Labels)
                     private JLabel usagecosttotalusagelbl = new JLabel("Total: ");
                     private JLabel usagecostnonpeakusagelbl = new JLabel("Non-Peak: ");
-                    private JLabel usagecostmidpeakusagelbl = new JLabel("Non-Peak: ");
+                    private JLabel usagecostmidpeakusagelbl = new JLabel("Mid-Peak: ");
                     private JLabel usagecostpeakusagelbl = new JLabel("Peak: ");
                 // 1st Column: Usage (Values)
                     private JLabel usagecosttotalusage = new JLabel("<html>24.383 <font size=4>kWH</font></html>");
@@ -117,7 +117,7 @@ public class ViewCalculatePanel extends Panel {
                 // 2nd Column: Usage (Labels)
                     private JLabel usagecosttotalcostlbl = new JLabel("Total Cost: ");
                     private JLabel usagecostnonpeakcostlbl = new JLabel("Cost Non-Peak: ");
-                    private JLabel usagecostmidpeakcostlbl = new JLabel(" Cost Non-Peak: ");
+                    private JLabel usagecostmidpeakcostlbl = new JLabel(" Cost Mid-Peak: ");
                     private JLabel usagecostpeakcostlbl = new JLabel("Cost Peak: ");
                 // 2nd Column: Usage (Values)
                     private JLabel usagecosttotalcost = new JLabel("$ 3.89");
@@ -173,15 +173,6 @@ public class ViewCalculatePanel extends Panel {
                         private JTextField summermidpeakperiod = new JTextField("Noon - 5pm/ 8pm - Midnight");
                         private JTextField summerpeakrate = new JTextField("$0.2941");
                         private JTextField summerpeakperiod = new JTextField("5PM - 8PM");
-
-                // summarydetailwestpanelnonsummer : Sub Panel 2 of summarydetailwestgrouppanels
-                    private JPanel summarydetailwestpanelnonsummer = new JPanel(new GridBagLayout());
-
-                    // summarydetailwestpanelnonsummer : Components
-                        private JTextField nonsummeroffpeakrate = new JTextField("$0.1388");
-                        private JTextField nonsummeroffpeakperiod = new JTextField("5PM - 8PM");
-                        private JTextField nonsummerpeakrate = new JTextField("$0.1006");
-                        private JTextField nonsummerpeakperiod = new JTextField("Midnight - 5PM , 5PM - 8PM");
 
             /* usagecostdetailspanel : Sub Panel 2 */
 
@@ -282,12 +273,6 @@ public class ViewCalculatePanel extends Panel {
     public void setSummerPeakRate(float f){ this.summerpeakrate.setText(Float.toString(f)); }
     public void setSummerPeakPeriod(float f){ this.summerpeakperiod.setText(Float.toString(f)); }
 
-    // summarydetailwestpanelnonsummer
-    public void setNonSummerOffPeakRate(float f){ this.nonsummeroffpeakrate.setText(Float.toString(f)); }
-    public void setNonSummerOffPeakPeriod(float f){ this.nonsummeroffpeakperiod.setText(Float.toString(f)); }
-    public void setNonSummerPeakRate(float f){ this.nonsummerpeakperiod.setText(Float.toString(f)); }
-    public void setNonSummerPeakPeriod(float f){ this.nonsummerpeakperiod.setText(Float.toString(f)); }
-
     // totalusagepanel
     public void setTotalUsage(float f){ this.totalusage.setText(Float.toString(f)); }
 
@@ -321,12 +306,6 @@ public class ViewCalculatePanel extends Panel {
     public JTextField getSummerMidPeakPeriod(){return this.summermidpeakperiod; }
     public JTextField getSummerPeakRate(){ return this.summerpeakrate; }
     public JTextField getSummerPeakPeriod(){ return this.summerpeakperiod; }
-
-    //summarydetailwestpanelnonsummer
-    public JTextField getNonSummerOffPeakRate(){ return this.nonsummeroffpeakrate; }
-    public JTextField getNonSummerOffPeakPeriod(){ return this.nonsummeroffpeakperiod; }
-    public JTextField getNonSummerPeakRate(){ return this.nonsummerpeakperiod; }
-    public JTextField getNonSummerPeakPeriod(){ return this.nonsummerpeakperiod; }
 
     // season toggle
     public JButton getSeasonToggleButton(){ return seasontoggle;}
@@ -520,11 +499,8 @@ public class ViewCalculatePanel extends Panel {
         /* Summary Details Main Sub Panel */
         //  Summary West Panel
         // Regular Attributes
-        summarydetailwestgrouppanels.setBackground(Color.WHITE);
         summarydetailwestpanelsummer.setBackground(Color.WHITE);
-        summarydetailwestpanelnonsummer.setBackground(Color.WHITE);
         summarydetailwestgrouppanels.add(summarydetailwestpanelsummer, "summer");
-        summarydetailwestgrouppanels.add(summarydetailwestpanelnonsummer, "nonsummer");
 
         // GridBag Attributes
         setPanelContraints(summarydetailsmainpanel, summarydetailwestgrouppanels, GridBagConstraints.VERTICAL, GridBagConstraints.WEST, 0, 1, DEFAULT_INSETS);
@@ -590,6 +566,7 @@ public class ViewCalculatePanel extends Panel {
         
         // Off Peak Period
         // Regular Attributes
+        summeroffpeakperiod.setEditable(false); 
         summeroffpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summeroffpeakperiod.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes
@@ -609,6 +586,7 @@ public class ViewCalculatePanel extends Panel {
 
 
         // Mid-peak Rate
+        summermidpeakperiod.setEditable(false);
         summermidpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summermidpeakperiod.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes
@@ -648,6 +626,7 @@ public class ViewCalculatePanel extends Panel {
         setPanelContraints(summarydetailwestpanelsummer, periodlbls[2], 0, GridBagConstraints.EAST, 1, 6, DEFAULT_INSETS, false);
 
         // Peak Period
+        summerpeakperiod.setEditable(false); 
         summerpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summerpeakperiod.setFont(new Font("Poppins", Font.BOLD, 15));
         // GridBag Attributes

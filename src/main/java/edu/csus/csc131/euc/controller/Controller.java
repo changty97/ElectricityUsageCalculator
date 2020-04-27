@@ -168,8 +168,8 @@ public class Controller {
 
         try{
             //updates the total values by day
-            panel.getUsageCostTotalCost().setText("<html>" + formatDecimals(profile.getTotalCostByDay(dayIndex)) + " <font size=3>kWH</font></html>");
-            panel.getUsageCostTotalUsage().setText( panel.getDollarSign() + profile.getTotalUsageByDay(dayIndex));
+            panel.getUsageCostTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.getTotalCostByDay(dayIndex)));
+            panel.getUsageCostTotalUsage().setText( "<html>" + profile.getTotalUsageByDay(dayIndex) + " <font size=3>kWH</font></html>");
 
             // Set up season detail dates
             panel.getSeasonDetailDate().setText(profile.getDays().get(dayIndex).getDate());
