@@ -3,6 +3,7 @@ package edu.csus.csc131.euc.model.data;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ListIterator;
 
 // ----------------------------------------- //
 // Profile Class: Sets up user profile       //
@@ -125,5 +126,25 @@ public class Profile {
         nonSummerRates = new Rates(false);
     }
 
+    public Day getDay(String date){
+        ListIterator<Day> i = days.listIterator();
+        Day d = new Day(date, true);
+        while(i.hasNext()){
+            Day comp = i.next();
+            if(d.getDate().equals(date)){
+                return comp;
+            }
+        }
+        return null;
+    }
+    public void deleteRecord(String date, int index){
+        ListIterator<Day> i = days.listIterator();
+        while(i.hasNext()){
+            Day d = i.next();
+            if(d.getDate().equals(date)){
+                d.setUsage(0, index);
+            }
+        }
+    }
 
 }
