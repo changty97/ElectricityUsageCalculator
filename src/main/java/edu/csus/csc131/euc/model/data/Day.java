@@ -3,6 +3,7 @@ package edu.csus.csc131.euc.model.data;
 public class Day {
 
   private String date;
+  private String period; 
   private Usage usage;
   private boolean isSummer;
 
@@ -34,11 +35,16 @@ public class Day {
     return isSummer;
   }
 
+  public String getPeriod(){ return this.period; }
+
   //setters
 
   public void setDate(String date){
     this.date = date;
   }
+
+  public void setPeriod(String period){ this.period = period; }
+
 
   // This function initializes usage specific for the profile
   public void setUsage(float value, int index){
