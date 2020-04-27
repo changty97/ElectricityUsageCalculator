@@ -33,7 +33,7 @@ public class ViewCalculatePanel extends Panel {
 
     // Sub Panels Size
     // Rounded
-    private final Dimension SEASON_DETAIL_PANEL_SIZE = new Dimension(230, 90);
+    private final Dimension SEASON_DETAIL_PANEL_SIZE = new Dimension(230, 70);
     private final Dimension USAGE_COST_DETAIL_PANEL_SIZE = new Dimension(870, 190);
     private final Dimension TOTAL_USAGE_PANEL_SIZE = new Dimension(450,100);
     private final Dimension TOTAL_COST_PANEL_SIZE = new Dimension(450,100);
@@ -130,7 +130,7 @@ public class ViewCalculatePanel extends Panel {
                 // Labels
                     private JLabel seasondetailtitle = new JLabel("Summer");
                     private JLabel seasondetailsdate = new JLabel("June 1 - September 30");
-                    private JLabel seasondetailperiod = new JLabel("01:00 - 02:00");
+
                 // Icon
                     private JLabel summericon = new JLabel(new ImageIcon("src\\main\\assets\\viewandcalculateres\\summericon.png"));
                     private JLabel nonsummericon = new JLabel(new ImageIcon("src\\main\\assets\\viewandcalculateres\\nonsummer.png"));
@@ -271,7 +271,6 @@ public class ViewCalculatePanel extends Panel {
     // seasondetailspanel
     public void setSeasonDetailTitle(String s){ this.seasondetailtitle.setText(s); }
     public void setSeasonDetailDate(String s){ this.seasondetailsdate.setText(s); }
-    public void setSeasonDetailPeriod(String s){ this.seasondetailperiod.setText(s); }
     public void setSeasonIcon(ImageIcon i){ this.summericon.setIcon(i); }
 
     // summarydetailwestpanelsummer
@@ -312,7 +311,6 @@ public class ViewCalculatePanel extends Panel {
     // seasondetailspanel
     public JLabel getSeasonDetailTitle(){ return this.seasondetailtitle; }
     public JLabel getSeasonDetailDate(){ return this.seasondetailsdate; }
-    public JLabel getSeasonDetailPeriod(){ return this.seasondetailperiod; }
     public JLabel getSeasonIcon(){ return this.summericon; }
 
     //summarydetailwestpanelsummer
@@ -731,12 +729,7 @@ public class ViewCalculatePanel extends Panel {
         // Season Date
         // Regular Attributes
         seasondetailsdate.setFont(new Font("Poppins", Font.BOLD, 12));
-        setPanelContraints(seasondetailspanel, seasondetailsdate, 0, GridBagConstraints.NORTH, 0, 1, DEFAULT_INSETS);
-
-        // Season Date
-        // Regular Attributes
-        seasondetailperiod.setFont(new Font("Poppins", Font.PLAIN, 12));
-        setPanelContraints(seasondetailspanel, seasondetailperiod, 0, GridBagConstraints.NORTH, 0, 2, DEFAULT_INSETS);
+        setPanelContraints(seasondetailspanel, seasondetailsdate, 0, GridBagConstraints.NORTH, 0, 1, DEFAULT_INSETS);;
 
         /* Total Usage Sub Panel Components */
         // Total Usage Label
