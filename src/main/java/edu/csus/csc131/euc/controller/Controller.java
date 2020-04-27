@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
 
 // Swing Imports
 import javax.swing.*;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.text.TableView;
+
 import java.awt.*;
 
 // IO Imports
@@ -201,6 +205,32 @@ public class Controller {
     }
 
     // Additional Action Listeners needs to be put into appropriate folders
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+        
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+                setText((value == null) ? "" : value.toString());
+                return this;
+            }
+        }
+        
+        class ButtonEditor extends DefaultCellEditor {
+        
+            private String label;
+            JButton button = new JButton();
+            public ButtonEditor(JTextField txt) {
+                super(txt);
+            }
+            
+            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+                label = (value == null) ? "" : value.toString();
+                button.setText(label);
+                return button;
+            }
+        }
     class AddEntryListener implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -221,9 +251,15 @@ public class Controller {
                 row[0] = view.getManualInputPanel().getEnterDateField().getText();
                 row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
                 row[2] = view.getManualInputPanel().getEnterUsageField().getText();
-                row[3] = "edit";
-                row[4] = "X";
+                //Add Edit button
+                view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(new ButtonRenderer());
+                view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(new ButtonEditor(new JTextField("Edit")));
+                //Add Delete Button
+                view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(new ButtonRenderer());
+                view.getManualInputPanel().getTable().getColumn("Delete").setCellEditor(new ButtonEditor(new JTextField("X")));
+
                 view.getManualInputPanel().getModel().addRow(row);
+                
 
                 //Alternate Row Colors
                 if(rows % 2 == 1) {
@@ -248,6 +284,7 @@ public class Controller {
                 view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
                 view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
+                
 
                 updateComponentsViewCalculate();
             }
