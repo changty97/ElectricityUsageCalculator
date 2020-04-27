@@ -98,6 +98,8 @@ public class ManualInputPanel extends Panel {
 
     // Intialize All Components
     public void initializeComponents(){
+
+        tablepanel.getTableHeader().setReorderingAllowed(false);
        /* Instantiate all components of panel here */
         this.addentrybutton = new JButton("Add Entry");
         this.enterdatefield = new JFormattedTextField(df);
