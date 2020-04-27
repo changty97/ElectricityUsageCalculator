@@ -25,7 +25,18 @@ public class ManualInputPanel extends Panel{
     private static final Insets TITLE_INSETS    = new Insets(0,10,0,10);
 
     // Main Panels
-    private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel model = new DefaultTableModel(){
+        /**
+         *
+         */
+        private static final long serialVersionUID = 1L;
+
+        @Override
+        public boolean isCellEditable(int row, int column)
+        {
+          return false;//This causes all cells to be not editable
+        }
+    };
     private JTable tablepanel = new JTable(model);
     private JTableHeader header = tablepanel.getTableHeader();
     private JPanel inputpanel = new JPanel(new GridBagLayout());
@@ -96,6 +107,8 @@ public class ManualInputPanel extends Panel{
         this.model.setColumnIdentifiers(columns);
         this.tablepanel.setModel(this.model);
         this.scrollpane = new JScrollPane(this.tablepanel);
+
+        tablepanel.getTableHeader().setResizingAllowed(false);
 
         RowSorter<TableModel> sorter =
         new TableRowSorter<TableModel>(model);
