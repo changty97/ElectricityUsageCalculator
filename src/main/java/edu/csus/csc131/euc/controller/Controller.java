@@ -198,37 +198,20 @@ public class Controller {
 
     class AddEntryListener implements ActionListener {
         @Override
-        public void actionPerformed(final ActionEvent e) {
+        public void actionPerformed(ActionEvent e) {
             String date = view.getManualInputPanel().getEnterDateField().getText();
             int index =  view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
-            int rows = view.getManualInputPanel().getModel().getRowCount();
             float usage = 0;
 
             // Set the summer/non-summer boolean 
             String[] dateArray = date.split("/");
             int month = Integer.parseInt(dateArray[0]);
-            Object[] row = new Object[5];
+            
 
             try{
                 usage = Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText());
-
-                //Add's a row to View and Calculate Panel
-                row[0] = view.getManualInputPanel().getEnterDateField().getText(); 
-                row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
-                row[2] = view.getManualInputPanel().getEnterUsageField().getText();
-                row[3] = "edit";
-                row[4] = "X";
-                view.getManualInputPanel().getModel().addRow(row);
-
-                //Alternate Row Colors
-                // if(rows % 2 == 1) {
-                //     view.getManualInputPanel().getTable().setBackground(Color.WHITE);
-                // } else {
-                    // view.getManualInputPanel().getTable().setBackground(Color.blue);
-                // }
-
                 //always uses summer rates for now
-                final Day day = new Day(date, true);
+                Day day = new Day(date, true);
 
                 //if between start of June and before October
                 if(month > 6 && month < 10){
@@ -241,13 +224,14 @@ public class Controller {
                 day.setPeriod(index + ":00 - " + (int)(index+1) + ":00");
 
                 model.getModelProfile().addDay(day);
+                view.getManualInputPanel().getListModel().addElement(date + " " + index + ":00 - " + (int)(index+1) + ":00" + " " + usage);
                 view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
                 view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
 
                 updateComponentsViewCalculate();
             }
-            catch(final Exception ex){
+            catch(Exception ex){
                 System.out.println("Usage has to be float!");
                 JOptionPane.showMessageDialog(view.getFrame(), "Usage has to be a number.");
             }
