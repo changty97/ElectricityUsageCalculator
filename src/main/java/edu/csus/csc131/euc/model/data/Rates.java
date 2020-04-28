@@ -26,8 +26,8 @@ public class Rates {
     private static final float RATES_DEFAULT_PEAK_SUMMER_DEFAULT = (float)0.2941;
     private static final float RATES_DEFAULT_PEAK_NONSUMMER_DEFAULT = (float)0.1388;
 
-    private static String[] summerPeriod;
-    private static String[] nonSummerPeriod;
+    private static String[] summerPeriod = new String[24];
+    private static String[] nonSummerPeriod = new String[24];
 
 
 
@@ -103,47 +103,52 @@ public class Rates {
 
     public void setOffPeakSummerPeriod(int from, int to, boolean def){
         if(def){
-            Arrays.fill(rates, 0, 12, RATES_DEFAULT_OFFPEAK_SUMMER);
+            Arrays.fill(summerPeriod, 0, 12, "RATES_DEFAULT_OFFPEAK_SUMMER");
         }
         else{
-            Arrays.fill(rates, from, to, RATES_DEFAULT_OFFPEAK_SUMMER);
+            Arrays.fill(summerPeriod, from, to, "RATES_DEFAULT_OFFPEAK_SUMMER");
         }
     }
     public void setMidPeakSummerPeriod(int from, int to, boolean def){
         if(def){
-            Arrays.fill(rates, 12, 17, RATES_DEFAULT_MIDPEAK_SUMMER);
-            Arrays.fill(rates, 20, 24, RATES_DEFAULT_MIDPEAK_SUMMER);
+            Arrays.fill(summerPeriod, 12, 17, "RATES_DEFAULT_MIDPEAK_SUMMER");
+            Arrays.fill(summerPeriod, 20, 24, "RATES_DEFAULT_MIDPEAK_SUMMER");
         }
         else{
-            Arrays.fill(rates, from, to, RATES_DEFAULT_MIDPEAK_SUMMER);
+            Arrays.fill(summerPeriod, from, to, "RATES_DEFAULT_MIDPEAK_SUMMER");
         }
     }
     public void setPeakSummerPeriod(int from, int to, boolean def){
         if(def){
-            Arrays.fill(rates, 17, 20, RATES_DEFAULT_PEAK_SUMMER);
+            Arrays.fill(summerPeriod, 17, 20, "RATES_DEFAULT_PEAK_SUMMER");
         }
         else{
-            Arrays.fill(rates, from, to, RATES_DEFAULT_PEAK_SUMMER);
+            Arrays.fill(summerPeriod, from, to, "RATES_DEFAULT_PEAK_SUMMER");
         }
     }
 
     public void setPeakNonSummerPeriod(int from, int to, boolean def){
         if(def){
-            Arrays.fill(rates, 17, 20, RATES_DEFAULT_PEAK_NONSUMMER);
+            Arrays.fill(nonSummerPeriod, 17, 20, "RATES_DEFAULT_PEAK_NONSUMMER");
         }
         else{
-            Arrays.fill(rates, from, to, RATES_DEFAULT_PEAK_NONSUMMER);
+            Arrays.fill(nonSummerPeriod, from, to, "RATES_DEFAULT_PEAK_NONSUMMER");
         }
     }
 
     public void setOffPeakNonSummerPeriod(int from, int to, boolean def){
         if(def){
-            Arrays.fill(rates, 0, 17, RATES_DEFAULT_OFFPEAK_NONSUMMER);
-            Arrays.fill(rates, 20, 24, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+            Arrays.fill(nonSummerPeriod, 0, 17, "RATES_DEFAULT_OFFPEAK_NONSUMMER");
+            Arrays.fill(nonSummerPeriod, 20, 24, "RATES_DEFAULT_OFFPEAK_NONSUMMER");
         }
         else{
-            Arrays.fill(rates, from, to, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+            Arrays.fill(nonSummerPeriod, from, to, "RATES_DEFAULT_OFFPEAK_NONSUMMER");
         }
+    }
+
+    public void flushPeriods(){
+        summerPeriod = new String[24];
+        nonSummerPeriod = new String[24];
     }
     // Method for setting default time values
     public static void setDefaultRates(){
