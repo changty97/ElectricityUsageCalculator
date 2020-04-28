@@ -172,6 +172,7 @@ public class Controller {
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
             panel.getSummerOffPeakPeriod().setText("Midnight - Noon");
             panel.getSummerMidPeakPeriod().setText("Noon - 5pm/8pm - Midnight");
+            panel.displaySummerSeasonTitle();
         }
         else{
             panel.displayNonSummerSeasonTitle();
@@ -181,6 +182,7 @@ public class Controller {
             panel.getSummerOffPeakPeriod().setText("Midnight - 5pm/ 8pm - Midnight");
             panel.getSummerMidPeakPeriod().setText("N/A");
             System.out.println(panel.getSummerOffPeakRate().getText());
+            panel.displayNonSummerSeasonTitle();
         }
 
         try{
@@ -200,7 +202,7 @@ public class Controller {
             else {
                 panel.getSeasonDetailTitle().setText("Non-Summer");
                 panel.displayNonSummerIcon();
-        }
+            }
 
         }
         catch(Exception e){
@@ -280,11 +282,13 @@ public class Controller {
                     //if there isn't a duplicate day
                     if(!duplicateExists){
                         //if between start of June and before October
-                        if(month > 6 && month < 10){
+                        System.out.println(month);
+                        if(month >= 6 && month < 10){
                             day.setSummer(true);
                         }else{
                             day.setSummer(false);
                         }
+                        System.out.println("summer:" + day.isSummer());
                         day.setUsage(usage, index);
 
                         model.getModelProfile().addDay(day);
@@ -414,9 +418,8 @@ public class Controller {
                     model.getModelProfile().getSummerRates().setOffPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
                 }
                 else{
-                    model.getModelProfile().getNonSummerRates().setPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerPeakRate().getText()));
-                    model.getModelProfile().getNonSummerRates().setMidPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerMidPeakRate().getText()));
-                    model.getModelProfile().getNonSummerRates().setOffPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
+                    model.getModelProfile().getNonSummerRates().setPeakNonSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerPeakRate().getText()));
+                    model.getModelProfile().getNonSummerRates().setOffPeakNonSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
                 }
 
                 model.getModelProfile().resetToNewRates();
