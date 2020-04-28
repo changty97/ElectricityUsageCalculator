@@ -15,6 +15,12 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.FocusEvent;
+import javax.swing.table.*;
+// import javax.swing.table.TableCellRenderer;
+// import javax.swing.table.TableModel;
+// import javax.swing.table.DefaultTableCellRenderer;
+// import javax.swing.table.DefaultCellEditor;
+import javax.swing.text.TableView;
 
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePanel;
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePicker;
@@ -51,6 +57,8 @@ public class Controller {
     // current Day Index
     private int dayIndex;
     private boolean isSummer = true;
+    private ImageRenderer Edit = new ImageRenderer("src\\main\\assets\\manualinputres\\editfield.png");
+    private ImageRenderer Delete = new ImageRenderer("src\\main\\assets\\manualinputres\\deletebutton.png");
 
     //array to keep track of duplicate entries
 
@@ -81,7 +89,8 @@ public class Controller {
 
         // Action Listener for Add Entry button
         view.getManualInputPanel().getAddEntryButton().addActionListener(new AddEntryListener());
-        // view.getManualInputPanel().getAddEntryButton().addActionListener(new modelActionListener(view));
+        // Edit.getButton().addActionListener(new EditRowListener());
+        // Delete.getButton().addActionListener(new DeleteRowListener());
 
         // Focus Listener for UsageTextField and date
         view.getManualInputPanel().getEnterUsageField().addFocusListener(new Focus());
@@ -211,6 +220,30 @@ public class Controller {
     }
 
     // Additional Action Listeners needs to be put into appropriate folders
+    //Function to set Jbutton Icon to the Table
+        class ImageRenderer extends DefaultTableCellRenderer { 
+            private JButton btn;
+            
+            public ImageRenderer(String file) {
+                btn = new JButton(new ImageIcon(file));
+            }
+            
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+                    //Alternate background color for button
+                    btn.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
+                    btn.setText((String) value);
+                    btn.setBorderPainted(false);
+              return btn;
+            }
+
+            //setter
+            public void setButton(JButton b) { this.btn = b; }
+
+            //getter
+            public JButton getButton() { return this.btn; }
+          }
+    
     class AddEntryListener implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -233,16 +266,12 @@ public class Controller {
                     row[0] = view.getManualInputPanel().getDatePicker().getTextField().getText();
                     row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
                     row[2] = String.format("%.4f", Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText()));
-                    row[3] = "edit";
-                    row[4] = "X";
+                    //Add Edit button
+                    view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(Edit);
+                    // Edit.getButton().addActionListener(new EditRowListener());
 
-
-                    //Alternate Row Colors
-                    if(rows % 2 == 1) {
-                        view.getManualInputPanel().getTable().setBackground(Color.WHITE);
-                    } else {
-                        // view.getManualInputPanel().getTable().setBackground(Color.blue);
-                    }
+                    //Add Delete Button
+                    view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(Delete);
 
                     //always uses summer rates for now
                     Day day = new Day(date, true);
@@ -412,6 +441,20 @@ public class Controller {
         }
     }
 
+    class EditRowListener implements ActionListener {
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            System.out.println("Edit clicked!");
+            // view.getManualInputPanel().getModel().isCellEditable();
+        }
+    }
+    
+    class DeleteRowListener implements ActionListener {
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            System.out.println("Delete clicked!");
+            // view.getManualInputPanel().getModel().removeRow(row);
+        }
+    }
+
 }
-
-
