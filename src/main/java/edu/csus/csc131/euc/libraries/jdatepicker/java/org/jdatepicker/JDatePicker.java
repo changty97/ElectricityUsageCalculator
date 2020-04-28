@@ -320,7 +320,7 @@ public class JDatePicker extends JComponent implements DatePicker {
     }
 
     public int getMonth(){
-        return month;
+        return month+1;
     }
 
     public int getYear(){
