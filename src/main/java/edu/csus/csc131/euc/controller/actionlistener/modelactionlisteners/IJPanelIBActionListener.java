@@ -145,8 +145,17 @@ public class IJPanelIBActionListener implements ActionListener {
                 if(day.getDate().equals("")){
                     day.setDate(date);
                 }
-                Object[] row = new Object[5];
 
+                view.getManualInputPanel().getDatePicker().getTextField().setText(date);
+                view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(Integer.parseInt(timeStart[0]));
+                view.getManualInputPanel().getEnterUsageField().setText(String.format("%.4f", value));
+
+                view.getManualInputPanel().getAddEntryButton().getActionListeners()[0].actionPerformed(new ActionEvent(
+                    view.getManualInputPanel().getAddEntryButton(), dayvalue, date));
+
+                //Object[] row = new Object[5];
+
+                /*
                 row[0] = date;
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(Integer.parseInt(timeStart[0]));
                 row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
@@ -158,9 +167,11 @@ public class IJPanelIBActionListener implements ActionListener {
                 //Add Delete Button
                 view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(controller.getDelete());
 
+
                 day.setUsage(value, Integer.parseInt(timeStart[0]), Integer.parseInt(timeEnd[0]));
                 Record.addRecord(new Record(date, Integer.parseInt(timeStart[0])));
                 view.getManualInputPanel().getModel().addRow(row);
+                */
 
             }
             model.getModelProfile().addDay(day);
