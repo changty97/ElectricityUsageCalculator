@@ -219,9 +219,9 @@ public class ManualInputPanel extends Panel {
         inputpanel.add(datelbl, c);
 
         // Regular Attributes
-        enterdatefield.setFont(new Font("Poppins", Font.PLAIN, 15));
-        enterdatefield.setText("mm/dd/yyyy");
-        enterdatefield.setHorizontalAlignment(SwingConstants.CENTER);
+        datePicker.getTextField().setFont(new Font("Poppins", Font.PLAIN, 15));
+        datePicker.getTextField().setMargin(new Insets(0, 25, 0, 0));
+        datePicker.getTextField().setHorizontalAlignment(SwingConstants.CENTER);
         // Gridbag Attributes
         c = new GridBagConstraints();
         c.weightx = c.weighty = 0.125;
