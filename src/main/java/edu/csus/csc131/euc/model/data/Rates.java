@@ -31,7 +31,6 @@ public class Rates {
     // Default Constructor
     public Rates(boolean isSummer){
         // Always true for now
-        isSummer = true;
 
         rates = setUserRates(isSummer);
     }
@@ -64,7 +63,7 @@ public class Rates {
         RATES_DEFAULT_PEAK_NONSUMMER = value;
     }
     public void setOffPeakNonSummer(float value){
-        RATES_DEFAULT_PEAK_NONSUMMER = value;
+        RATES_DEFAULT_OFFPEAK_NONSUMMER = value;
     }
 
     private float[] setUserRates(boolean isSummer){

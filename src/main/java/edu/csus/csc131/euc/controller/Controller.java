@@ -258,6 +258,7 @@ public class Controller {
                         }else{
                             day.setSummer(false);
                         }
+                        System.out.println("summer:" + day.isSummer());
                         day.setUsage(usage, index);
 
                         model.getModelProfile().addDay(day);
@@ -387,9 +388,8 @@ public class Controller {
                     model.getModelProfile().getSummerRates().setOffPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
                 }
                 else{
-                    model.getModelProfile().getNonSummerRates().setPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerPeakRate().getText()));
-                    model.getModelProfile().getNonSummerRates().setMidPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerMidPeakRate().getText()));
-                    model.getModelProfile().getNonSummerRates().setOffPeakSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
+                    model.getModelProfile().getNonSummerRates().setPeakNonSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerPeakRate().getText()));
+                    model.getModelProfile().getNonSummerRates().setOffPeakNonSummer(Float.parseFloat(view.getViewCalculatePanel().getSummerOffPeakRate().getText()));
                 }
 
                 model.getModelProfile().resetToNewRates();
