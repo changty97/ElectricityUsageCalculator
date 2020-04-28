@@ -108,8 +108,6 @@ public class ManualInputPanel extends Panel {
             {
                 final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 c.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-                // table.setGridColor(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-                // c.setBorder(new EmptyBorder(2,2,2,2));
                 return c;
             }
         });
