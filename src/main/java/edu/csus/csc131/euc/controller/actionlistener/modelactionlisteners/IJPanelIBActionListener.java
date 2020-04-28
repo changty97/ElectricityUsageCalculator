@@ -151,8 +151,12 @@ public class IJPanelIBActionListener implements ActionListener {
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(Integer.parseInt(timeStart[0]));
                 row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
                 row[2] = String.format("%.4f", value);
-                row[3] = "edit";
-                row[4] = "X";
+                //Add Edit button
+                view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(controller.getEdit());
+                // Edit.getButton().addActionListener(new EditRowListener());
+
+                //Add Delete Button
+                view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(controller.getDelete());
 
                 day.setUsage(value, Integer.parseInt(timeStart[0]), Integer.parseInt(timeEnd[0]));
                 Record.addRecord(new Record(date, Integer.parseInt(timeStart[0])));
