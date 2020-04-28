@@ -74,8 +74,8 @@ public class Rates {
             Arrays.fill(temp, 17, 19, RATES_DEFAULT_PEAK_SUMMER);
             Arrays.fill(temp, 20, 23, RATES_DEFAULT_MIDPEAK_SUMMER);
         }else{
-            Arrays.fill(temp, 0, 15, RATES_DEFAULT_OFFPEAK_NONSUMMER);
-            Arrays.fill(temp, 16, 19, RATES_DEFAULT_PEAK_NONSUMMER);
+            Arrays.fill(temp, 0, 16, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+            Arrays.fill(temp, 17, 19, RATES_DEFAULT_PEAK_NONSUMMER);
             Arrays.fill(temp, 20, 23, RATES_DEFAULT_OFFPEAK_NONSUMMER);
         }
 
