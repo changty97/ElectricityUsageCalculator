@@ -138,14 +138,14 @@ public class IJPanelIBActionListener implements ActionListener {
                 System.out.println(date);
 
                 //if between start of June and before October
-                if(month > 6 && month < 10){
-                    day.setSummer(true);
-                }
-                //set date if it is not done already
-                if(day.getDate().equals("")){
-                    day.setDate(date);
-                }
-
+                // if(month >= 6 && month < 10){
+                //     day.setSummer(true);
+                // }
+                // //set date if it is not done already
+                // if(day.getDate().equals("")){
+                //     day.setDate(date);
+                // }
+                view.getManualInputPanel().getDatePicker().setMonth(month);
                 view.getManualInputPanel().getDatePicker().getTextField().setText(date);
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(Integer.parseInt(timeStart[0]));
                 view.getManualInputPanel().getEnterUsageField().setText(String.format("%.4f", value));
@@ -174,13 +174,12 @@ public class IJPanelIBActionListener implements ActionListener {
                 */
 
             }
-            model.getModelProfile().addDay(day);
+            //model.getModelProfile().addDay(day);
             //updates the view calculate panel
-            controller.updateComponentsViewCalculate();
             // Set a default view for view/calcuate which takes the datetime of the first rate in the array.
             // In this case, after importing the program, the index will be at 0 and we will see the start/end
             // time and the rate in the beginning of the dataset in the JSON file.
-            model.setModelIndex(0); // this will always set the index value to 0 at import.
+            //model.setModelIndex(0); // this will always set the index value to 0 at import.
             // view.getViewCalculatePanel().getUsageStartTime().setText(model.getModelRates().getStartTimeAtIndex(model.getModelIndex()));
             // view.getViewCalculatePanel().getUsageEndTime().setText(model.getModelRates().getEndTimeAtIndex(model.getModelIndex()));
 

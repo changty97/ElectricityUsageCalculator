@@ -69,14 +69,14 @@ public class Rates {
     private float[] setUserRates(boolean isSummer){
         float temp[] = new float[HOURS];
         if(isSummer){
-            Arrays.fill(temp, 0, 11, RATES_DEFAULT_OFFPEAK_SUMMER);
-            Arrays.fill(temp, 12, 16, RATES_DEFAULT_MIDPEAK_SUMMER);
-            Arrays.fill(temp, 17, 19, RATES_DEFAULT_PEAK_SUMMER);
-            Arrays.fill(temp, 20, 23, RATES_DEFAULT_MIDPEAK_SUMMER);
+            Arrays.fill(temp, 0, 12, RATES_DEFAULT_OFFPEAK_SUMMER);
+            Arrays.fill(temp, 12, 17, RATES_DEFAULT_MIDPEAK_SUMMER);
+            Arrays.fill(temp, 17, 20, RATES_DEFAULT_PEAK_SUMMER);
+            Arrays.fill(temp, 20, 24, RATES_DEFAULT_MIDPEAK_SUMMER);
         }else{
-            Arrays.fill(temp, 0, 15, RATES_DEFAULT_OFFPEAK_NONSUMMER);
-            Arrays.fill(temp, 16, 19, RATES_DEFAULT_PEAK_NONSUMMER);
-            Arrays.fill(temp, 20, 23, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+            Arrays.fill(temp, 0, 17, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+            Arrays.fill(temp, 17, 20, RATES_DEFAULT_PEAK_NONSUMMER);
+            Arrays.fill(temp, 20, 24, RATES_DEFAULT_OFFPEAK_NONSUMMER);
         }
 
         return temp;

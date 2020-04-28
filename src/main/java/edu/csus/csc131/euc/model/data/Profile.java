@@ -2,6 +2,7 @@
 package edu.csus.csc131.euc.model.data;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.ListIterator;
 
@@ -143,6 +144,21 @@ public class Profile {
             Day d = i.next();
             if(d.getDate().equals(date)){
                 d.setUsage(0, index);
+            }
+        }
+    }
+
+    public void dumpValues(){
+        ListIterator<Day> i = days.listIterator();
+        while(i.hasNext()){
+            Day d = i.next();
+            System.out.println(Arrays.toString(d.getUsage().getUsage()));
+
+            if(d.isSummer()){
+                System.out.println(Arrays.toString(summerRates.getRates()));
+            }
+            else{
+                System.out.println(Arrays.toString(nonSummerRates.getRates()));
             }
         }
     }

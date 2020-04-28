@@ -144,13 +144,13 @@ public class JDatePicker extends JComponent implements DatePicker {
         button = new JButton();
         button.setFocusable(true);
 
-        // Set button Attributes 
+        // Set button Attributes
         button.setFont(new Font("Poppins", Font.BOLD, 15));
         button.setForeground(Color.WHITE);
         button.setBackground(new Color(76,175,106));
         button.setBorderPainted(false);
         button.setFocusPainted(false);
-        
+
 
         Icon icon = ComponentIconDefaults.getInstance().getPopupButtonIcon();
         button.setIcon(icon);
@@ -161,7 +161,7 @@ public class JDatePicker extends JComponent implements DatePicker {
             // remove text
             button.setText("");
         }
-        
+
         add(button);
         layout.putConstraint(SpringLayout.WEST, button, 1, SpringLayout.EAST, formattedTextField);
         layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, button);
@@ -329,8 +329,16 @@ public class JDatePicker extends JComponent implements DatePicker {
         return day;
     }
 
+    public void setDay(int day){
+        this.day = day;
+    }
+
+    public void setMonth(int month){
+        this.month =  month-1;
+    }
+
     public int getMonth(){
-        return month+1;
+        return  month+1;
     }
 
     public int getYear(){
