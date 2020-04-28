@@ -130,9 +130,9 @@ public class Profile {
         ListIterator<Day> i = days.listIterator();
         Day d = new Day(date, true);
         while(i.hasNext()){
-            Day comp = i.next();
+            d = i.next();
             if(d.getDate().equals(date)){
-                return comp;
+                return d;
             }
         }
         return null;

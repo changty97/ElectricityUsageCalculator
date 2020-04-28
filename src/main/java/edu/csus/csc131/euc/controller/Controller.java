@@ -219,15 +219,23 @@ public class Controller {
         return s;
     }
 
+    public ImageRenderer getEdit(){
+        return Edit;
+    }
+
+    public ImageRenderer getDelete(){
+        return Delete;
+    }
+
     // Additional Action Listeners needs to be put into appropriate folders
     //Function to set Jbutton Icon to the Table
-        class ImageRenderer extends DefaultTableCellRenderer { 
+        class ImageRenderer extends DefaultTableCellRenderer {
             private JButton btn;
-            
+
             public ImageRenderer(String file) {
                 btn = new JButton(new ImageIcon(file));
             }
-            
+
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
                 boolean hasFocus, int row, int column) {
                     //Alternate background color for button
@@ -393,7 +401,7 @@ public class Controller {
                                 int rowNo = Record.findDuplicate(date, index);
 
                                 //remove duplicate row
-                                model.getModelProfile().deleteRecord(date, index);
+                                //model.getModelProfile().deleteRecord(date, index);
                                 Record.deleteRecord(rowNo);
                                 view.getManualInputPanel().getModel().removeRow(rowNo);
 
@@ -526,7 +534,7 @@ public class Controller {
             // view.getManualInputPanel().getModel().isCellEditable();
         }
     }
-    
+
     class DeleteRowListener implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
