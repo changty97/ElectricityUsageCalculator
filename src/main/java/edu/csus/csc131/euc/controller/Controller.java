@@ -263,13 +263,6 @@ public class Controller {
                     //Add Delete Button
                     view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(new ImageRenderer("src\\main\\assets\\manualinputres\\deletebutton.png"));
 
-                    //Alternate Row Colors
-                    // if(rows % 2 == 1) {
-                    //     view.getManualInputPanel().getTable().getColumn("Date").setBackground(Color.RED);
-                    // } else {
-                    //     view.getManualInputPanel().getTable().getColumn("Date").setBackground(Color.LIGHT_GRAY);
-                    // }
-
                     //always uses summer rates for now
                     Day day = new Day(date, true);
 
