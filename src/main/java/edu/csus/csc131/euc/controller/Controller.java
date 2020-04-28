@@ -211,7 +211,7 @@ public class Controller {
         //updates the total values
         panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH(), 2));
         panel.getTotalUsage().setText("<html>" + formatDecimals(profile.getTotalUsage(), 2) + " <font size=5>kWH</font></html>" );
-
+        model.getModelProfile().dumpValues();
     }
 
     public String formatDecimals(final float value, int decimal){
