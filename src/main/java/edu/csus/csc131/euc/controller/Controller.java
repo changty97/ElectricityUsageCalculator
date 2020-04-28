@@ -15,6 +15,10 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.FocusEvent;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableCellRenderer;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.text.TableView;
 
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePanel;
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePicker;
@@ -209,32 +213,29 @@ public class Controller {
     }
 
     // Additional Action Listeners needs to be put into appropriate folders
-    class ButtonRenderer extends JButton implements TableCellRenderer {
-
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-        
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                setText((value == null) ? "" : value.toString());
-                return this;
-            }
-        }
-        
-        class ButtonEditor extends DefaultCellEditor {
-        
-            private String label;
-            JButton button = new JButton();
-            public ButtonEditor(JTextField txt) {
-                super(txt);
-            }
+    //Function to set Jbutton Icon to the Table
+        class ImageRenderer extends DefaultTableCellRenderer {
+            // JLabel lbl = new JLabel();
+            private JButton btn = new JButton();
+            private ImageIcon icon;
             
-            public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
-                label = (value == null) ? "" : value.toString();
-                button.setText(label);
-                return button;
+            public ImageRenderer(String file) {
+                icon = new ImageIcon(file);
             }
-        }
+
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
+                boolean hasFocus, int row, int column) {
+                    btn.setText((String) value);
+                    btn.setIcon(icon);
+                    btn.setFocusPainted(false); 
+                    btn.setOpaque(false);
+                    btn.setContentAreaFilled(true);
+                    btn.setBackground(Color.WHITE); 
+                    btn.setBorderPainted(false);
+              return btn;
+            }
+          }
+          
     class AddEntryListener implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -257,22 +258,17 @@ public class Controller {
                     row[0] = view.getManualInputPanel().getDatePicker().getTextField().getText();
                     row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
                     row[2] = String.format("%.4f", Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText()));
-                    // row[3] = "edit";
-                    // row[4] = "X";
                     //Add Edit button
-                    view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(new ButtonRenderer());
-                    view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(new ButtonEditor(new JTextField("Edit")));
+                    view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(new ImageRenderer("src\\main\\assets\\manualinputres\\editfield.png"));
                     //Add Delete Button
-                    view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(new ButtonRenderer());
-                    view.getManualInputPanel().getTable().getColumn("Delete").setCellEditor(new ButtonEditor(new JTextField("X")));
-
+                    view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(new ImageRenderer("src\\main\\assets\\manualinputres\\deletebutton.png"));
 
                     //Alternate Row Colors
-                    if(rows % 2 == 1) {
-                        view.getManualInputPanel().getTable().setBackground(Color.WHITE);
-                    } else {
-                        // view.getManualInputPanel().getTable().setBackground(Color.blue);
-                    }
+                    // if(rows % 2 == 1) {
+                    //     view.getManualInputPanel().getTable().getColumn("Date").setBackground(Color.RED);
+                    // } else {
+                    //     view.getManualInputPanel().getTable().getColumn("Date").setBackground(Color.LIGHT_GRAY);
+                    // }
 
                     //always uses summer rates for now
                     Day day = new Day(date, true);
