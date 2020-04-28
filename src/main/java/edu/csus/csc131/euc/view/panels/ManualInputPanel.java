@@ -40,8 +40,15 @@ public class ManualInputPanel extends Panel {
         @Override
         public boolean isCellEditable(int row, int column)
         {
-          return false;//This causes all cells to be not editable
+            switch (column) {
+                case 3: return true; //Edit Cell needs to be true to allow for action listener
+                case 4: return true; //Delete Cell needs to be true to allow for action listener
+                default:
+                    return false; //This causes all other cells to be not editable
+             }
         }
+
+        
     };
     private JTable tablepanel = new JTable(model);
     private JTableHeader header = tablepanel.getTableHeader();
@@ -83,7 +90,6 @@ public class ManualInputPanel extends Panel {
     public void setTable(JTable t) { this.tablepanel = t; }
     public void setModel(DefaultTableModel tm) { this.model = tm; }
     //public void addTable()
-
 
     // Getters
     public JButton getAddEntryButton() { return this.addentrybutton; }
