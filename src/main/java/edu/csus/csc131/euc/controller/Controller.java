@@ -286,7 +286,7 @@ public class Controller {
                                 int rowNo = Record.findDuplicate(date, index);
 
                                 //remove duplicate row
-                                model.getModelProfile().deleteRecord(date, index);
+                                //model.getModelProfile().deleteRecord(date, index);
                                 Record.deleteRecord(rowNo);
                                 view.getManualInputPanel().getModel().removeRow(rowNo);
 
