@@ -8,6 +8,7 @@ import java.util.Arrays;
 // Rates Class: Contains rates               //
 // ----------------------------------------- //
 
+
 public class Rates {
 
     // Constants
@@ -25,13 +26,18 @@ public class Rates {
     private static final float RATES_DEFAULT_PEAK_SUMMER_DEFAULT = (float)0.2941;
     private static final float RATES_DEFAULT_PEAK_NONSUMMER_DEFAULT = (float)0.1388;
 
+    private static String[] summerPeriod;
+    private static String[] nonSummerPeriod;
+
+
+
     // Instance Variables
     private float [] rates;
 
     // Default Constructor
     public Rates(boolean isSummer){
         // Always true for now
-
+        setDefaultRates();
         rates = setUserRates(isSummer);
     }
 
@@ -47,6 +53,7 @@ public class Rates {
     public static float getPeakSummer(){ return RATES_DEFAULT_PEAK_SUMMER;}
     public static float getPeakNonSummer(){ return RATES_DEFAULT_PEAK_NONSUMMER;}
     public static float getOffPeakNonSummer(){ return RATES_DEFAULT_OFFPEAK_NONSUMMER;}
+
 
 
     //setters for default rates
@@ -69,17 +76,74 @@ public class Rates {
     private float[] setUserRates(boolean isSummer){
         float temp[] = new float[HOURS];
         if(isSummer){
-            Arrays.fill(temp, 0, 12, RATES_DEFAULT_OFFPEAK_SUMMER);
-            Arrays.fill(temp, 12, 17, RATES_DEFAULT_MIDPEAK_SUMMER);
-            Arrays.fill(temp, 17, 20, RATES_DEFAULT_PEAK_SUMMER);
-            Arrays.fill(temp, 20, 24, RATES_DEFAULT_MIDPEAK_SUMMER);
+            for(int i = 0; i < 24; i++){
+                if(summerPeriod[i].equals("RATES_DEFAULT_MIDPEAK_SUMMER")){
+                    rates[i] = RATES_DEFAULT_MIDPEAK_SUMMER;
+                }
+                else if(summerPeriod[i].equals("RATES_DEFAULT_PEAK_SUMMER")){
+                    rates[i] = RATES_DEFAULT_PEAK_SUMMER;
+                }
+                else if(summerPeriod[i].equals("RATES_DEFAULT_OFFPEAK_SUMMER")){
+                    rates[i] = RATES_DEFAULT_OFFPEAK_SUMMER;
+                }
+            }
         }else{
-            Arrays.fill(temp, 0, 17, RATES_DEFAULT_OFFPEAK_NONSUMMER);
-            Arrays.fill(temp, 17, 20, RATES_DEFAULT_PEAK_NONSUMMER);
-            Arrays.fill(temp, 20, 24, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+            for(int i = 0; i < 24; i++){
+                if(nonSummerPeriod[i].equals("RATES_DEFAULT_PEAK_NONSUMMER")){
+                    rates[i] = RATES_DEFAULT_PEAK_SUMMER;
+                }
+                else if(nonSummerPeriod[i].equals("RATES_DEFAULT_OFFPEAK_NONSUMMER")){
+                    rates[i] = RATES_DEFAULT_OFFPEAK_SUMMER;
+                }
+            }
         }
 
         return temp;
+    }
+
+    public void setOffPeakSummerPeriod(int from, int to, boolean def){
+        if(def){
+            Arrays.fill(rates, 0, 12, RATES_DEFAULT_OFFPEAK_SUMMER);
+        }
+        else{
+            Arrays.fill(rates, from, to, RATES_DEFAULT_OFFPEAK_SUMMER);
+        }
+    }
+    public void setMidPeakSummerPeriod(int from, int to, boolean def){
+        if(def){
+            Arrays.fill(rates, 12, 17, RATES_DEFAULT_MIDPEAK_SUMMER);
+            Arrays.fill(rates, 20, 24, RATES_DEFAULT_MIDPEAK_SUMMER);
+        }
+        else{
+            Arrays.fill(rates, from, to, RATES_DEFAULT_MIDPEAK_SUMMER);
+        }
+    }
+    public void setPeakSummerPeriod(int from, int to, boolean def){
+        if(def){
+            Arrays.fill(rates, 17, 20, RATES_DEFAULT_PEAK_SUMMER);
+        }
+        else{
+            Arrays.fill(rates, from, to, RATES_DEFAULT_PEAK_SUMMER);
+        }
+    }
+
+    public void setPeakNonSummerPeriod(int from, int to, boolean def){
+        if(def){
+            Arrays.fill(rates, 17, 20, RATES_DEFAULT_PEAK_NONSUMMER);
+        }
+        else{
+            Arrays.fill(rates, from, to, RATES_DEFAULT_PEAK_NONSUMMER);
+        }
+    }
+
+    public void setOffPeakNonSummerPeriod(int from, int to, boolean def){
+        if(def){
+            Arrays.fill(rates, 0, 17, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+            Arrays.fill(rates, 20, 24, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+        }
+        else{
+            Arrays.fill(rates, from, to, RATES_DEFAULT_OFFPEAK_NONSUMMER);
+        }
     }
     // Method for setting default time values
     public static void setDefaultRates(){
@@ -91,6 +155,13 @@ public class Rates {
         RATES_DEFAULT_OFFPEAK_NONSUMMER = RATES_DEFAULT_OFFPEAK_NONSUMMER_DEFAULT;
         RATES_DEFAULT_PEAK_NONSUMMER = RATES_DEFAULT_PEAK_NONSUMMER_DEFAULT;
 
+        Arrays.fill(summerPeriod, 0, 12, "RATES_DEFAULT_OFFPEAK_SUMMER");
+        Arrays.fill(summerPeriod, 12, 17, "RATES_DEFAULT_MIDPEAK_SUMMER");
+        Arrays.fill(summerPeriod, 17, 20, "RATES_DEFAULT_PEAK_SUMMER");
+        Arrays.fill(summerPeriod, 20, 24, "RATES_DEFAULT_MIDPEAK_SUMMER");
+        Arrays.fill(nonSummerPeriod, 0, 17, "RATES_DEFAULT_OFFPEAK_NONSUMMER");
+        Arrays.fill(nonSummerPeriod, 17, 20, "RATES_DEFAULT_PEAK_NONSUMMER");
+        Arrays.fill(nonSummerPeriod, 20, 24, "RATES_DEFAULT_OFFPEAK_NONSUMMER");
     }
 
 
