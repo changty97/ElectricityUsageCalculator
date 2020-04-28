@@ -145,7 +145,7 @@ public class IJPanelIBActionListener implements ActionListener {
                 // if(day.getDate().equals("")){
                 //     day.setDate(date);
                 // }
-
+                view.getManualInputPanel().getDatePicker().setMonth(month);
                 view.getManualInputPanel().getDatePicker().getTextField().setText(date);
                 view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(Integer.parseInt(timeStart[0]));
                 view.getManualInputPanel().getEnterUsageField().setText(String.format("%.4f", value));
