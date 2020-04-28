@@ -304,6 +304,8 @@ public class ViewCalculatePanel extends Panel {
         c.gridy = 1;
         c.ipadx = c.ipady = 50;
         c.anchor = GridBagConstraints.SOUTH;
+        // setPanelContraints(getPanel(), summarydetailsmainpanel, 0, GridBagConstraints.SOUTH, 0, 1, DEFAULT_INSETS);
+
         getPanel().add(summarydetailsmainpanel, c);
 
         /* MAIN SUB PANEL COMPONENTS  */
@@ -325,7 +327,7 @@ public class ViewCalculatePanel extends Panel {
         // Season Details Sub Panel
         // Regular Attributes
         // Grid Bag Attributes
-        setVeiewCalConstraints(usagedetailsmainpanel, seasondetailspanel, 1.0, GridBagConstraints.EAST, 1, 2, 0, SEASON_DETAILS_PANEL_PADDING);
+        setViewCalConstraints(usagedetailsmainpanel, seasondetailspanel, 1.0, GridBagConstraints.EAST, 1, 2, 0, SEASON_DETAILS_PANEL_PADDING);
 
 
         // Usage Cost Details Sub Panel
@@ -333,7 +335,7 @@ public class ViewCalculatePanel extends Panel {
         usagecostdetailspanel.setBackground(Color.WHITE);
         // Grid Bag Attributes
         // Label Attributes
-        setVeiewCalConstraints(usagedetailsmainpanel, usagecostdetailspanel, 1.0, GridBagConstraints.WEST, 2, 1, 1, USAGECOST_PANEL_PADDING);
+        setViewCalConstraints(usagedetailsmainpanel, usagecostdetailspanel, 1.0, GridBagConstraints.WEST, 2, 1, 1, USAGECOST_PANEL_PADDING);
        
         // RoundedPanel usagecostleft = new RoundedPanel();
         JPanel usagecostleft = new JPanel(new GridBagLayout());
