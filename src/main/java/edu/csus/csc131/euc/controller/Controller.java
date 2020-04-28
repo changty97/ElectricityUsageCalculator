@@ -193,7 +193,7 @@ public class Controller {
             else {
                 panel.getSeasonDetailTitle().setText("Non-Summer");
                 panel.displayNonSummerIcon();
-        }
+            }
 
         }
         catch(Exception e){
@@ -253,7 +253,8 @@ public class Controller {
                     //if there isn't a duplicate day
                     if(!duplicateExists){
                         //if between start of June and before October
-                        if(month > 6 && month < 10){
+                        System.out.println(month);
+                        if(month >= 6 && month < 10){
                             day.setSummer(true);
                         }else{
                             day.setSummer(false);
