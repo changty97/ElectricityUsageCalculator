@@ -108,6 +108,8 @@ public class ManualInputPanel extends Panel {
             {
                 final Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 c.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
+                // table.setGridColor(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
+                // c.setBorder(new EmptyBorder(2,2,2,2));
                 return c;
             }
         });
@@ -148,12 +150,13 @@ public class ManualInputPanel extends Panel {
         // table panel
 
         // Regular Attributes
-        tablepanel.setBackground(Color.WHITE);
+        //Sets grid on table to match background color
         tablepanel.setGridColor(Color.WHITE);
+        tablepanel.setIntercellSpacing(new Dimension(0,0));
         tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
         tablepanel.setRowHeight(30);
         tablepanel.setFont(new Font("Poppins", Font.BOLD, 15));
-
+        
         //Change the Default alignment from left to center on the table.
         DefaultTableCellRenderer centerRender = (DefaultTableCellRenderer)tablepanel.getDefaultRenderer(Object.class);
         centerRender.setHorizontalAlignment(SwingConstants.CENTER);
