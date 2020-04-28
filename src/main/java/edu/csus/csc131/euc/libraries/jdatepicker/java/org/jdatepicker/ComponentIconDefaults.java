@@ -67,7 +67,7 @@ public final class ComponentIconDefaults {
     private ComponentIconDefaults() {
         // TODO consider making all the icons vector images which will scale
         try {
-            clearIcon = new ImageIcon("src\\main\\assets\\clear.png");
+            clearIcon = new ImageIcon("src\\main\\assets\\datepickerres\\clear.png");
             //clearIcon = loadIcon(CLEAR);
             nextMonthIconEnabled = new JNextIcon(4, 7, false, true);
             nextYearIconEnabled = new JNextIcon(8, 7, true, true);
