@@ -3,7 +3,14 @@ package edu.csus.csc131.euc.view.panels;
 
 /*Library Imports*/
 import javax.swing.*;
+import javax.swing.text.MaskFormatter;
+
 import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Formatter;
+
 import edu.csus.csc131.euc.view.panels.subpanels.*;
 
 public class ViewCalculatePanel extends Panel {
@@ -128,11 +135,19 @@ public class ViewCalculatePanel extends Panel {
 
     // summarydetailwestpanelsummer : Components
     private JTextField summeroffpeakrate = new JTextField("$0.1209");
-    private JTextField summeroffpeakperiod = new JTextField("Midnight - Noon");
+
+    // private JTextField summeroffpeakperiod = new JTextField("Midnight - Noon");
+    private JTextField summeroffpeakperiod = new JTextField("00:00 to 12:00");
+;
     private JTextField summermidpeakrate = new JTextField("$0.1671");
-    private JTextField summermidpeakperiod = new JTextField("Noon - 5pm/ 8pm - Midnight");
+
+    // private JTextField summermidpeakperiod = new JTextField("Noon - 5pm/ 8pm - Midnight");
+    private JTextField summermidpeakperiod = new JTextField("12:00 to 17:00 20:00 to 00:00");
+
     private JTextField summerpeakrate = new JTextField("$0.2941");
-    private JTextField summerpeakperiod = new JTextField("5PM - 8PM");
+
+    // private JTextField summerpeakperiod = new JTextField("5PM - 8PM");
+    private JTextField summerpeakperiod = new JTextField("17:00 to 20:00");
 
     /* usagecostdetailspanel : Sub Panel 2 */
     private JPanel summarydetaileastpanel = new JPanel(new GridBagLayout());
@@ -281,6 +296,13 @@ public class ViewCalculatePanel extends Panel {
 
         // TITLE Sizes
         usagetitle.setPreferredSize(USAGE_DETAILS_TITLE_SIZE);
+
+        // Link ALs for InputVerifier 
+        // this.summeroffpeakperiod.is
+        // this.summermidpeakperiod =
+        // this.summerpeakperiod =
+
+
     }
 
     // Initializes Constraints for GridBag Layout
@@ -495,7 +517,6 @@ public class ViewCalculatePanel extends Panel {
         
         // Off Peak Period
         // Regular Attributes
-        summeroffpeakperiod.setEditable(false); 
         summeroffpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summeroffpeakperiod.setFont(new Font("Poppins", Font.BOLD, 12));
         // GridBag Attributes
@@ -515,7 +536,6 @@ public class ViewCalculatePanel extends Panel {
 
 
         // Mid-peak Rate
-        summermidpeakperiod.setEditable(false);
         summermidpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summermidpeakperiod.setFont(new Font("Poppins", Font.BOLD, 12));
         // GridBag Attributes
@@ -555,7 +575,6 @@ public class ViewCalculatePanel extends Panel {
         setPanelContraints(summarydetailwestpanelsummer, periodlbls[2], 0, GridBagConstraints.EAST, 1, 6, DEFAULT_INSETS, false);
 
         // Peak Period
-        summerpeakperiod.setEditable(false); 
         summerpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summerpeakperiod.setFont(new Font("Poppins", Font.BOLD, 12));
         // GridBag Attributes
@@ -717,5 +736,5 @@ public class ViewCalculatePanel extends Panel {
         this.nonsummertitle.setVisible(true);
 
     }
-
+    
 }
