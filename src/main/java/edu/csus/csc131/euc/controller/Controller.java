@@ -291,6 +291,10 @@ public class Controller {
     // Additional Action Listeners needs to be put into appropriate folders
     //Function to set Jbutton Icon to the Table
         class ImageRenderer extends DefaultTableCellRenderer {
+            /**
+             *
+             */
+            private static final long serialVersionUID = 1L;
             private JButton btn;
 
             public ImageRenderer(String file) {
