@@ -2,21 +2,21 @@
 package edu.csus.csc131.euc.model;
 
 /* Local Imports */
-import edu.csus.csc131.euc.model.data.*; 
+import edu.csus.csc131.euc.model.data.*;
 
 public class Model {
-    // Instance Variables handling all the models 
-    Profile profile; 
-    Usage usage; 
-    Rates rates; 
+    // Instance Variables handling all the models
+    Profile profile;
+    Usage usage;
+    Rates rates;
     int index;
 
-    // Construtor for all Models 
+    // Construtor for all Models
     public Model(int id){
         this.profile = new Profile(id);
-        this.usage = new Usage(); 
-        // Always true for summer for now 
-        this.rates = new Rates(true); 
+        this.usage = new Usage();
+        // Always true for summer for now
+        this.rates = new Rates(true);
         this.index = 0;
     }
 

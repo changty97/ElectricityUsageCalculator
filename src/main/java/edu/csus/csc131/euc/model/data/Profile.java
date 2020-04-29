@@ -117,14 +117,13 @@ public class Profile {
     }
 
     public void resetToNewRates(){
-        summerRates = new Rates(true);
-        nonSummerRates = new Rates(false);
+        summerRates.setUserRates(true);
+        nonSummerRates.setUserRates(false);
     }
 
     public void resetDefault(){
         Rates.setDefaultRates();
-        summerRates = new Rates(true);
-        nonSummerRates = new Rates(false);
+        Rates.setDefaultPeriod();
     }
 
     public Day getDay(String date){

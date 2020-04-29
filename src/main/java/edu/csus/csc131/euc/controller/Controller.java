@@ -14,6 +14,7 @@ import java.awt.*;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 import java.awt.event.FocusEvent;
 import javax.swing.table.*;
@@ -58,8 +59,8 @@ public class Controller {
     // current Day Index
     private int dayIndex;
     private boolean isSummer = true;
-    private boolean isUserEditedPeriods = false; 
-    private boolean isUserEditedRates = false; 
+    private boolean isUserEditedPeriods = false;
+    private boolean isUserEditedRates = false;
     private ImageRenderer Edit = new ImageRenderer("src\\main\\assets\\manualinputres\\editfield.png");
     private ImageRenderer Delete = new ImageRenderer("src\\main\\assets\\manualinputres\\deletebutton.png");
 
@@ -559,6 +560,10 @@ public class Controller {
                     isUserEditedPeriods = true;
                 }
             }
+
+
+            model.getModelProfile().getNonSummerRates().setUserRates(false);
+            model.getModelProfile().getSummerRates().setUserRates(true);
 
             // Set new user rates
             // if(isSummer){
