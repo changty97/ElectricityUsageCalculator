@@ -18,6 +18,9 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.FocusEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseAdapter;
 import javax.swing.table.*;
 
 /* Local Imports */
@@ -40,10 +43,11 @@ public class Controller {
     // current Day Index
     private int dayIndex;
     private boolean isSummer = true;
-    private ImageRenderer Edit = new ImageRenderer(new JCheckBox(), "src\\main\\assets\\manualinputres\\editfield.png");
-    private ImageRenderer Delete = new ImageRenderer(new JCheckBox(), "src\\main\\assets\\manualinputres\\deletebutton.png");
+    private ImageRenderer EditCellEditor = new ImageRenderer(new JTextField(), "src\\main\\assets\\manualinputres\\editfield.png");
+    private ClientsTableButtonRenderer EditCellRenderer = new ClientsTableButtonRenderer("src\\main\\assets\\manualinputres\\editfield.png");
+    private ImageRenderer DeleteCellEditor = new ImageRenderer(new JTextField(), "src\\main\\assets\\manualinputres\\deletebutton.png");
+    private ClientsTableButtonRenderer DeleteCellRenderer = new ClientsTableButtonRenderer("src\\main\\assets\\manualinputres\\deletebutton.png");
     private Object[] row = new Object[5];
-    private int rowCount;
 
     public Controller(final Model m, final View v) {
         this.model = m;
@@ -245,62 +249,27 @@ public class Controller {
     }
 
     public ImageRenderer getEdit(){
-        return Edit;
+        return EditCellEditor;
     }
 
     public ImageRenderer getDelete(){
-        return Delete;
+        return DeleteCellEditor;
     }
 
     // Additional Action Listeners needs to be put into appropriate folders
     //Function to set Jbutton Icon to the Table
-        // class ImageRenderer extends DefaultTableCellRenderer {
-        //     private JButton btn;
-
-        //     public ImageRenderer(String file) {
-        //         btn = new JButton(new ImageIcon(file));
-        //     }
-
-        //     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-        //         boolean hasFocus, int row, int column) {
-        //             //Alternate background color for button
-        //             btn.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
-        //             btn.setText((String) value);
-        //             btn.setBorderPainted(false);
-        //       return btn;
-        //     }
-
-        //     //setter
-        //     public void setButton(JButton b) { this.btn = b; }
-
-        //     //getter
-        //     public JButton getButton() { return this.btn; }
-        //   }
-    
           public class ImageRenderer extends DefaultCellEditor {
             protected JButton button;
-            // private String label;
-            private boolean isPushed;
            
-            public ImageRenderer(JCheckBox checkBox, String file) {
-              super(checkBox);
-              button = new JButton(new ImageIcon(file));
+            public ImageRenderer(JTextField text, String file) {
+              super(text);
+              this.button = new JButton(new ImageIcon(file));
             }
-           
+
             public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
-            //   if (isSelected) {
-            //     button.setForeground(table.getSelectionForeground());
-            //     button.setBackground(table.getSelectionBackground());
-            //   } else {
-            //     button.setForeground(table.getForeground());
-            //     button.setBackground(table.getBackground());
-            //   }
-            //   label = (value == null) ? "" : value.toString();
-            //   button.setText(label);
               button.setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
               button.setBorderPainted(false);
-              isPushed = true;
               return button;
             }
 
@@ -312,6 +281,28 @@ public class Controller {
            
           }
 
+          class ClientsTableButtonRenderer extends JButton implements TableCellRenderer
+            {
+                private String file;
+                public ClientsTableButtonRenderer(String file)
+                {
+                    setOpaque(true);
+                    this.file = file;
+                }
+          
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+                {
+                    setIcon(new ImageIcon(file));
+                    setBackground(row % 2 == 0 ? Color.LIGHT_GRAY : Color.WHITE);
+                    setBorderPainted(false);
+                    setText((value == null) ? "" : value.toString());
+                    return this;
+                }
+
+                //getter
+                public JButton getButton() { return this; }
+            }
+
     class AddEntryListener implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
@@ -320,7 +311,6 @@ public class Controller {
             System.out.println(date);
 
             int index =  view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
-            int rows = view.getManualInputPanel().getModel().getRowCount();
 
             // Set the summer/non-summer boolean
             if(!date.equals("")){
@@ -332,15 +322,22 @@ public class Controller {
                     row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
                     row[2] = String.format("%.4f", Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText()));
                     //Add Edit button
-                    // view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(Edit);
-                    // view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(new ButtonRenderer());
-                    view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(Edit);
-                    Edit.getButton().addActionListener(new EditRowListener());
+                    view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(EditCellEditor); 
+                    view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(EditCellRenderer);
+                    EditCellEditor.getButton().addMouseListener(new MouseAdapter() {
+                        @Override
+                        public void mouseClicked(MouseEvent e) {
+                            int row = view.getManualInputPanel().getTable().getSelectedRow();
+                            view.getManualInputPanel().getDatePicker().getTextField().setText(view.getManualInputPanel().getModel().getValueAt(row, 0).toString());
+                            view.getManualInputPanel().getEnterPeriodField().setSelectedItem(view.getManualInputPanel().getModel().getValueAt(row, 1).toString());   
+                            view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(row, 2).toString());
+                        }
+                    });
 
                     //Add Delete Button
-                    // view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(Delete);
-                    view.getManualInputPanel().getTable().getColumn("Delete").setCellEditor(Delete);
-                    Delete.getButton().addActionListener(new DeleteRowListener());
+                    view.getManualInputPanel().getTable().getColumn("Delete").setCellEditor(DeleteCellEditor);
+                    view.getManualInputPanel().getTable().getColumn("Delete").setCellRenderer(DeleteCellRenderer);
+                    DeleteCellEditor.getButton().addActionListener(new DeleteRowListener());
 
                     //always uses summer rates for now
                     Day day = new Day(date, true);
@@ -362,7 +359,6 @@ public class Controller {
                         model.getModelProfile().addDay(day);
                         Record.addRecord(new Record(date, index));
                         view.getManualInputPanel().getModel().addRow(row);
-                        rowCount = view.getManualInputPanel().getModel().getRowCount() - 1;
 
                     }
                     //if there is a duplicate day
@@ -397,7 +393,7 @@ public class Controller {
                         }
 
                     }
-                    view.getManualInputPanel().getEnterDateField().setText("mm/dd/yyyy");
+                    view.getManualInputPanel().getDatePicker().getTextField().setText("mm/dd/yyyy");
                     view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(0);
                     view.getManualInputPanel().getEnterUsageField().setText("Enter Usage");
 
@@ -576,52 +572,16 @@ public class Controller {
         }
     }
 
-    class EditRowListener implements ActionListener {
-        @Override
-        public void actionPerformed(final ActionEvent e) {
-            System.out.println("Edit clicked!");
-            // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 0).toString());   
-            // view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(view.getManualInputPanel().getTable().getSelectedRow()); //set to what ever the user clicked edit on
-            // view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 2).toString());
-            int row = view.getManualInputPanel().getTable().getSelectedRow();
-            if( row >= 0) {
-                // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterDateField().getText(), row, 0));   
-                // int val = view.getManualInputPanel().getModel().getValueAt(row, 3);
-                // view.getManualInputPanel().getEnterUsageField().setText(val);
-                // view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterPeriodField().getText(), row, 1);
-                // view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getEnterUsageField().getText(), row, 2);
-            } else {
-                System.out.println("Update Error!");
-            }
-            
-        }
-    }
-    
-    // class EditRowListener implements MouseListener {
-    //     @Override
-    //     public void mouseClicked(final MouseEvent e) {
-    //         System.out.println("Edit clicked!");
-    //         // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 0).toString());   
-    //         // view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(view.getManualInputPanel().getTable().getSelectedRow()); //set to what ever the user clicked edit on
-    //         // view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 2).toString());
-    //         int row = view.getManualInputPanel().getTable().getSelectedRow();
-    //         if( row >= 0) {
-    //             // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterDateField().getText(), row, 0));   
-    //             int val = view.getManualInputPanel().getModel().getValueAt(row, 3);
-    //             view.getManualInputPanel().getEnterUsageField().setText(val);
-    //             // view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterPeriodField().getText(), row, 1);
-    //             // view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getEnterUsageField().getText(), row, 2);
-    //         } else {
-    //             System.out.println("Update Error!");
-    //         }
-    //     }
-    // }
-
     class DeleteRowListener implements ActionListener {
+        String date = view.getManualInputPanel().getDatePicker().getTextField().getText();
+        int index =  view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
+        int rowNo = Record.findIndex(index);
+
         @Override
         public void actionPerformed(final ActionEvent e) {
             System.out.println("Delete Clicked");
             view.getManualInputPanel().getModel().removeRow(view.getManualInputPanel().getTable().getSelectedRow());
+            Record.deleteRecord(rowNo);
         }
     }
 
