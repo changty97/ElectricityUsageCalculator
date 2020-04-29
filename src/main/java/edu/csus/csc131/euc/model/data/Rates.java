@@ -37,8 +37,9 @@ public class Rates {
     // Default Constructor
     public Rates(boolean isSummer){
         // Always true for now
+        rates = new float[24];
         setDefaultRates();
-        rates = setUserRates(isSummer);
+        setUserRates(isSummer);
     }
 
     // Setters
@@ -73,8 +74,7 @@ public class Rates {
         RATES_DEFAULT_OFFPEAK_NONSUMMER = value;
     }
 
-    private float[] setUserRates(boolean isSummer){
-        float temp[] = new float[HOURS];
+    private void setUserRates(boolean isSummer){
         if(isSummer){
             for(int i = 0; i < 24; i++){
                 if(summerPeriod[i].equals("RATES_DEFAULT_MIDPEAK_SUMMER")){
@@ -98,7 +98,6 @@ public class Rates {
             }
         }
 
-        return temp;
     }
 
     public void setOffPeakSummerPeriod(int from, int to, boolean def){
