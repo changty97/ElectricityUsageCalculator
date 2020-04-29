@@ -206,10 +206,11 @@ public class Controller {
 
             System.out.println(panel.getSummerOffPeakRate().getText());
 
+            panel.getSummerMidPeakRate().setText("N/A");
+            panel.getSummerMidPeakPeriod().setText("N/A");
+
             if (isResetDefault){
-                panel.getSummerMidPeakRate().setText("N/A");
                 panel.getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
-                panel.getSummerMidPeakPeriod().setText("N/A");
                 panel.getSummerPeakPeriod().setText("17:00 to 20:00");
             }
 
@@ -544,6 +545,10 @@ public class Controller {
                 }
             }
             else{
+
+                view.getViewCalculatePanel().getSummerMidPeakPeriod().setText("N/A");
+                view.getViewCalculatePanel().getSummerMidPeakRate().setText("N/A");
+
                 // if(offpeak != "00:00 to 17:00 20:00 to 00:00")
                 if(offpeak != "00:00 to 17:00 20:00 to 00:00"){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
@@ -566,7 +571,7 @@ public class Controller {
             }
 
             // Set new user rates
-            // model.getModelRates().setRate(model.getModelRates().setUserRates(isSummer));
+            model.getModelRates().setRate(model.getModelRates().setUserRates(isSummer));
         }
     }
 
