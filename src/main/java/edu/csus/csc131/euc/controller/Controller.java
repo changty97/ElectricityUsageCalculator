@@ -184,8 +184,8 @@ public class Controller {
     }
 
     public void updateComponentsViewCalculate(boolean isResetDefault){
-        final ViewCalculatePanel panel = view.getViewCalculatePanel();
-        final Profile profile = model.getModelProfile();
+        ViewCalculatePanel panel = view.getViewCalculatePanel();
+        Profile profile = model.getModelProfile();
 
         //updates the rate values
         if(isSummer){
@@ -194,9 +194,9 @@ public class Controller {
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
 
-            panel.getSummerOffPeakPeriod().setText("00:00 to 12:00");
-            panel.getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
-            panel.getSummerPeakPeriod().setText("17:00 to 20:00");
+            // panel.getSummerOffPeakPeriod().setText("00:00 to 12:00");
+            // panel.getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
+            // panel.getSummerPeakPeriod().setText("17:00 to 20:00");
 
         }
         else{
@@ -206,10 +206,10 @@ public class Controller {
 
             System.out.println(panel.getSummerOffPeakRate().getText());
 
-            panel.getSummerMidPeakRate().setText("N/A");
-            panel.getSummerMidPeakPeriod().setText("N/A");
-            panel.getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
-            panel.getSummerPeakPeriod().setText("17:00 to 20:00");
+            // panel.getSummerMidPeakRate().setText("N/A");
+            // panel.getSummerMidPeakPeriod().setText("N/A");
+            // panel.getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
+            // panel.getSummerPeakPeriod().setText("17:00 to 20:00");
 
             panel.displayNonSummerSeasonTitle();
         }
@@ -502,36 +502,26 @@ public class Controller {
 
             if(isSummer){
                 // if(offpeak != "00:00 to 12:00" && isOffPeakMatch)
-                if(offpeak != "00:00 to 12:00"){
+                if(!offpeak.equals("00:00 to 12:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
                         
                     // setPeriod( String Period, isSummer, isOffPeak, isMidPeak, isPeak )
                     model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
                 }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
-                    view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 12:00");
-                }
 
                 // if(midpeak != "12:00 to 17:00 20:00 to 00:00" && isMidPeakMatch)
-                if(midpeak != "12:00 to 17:00 20:00 to 00:00"){
+                if(!midpeak.equals("12:00 to 17:00 20:00 to 00:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Mid Peak Period: " + midpeak);
                     view.getViewCalculatePanel().getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
                     model.getModelRates().setUserPeriod(midpeak, isSummer, false, true, false); 
                 }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Mid Peak: Format is HH:MM to HH:MM ...");
-
-                }
+             
                 // if(peak != "17:00 to 20:00" && isPeakMatch)
-                if(peak != "17:00 to 20:00"){
+                if(!peak.equals("17:00 to 20:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
                     model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
                 }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
-                    view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
-                }
+               
             }
             else{
 
@@ -539,28 +529,28 @@ public class Controller {
                 view.getViewCalculatePanel().getSummerMidPeakRate().setText("N/A");
 
                 // if(offpeak != "00:00 to 17:00 20:00 to 00:00")
-                if(offpeak != "00:00 to 17:00 20:00 to 00:00"){
+                if(!offpeak.equals("00:00 to 17:00 20:00 to 00:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
                     view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
                     model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
                 }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
-
-                }
+               
                 // if(peak != "17:00 20:00" && isPeakMatch)
-                if(peak != "17:00 to 20:00"){
+                if(!peak.equals("17:00 to 20:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
                     model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
-                }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
-                    view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
-                }
+                }    
             }
 
             // Set new user rates
-            model.getModelRates().setUserRates(isSummer);
+            if(isSummer){
+                model.getModelProfile().getSummerRates().setUserRates(isSummer);
+            }
+            else{
+                model.getModelProfile().getNonSummerRates().setUserRates(isSummer);
+            }
+
+            updateComponentsViewCalculate(false);
         }
     }
 
@@ -575,13 +565,12 @@ public class Controller {
     class DeleteRowListener implements ActionListener {
         String date = view.getManualInputPanel().getDatePicker().getTextField().getText();
         int index =  view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
-        int rowNo = Record.findIndex(index);
 
         @Override
         public void actionPerformed(final ActionEvent e) {
             System.out.println("Delete Clicked");
             view.getManualInputPanel().getModel().removeRow(view.getManualInputPanel().getTable().getSelectedRow());
-            Record.deleteRecord(rowNo);
+            Record.deleteRecord(view.getManualInputPanel().getTable().getSelectedRow());
         }
     }
 
