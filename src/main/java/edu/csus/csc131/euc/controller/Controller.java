@@ -88,6 +88,7 @@ public class Controller {
         view.getViewCalculatePanel().getNavRightButton().addActionListener(new ArrowNavigation());
         view.getViewCalculatePanel().getSeasonToggleButton().addActionListener(new SummerToggle());
         view.getViewCalculatePanel().getSubmitUserValuesButton().addActionListener(new InputRates());
+        view.getViewCalculatePanel().getSubmitUserValuesButton().addActionListener(new InputPeriod());
         view.getViewCalculatePanel().getResetDefaultButton().addActionListener(new ResetDefault());
 
         // Set AL for Manual Input Panel
@@ -450,73 +451,81 @@ public class Controller {
             catch(final Exception ex){
                 JOptionPane.showMessageDialog(view.getFrame(), "Rate values have to be a number.");
             }
+        }
+    }
 
-            try{ 
-                // Regex pattern for ' HH:MM to HH:MM , ' for one or more occurences 
-                String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}"; 
+    class InputPeriod implements ActionListener{
+        @Override
+        public void actionPerformed(final ActionEvent e) {
+            // Regex pattern for ' HH:MM to HH:MM , ' for one or more occurences 
+            String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}"; 
 
-                // Grab values for periods 
-                String offpeak = view.getViewCalculatePanel().getSummerOffPeakPeriod().getText();
-                String midpeak = view.getViewCalculatePanel().getSummerMidPeakPeriod().getText();
-                String peak = view.getViewCalculatePanel().getSummerPeakPeriod().getText();
+            // Grab values for periods 
+            String offpeak = view.getViewCalculatePanel().getSummerOffPeakPeriod().getText();
+            String midpeak = view.getViewCalculatePanel().getSummerMidPeakPeriod().getText();
+            String peak = view.getViewCalculatePanel().getSummerPeakPeriod().getText();
 
-                boolean isOffPeakMatch = Pattern.matches(pattern, offpeak);
-                boolean isMidPeakMatch = Pattern.matches(pattern, midpeak);
-                boolean isPeakMatch = Pattern.matches(pattern, peak);
+            boolean isOffPeakMatch = Pattern.matches(pattern, offpeak);
+            boolean isMidPeakMatch = Pattern.matches(pattern, midpeak);
+            boolean isPeakMatch = Pattern.matches(pattern, peak);
+
+            System.out.println(offpeak);
+            System.out.println(midpeak);
+            System.out.println(peak);
 
 
-                if(isSummer){
-                    if(offpeak != "00:00 to 12:00" && isOffPeakMatch){
-                        JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
-                        view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 12:00");
-
-                        // setPeriod( String Period, isSummer, isOffPeak, isMidPeak, isPeak )
-                        model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
-                    }
-
-                    if(midpeak != "12:00 to 17:00 0:00 to 00:00" && isMidPeakMatch){
-                        JOptionPane.showMessageDialog(view.getFrame(), "New Mid Peak Period: " + midpeak);
-                        view.getViewCalculatePanel().getSummerMidPeakPeriod().setText("12:00 to 17:00 0:00 to 00:00");
-                        model.getModelRates().setUserPeriod(midpeak, isSummer, false, true, false); 
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(view.getFrame(), "Invalid Mid Peak: Format is HH:MM to HH:MM ...");
-
-                    }
-                    if(peak != "17:00 to 20:00" && isPeakMatch){
-                        JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
-                        model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
-                        view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
-                    }
+            if(isSummer){
+                if(offpeak != "00:00 to 12:00" && isOffPeakMatch){
+                    JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
+                        
+                    // setPeriod( String Period, isSummer, isOffPeak, isMidPeak, isPeak )
+                    model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
                 }
-                else if (!isSummer && isOffPeakMatch && isOffPeakMatch){
-                    if(offpeak != "00:00 to 17:00 20:00 to 00:00"){
-                        JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
-                        view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
-                        model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
-
-                    }
-                    if(peak != "17:00 20:00" && isPeakMatch){
-                        JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
-                        model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
-                    }
-                    else{
-                        JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
-                        view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
-                    }
+                else{
+                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
+                    view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 12:00");
                 }
-            }catch(final Exception ex){
-                JOptionPane.showMessageDialog(view.getFrame(), "Invalid Period Formatting");
+
+                if(midpeak != "12:00 to 17:00 0:00 to 00:00" && isMidPeakMatch){
+                    JOptionPane.showMessageDialog(view.getFrame(), "New Mid Peak Period: " + midpeak);
+                    view.getViewCalculatePanel().getSummerMidPeakPeriod().setText("12:00 to 17:00 0:00 to 00:00");
+                    model.getModelRates().setUserPeriod(midpeak, isSummer, false, true, false); 
+                }
+                else{
+                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Mid Peak: Format is HH:MM to HH:MM ...");
+
+                }
+                if(peak != "17:00 to 20:00" && isPeakMatch){
+                    JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
+                    model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
+                }
+                else{
+                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
+                    view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
+                }
             }
+            else{
+                if(offpeak != "00:00 to 17:00 20:00 to 00:00"){
+                    JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
+                    view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
+                    model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
+                }
+                else{
+                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
+
+                }
+                if(peak != "17:00 20:00" && isPeakMatch){
+                    JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
+                    model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
+                }
+                else{
+                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
+                    view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
+                }
+            }
+
+            // Set new user rates
+            // model.getModelRates().setRate(model.getModelRates().setUserRates(isSummer));
         }
     }
 

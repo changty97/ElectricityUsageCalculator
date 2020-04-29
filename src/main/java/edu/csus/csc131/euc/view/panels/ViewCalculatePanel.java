@@ -142,7 +142,7 @@ public class ViewCalculatePanel extends Panel {
     private JTextField summermidpeakrate = new JTextField("$0.1671");
 
     // private JTextField summermidpeakperiod = new JTextField("Noon - 5pm/ 8pm - Midnight");
-    private JTextField summermidpeakperiod = new JTextField("12:00 to 17:00 0:00 to 00:00");
+    private JTextField summermidpeakperiod = new JTextField("12:00 to 17:00 20:00 to 00:00");
 
     private JTextField summerpeakrate = new JTextField("$0.2941");
 

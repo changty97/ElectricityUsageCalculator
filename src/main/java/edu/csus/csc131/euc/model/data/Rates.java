@@ -4,6 +4,7 @@ package edu.csus.csc131.euc.model.data;
 /* Libaray Imports */
 import java.util.Arrays;
 
+
 // ----------------------------------------- //
 // Rates Class: Contains rates               //
 // ----------------------------------------- //
@@ -73,27 +74,27 @@ public class Rates {
         RATES_DEFAULT_OFFPEAK_NONSUMMER = value;
     }
 
-    private float[] setUserRates(boolean isSummer){
+    public float[] setUserRates(boolean isSummer){
         float temp[] = new float[HOURS];
         if(isSummer){
             for(int i = 0; i < 24; i++){
                 if(summerPeriod[i].equals("RATES_DEFAULT_MIDPEAK_SUMMER")){
-                    rates[i] = RATES_DEFAULT_MIDPEAK_SUMMER;
+                    temp[i] = RATES_DEFAULT_MIDPEAK_SUMMER;
                 }
                 else if(summerPeriod[i].equals("RATES_DEFAULT_PEAK_SUMMER")){
-                    rates[i] = RATES_DEFAULT_PEAK_SUMMER;
+                    temp[i] = RATES_DEFAULT_PEAK_SUMMER;
                 }
                 else if(summerPeriod[i].equals("RATES_DEFAULT_OFFPEAK_SUMMER")){
-                    rates[i] = RATES_DEFAULT_OFFPEAK_SUMMER;
+                    temp[i] = RATES_DEFAULT_OFFPEAK_SUMMER;
                 }
             }
         }else{
             for(int i = 0; i < 24; i++){
                 if(nonSummerPeriod[i].equals("RATES_DEFAULT_PEAK_NONSUMMER")){
-                    rates[i] = RATES_DEFAULT_PEAK_SUMMER;
+                    temp[i] = RATES_DEFAULT_PEAK_NONSUMMER;
                 }
                 else if(nonSummerPeriod[i].equals("RATES_DEFAULT_OFFPEAK_NONSUMMER")){
-                    rates[i] = RATES_DEFAULT_OFFPEAK_SUMMER;
+                    temp[i] = RATES_DEFAULT_OFFPEAK_NONSUMMER;
                 }
             }
         }
@@ -171,39 +172,97 @@ public class Rates {
 
     // Helper function to parse hours from string 
     public void setUserPeriod(String period, boolean isSummer, boolean isOffPeak, boolean isMidPeak, boolean isPeak){
-        //00:00 to 17:00 20:00 to 00:00
-        //00:00 to 17:00
-
+        
+        // Split according to whitespace
         String [] split = period.split("\\s+");
+        
+        // TESTING SPLIT
+        // System.out.println("Listing all elements: ");
+        // for (String element : split){System.out.println(element); }
+
         int to = 0;
         int from = 0; 
-        boolean isFrom = true; 
-
-        // parsedperiods[count][0] = from
-        // parsedperiods[count][1] = to
+        boolean isFrom = true;
+        boolean doInput = false; 
 
         for (String element : split){
+            // System.out.println(element);
             // if it is "to" then flip flag 
-            if( element == "to"){ isFrom = false; }
+            if( element.equals("to") ){ isFrom = false; }
             else{
                 // Get only the hours section of the string and replace all 0's with nothing
-                String hours = element.substring(0, 3);
-                hours.replace("0",""); 
+                String hours = element.substring(0, 2);
+
+                // TEST SUBSTRING 
+                // System.out.println(hours);
+
+                // Catching values with leading 0 
+                if(hours.startsWith("0")){
+                    hours = hours.replace("0","");
+                }
+
+                // TEST HOURS REPLACEMENT 
+                // System.out.println(hours); 
+                // System.out.println(hours.isEmpty()); 
 
                 // If isFrom set 'from', else set 'to'
-                if (hours.isEmpty() && isFrom){ from = 0; }
-                else{ to = 0; }
-                if( !hours.isEmpty() && isFrom){ from = Integer.parseInt(hours); }
-                else{ to = Integer.parseInt(hours); } 
+                try{
+                    if (hours.isEmpty() && isFrom){ 
+                        from = 0; 
+                        doInput = false; 
+                    }
+                    else if(hours.isEmpty() && !isFrom){ 
+                        to = 0; 
+                        doInput = true; 
+                        isFrom = true; 
+                    }else if(!hours.isEmpty() && isFrom){
+                        from = Integer.parseInt(hours); 
+                        doInput = false;
+                    }else{
+                        to = Integer.parseInt(hours); 
+                        doInput = true; 
+                        isFrom = true; 
+                    }
+                }catch(Exception ex){
+                    System.out.println(ex); 
+                }
+
+                // Catching times from previous day to midnight of next day
+                if(to == 0 && from > to){
+                    to = 23; 
+                }
             }
 
-            // Call appropriate period setting method 
-            if (isOffPeak && isSummer){ setOffPeakSummerPeriod(from, to, false); }
-            else { setOffPeakNonSummerPeriod(from, to, false); }
-            if (isMidPeak && isSummer){ setMidPeakSummerPeriod(from, to, false); }
-            if (isPeak && isSummer){ setPeakSummerPeriod(from, to, false); }
-            else { setPeakNonSummerPeriod(from, to, false); }
-
+            // Call appropriate period setting method
+            if(doInput){
+                System.out.println("Processing Input");
+                if (isOffPeak && isSummer){ 
+                    System.out.println("From: " + from + " To: " + to); 
+                    setOffPeakSummerPeriod(from, to, false); 
+                }
+                else if (isOffPeak && !isSummer){
+                    System.out.println("From: " + from + " To: " + to); 
+                    setOffPeakNonSummerPeriod(from, to, false); 
+                }
+                else if (isMidPeak && isSummer){
+                    System.out.println("From: " + from + " To: " + to); 
+                    setMidPeakSummerPeriod(from, to, false); 
+                }
+                else if (isMidPeak && !isSummer){
+                    // Do Nothing
+                }
+                else if (isPeak && isSummer){ 
+                    System.out.println("From: " + from + " To: " + to); 
+                    setPeakSummerPeriod(from, to, false); 
+                }
+                else if (isPeak && !isSummer){ 
+                    System.out.println("From: " + from + " To: " + to); 
+                    setPeakNonSummerPeriod(from, to, false); 
+                }
+                else { 
+                    // Do Nothing
+                }
+            }
         }
     }
 
