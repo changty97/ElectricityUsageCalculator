@@ -75,7 +75,7 @@ public class Rates {
         RATES_DEFAULT_OFFPEAK_NONSUMMER = value;
     }
 
-    private void setUserRates(boolean isSummer){
+    public void setUserRates(boolean isSummer){
         if(isSummer){
             for(int i = 0; i < 24; i++){
                 if(summerPeriod[i].equals("RATES_DEFAULT_MIDPEAK_SUMMER")){

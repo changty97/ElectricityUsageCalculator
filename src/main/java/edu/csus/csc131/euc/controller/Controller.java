@@ -190,12 +190,9 @@ public class Controller {
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
 
-            if (isResetDefault){
-                panel.getSummerOffPeakPeriod().setText("00:00 to 12:00");
-                panel.getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
-                panel.getSummerPeakPeriod().setText("17:00 to 20:00");
-                panel.displaySummerSeasonTitle();
-            }
+            panel.getSummerOffPeakPeriod().setText("00:00 to 12:00");
+            panel.getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
+            panel.getSummerPeakPeriod().setText("17:00 to 20:00");
 
         }
         else{
@@ -203,16 +200,12 @@ public class Controller {
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakNonSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakNonSummer()));
 
-
             System.out.println(panel.getSummerOffPeakRate().getText());
 
             panel.getSummerMidPeakRate().setText("N/A");
             panel.getSummerMidPeakPeriod().setText("N/A");
-
-            if (isResetDefault){
-                panel.getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
-                panel.getSummerPeakPeriod().setText("17:00 to 20:00");
-            }
+            panel.getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
+            panel.getSummerPeakPeriod().setText("17:00 to 20:00");
 
             panel.displayNonSummerSeasonTitle();
         }
@@ -571,7 +564,7 @@ public class Controller {
             }
 
             // Set new user rates
-            model.getModelRates().setRate(model.getModelRates().setUserRates(isSummer));
+            model.getModelRates().setUserRates(isSummer);
         }
     }
 
