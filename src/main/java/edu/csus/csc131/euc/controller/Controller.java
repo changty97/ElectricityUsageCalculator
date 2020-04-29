@@ -238,6 +238,22 @@ public class Controller {
         catch(Exception e){
 
         }
+        if(model.getModelProfile().getDays().size() != 0){
+            //updates time range totals
+            panel.getUsageCostNonPeakUsage().setText("<html>" + formatDecimals(profile.getUsageOffPeak(dayIndex), 4) + " <font size=4>kWH</font></html>");
+            panel.getUsageCostMidPeakUsage().setText("<html>" + formatDecimals(profile.getUsageMidPeak(dayIndex), 4) + " <font size=4>kWH</font></html>");
+            panel.getUsageCostPeakUsage().setText("<html>" + formatDecimals(profile.getUsagePeak(dayIndex), 4) + " <font size=4>kWH</font></html>");
+            if(profile.getDays().get(dayIndex).isSummer()){
+                panel.getUsageCostNonPeakCost().setText("$ " + formatDecimals(profile.getCostOffPeakSummer(dayIndex), 2));
+                panel.getUsageCostMidPeakCost().setText("$ " + formatDecimals(profile.getCostMidPeakSummer(dayIndex), 2));
+                panel.getUsageCostPeakCost().setText("$ " + formatDecimals(profile.getCostPeakSummer(dayIndex), 2));
+            }
+            else{
+                panel.getUsageCostNonPeakCost().setText("$ " + formatDecimals(profile.getCostOffPeakNonSummer(dayIndex), 2));
+                panel.getUsageCostMidPeakCost().setText("$ 0.00");
+                panel.getUsageCostPeakCost().setText("$ " + formatDecimals(profile.getCostPeakNonSummer(dayIndex), 2));
+            }
+        }
         //updates the total values
         panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH(), 2));
         panel.getTotalUsage().setText("<html>" + formatDecimals(profile.getTotalUsage(), 2) + " <font size=5>kWH</font></html>" );

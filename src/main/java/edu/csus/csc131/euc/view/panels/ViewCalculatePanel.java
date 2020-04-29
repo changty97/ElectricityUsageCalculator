@@ -8,9 +8,9 @@ import edu.csus.csc131.euc.view.panels.subpanels.*;
 
 public class ViewCalculatePanel extends Panel {
 
-    /* Constants */ // RF: 4/27/2020 - Pix 
+    /* Constants */ // RF: 4/27/2020 - Pix
     // SIZES
-    // Main Sub Panels 
+    // Main Sub Panels
     private final Dimension USAGE_DETAILS_MAIN_SUB_PANEL_SIZE         = new Dimension(1028,532);
     private final Dimension SUMMARY_DETAILS_MAIN_SUB_PANEL_SIZE       = new Dimension(1028,332);
 
@@ -21,17 +21,17 @@ public class ViewCalculatePanel extends Panel {
     private final Dimension USAGE_COST_DETAILS_PANEL_SIZE             = new Dimension(920,240);
     private final Dimension TOTAL_COST_DETAILS_PANEL_SIZE             = new Dimension(670,200);
 
-    // Summary Details 
+    // Summary Details
     private final Dimension TOTAL_USAGE_PANEL_SIZE                    = new Dimension(450,100);
     private final Dimension TOTAL_COST_PANEL_SIZE                     = new Dimension(450,100);
-    private final Dimension SUMMARY_DETAILS_BUTTON_SIZE               = new Dimension(150,30); 
-    private final Dimension SUMMARY_DETAILS_TEXTFIELD_SIZE            = new Dimension(180,30); 
+    private final Dimension SUMMARY_DETAILS_BUTTON_SIZE               = new Dimension(150,30);
+    private final Dimension SUMMARY_DETAILS_TEXTFIELD_SIZE            = new Dimension(180,30);
 
     // PADDING
-    // Generic 
+    // Generic
     private static final Insets DEFAULT_INSETS                        = new Insets(0,0,0,0);
 
-    // Usage Details 
+    // Usage Details
     private static final Insets USAGE_DETAILS_TITLE_PADDING           = new Insets(70,0,0,270);
     private static final Insets SEASON_DETAILS_PANEL_PADDING          = new Insets(35,0,0,20);
     private static final Insets USAGECOST_PANEL_PADDING               = new Insets(0,70,20,50);
@@ -40,7 +40,7 @@ public class ViewCalculatePanel extends Panel {
     private static final Insets NAV_LEFT_PADDING                      = new Insets(0,0,0,0);
     private static final Insets NAV_RIGHT_PADDING                     = new Insets(0,0,0,15);
 
-    // Summary Details 
+    // Summary Details
     private static final Insets SUMMARY_DETAILS_COMP_PADDING          = new Insets(0,0,0,15);
     private static final Insets SUMMARY_DETAILS_BUTTON_PADDING        = new Insets(20,30,5,0);
     private static final Insets SEASON_TITLE_PADDING                  = new Insets(0,70,0,10);
@@ -49,7 +49,7 @@ public class ViewCalculatePanel extends Panel {
     private static final Insets TOTAL_SUB_PANEL_PADDING               = new Insets(5,0,0,5);
     private static final Insets TOTAL_VALUE_PADDING                   = new Insets(0,0,0,10);
 
-    /* Instance Variables */ 
+    /* Instance Variables */
 
     /* usagedetailsmainpanel : Main Panel */
     private JPanel usagedetailsmainpanel = new JPanel(new GridBagLayout());
@@ -115,8 +115,8 @@ public class ViewCalculatePanel extends Panel {
 
     /* summarydetailwestgrouppanels: Components */
     // General Labels
-    private JLabel summertitle = new JLabel("Summer", new ImageIcon("src\\main\\assets\\viewandcalculateres\\summericon.png"), SwingConstants.LEFT); 
-    private JLabel nonsummertitle = new JLabel("Non-Summer", new ImageIcon("src\\main\\assets\\viewandcalculateres\\nonsummer.png"), SwingConstants.LEFT); 
+    private JLabel summertitle = new JLabel("Summer", new ImageIcon("src\\main\\assets\\viewandcalculateres\\summericon.png"), SwingConstants.LEFT);
+    private JLabel nonsummertitle = new JLabel("Non-Summer", new ImageIcon("src\\main\\assets\\viewandcalculateres\\nonsummer.png"), SwingConstants.LEFT);
     private JLabel offpeaktitle = new JLabel("Off-Peak");
     private JLabel midpeaktitle = new JLabel("Mid-Peak");
     private JLabel peaktitle = new JLabel("Peak");
@@ -287,9 +287,9 @@ public class ViewCalculatePanel extends Panel {
     public void intializeConstraints(){
         /* MAIN SUB PANEL CONSTRAINTS */
 
-        GridBagConstraints c = new GridBagConstraints(); 
+        GridBagConstraints c = new GridBagConstraints();
 
-        // Usage Details Main Sub Panel 
+        // Usage Details Main Sub Panel
         // Regular Attributes
         usagedetailsmainpanel.setBackground(new Color(13, 156, 204));
         setPanelContraints(getPanel(), usagedetailsmainpanel, 0, GridBagConstraints.NORTH, 0, 0, DEFAULT_INSETS);
@@ -318,10 +318,10 @@ public class ViewCalculatePanel extends Panel {
         // Grid Bag Attributes
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1.0;
-        c.gridwidth = 2; 
-        c.gridx = 0; 
-        c.gridy = 0; 
-        c.insets = USAGE_DETAILS_TITLE_PADDING; 
+        c.gridwidth = 2;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.insets = USAGE_DETAILS_TITLE_PADDING;
         usagedetailsmainpanel.add(usagetitle, c);
 
         // Season Details Sub Panel
@@ -336,7 +336,7 @@ public class ViewCalculatePanel extends Panel {
         // Grid Bag Attributes
         // Label Attributes
         setViewCalConstraints(usagedetailsmainpanel, usagecostdetailspanel, 1.0, GridBagConstraints.WEST, 2, 1, 1, USAGECOST_PANEL_PADDING);
-       
+
         // RoundedPanel usagecostleft = new RoundedPanel();
         JPanel usagecostleft = new JPanel(new GridBagLayout());
         usagecostleft.setOpaque(false);
@@ -356,16 +356,16 @@ public class ViewCalculatePanel extends Panel {
         createPanel(usagecostdetailspanel, usagecostright, GridBagConstraints.BOTH, GridBagConstraints.EAST, 2, 0);
 
         // Navigation Attributes
-        navleftbutton.setFocusPainted(false); 
+        navleftbutton.setFocusPainted(false);
         navleftbutton.setOpaque(false);
         navleftbutton.setContentAreaFilled(true);
-        navleftbutton.setBackground(Color.WHITE); 
+        navleftbutton.setBackground(Color.WHITE);
         navleftbutton.setBorderPainted(false);
 
-        navrightbutton.setFocusPainted(false); 
+        navrightbutton.setFocusPainted(false);
         navrightbutton.setOpaque(false);
         navrightbutton.setContentAreaFilled(true);
-        navrightbutton.setBackground(Color.WHITE); 
+        navrightbutton.setBackground(Color.WHITE);
         navrightbutton.setBorderPainted(false);
 
         setPanelContraints(usagecostleft, navleftbutton, GridBagConstraints.BOTH, GridBagConstraints.WEST, 0, 0, NAV_LEFT_PADDING);
@@ -399,27 +399,27 @@ public class ViewCalculatePanel extends Panel {
 
         // Usage (Values)
         // total usage
-        // Regular Attributes 
+        // Regular Attributes
         usagecosttotalusage.setForeground(new Color(23, 104, 172));
         setViewCalculateFont(usagecostcenter, usagecosttotalusage, 1, 0, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // non usage
-        setViewCalculateFont(usagecostcenter, usagecostnonpeakusage, 1, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakusage, 1, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // mid usage
-        setViewCalculateFont(usagecostcenter, usagecostmidpeakusage, 1, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakusage, 1, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // peak usage
         setViewCalculateFont(usagecostcenter, usagecostpeakusage, 1, 3, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
        // total cost usage
-       // Regular Attributes 
+       // Regular Attributes
        usagecosttotalcost.setForeground(new Color(76, 175, 106));
        setViewCalculateFont(usagecostcenter, usagecosttotalcost, 3, 0, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // total cost usage
-        setViewCalculateFont(usagecostcenter, usagecostnonpeakcost, 3, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
-        setViewCalculateFont(usagecostcenter, usagecostmidpeakcost, 3, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakcost, 3, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakcost, 3, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
         setViewCalculateFont(usagecostcenter, usagecostpeakcost, 3, 3, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
 
@@ -445,7 +445,7 @@ public class ViewCalculatePanel extends Panel {
         // // setPanelContraints(summarydetailsmainpanel, summarytitle, 0, GridBagConstraints.CENTER, 1, 0, SUMMARY_TITLE, false);
         // setPanelContraints(summarydetaileastpanel, summarytitle, GridBagConstraints.CENTER, GridBagConstraints.CENTER, 0, 0, SUMMARY_TITLE, false);
 
-        // Summary Details Panel Season Title / Summer 
+        // Summary Details Panel Season Title / Summer
         // Regular Attributes
         summertitle.setFont(new Font("Poppins", Font.BOLD, 25));
         summertitle.setForeground(Color.BLACK);
@@ -461,7 +461,7 @@ public class ViewCalculatePanel extends Panel {
         nonsummertitle.setForeground(Color.BLACK);
         nonsummertitle.setHorizontalTextPosition(SwingConstants.LEFT);
         nonsummertitle.setIconTextGap(10);
-        nonsummertitle.setVisible(false); 
+        nonsummertitle.setVisible(false);
         // GridBag Attributes
         // setPanelContraints(summarydetailsmainpanel, nonsummertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE, false);
         setPanelContraints(summarydetailwestpanelsummer, nonsummertitle, 0, GridBagConstraints.WEST, 0, 0, SEASON_TITLE_PADDING, 3);
@@ -483,19 +483,19 @@ public class ViewCalculatePanel extends Panel {
         // Regular Attributes
         summeroffpeakrate.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summeroffpeakrate.setFont(new Font("Poppins", Font.BOLD, 15));
-        // GridBag Attributes 
-        setPanelContraints(summarydetailwestpanelsummer, summeroffpeakrate, 0, GridBagConstraints.WEST, 2, 1, SUMMARY_DETAILS_COMP_PADDING, false);  
+        // GridBag Attributes
+        setPanelContraints(summarydetailwestpanelsummer, summeroffpeakrate, 0, GridBagConstraints.WEST, 2, 1, SUMMARY_DETAILS_COMP_PADDING, false);
 
 
         // Off Peak Period Label
         // Regular Attributes
         periodlbls[0].setFont(new Font("Poppins", Font.BOLD, 15));
-        // GridBag Attributes 
-        setPanelContraints(summarydetailwestpanelsummer, periodlbls[0], 0, GridBagConstraints.EAST, 1, 2, DEFAULT_INSETS, false);  
-        
+        // GridBag Attributes
+        setPanelContraints(summarydetailwestpanelsummer, periodlbls[0], 0, GridBagConstraints.EAST, 1, 2, DEFAULT_INSETS, false);
+
         // Off Peak Period
         // Regular Attributes
-        summeroffpeakperiod.setEditable(true); 
+        summeroffpeakperiod.setEditable(true);
         summeroffpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summeroffpeakperiod.setFont(new Font("Poppins", Font.BOLD, 12));
         // GridBag Attributes
@@ -504,8 +504,8 @@ public class ViewCalculatePanel extends Panel {
         // Mid-peak Label
         // Regular Attributes
         midpeaktitle.setFont(new Font("Poppins", Font.BOLD, 20));
-        // GridBag Attributes 
-        setViewCalculateFont(summarydetailwestpanelsummer, midpeaktitle, 0, 3, Font.BOLD, 20, OFF_MID_PEAK_TITLE_PADDING, false);  
+        // GridBag Attributes
+        setViewCalculateFont(summarydetailwestpanelsummer, midpeaktitle, 0, 3, Font.BOLD, 20, OFF_MID_PEAK_TITLE_PADDING, false);
 
 
         // Mid-peak Rate Label
@@ -555,7 +555,7 @@ public class ViewCalculatePanel extends Panel {
         setPanelContraints(summarydetailwestpanelsummer, periodlbls[2], 0, GridBagConstraints.EAST, 1, 6, DEFAULT_INSETS, false);
 
         // Peak Period
-        summerpeakperiod.setEditable(true); 
+        summerpeakperiod.setEditable(true);
         summerpeakperiod.setPreferredSize(SUMMARY_DETAILS_TEXTFIELD_SIZE);
         summerpeakperiod.setFont(new Font("Poppins", Font.BOLD, 12));
         // GridBag Attributes
@@ -610,35 +610,35 @@ public class ViewCalculatePanel extends Panel {
 
         /* Season Details Components */
 
-        // Season Detail Title 
-        // Regular Attributes 
+        // Season Detail Title
+        // Regular Attributes
         setViewCalculateFont(seasondetailspanel, seasondetailtitle, 0, 0, Font.BOLD, 20, SEASON_DETAIL_TITLE);
 
         // Summer Icon
-        // Regular Attributes 
-        // GridBag Attributes 
-        c = new GridBagConstraints();  
+        // Regular Attributes
+        // GridBag Attributes
+        c = new GridBagConstraints();
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.gridheight = 3;
-        c.anchor = GridBagConstraints.CENTER; 
-        c.gridx = 1; 
-        c.gridy = 0; 
-        c.insets = DEFAULT_INSETS; 
+        c.anchor = GridBagConstraints.CENTER;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.insets = DEFAULT_INSETS;
         seasondetailspanel.add(summericon, c);
 
         // Non Summer Icon
-        // Regular Attributes 
+        // Regular Attributes
         nonsummericon.setVisible(false);
-        // GridBag Attributes 
-        c = new GridBagConstraints();  
+        // GridBag Attributes
+        c = new GridBagConstraints();
         c.weightx = 1.0;
         c.weighty = 1.0;
         c.gridheight = 3;
-        c.anchor = GridBagConstraints.CENTER; 
-        c.gridx = 1; 
-        c.gridy = 0; 
-        c.insets = DEFAULT_INSETS; 
+        c.anchor = GridBagConstraints.CENTER;
+        c.gridx = 1;
+        c.gridy = 0;
+        c.insets = DEFAULT_INSETS;
         seasondetailspanel.add(nonsummericon, c);
 
         // Season Date
@@ -705,7 +705,7 @@ public class ViewCalculatePanel extends Panel {
         this.nonsummericon.setVisible(true);
     }
 
-    // Settion the non summer title: Helper methods to display the correct summary detail season title 
+    // Settion the non summer title: Helper methods to display the correct summary detail season title
     public void displaySummerSeasonTitle(){
         this.nonsummertitle.setVisible(false);
         this.summertitle.setVisible(true);

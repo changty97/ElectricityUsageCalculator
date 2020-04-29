@@ -162,4 +162,85 @@ public class Profile {
         }
     }
 
+    public float getCostPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_PEAK_SUMMER")){
+                sum += summerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostMidPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_MIDPEAK_SUMMER")){
+                sum += summerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostOffPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_OFFPEAK_SUMMER")){
+                sum += summerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostPeakNonSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(nonSummerRates.getNonSummerPeriod(i).equals("RATES_DEFAULT_PEAK_NONSUMMER")){
+                sum += nonSummerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostOffPeakNonSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(nonSummerRates.getNonSummerPeriod(i).equals("RATES_DEFAULT_OFFPEAK_NONSUMMER")){
+                sum += nonSummerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsagePeak(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_PEAK_SUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsageMidPeak(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_MIDPEAK_SUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsageOffPeak(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_OFFPEAK_SUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+
 }

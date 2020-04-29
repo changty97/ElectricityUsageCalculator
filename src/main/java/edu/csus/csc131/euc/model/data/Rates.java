@@ -273,6 +273,13 @@ public class Rates {
             Arrays.fill(nonSummerPeriod, from, to, "RATES_DEFAULT_OFFPEAK_NONSUMMER");
         }
     }
+    public String getSummerPeriod(int index){
+        return summerPeriod[index];
+    }
 
+    public String getNonSummerPeriod(int index){
+        return nonSummerPeriod[index];
+
+    }
 
 }
