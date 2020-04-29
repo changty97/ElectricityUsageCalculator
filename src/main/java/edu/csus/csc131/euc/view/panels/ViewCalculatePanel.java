@@ -297,6 +297,11 @@ public class ViewCalculatePanel extends Panel {
         // TITLE Sizes
         usagetitle.setPreferredSize(USAGE_DETAILS_TITLE_SIZE);
 
+        // Link ALs for InputVerifier 
+        // this.summeroffpeakperiod.is
+        // this.summermidpeakperiod =
+        // this.summerpeakperiod =
+
 
     }
 

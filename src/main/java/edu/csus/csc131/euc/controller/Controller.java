@@ -118,6 +118,43 @@ public class Controller {
             }
         });
 
+        // Set AL for key input
+        PeriodInputVerification verifier = new PeriodInputVerification();
+        view.getViewCalculatePanel().getSummerOffPeakPeriod().setInputVerifier(verifier);
+        view.getViewCalculatePanel().getSummerMidPeakPeriod().setInputVerifier(verifier);
+        view.getViewCalculatePanel().getSummerPeakPeriod().setInputVerifier(verifier);
+
+    }
+
+    // Listner to verify input
+    public class PeriodInputVerification extends InputVerifier { 
+        @Override 
+        public boolean verify(JComponent input){
+
+            String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}"; 
+            String text = ((JTextField) input).getText(); 
+
+            if(text == "N/A" && !isSummer){
+                input.setBackground(new Color(149,195,163));
+                return true; 
+            }
+    
+            boolean isMatch = Pattern.matches(pattern, text);
+
+            if (isMatch){
+                input.setBackground(new Color(149,195,163));
+                return true;
+            }
+
+            input.setBackground(new Color(195,149,149));
+
+            // Show Input Field Message to Fix Error 
+            JTextField in = (JTextField) input; 
+            in.setText(JOptionPane.showInputDialog(input, "Please correct: " + text + "\nFormat is (HH:MM to HH:MM ...)"));
+
+            return false;
+
+        }
     }
 
     public void createAndShowGUI() {
@@ -458,24 +495,24 @@ public class Controller {
         @Override
         public void actionPerformed(final ActionEvent e) {
             // Regex pattern for ' HH:MM to HH:MM , ' for one or more occurences 
-            String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}"; 
+            // String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}"; 
 
-            // Grab values for periods 
+            // // Grab values for periods 
             String offpeak = view.getViewCalculatePanel().getSummerOffPeakPeriod().getText();
             String midpeak = view.getViewCalculatePanel().getSummerMidPeakPeriod().getText();
             String peak = view.getViewCalculatePanel().getSummerPeakPeriod().getText();
 
-            boolean isOffPeakMatch = Pattern.matches(pattern, offpeak);
-            boolean isMidPeakMatch = Pattern.matches(pattern, midpeak);
-            boolean isPeakMatch = Pattern.matches(pattern, peak);
+            // boolean isOffPeakMatch = Pattern.matches(pattern, offpeak);
+            // boolean isMidPeakMatch = Pattern.matches(pattern, midpeak);
+            // boolean isPeakMatch = Pattern.matches(pattern, peak);
 
-            System.out.println(offpeak);
-            System.out.println(midpeak);
-            System.out.println(peak);
-
+            // System.out.println(offpeak);
+            // System.out.println(midpeak);
+            // System.out.println(peak);
 
             if(isSummer){
-                if(offpeak != "00:00 to 12:00" && isOffPeakMatch){
+                // if(offpeak != "00:00 to 12:00" && isOffPeakMatch)
+                if(offpeak != "00:00 to 12:00"){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
                         
                     // setPeriod( String Period, isSummer, isOffPeak, isMidPeak, isPeak )
@@ -486,16 +523,18 @@ public class Controller {
                     view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 12:00");
                 }
 
-                if(midpeak != "12:00 to 17:00 0:00 to 00:00" && isMidPeakMatch){
+                // if(midpeak != "12:00 to 17:00 20:00 to 00:00" && isMidPeakMatch)
+                if(midpeak != "12:00 to 17:00 20:00 to 00:00"){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Mid Peak Period: " + midpeak);
-                    view.getViewCalculatePanel().getSummerMidPeakPeriod().setText("12:00 to 17:00 0:00 to 00:00");
+                    view.getViewCalculatePanel().getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
                     model.getModelRates().setUserPeriod(midpeak, isSummer, false, true, false); 
                 }
                 else{
                     JOptionPane.showMessageDialog(view.getFrame(), "Invalid Mid Peak: Format is HH:MM to HH:MM ...");
 
                 }
-                if(peak != "17:00 to 20:00" && isPeakMatch){
+                // if(peak != "17:00 to 20:00" && isPeakMatch)
+                if(peak != "17:00 to 20:00"){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
                     model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
                 }
@@ -505,6 +544,7 @@ public class Controller {
                 }
             }
             else{
+                // if(offpeak != "00:00 to 17:00 20:00 to 00:00")
                 if(offpeak != "00:00 to 17:00 20:00 to 00:00"){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
                     view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
@@ -514,7 +554,8 @@ public class Controller {
                     JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
 
                 }
-                if(peak != "17:00 20:00" && isPeakMatch){
+                // if(peak != "17:00 20:00" && isPeakMatch)
+                if(peak != "17:00 to 20:00"){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
                     model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
                 }
