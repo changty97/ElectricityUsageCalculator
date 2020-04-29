@@ -240,19 +240,29 @@ public class Controller {
         }
         if(model.getModelProfile().getDays().size() != 0){
             //updates time range totals
-            panel.getUsageCostNonPeakUsage().setText("<html>" + formatDecimals(profile.getUsageOffPeak(dayIndex), 4) + " <font size=4>kWH</font></html>");
-            panel.getUsageCostMidPeakUsage().setText("<html>" + formatDecimals(profile.getUsageMidPeak(dayIndex), 4) + " <font size=4>kWH</font></html>");
-            panel.getUsageCostPeakUsage().setText("<html>" + formatDecimals(profile.getUsagePeak(dayIndex), 4) + " <font size=4>kWH</font></html>");
             if(profile.getDays().get(dayIndex).isSummer()){
+                // Update Usage - Summer
+                panel.getUsageCostNonPeakUsage().setText("<html>" + formatDecimals(profile.getUsageOffPeakSummer(dayIndex), 4) + " <font size=4>kWH</font></html>");
+                panel.getUsageCostMidPeakUsage().setText("<html>" + formatDecimals(profile.getUsageMidPeakSummer(dayIndex), 4) + " <font size=4>kWH</font></html>");
+                panel.getUsageCostPeakUsage().setText("<html>" + formatDecimals(profile.getUsagePeakSummer(dayIndex), 4) + " <font size=4>kWH</font></html>");
+
+                // Update Cost - Summer
                 panel.getUsageCostNonPeakCost().setText("$ " + formatDecimals(profile.getCostOffPeakSummer(dayIndex), 2));
                 panel.getUsageCostMidPeakCost().setText("$ " + formatDecimals(profile.getCostMidPeakSummer(dayIndex), 2));
                 panel.getUsageCostPeakCost().setText("$ " + formatDecimals(profile.getCostPeakSummer(dayIndex), 2));
             }
             else{
+                // Update Usage - NonSummer
+                panel.getUsageCostNonPeakUsage().setText("<html>" + formatDecimals(profile.getUsageOffPeakNonSummer(dayIndex), 4) + " <font size=4>kWH</font></html>");
+                panel.getUsageCostMidPeakUsage().setText("<html>0.000 <font size=4>kWH</font></html>");
+                panel.getUsageCostPeakUsage().setText("<html>" + formatDecimals(profile.getUsagePeakNonSummer(dayIndex), 4) + " <font size=4>kWH</font></html>");
+
+                // Update Cost - NonSummer
                 panel.getUsageCostNonPeakCost().setText("$ " + formatDecimals(profile.getCostOffPeakNonSummer(dayIndex), 2));
                 panel.getUsageCostMidPeakCost().setText("$ 0.00");
                 panel.getUsageCostPeakCost().setText("$ " + formatDecimals(profile.getCostPeakNonSummer(dayIndex), 2));
             }
+
         }
         //updates the total values
         panel.getTotalCost().setText(panel.getDollarSign() + formatDecimals(profile.calculateKWH(), 2));

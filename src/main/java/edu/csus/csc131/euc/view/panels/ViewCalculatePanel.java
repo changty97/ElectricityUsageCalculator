@@ -404,10 +404,10 @@ public class ViewCalculatePanel extends Panel {
         setViewCalculateFont(usagecostcenter, usagecosttotalusage, 1, 0, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // non usage
-        setViewCalculateFont(usagecostcenter, usagecostmidpeakusage, 1, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakusage, 1, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // mid usage
-        setViewCalculateFont(usagecostcenter, usagecostnonpeakusage, 1, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakusage, 1, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // peak usage
         setViewCalculateFont(usagecostcenter, usagecostpeakusage, 1, 3, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
@@ -418,8 +418,8 @@ public class ViewCalculatePanel extends Panel {
        setViewCalculateFont(usagecostcenter, usagecosttotalcost, 3, 0, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
         // total cost usage
-        setViewCalculateFont(usagecostcenter, usagecostmidpeakcost, 3, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
-        setViewCalculateFont(usagecostcenter, usagecostnonpeakcost, 3, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostnonpeakcost, 3, 1, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
+        setViewCalculateFont(usagecostcenter, usagecostmidpeakcost, 3, 2, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
         setViewCalculateFont(usagecostcenter, usagecostpeakcost, 3, 3, Font.BOLD, 25, USAGECOST_COMP_PADDING, "east");
 
 
