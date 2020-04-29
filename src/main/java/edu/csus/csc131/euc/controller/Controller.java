@@ -22,6 +22,8 @@ import javax.swing.table.*;
 // import javax.swing.table.DefaultCellEditor;
 import javax.swing.text.TableView;
 
+import org.w3c.dom.events.MouseEvent;
+
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePanel;
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePicker;
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.UtilDateModel;
@@ -494,17 +496,48 @@ public class Controller {
         @Override
         public void actionPerformed(final ActionEvent e) {
             System.out.println("Edit clicked!");
-            view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 0).toString());   
-            view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(view.getManualInputPanel().getTable().getSelectedRow()); //set to what ever the user clicked edit on
-            view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 2).toString());
+            // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 0).toString());   
+            // view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(view.getManualInputPanel().getTable().getSelectedRow()); //set to what ever the user clicked edit on
+            // view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 2).toString());
+            int row = view.getManualInputPanel().getTable().getSelectedRow();
+            if( row >= 0) {
+                // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterDateField().getText(), row, 0));   
+                // int val = view.getManualInputPanel().getModel().getValueAt(row, 3);
+                // view.getManualInputPanel().getEnterUsageField().setText(val);
+                // view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterPeriodField().getText(), row, 1);
+                // view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getEnterUsageField().getText(), row, 2);
+            } else {
+                System.out.println("Update Error!");
+            }
+            
         }
     }
+    
+    // class EditRowListener implements MouseListener {
+    //     @Override
+    //     public void mouseClicked(final MouseEvent e) {
+    //         System.out.println("Edit clicked!");
+    //         // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 0).toString());   
+    //         // view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(view.getManualInputPanel().getTable().getSelectedRow()); //set to what ever the user clicked edit on
+    //         // view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 2).toString());
+    //         int row = view.getManualInputPanel().getTable().getSelectedRow();
+    //         if( row >= 0) {
+    //             // view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterDateField().getText(), row, 0));   
+    //             int val = view.getManualInputPanel().getModel().getValueAt(row, 3);
+    //             view.getManualInputPanel().getEnterUsageField().setText(val);
+    //             // view.getManualInputPanel().getModel().setValueAt(view.getManualInputPanel().getEnterPeriodField().getText(), row, 1);
+    //             // view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getEnterUsageField().getText(), row, 2);
+    //         } else {
+    //             System.out.println("Update Error!");
+    //         }
+    //     }
+    // }
 
     class DeleteRowListener implements ActionListener {
         @Override
         public void actionPerformed(final ActionEvent e) {
             System.out.println("Delete Clicked");
-            view.getManualInputPanel().getModel().removeRow(rowCount);
+            view.getManualInputPanel().getModel().removeRow(view.getManualInputPanel().getTable().getSelectedRow());
         }
     }
 
