@@ -8,6 +8,9 @@ import javax.swing.table.*;
 import java.awt.*;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePanel;
 import edu.csus.csc131.euc.libraries.jdatepicker.java.org.jdatepicker.JDatePicker;
@@ -43,15 +46,23 @@ public class ManualInputPanel extends Panel {
           return false;//This causes all cells to be not editable
         }
     };
-    private JTable tablepanel = new JTable(model);
-    private JTableHeader header = tablepanel.getTableHeader();
-    private JPanel inputpanel = new JPanel(new GridBagLayout());
 
-    // Instance Elements
+    // Table Elements 
+    private JScrollPane scrollpane;
+    private JPanel tablepanel = new JPanel(new BorderLayout()); 
+    private JPanel filterpanel = new JPanel(new BorderLayout());
+    private JTable datatable = new JTable(model);
+    // Table Field Components
+    private JTableHeader header = datatable.getTableHeader();
+    // Row Search and Sort
+    private JLabel searchlbl = new JLabel(new ImageIcon("src\\main\\assets\\manualinputres\\search.png")); 
+    private TableRowSorter<TableModel> rowsorter = new TableRowSorter<>(datatable.getModel());
+    private JTextField texttablefilter = new JTextField();
 
     // Table Field Components
-    private JScrollPane scrollpane;
 
+    // Input Panel 
+    private JPanel inputpanel = new JPanel(new GridBagLayout());
     // Input Field Components
     private JLabel inputfieldtitle = new JLabel("Entry Details");
     private JLabel periodlbl = new JLabel("Period", new ImageIcon("src\\main\\assets\\manualinputres\\clockicon.png"), SwingConstants.LEFT );
@@ -80,7 +91,7 @@ public class ManualInputPanel extends Panel {
     public void setEnterDateField(JFormattedTextField t) { this.enterdatefield = t; }
     public void setEnterPeriodField(JComboBox<String> t) { this.enterperiodfield = t; }
     public void setEnterUsageField(JTextField t) { this.enterusagefield = t; }
-    public void setTable(JTable t) { this.tablepanel = t; }
+    public void setTable(JTable t) { this.datatable = t; }
     public void setModel(DefaultTableModel tm) { this.model = tm; }
     //public void addTable()
 
@@ -91,17 +102,19 @@ public class ManualInputPanel extends Panel {
     public JFormattedTextField getEnterDateField() { return this.enterdatefield; }
     public JComboBox<String> getEnterPeriodField() { return this.enterperiodfield; }
     public JTextField getEnterUsageField() { return this.enterusagefield; }
-    public JTable getTable() { return this.tablepanel; }
+    public JTable getTable() { return this.datatable; }
     public DefaultTableModel getModel() { return this.model; }
     public JDatePicker getDatePicker(){ return datePicker;}
+    public JTextField getTextTableFilter(){ return texttablefilter; }
+    public TableRowSorter getRowSorter(){ return this.rowsorter; }
 
 
     // Intialize All Components
     public void initializeComponents(){
 
-        tablepanel.getTableHeader().setReorderingAllowed(false);
+        datatable.getTableHeader().setReorderingAllowed(false);
         //Alternates Cells to be white or grey
-        tablepanel.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
+        datatable.setDefaultRenderer(Object.class, new DefaultTableCellRenderer()
         {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
@@ -125,19 +138,28 @@ public class ManualInputPanel extends Panel {
 
         this.enterusagefield = new JTextField("Enter Usage");
         this.model.setColumnIdentifiers(columns);
-        this.tablepanel.setModel(this.model);
-        this.scrollpane = new JScrollPane(this.tablepanel);
+        this.datatable.setModel(this.model);
+        this.scrollpane = new JScrollPane(this.datatable);
+    
 
-        tablepanel.getTableHeader().setResizingAllowed(false);
+        datatable.getTableHeader().setResizingAllowed(false);
 
         RowSorter<TableModel> sorter =
         new TableRowSorter<TableModel>(model);
-        tablepanel.setRowSorter(sorter);
+        datatable.setRowSorter(sorter);
         // Instantiate list components
 
         //sets the date field and usage field to be focusable
         enterdatefield.setFocusable(true);
         enterusagefield.setFocusable(true);
+
+        // Setting up Searchable Table
+        texttablefilter.setFont(new Font("Poppins", Font.BOLD, 15));
+        datatable.setRowSorter(this.rowsorter);
+        filterpanel.add(searchlbl, BorderLayout.WEST);
+        filterpanel.add(texttablefilter, BorderLayout.CENTER);
+        tablepanel.add(filterpanel, BorderLayout.NORTH);
+        tablepanel.add(scrollpane, BorderLayout.CENTER);
 
     }
 
@@ -149,14 +171,14 @@ public class ManualInputPanel extends Panel {
 
         // Regular Attributes
         //Sets grid on table to match background color
-        tablepanel.setGridColor(Color.WHITE);
-        tablepanel.setIntercellSpacing(new Dimension(0,0));
-        tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
-        tablepanel.setRowHeight(30);
-        tablepanel.setFont(new Font("Poppins", Font.BOLD, 15));
+        datatable.setGridColor(Color.WHITE);
+        datatable.setIntercellSpacing(new Dimension(0,0));
+        // tablepanel.setPreferredSize(TABLE_PANEL_SIZE);
+        datatable.setRowHeight(30);
+        datatable.setFont(new Font("Poppins", Font.BOLD, 15));
         
         //Change the Default alignment from left to center on the table.
-        DefaultTableCellRenderer centerRender = (DefaultTableCellRenderer)tablepanel.getDefaultRenderer(Object.class);
+        DefaultTableCellRenderer centerRender = (DefaultTableCellRenderer)datatable.getDefaultRenderer(Object.class);
         centerRender.setHorizontalAlignment(SwingConstants.CENTER);
 
         // Gridbag Attributes
@@ -165,6 +187,7 @@ public class ManualInputPanel extends Panel {
         /* table panel components */
         this.header.setBackground(new Color(10, 169, 212));
         this.header.setFont(new Font("Poppins", Font.BOLD, 20));
+        this.header.setForeground(Color.WHITE);
         // setScrollPaneConstraints(this.scrollpane, 1, 1, DIMENSION_SCROLL_PANE, GLOBAL_PADDING);
         // Regular Attributes
         scrollpane.setFont(new Font("Poppins", Font.BOLD, 20));
@@ -178,12 +201,12 @@ public class ManualInputPanel extends Panel {
         c.gridy = 0;
         c.anchor = GridBagConstraints.CENTER;
         c.fill = GridBagConstraints.BOTH;
-        getPanel().add(scrollpane, c);
+        getPanel().add(tablepanel, c);
 
         // input panel
         // Regular Attributes
         inputpanel.setBackground(new Color(10, 169, 212));
-        inputpanel.setPreferredSize(INPUT_PANEL_SIZE);
+        // inputpanel.setPreferredSize(INPUT_PANEL_SIZE);
         // Gridbag Attributes
         // setPanelContraints(getPanel(), inputpanel, GridBagConstraints.VERTICAL, GridBagConstraints.EAST, 1, 0, GLOBAL_PADDING);
 
@@ -192,7 +215,7 @@ public class ManualInputPanel extends Panel {
         c.gridx = 1;
         c.gridy = 0;
         c.anchor = GridBagConstraints.EAST;
-        c.fill = GridBagConstraints.VERTICAL;
+        c.fill = GridBagConstraints.BOTH;
         getPanel().add(inputpanel, c);
 
         /* input panel components */

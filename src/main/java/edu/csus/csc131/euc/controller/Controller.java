@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 
 // Swing Imports
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 import java.awt.*;
 
 // IO Imports
@@ -146,6 +149,36 @@ public class Controller {
         view.getViewCalculatePanel().getSummerOffPeakPeriod().setInputVerifier(verifier);
         view.getViewCalculatePanel().getSummerMidPeakPeriod().setInputVerifier(verifier);
         view.getViewCalculatePanel().getSummerPeakPeriod().setInputVerifier(verifier);
+
+        // Set Doc Listener for Search Input MI 
+        view.getManualInputPanel().getTextTableFilter().getDocument().addDocumentListener(new DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                String text = view.getManualInputPanel().getTextTableFilter().getText();
+
+                if (text.trim().length() == 0) {
+                    view.getManualInputPanel().getRowSorter().setRowFilter(null);
+                } else {
+                    view.getManualInputPanel().getRowSorter().setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                String text = view.getManualInputPanel().getTextTableFilter().getText();
+
+                if (text.trim().length() == 0) {
+                    view.getManualInputPanel().getRowSorter().setRowFilter(null);
+                } else {
+                    view.getManualInputPanel().getRowSorter().setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        }); 
 
     }
 
