@@ -174,12 +174,9 @@ public class ManualInputPanel extends Panel {
         // setScrollPaneConstraints(this.scrollpane, 1, 1, DIMENSION_SCROLL_PANE, GLOBAL_PADDING);
         // Regular Attributes
         scrollpane.setFont(new Font("Poppins", Font.BOLD, 20));
-        scrollpane.setBackground(new Color(2, 29, 62));
-        scrollpane.setForeground(new Color(10, 169, 212));
         scrollpane.setPreferredSize(TABLE_PANEL_SIZE);
         scrollpane.setMaximumSize(TABLE_PANEL_SIZE);
         scrollpane.setMinimumSize(TABLE_PANEL_SIZE);
-        scrollpane.getVerticalScrollBar().setSize(5, 1);
         // Gridbag Attributes
         c = new GridBagConstraints();
         c.weightx = c.weighty = 1.0;
