@@ -2,7 +2,7 @@
 package edu.csus.csc131.euc.controller;
 
 /* Library Imports */
-// Util Imports 
+// Util Imports
 import java.util.regex.Pattern;
 
 // AWT Imports
@@ -127,18 +127,18 @@ public class Controller {
     }
 
     // Listner to verify input
-    public class PeriodInputVerification extends InputVerifier { 
-        @Override 
+    public class PeriodInputVerification extends InputVerifier {
+        @Override
         public boolean verify(JComponent input){
 
-            String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}"; 
-            String text = ((JTextField) input).getText(); 
+            String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}";
+            String text = ((JTextField) input).getText();
 
             if(text == "N/A" && !isSummer){
                 input.setBackground(new Color(149,195,163));
-                return true; 
+                return true;
             }
-    
+
             boolean isMatch = Pattern.matches(pattern, text);
 
             if (isMatch){
@@ -148,8 +148,8 @@ public class Controller {
 
             input.setBackground(new Color(195,149,149));
 
-            // Show Input Field Message to Fix Error 
-            JTextField in = (JTextField) input; 
+            // Show Input Field Message to Fix Error
+            JTextField in = (JTextField) input;
             in.setText(JOptionPane.showInputDialog(input, "Please correct: " + text + "\nFormat is (HH:MM to HH:MM ...)"));
 
             return false;
@@ -180,8 +180,8 @@ public class Controller {
     }
 
     public void updateComponentsViewCalculate(boolean isResetDefault){
-        final ViewCalculatePanel panel = view.getViewCalculatePanel();
-        final Profile profile = model.getModelProfile();
+        ViewCalculatePanel panel = view.getViewCalculatePanel();
+        Profile profile = model.getModelProfile();
 
         //updates the rate values
         if(isSummer){
@@ -190,9 +190,9 @@ public class Controller {
             panel.getSummerOffPeakRate().setText(Float.toString(Rates.getOffPeakSummer()));
             panel.getSummerPeakRate().setText(Float.toString(Rates.getPeakSummer()));
 
-            panel.getSummerOffPeakPeriod().setText("00:00 to 12:00");
-            panel.getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
-            panel.getSummerPeakPeriod().setText("17:00 to 20:00");
+            // panel.getSummerOffPeakPeriod().setText("00:00 to 12:00");
+            // panel.getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
+            // panel.getSummerPeakPeriod().setText("17:00 to 20:00");
 
         }
         else{
@@ -202,10 +202,10 @@ public class Controller {
 
             System.out.println(panel.getSummerOffPeakRate().getText());
 
-            panel.getSummerMidPeakRate().setText("N/A");
-            panel.getSummerMidPeakPeriod().setText("N/A");
-            panel.getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
-            panel.getSummerPeakPeriod().setText("17:00 to 20:00");
+            // panel.getSummerMidPeakRate().setText("N/A");
+            // panel.getSummerMidPeakPeriod().setText("N/A");
+            // panel.getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
+            // panel.getSummerPeakPeriod().setText("17:00 to 20:00");
 
             panel.displayNonSummerSeasonTitle();
         }
@@ -276,17 +276,17 @@ public class Controller {
         //     //getter
         //     public JButton getButton() { return this.btn; }
         //   }
-    
+
           public class ImageRenderer extends DefaultCellEditor {
             protected JButton button;
             // private String label;
             private boolean isPushed;
-           
+
             public ImageRenderer(JCheckBox checkBox, String file) {
               super(checkBox);
               button = new JButton(new ImageIcon(file));
             }
-           
+
             public Component getTableCellEditorComponent(JTable table, Object value,
                 boolean isSelected, int row, int column) {
             //   if (isSelected) {
@@ -309,7 +309,7 @@ public class Controller {
 
              //getter
              public JButton getButton() { return this.button; }
-           
+
           }
 
     class AddEntryListener implements ActionListener {
@@ -488,10 +488,10 @@ public class Controller {
     class InputPeriod implements ActionListener{
         @Override
         public void actionPerformed(final ActionEvent e) {
-            // Regex pattern for ' HH:MM to HH:MM , ' for one or more occurences 
-            // String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}"; 
+            // Regex pattern for ' HH:MM to HH:MM , ' for one or more occurences
+            // String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}";
 
-            // // Grab values for periods 
+            // // Grab values for periods
             String offpeak = view.getViewCalculatePanel().getSummerOffPeakPeriod().getText();
             String midpeak = view.getViewCalculatePanel().getSummerMidPeakPeriod().getText();
             String peak = view.getViewCalculatePanel().getSummerPeakPeriod().getText();
@@ -506,36 +506,26 @@ public class Controller {
 
             if(isSummer){
                 // if(offpeak != "00:00 to 12:00" && isOffPeakMatch)
-                if(offpeak != "00:00 to 12:00"){
+                if(!offpeak.equals("00:00 to 12:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
-                        
+
                     // setPeriod( String Period, isSummer, isOffPeak, isMidPeak, isPeak )
-                    model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
-                }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
-                    view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 12:00");
+                    model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false);
                 }
 
                 // if(midpeak != "12:00 to 17:00 20:00 to 00:00" && isMidPeakMatch)
-                if(midpeak != "12:00 to 17:00 20:00 to 00:00"){
+                if(!midpeak.equals("12:00 to 17:00 20:00 to 00:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Mid Peak Period: " + midpeak);
                     view.getViewCalculatePanel().getSummerMidPeakPeriod().setText("12:00 to 17:00 20:00 to 00:00");
-                    model.getModelRates().setUserPeriod(midpeak, isSummer, false, true, false); 
+                    model.getModelRates().setUserPeriod(midpeak, isSummer, false, true, false);
                 }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Mid Peak: Format is HH:MM to HH:MM ...");
 
-                }
                 // if(peak != "17:00 to 20:00" && isPeakMatch)
-                if(peak != "17:00 to 20:00"){
+                if(!peak.equals("17:00 to 20:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
-                    model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
+                    model.getModelRates().setUserPeriod(peak, isSummer, false, false, true);
                 }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
-                    view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
-                }
+
             }
             else{
 
@@ -543,28 +533,28 @@ public class Controller {
                 view.getViewCalculatePanel().getSummerMidPeakRate().setText("N/A");
 
                 // if(offpeak != "00:00 to 17:00 20:00 to 00:00")
-                if(offpeak != "00:00 to 17:00 20:00 to 00:00"){
+                if(!offpeak.equals("00:00 to 17:00 20:00 to 00:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Off Peak Period: " + offpeak);
                     view.getViewCalculatePanel().getSummerOffPeakPeriod().setText("00:00 to 17:00 20:00 to 00:00");
-                    model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false); 
+                    model.getModelRates().setUserPeriod(offpeak, isSummer, true, false, false);
                 }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Off Peak: Format is HH:MM to HH:MM ...");
 
-                }
                 // if(peak != "17:00 20:00" && isPeakMatch)
-                if(peak != "17:00 to 20:00"){
+                if(!peak.equals("17:00 to 20:00")){
                     JOptionPane.showMessageDialog(view.getFrame(), "New Peak Period: " + peak);
-                    model.getModelRates().setUserPeriod(peak, isSummer, false, false, true); 
-                }
-                else{
-                    JOptionPane.showMessageDialog(view.getFrame(), "Invalid Peak: Format is HH:MM to HH:MM ...");
-                    view.getViewCalculatePanel().getSummerPeakPeriod().setText("17:00 to 20:00");
+                    model.getModelRates().setUserPeriod(peak, isSummer, false, false, true);
                 }
             }
 
             // Set new user rates
-            model.getModelRates().setUserRates(isSummer);
+            if(isSummer){
+                model.getModelProfile().getSummerRates().setUserRates(isSummer);
+            }
+            else{
+                model.getModelProfile().getNonSummerRates().setUserRates(isSummer);
+            }
+
+            updateComponentsViewCalculate(false);
         }
     }
 
@@ -580,7 +570,7 @@ public class Controller {
         @Override
         public void actionPerformed(final ActionEvent e) {
             System.out.println("Edit clicked!");
-            view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 0).toString());   
+            view.getManualInputPanel().getEnterDateField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 0).toString());
             view.getManualInputPanel().getEnterPeriodField().setSelectedIndex(view.getManualInputPanel().getTable().getSelectedRow()); //set to what ever the user clicked edit on
             view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(view.getManualInputPanel().getTable().getSelectedRow(), 2).toString());
         }

@@ -169,96 +169,96 @@ public class Rates {
         Arrays.fill(nonSummerPeriod, 20, 24, "RATES_DEFAULT_OFFPEAK_NONSUMMER");
     }
 
-    // Helper function to parse hours from string 
+    // Helper function to parse hours from string
     public void setUserPeriod(String period, boolean isSummer, boolean isOffPeak, boolean isMidPeak, boolean isPeak){
-        
+
         // Split according to whitespace
         String [] split = period.split("\\s+");
-        
+
         // TESTING SPLIT
         // System.out.println("Listing all elements: ");
         // for (String element : split){System.out.println(element); }
 
         int to = 0;
-        int from = 0; 
+        int from = 0;
         boolean isFrom = true;
-        boolean doInput = false; 
+        boolean doInput = false;
 
         for (String element : split){
             // System.out.println(element);
-            // if it is "to" then flip flag 
+            // if it is "to" then flip flag
             if( element.equals("to") ){ isFrom = false; }
             else{
                 // Get only the hours section of the string and replace all 0's with nothing
                 String hours = element.substring(0, 2);
 
-                // TEST SUBSTRING 
+                // TEST SUBSTRING
                 // System.out.println(hours);
 
-                // Catching values with leading 0 
+                // Catching values with leading 0
                 if(hours.startsWith("0")){
                     hours = hours.replace("0","");
                 }
 
-                // TEST HOURS REPLACEMENT 
-                // System.out.println(hours); 
-                // System.out.println(hours.isEmpty()); 
+                // TEST HOURS REPLACEMENT
+                // System.out.println(hours);
+                // System.out.println(hours.isEmpty());
 
                 // If isFrom set 'from', else set 'to'
                 try{
-                    if (hours.isEmpty() && isFrom){ 
-                        from = 0; 
-                        doInput = false; 
+                    if (hours.isEmpty() && isFrom){
+                        from = 0;
+                        doInput = false;
                     }
-                    else if(hours.isEmpty() && !isFrom){ 
-                        to = 0; 
-                        doInput = true; 
-                        isFrom = true; 
+                    else if(hours.isEmpty() && !isFrom){
+                        to = 0;
+                        doInput = true;
+                        isFrom = true;
                     }else if(!hours.isEmpty() && isFrom){
-                        from = Integer.parseInt(hours); 
+                        from = Integer.parseInt(hours);
                         doInput = false;
                     }else{
-                        to = Integer.parseInt(hours); 
-                        doInput = true; 
-                        isFrom = true; 
+                        to = Integer.parseInt(hours);
+                        doInput = true;
+                        isFrom = true;
                     }
                 }catch(Exception ex){
-                    System.out.println(ex); 
+                    System.out.println(ex);
                 }
 
                 // Catching times from previous day to midnight of next day
                 if(to == 0 && from > to){
-                    to = 23; 
+                    to = 23;
                 }
             }
 
             // Call appropriate period setting method
             if(doInput){
                 System.out.println("Processing Input");
-                if (isOffPeak && isSummer){ 
-                    System.out.println("From: " + from + " To: " + to); 
-                    setOffPeakSummerPeriod(from, to, false); 
+                if (isOffPeak && isSummer){
+                    System.out.println("From: " + from + " To: " + to);
+                    setOffPeakSummerPeriod(from, to, false);
                 }
                 else if (isOffPeak && !isSummer){
-                    System.out.println("From: " + from + " To: " + to); 
-                    setOffPeakNonSummerPeriod(from, to, false); 
+                    System.out.println("From: " + from + " To: " + to);
+                    setOffPeakNonSummerPeriod(from, to, false);
                 }
                 else if (isMidPeak && isSummer){
-                    System.out.println("From: " + from + " To: " + to); 
-                    setMidPeakSummerPeriod(from, to, false); 
+                    System.out.println("From: " + from + " To: " + to);
+                    setMidPeakSummerPeriod(from, to, false);
                 }
                 else if (isMidPeak && !isSummer){
                     // Do Nothing
                 }
-                else if (isPeak && isSummer){ 
-                    System.out.println("From: " + from + " To: " + to); 
-                    setPeakSummerPeriod(from, to, false); 
+                else if (isPeak && isSummer){
+                    System.out.println("From: " + from + " To: " + to);
+                    setPeakSummerPeriod(from, to, false);
                 }
-                else if (isPeak && !isSummer){ 
-                    System.out.println("From: " + from + " To: " + to); 
-                    setPeakNonSummerPeriod(from, to, false); 
+                else if (isPeak && !isSummer){
+                    System.out.println("From: " + from + " To: " + to);
+                    setPeakNonSummerPeriod(from, to, false);
                 }
-                else { 
+                else {
                     // Do Nothing
                 }
             }
