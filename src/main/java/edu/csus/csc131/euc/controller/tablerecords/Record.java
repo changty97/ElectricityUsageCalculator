@@ -1,4 +1,4 @@
-package edu.csus.csc131.euc.model.data;
+package edu.csus.csc131.euc.controller.tablerecords;
 
 import java.util.ArrayList;
 import java.util.ListIterator;

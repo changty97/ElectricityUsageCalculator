@@ -50,12 +50,13 @@ import java.text.DateFormat;
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.controller.actionlistener.viewactionlisteners.*;
+import edu.csus.csc131.euc.controller.tablerecords.Record;
 import edu.csus.csc131.euc.controller.actionlistener.modelactionlisteners.*;
 import edu.csus.csc131.euc.model.data.Day;
 import edu.csus.csc131.euc.view.panels.ViewCalculatePanel;
 import edu.csus.csc131.euc.model.data.Profile;
 import edu.csus.csc131.euc.model.data.Rates;
-import edu.csus.csc131.euc.model.data.Record;
+
 
 public class Controller {
     // Instance Variables for Controller

@@ -31,7 +31,6 @@ import java.text.DateFormat;
 import edu.csus.csc131.euc.view.View;
 import edu.csus.csc131.euc.model.Model;
 import edu.csus.csc131.euc.model.data.Day;
-import edu.csus.csc131.euc.model.data.Record;
 import edu.csus.csc131.euc.controller.Controller;
 // Simple Local Import
 import edu.csus.csc131.euc.libraries.simple.JSONArray;
