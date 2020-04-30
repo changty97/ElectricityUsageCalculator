@@ -43,7 +43,12 @@ public class ManualInputPanel extends Panel {
         @Override
         public boolean isCellEditable(int row, int column)
         {
-          return false;//This causes all cells to be not editable
+            switch (column) {
+                case 3: return true; //Edit Cell needs to be true to allow for action listener
+                case 4: return true; //Delete Cell needs to be true to allow for action listener
+                default:
+                    return false; //This causes all other cells to be not editable
+             }
         }
     };
 
