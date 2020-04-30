@@ -155,6 +155,7 @@ public class ManualInputPanel extends Panel {
 
         // Setting up Searchable Table
         texttablefilter.setFont(new Font("Poppins", Font.BOLD, 15));
+        texttablefilter.setMargin(new Insets(0,5,0,0));
         datatable.setRowSorter(this.rowsorter);
         filterpanel.add(searchlbl, BorderLayout.WEST);
         filterpanel.add(texttablefilter, BorderLayout.CENTER);
