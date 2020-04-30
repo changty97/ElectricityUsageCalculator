@@ -117,14 +117,13 @@ public class Profile {
     }
 
     public void resetToNewRates(){
-        summerRates = new Rates(true);
-        nonSummerRates = new Rates(false);
+        summerRates.setUserRates(true);
+        nonSummerRates.setUserRates(false);
     }
 
     public void resetDefault(){
         Rates.setDefaultRates();
-        summerRates = new Rates(true);
-        nonSummerRates = new Rates(false);
+        Rates.setDefaultPeriod();
     }
 
     public Day getDay(String date){
@@ -162,5 +161,122 @@ public class Profile {
             }
         }
     }
+
+    public float getCostPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_PEAK_SUMMER")){
+                sum += summerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostMidPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_MIDPEAK_SUMMER")){
+                sum += summerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostOffPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_OFFPEAK_SUMMER")){
+                sum += summerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostPeakNonSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(nonSummerRates.getNonSummerPeriod(i).equals("RATES_DEFAULT_PEAK_NONSUMMER")){
+                sum += nonSummerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getCostOffPeakNonSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(nonSummerRates.getNonSummerPeriod(i).equals("RATES_DEFAULT_OFFPEAK_NONSUMMER")){
+                sum += nonSummerRates.getRateAtIndex(i) * days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsagePeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_PEAK_SUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsageMidPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_MIDPEAK_SUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsageOffPeakSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getSummerPeriod(i).equals("RATES_DEFAULT_OFFPEAK_SUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsageOffPeakNonSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getNonSummerPeriod(i).equals("RATES_DEFAULT_OFFPEAK_NONSUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public float getUsagePeakNonSummer(int dayIndex){
+        float sum = 0;
+        for(int i = 0; i < 24; i++){
+            if(summerRates.getNonSummerPeriod(i).equals("RATES_DEFAULT_PEAK_NONSUMMER")){
+                sum += days.get(dayIndex).getUsage().getUsageAtIndex(i);
+            }
+        }
+        return sum;
+    }
+
+    public void removeEmptyDays(){
+        for(int i = 0; i < days.size(); i++){
+            boolean isEmpty = true;
+            for(int j = 0; j < 24; j++){
+                if(days.get(i).getUsageAtIndex(j) != (float)0){
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if(isEmpty){
+                days.remove(i);
+            }
+
+        }
+    }
+
 
 }
