@@ -321,7 +321,8 @@ public class Controller {
         @Override
         public boolean verify(JComponent input){
 
-            String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}";
+            // String pattern = "(([0-1]?[0-9]|2[0-3]):[0-5][0-9] to ([0-1]?[0-9]|2[0-3]):[0-5][0-9]\\s*){1,}";
+            String pattern = "([0-2][0-9]:[0-5][0-9] to [0-2][0-9]:[0-5][0-9]\\s*){1,}";
             String text = ((JTextField) input).getText();
 
             if(text == "N/A" && !isSummer){
