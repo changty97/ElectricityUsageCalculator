@@ -262,5 +262,21 @@ public class Profile {
         return sum;
     }
 
+    public void removeEmptyDays(){
+        for(int i = 0; i < days.size(); i++){
+            boolean isEmpty = true;
+            for(int j = 0; j < 24; j++){
+                if(days.get(i).getUsageAtIndex(j) != (float)0){
+                    isEmpty = false;
+                    break;
+                }
+            }
+            if(isEmpty){
+                days.remove(i);
+            }
+
+        }
+    }
+
 
 }

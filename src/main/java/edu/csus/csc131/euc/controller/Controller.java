@@ -155,7 +155,7 @@ public class Controller {
         view.getViewCalculatePanel().getSummerMidPeakPeriod().setInputVerifier(verifier);
         view.getViewCalculatePanel().getSummerPeakPeriod().setInputVerifier(verifier);
 
-        // Set Doc Listener for Search Input MI 
+        // Set Doc Listener for Search Input MI
         view.getManualInputPanel().getTextTableFilter().getDocument().addDocumentListener(new DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -183,7 +183,7 @@ public class Controller {
             public void changedUpdate(DocumentEvent e) {
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-        }); 
+        });
 
     }
 
@@ -357,7 +357,7 @@ public class Controller {
     //Function to set Jbutton Icon to the Table
     public class ImageRenderer extends DefaultCellEditor {
         protected JButton button;
-       
+
         public ImageRenderer(JTextField text, String file) {
           super(text);
           this.button = new JButton(new ImageIcon(file));
@@ -375,7 +375,7 @@ public class Controller {
 
          //getter
          public JButton getButton() { return this.button; }
-       
+
       }
 
       class ClientsTableButtonRenderer extends JButton implements TableCellRenderer
@@ -386,7 +386,7 @@ public class Controller {
                 setOpaque(true);
                 this.file = file;
             }
-      
+
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
             {
                 setIcon(new ImageIcon(file));
@@ -423,14 +423,14 @@ public class Controller {
                     row[1] = view.getManualInputPanel().getEnterPeriodField().getSelectedItem().toString();
                     row[2] = String.format("%.4f", Float.parseFloat(view.getManualInputPanel().getEnterUsageField().getText()));
                     //Add Edit button
-                    view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(EditCellEditor); 
+                    view.getManualInputPanel().getTable().getColumn("Edit").setCellEditor(EditCellEditor);
                     view.getManualInputPanel().getTable().getColumn("Edit").setCellRenderer(EditCellRenderer);
                     EditCellEditor.getButton().addMouseListener(new MouseAdapter() {
                         @Override
                         public void mouseClicked(MouseEvent e) {
                             int row = view.getManualInputPanel().getTable().getSelectedRow();
                             view.getManualInputPanel().getDatePicker().getTextField().setText(view.getManualInputPanel().getModel().getValueAt(row, 0).toString());
-                            view.getManualInputPanel().getEnterPeriodField().setSelectedItem(view.getManualInputPanel().getModel().getValueAt(row, 1).toString());   
+                            view.getManualInputPanel().getEnterPeriodField().setSelectedItem(view.getManualInputPanel().getModel().getValueAt(row, 1).toString());
                             view.getManualInputPanel().getEnterUsageField().setText(view.getManualInputPanel().getModel().getValueAt(row, 2).toString());
                         }
                     });
@@ -689,28 +689,33 @@ public class Controller {
     }
 
     class DeleteRowListener implements ActionListener {
-        
+
         @Override
         public void actionPerformed(final ActionEvent e) {
             int row = view.getManualInputPanel().getTable().getSelectedRow();
-            String date = view.getManualInputPanel().getModel().getValueAt(row, 0).toString();
-            String period = view.getManualInputPanel().getModel().getValueAt(row, 1).toString();
+            if (!(row == -1)){
 
-            
-            view.getManualInputPanel().getModel().removeRow(row);
-            
-            Record.deleteRecord(row);
-            model.getModelProfile().getDays().remove(row);
-            view.getManualInputPanel().getEnterPeriodField().setSelectedItem(period);
-            int index = view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
-            model.getModelProfile().getDay(date).setUsage(0, index);
-            dayIndex = 0;
-            // if(model.getModelProfile().getDays().size() == dayIndex-1) {
-            //     dayIndex--;
-            // }
+                String date = view.getManualInputPanel().getModel().getValueAt(row, 0).toString();
+                String period = view.getManualInputPanel().getModel().getValueAt(row, 1).toString();
 
-            updateComponentsViewCalculate();
-            
+
+                view.getManualInputPanel().getModel().removeRow(row);
+
+                Record.deleteRecord(row);
+
+                view.getManualInputPanel().getEnterPeriodField().setSelectedItem(period);
+                int index = view.getManualInputPanel().getEnterPeriodField().getSelectedIndex();
+
+                model.getModelProfile().getDay(date).setUsage(0, index);
+                System.out.println(Arrays.toString(model.getModelProfile().getDay(date).getUsage().getUsage()));
+                dayIndex = 0;
+                // if(model.getModelProfile().getDays().size() == dayIndex-1) {
+                //     dayIndex--;
+                // }
+                model.getModelProfile().removeEmptyDays();
+                updateComponentsViewCalculate();
+            }
+
         }
     }
 
